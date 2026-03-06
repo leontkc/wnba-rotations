@@ -254,6 +254,48 @@ function renderStints(data) {
     return `${m}:${String(s2).padStart(2, '0')}`;
   }
 
+  function evClass(type) {
+    if (type === 'Made Shot' || type === 'Free Throw') return 'ev-made';
+    if (type === 'Missed Shot') return 'ev-miss';
+    if (type === 'Assist') return 'ev-ast';
+    if (type === 'Turnover') return 'ev-to';
+    if (type === 'Steal' || type === 'Block') return 'ev-stl';
+    return '';
+  }
+
+  function buildTooltipHTML(s) {
+    const dMin = Math.floor(s.duration_sec / 60);
+    const dSec = Math.round(s.duration_sec % 60);
+    const dur = `${dMin}:${String(dSec).padStart(2, '0')}`;
+
+    let html = `<div class="tip-header">${s.player} <span style="color:${s.team === homeTC ? HOME_COLOR : AWAY_COLOR}">(${s.team})</span>`
+      + `<br><span class="tip-time">Q${s.period} ${fmtClock(s.clock_in)} → ${fmtClock(s.clock_out)}  ·  ${dur}</span></div>`;
+
+    html += `<div class="tip-stats">`
+      + `<span><span class="stat-val">${s.stint_pts || 0}</span> PTS</span>`
+      + `<span><span class="stat-val">${s.stint_reb || 0}</span> REB</span>`
+      + `<span><span class="stat-val">${s.stint_ast || 0}</span> AST</span>`
+      + `<span><span class="stat-val">${s.stint_stl || 0}</span> STL</span>`
+      + `<span><span class="stat-val">${s.stint_blk || 0}</span> BLK</span>`
+      + `<span><span class="stat-val">${s.stint_to || 0}</span> TO</span>`
+      + `</div>`;
+
+    const events = s.events || [];
+    if (events.length) {
+      html += `<div class="tip-events">`;
+      events.forEach(ev => {
+        html += `<div class="tip-ev ${evClass(ev.type)}">`
+          + `<span class="ev-clock">${ev.clock}</span>`
+          + `<span class="ev-type">${ev.type}</span>`
+          + `<span class="ev-detail">${ev.detail}</span>`
+          + `</div>`;
+      });
+      html += `</div>`;
+    }
+
+    return html;
+  }
+
   let clipIdx = 0;
   stints.forEach(s => {
     const i = playerRowIndex.get(s.player);
@@ -272,17 +314,16 @@ function renderStints(data) {
       style: 'cursor:pointer'
     });
 
-    const dMin = Math.floor(s.duration_sec / 60);
-    const dSec = Math.round(s.duration_sec % 60);
-    const tip = `${s.player} (${s.team})  Q${s.period} ` +
-      `${fmtClock(s.clock_in)}→${fmtClock(s.clock_out)}  ` +
-      `${dMin}:${String(dSec).padStart(2, '0')}`;
+    const tipHTML = buildTooltipHTML(s);
 
     rect.addEventListener('mousemove', e => {
-      tooltip.textContent = tip;
+      tooltip.innerHTML = tipHTML;
       tooltip.style.display = 'block';
-      tooltip.style.left = (e.clientX + 12) + 'px';
-      tooltip.style.top  = (e.clientY + 12) + 'px';
+      // Position: prefer right of cursor, flip if near right edge
+      const tx = (e.clientX + 16 + 340 > window.innerWidth) ? e.clientX - 350 : e.clientX + 16;
+      const ty = Math.min(e.clientY + 12, window.innerHeight - 320);
+      tooltip.style.left = tx + 'px';
+      tooltip.style.top  = ty + 'px';
     });
     rect.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
 
