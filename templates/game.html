@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>__GAME_TITLE__</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="../assets/viz.css">
+</head>
+<body>
+<div id="gantt-tooltip"></div>
+
+<nav id="game-nav">
+  <a href="../index.html" id="nav-home">← wnbarotations</a>
+  <span id="nav-adjacent"></span>
+</nav>
+
+<h1 id="game-title">Loading …</h1>
+
+<section>
+  <h2>Score Flow</h2>
+  <div style="position:relative;height:300px;">
+    <canvas id="scoreChart"></canvas>
+  </div>
+</section>
+
+<section>
+  <h2>Player Stints</h2>
+  <div id="gantt-container"></div>
+</section>
+
+<section>
+  <h2>Box Score</h2>
+  <div id="box-score-container"></div>
+</section>
+
+<script>
+const DATA = __GAME_DATA__;
+const NAV  = __GAME_NAV__;
+</script>
+<script src="../assets/viz.js"></script>
+</body>
+</html>

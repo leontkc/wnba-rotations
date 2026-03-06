@@ -1,0 +1,419 @@
+// wnbarotations — shared visualization script
+// DATA and NAV are injected by the game HTML shell before this script loads.
+
+// ─── Prev / Next nav ────────────────────────────────────────────────────────
+(function renderNav() {
+  const adjacent = document.getElementById('nav-adjacent');
+  if (!adjacent || typeof NAV === 'undefined' || !NAV) return;
+  const parts = [];
+  if (NAV.prev) parts.push(`<a href="${NAV.prev}.html">← Prev</a>`);
+  if (NAV.next) parts.push(`<a href="${NAV.next}.html">Next →</a>`);
+  adjacent.innerHTML = parts.join(' · ');
+})();
+
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+function minLabel(sec) {
+  return (sec / 60).toFixed(1);
+}
+
+const HOME_COLOR = '#c8102e';  // crimson
+const AWAY_COLOR = '#4a90d9';  // steel blue
+const HOME_LIGHT = 'rgba(200,16,46,0.12)';
+const AWAY_LIGHT = 'rgba(74,144,217,0.12)';
+
+function teamColor(tc) {
+  return tc === DATA.game.home_tricode ? HOME_COLOR : AWAY_COLOR;
+}
+
+// ─── Title ───────────────────────────────────────────────────────────────────
+const g = DATA.game;
+document.getElementById('game-title').textContent =
+  `${g.home_tricode} vs. ${g.away_tricode}  ·  ${g.date}  ·  ` +
+  `Final: ${g.home_tricode} ${g.score_home} – ${g.away_tricode} ${g.score_away}`;
+
+// ─── 1. Score Flow ───────────────────────────────────────────────────────────
+(function renderScoreFlow() {
+  const flow = DATA.score_flow;
+  if (!flow.length) return;
+
+  const homeData = flow.map(d => ({ x: d.elapsed_sec / 60, y: d.score_home }));
+  const awayData = flow.map(d => ({ x: d.elapsed_sec / 60, y: d.score_away }));
+
+  const quarterLines = {
+    id: 'quarterLines',
+    afterDraw(chart) {
+      const { ctx, chartArea: { top, bottom }, scales: { x } } = chart;
+      [10, 20, 30].forEach((min, i) => {
+        const xPx = x.getPixelForValue(min);
+        ctx.save();
+        ctx.strokeStyle = 'rgba(255,255,255,0.18)';
+        ctx.lineWidth = 1;
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        ctx.moveTo(xPx, top);
+        ctx.lineTo(xPx, bottom);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = 'rgba(255,255,255,0.45)';
+        ctx.font = '11px Segoe UI, Arial, sans-serif';
+        ctx.fillText(`Q${i + 2}`, xPx + 4, top + 14);
+        ctx.restore();
+      });
+    }
+  };
+
+  new Chart(document.getElementById('scoreChart'), {
+    type: 'line',
+    data: {
+      datasets: [
+        {
+          label: g.home_tricode,
+          data: homeData,
+          borderColor: HOME_COLOR,
+          backgroundColor: 'transparent',
+          tension: 0.3,
+          pointRadius: 0,
+          borderWidth: 2,
+          stepped: false,
+        },
+        {
+          label: g.away_tricode,
+          data: awayData,
+          borderColor: AWAY_COLOR,
+          backgroundColor: 'transparent',
+          tension: 0.3,
+          pointRadius: 0,
+          borderWidth: 2,
+          stepped: false,
+        }
+      ]
+    },
+    options: {
+      animation: false,
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      scales: {
+        x: {
+          type: 'linear',
+          min: 0,
+          max: 40,
+          title: { display: true, text: 'Game Time (min)', color: '#888' },
+          ticks: { color: '#888', stepSize: 5 },
+          grid: { color: 'rgba(255,255,255,0.06)' },
+        },
+        y: {
+          title: { display: true, text: 'Score', color: '#888' },
+          ticks: { color: '#888' },
+          grid: { color: 'rgba(255,255,255,0.06)' },
+        }
+      },
+      plugins: {
+        legend: { labels: { color: '#ccc' } },
+        tooltip: {
+          callbacks: {
+            title(items) {
+              const elSec = items[0].parsed.x * 60;
+              const ev = flow.find(d => d.elapsed_sec >= elSec - 5 && d.elapsed_sec <= elSec + 5);
+              if (ev) return `Q${ev.period} ${ev.clock_display}`;
+              const period = Math.floor(items[0].parsed.x / 10) + 1;
+              return `Q${Math.min(period, 4)} ${(items[0].parsed.x % 10).toFixed(1)} min`;
+            },
+            label(item) {
+              const tc = item.dataset.label;
+              return ` ${tc}: ${item.parsed.y}`;
+            }
+          },
+          backgroundColor: 'rgba(20,22,35,0.95)',
+          titleColor: '#ddd',
+          bodyColor: '#bbb',
+          borderColor: '#444',
+          borderWidth: 1,
+        }
+      }
+    },
+    plugins: [quarterLines]
+  });
+})();
+
+// ─── 2. Player Stint Gantt ────────────────────────────────────────────────────
+function renderStints(data) {
+  const stints = data.stints;
+  if (!stints.length) {
+    document.getElementById('gantt-container').textContent = 'No stint data.';
+    return;
+  }
+
+  const homeTC = data.game.home_tricode;
+  const awayTC = data.game.away_tricode;
+
+  const seen = new Map();
+  stints.forEach(s => { if (!seen.has(s.player)) seen.set(s.player, s.team); });
+
+  const homePlayers = [...seen.entries()].filter(([,t]) => t === homeTC).map(([p]) => p);
+  const awayPlayers = [...seen.entries()].filter(([,t]) => t !== homeTC).map(([p]) => p);
+
+  const rows = [
+    { type: 'header', team: homeTC },
+    ...homePlayers.map(p => ({ type: 'player', player: p, team: homeTC })),
+    { type: 'header', team: awayTC },
+    ...awayPlayers.map(p => ({ type: 'player', player: p, team: awayTC })),
+  ];
+
+  const playerRowIndex = new Map();
+  rows.forEach((r, i) => { if (r.type === 'player') playerRowIndex.set(r.player, i); });
+
+  const ROW_H    = 18;
+  const HEADER_H = 22;
+  const PAD_TOP  = 28;
+  const PAD_BOT  = 10;
+  const PAD_LEFT = 130;
+  const PAD_RIGHT = 20;
+  const svgW = Math.max(800, (document.getElementById('gantt-container').clientWidth || 900) - 4);
+  const chartW = svgW - PAD_LEFT - PAD_RIGHT;
+
+  let totalContentH = 0;
+  const rowOffsets = rows.map(r => {
+    const y = totalContentH;
+    totalContentH += r.type === 'header' ? HEADER_H : ROW_H;
+    return y;
+  });
+  const svgH = PAD_TOP + totalContentH + PAD_BOT;
+
+  function xOf(elSec) { return PAD_LEFT + (elSec / 2400) * chartW; }
+
+  const ns = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(ns, 'svg');
+  svg.setAttribute('width', svgW);
+  svg.setAttribute('height', svgH);
+  svg.style.display = 'block';
+
+  function el(tag, attrs = {}, parent = svg) {
+    const e = document.createElementNS(ns, tag);
+    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+    parent.appendChild(e);
+    return e;
+  }
+
+  el('rect', { x: 0, y: 0, width: svgW, height: svgH, fill: '#1a1d27' });
+
+  const defs = el('defs', {});
+
+  const quarterShades = ['rgba(255,255,255,0.02)', 'rgba(255,255,255,0.05)',
+                         'rgba(255,255,255,0.02)', 'rgba(255,255,255,0.05)'];
+  [0,1,2,3].forEach(q => {
+    const x1 = xOf(q * 600);
+    const x2 = xOf((q + 1) * 600);
+    el('rect', { x: x1, y: PAD_TOP, width: x2 - x1, height: totalContentH, fill: quarterShades[q] });
+    el('text', {
+      x: (x1 + x2) / 2, y: PAD_TOP - 8,
+      fill: '#777', 'font-size': '12', 'font-weight': '600',
+      'text-anchor': 'middle', 'font-family': 'Segoe UI, Arial, sans-serif'
+    }).textContent = `Q${q + 1}`;
+  });
+
+  [0, 10, 20, 30, 40].forEach(min => {
+    const x = xOf(min * 60);
+    el('line', {
+      x1: x, y1: PAD_TOP, x2: x, y2: PAD_TOP + totalContentH,
+      stroke: 'rgba(255,255,255,0.2)', 'stroke-width': 1,
+    });
+  });
+
+  rows.forEach((row, i) => {
+    const y = PAD_TOP + rowOffsets[i];
+    const isHome = row.team === homeTC;
+    const color = isHome ? HOME_COLOR : AWAY_COLOR;
+
+    if (row.type === 'header') {
+      el('rect', { x: 0, y, width: svgW, height: HEADER_H,
+        fill: isHome ? 'rgba(200,16,46,0.18)' : 'rgba(74,144,217,0.18)' });
+      el('rect', { x: 0, y, width: 4, height: HEADER_H, fill: color });
+      el('text', {
+        x: 12, y: y + HEADER_H / 2 + 5,
+        fill: color, 'font-size': '12', 'font-weight': '700',
+        'font-family': 'Segoe UI, Arial, sans-serif', 'letter-spacing': '0.06em'
+      }).textContent = row.team;
+    } else {
+      el('rect', {
+        x: 0, y, width: svgW, height: ROW_H - 1,
+        fill: isHome ? 'rgba(200,16,46,0.03)' : 'rgba(74,144,217,0.03)'
+      });
+      el('text', {
+        x: PAD_LEFT - 6, y: y + ROW_H / 2 + 4,
+        fill: isHome ? '#e8a0aa' : '#8ab8e0',
+        'font-size': '11', 'text-anchor': 'end',
+        'font-family': 'Segoe UI, Arial, sans-serif'
+      }).textContent = row.player.length > 18 ? row.player.slice(0, 17) + '…' : row.player;
+    }
+  });
+
+  const tooltip = document.getElementById('gantt-tooltip');
+  function fmtClock(secs) {
+    const m = Math.floor(secs / 60), s2 = Math.round(secs % 60);
+    return `${m}:${String(s2).padStart(2, '0')}`;
+  }
+
+  let clipIdx = 0;
+  stints.forEach(s => {
+    const i = playerRowIndex.get(s.player);
+    if (i === undefined) return;
+    const x1 = xOf(s.start_elapsed);
+    const x2 = xOf(s.end_elapsed);
+    const barW = Math.max(1, x2 - x1);
+    const y = PAD_TOP + rowOffsets[i] + 1;
+    const barH = ROW_H - 3;
+    const isHome = s.team === homeTC;
+    const color = isHome ? HOME_COLOR : AWAY_COLOR;
+
+    const rect = el('rect', {
+      x: x1, y, width: barW, height: barH,
+      fill: color, opacity: '0.75', rx: '2',
+      style: 'cursor:pointer'
+    });
+
+    const dMin = Math.floor(s.duration_sec / 60);
+    const dSec = Math.round(s.duration_sec % 60);
+    const tip = `${s.player} (${s.team})  Q${s.period} ` +
+      `${fmtClock(s.clock_in)}→${fmtClock(s.clock_out)}  ` +
+      `${dMin}:${String(dSec).padStart(2, '0')}`;
+
+    rect.addEventListener('mousemove', e => {
+      tooltip.textContent = tip;
+      tooltip.style.display = 'block';
+      tooltip.style.left = (e.clientX + 12) + 'px';
+      tooltip.style.top  = (e.clientY + 12) + 'px';
+    });
+    rect.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+
+    const combo = (s.stint_reb || 0) + (s.stint_ast || 0);
+    const cid = `cs${clipIdx++}`;
+    const cp = document.createElementNS(ns, 'clipPath');
+    cp.setAttribute('id', cid);
+    const cr = document.createElementNS(ns, 'rect');
+    cr.setAttribute('x', x1 + 2); cr.setAttribute('y', y);
+    cr.setAttribute('width', Math.max(0, barW - 4)); cr.setAttribute('height', barH);
+    cp.appendChild(cr);
+    defs.appendChild(cp);
+
+    el('text', {
+      x: x1 + 4, y: y + barH / 2 + 4,
+      fill: 'rgba(255,255,255,0.92)', 'font-size': '9', 'font-weight': '600',
+      'text-anchor': 'start', 'font-family': 'Segoe UI, Arial, sans-serif',
+      'pointer-events': 'none', 'clip-path': `url(#${cid})`
+    }).textContent = `${s.stint_pts || 0} · ${combo}`;
+  });
+
+  document.getElementById('gantt-container').appendChild(svg);
+}
+
+renderStints(DATA);
+
+// Re-render gantt on resize (debounced)
+let _ganttResizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(_ganttResizeTimer);
+  _ganttResizeTimer = setTimeout(() => {
+    const container = document.getElementById('gantt-container');
+    container.innerHTML = '';
+    renderStints(DATA);
+  }, 150);
+});
+
+// ─── 3. Box Score ─────────────────────────────────────────────────────────────
+function renderBoxScore(data) {
+  const rows = data.box_score;
+  if (!rows.length) {
+    document.getElementById('box-score-container').textContent = 'No box score data.';
+    return;
+  }
+
+  const cols = [
+    { key: 'first',      label: 'Player', fmt: (r) => `${r.first} ${r.last}`, sort: (a, b) => `${a.last}${a.first}`.localeCompare(`${b.last}${b.first}`) },
+    { key: 'team',       label: 'Team',   fmt: (r) => r.team,       sort: (a, b) => a.team.localeCompare(b.team) },
+    { key: 'minutes',    label: 'Min',    fmt: (r) => r.minutes,    sort: (a, b) => minutesToNum(a.minutes) - minutesToNum(b.minutes) },
+    { key: 'pts',        label: 'Pts',    fmt: (r) => r.pts ?? '-', sort: (a, b) => (a.pts ?? 0) - (b.pts ?? 0) },
+    { key: 'fgm',        label: 'FGM',   fmt: (r) => r.fgm ?? '-', sort: (a, b) => (a.fgm ?? 0) - (b.fgm ?? 0) },
+    { key: 'fga',        label: 'FGA',   fmt: (r) => r.fga ?? '-', sort: (a, b) => (a.fga ?? 0) - (b.fga ?? 0) },
+    { key: 'reb',        label: 'Reb',   fmt: (r) => r.reb ?? '-', sort: (a, b) => (a.reb ?? 0) - (b.reb ?? 0) },
+    { key: 'ast',        label: 'Ast',   fmt: (r) => r.ast ?? '-', sort: (a, b) => (a.ast ?? 0) - (b.ast ?? 0) },
+    { key: 'stl',        label: 'Stl',   fmt: (r) => r.stl ?? '-', sort: (a, b) => (a.stl ?? 0) - (b.stl ?? 0) },
+    { key: 'blk',        label: 'Blk',   fmt: (r) => r.blk ?? '-', sort: (a, b) => (a.blk ?? 0) - (b.blk ?? 0) },
+    { key: 'to',         label: 'TO',    fmt: (r) => r.to  ?? '-', sort: (a, b) => (a.to  ?? 0) - (b.to  ?? 0) },
+    { key: 'pf',         label: 'PF',    fmt: (r) => r.pf  ?? '-', sort: (a, b) => (a.pf  ?? 0) - (b.pf  ?? 0) },
+    { key: 'plus_minus', label: '+/-',   fmt: (r) => r.plus_minus != null ? (r.plus_minus > 0 ? '+' : '') + r.plus_minus : '-',
+                                          sort: (a, b) => (a.plus_minus ?? 0) - (b.plus_minus ?? 0) },
+  ];
+
+  function minutesToNum(min) {
+    if (!min) return 0;
+    const parts = String(min).split(':');
+    return parseInt(parts[0] || 0) * 60 + parseInt(parts[1] || 0);
+  }
+
+  let sortKey = 'pts';
+  let sortDir = -1;
+
+  const container = document.getElementById('box-score-container');
+  const table = document.createElement('table');
+  const thead = table.createTHead();
+  const tbody = table.createTBody();
+  container.appendChild(table);
+
+  const homeTC = data.game.home_tricode;
+
+  function buildHeader() {
+    const tr = document.createElement('tr');
+    cols.forEach(col => {
+      const th = document.createElement('th');
+      th.textContent = col.label;
+      if (col.key === sortKey) {
+        th.classList.add(sortDir === -1 ? 'sort-desc' : 'sort-asc');
+      }
+      th.addEventListener('click', () => {
+        if (sortKey === col.key) sortDir *= -1;
+        else { sortKey = col.key; sortDir = -1; }
+        buildAll();
+      });
+      tr.appendChild(th);
+    });
+    thead.innerHTML = '';
+    thead.appendChild(tr);
+  }
+
+  function buildBody() {
+    const sortCol = cols.find(c => c.key === sortKey);
+    tbody.innerHTML = '';
+
+    const homeRows = rows.filter(r => r.team === homeTC).sort((a, b) => sortCol.sort(a, b) * sortDir);
+    const awayRows = rows.filter(r => r.team !== homeTC).sort((a, b) => sortCol.sort(a, b) * sortDir);
+
+    [[homeTC, homeRows, HOME_COLOR, HOME_LIGHT], [data.game.away_tricode, awayRows, AWAY_COLOR, AWAY_LIGHT]]
+      .forEach(([tc, teamRows, color, light]) => {
+        const htr = document.createElement('tr');
+        const htd = document.createElement('td');
+        htd.colSpan = cols.length;
+        htd.textContent = tc;
+        htd.style.cssText = `color:${color};font-weight:700;font-size:0.8rem;` +
+          `background:${light};padding:4px 10px;letter-spacing:0.06em;`;
+        htr.appendChild(htd);
+        tbody.appendChild(htr);
+
+        teamRows.forEach(row => {
+          const tr = document.createElement('tr');
+          tr.style.background = light;
+          cols.forEach(col => {
+            const td = document.createElement('td');
+            td.textContent = col.fmt(row);
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        });
+      });
+  }
+
+  function buildAll() { buildHeader(); buildBody(); }
+  buildAll();
+}
+
+renderBoxScore(DATA);

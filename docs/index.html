@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wnbarotations — WNBA Game Flows</title>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header>
+  <h1>wnbarotations</h1>
+  <p class="subtitle">Score flow, player rotations &amp; box scores for every WNBA game</p>
+  <div class="season-tabs">
+    <span class="tab active" data-season="" onclick="switchSeason('')"></span>
+  </div>
+</header>
+
+<div class="filters">
+  <select id="team-filter" onchange="applyFilters()">
+    <option value="">All Teams</option>
+      <option value="IND">IND</option>
+      <option value="MIA">MIA</option>
+  </select>
+  <input id="search-box" type="text" placeholder="🔍  Search team or date…" oninput="applyFilters()">
+  <span id="game-count">1 games</span>
+</div>
+
+<main id="game-list">
+    <div class="season-section active" id="season-" data-season="">
+      <div class="date-group" data-date="">
+        <div class="date-header"></div>
+        <div class="game-row" data-teams="IND MIA" data-date="">
+          <span class="game-matchup">MIA @ IND</span>
+          <span class="game-score">Final: IND <span class="winner">119</span> – MIA 110</span>
+          <a class="game-link" href="games/0022400235.html">View →</a>
+        </div>
+      </div>
+    </div>
+  <div class="no-results" id="no-results" style="display:none">No games match your search.</div>
+</main>
+
+<script>
+const MANIFEST = [{"id": "0022400235", "s": "", "d": "", "h": "IND", "a": "MIA", "sh": 119, "sa": 110}];
+
+let currentSeason = '';
+
+function switchSeason(season) {
+  currentSeason = season;
+  document.querySelectorAll('.season-section').forEach(el => {
+    el.classList.toggle('active', el.dataset.season === season);
+  });
+  document.querySelectorAll('.tab').forEach(el => {
+    el.classList.toggle('active', el.dataset.season === season);
+  });
+  applyFilters();
+}
+
+function applyFilters() {
+  const team   = document.getElementById('team-filter').value.trim().toUpperCase();
+  const search = document.getElementById('search-box').value.trim().toUpperCase();
+
+  const section = document.querySelector(`.season-section[data-season="${currentSeason}"]`);
+  if (!section) return;
+
+  let visible = 0;
+  section.querySelectorAll('.game-row').forEach(row => {
+    const teams = (row.dataset.teams || '').toUpperCase();
+    const date  = (row.dataset.date  || '').toUpperCase();
+    const teamOk   = !team   || teams.includes(team);
+    const searchOk = !search || teams.includes(search) || date.includes(search);
+    const show = teamOk && searchOk;
+    row.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+
+  // Hide empty date groups
+  section.querySelectorAll('.date-group').forEach(dg => {
+    const hasVisible = [...dg.querySelectorAll('.game-row')].some(r => r.style.display !== 'none');
+    dg.style.display = hasVisible ? '' : 'none';
+  });
+
+  document.getElementById('game-count').textContent = visible + ' game' + (visible !== 1 ? 's' : '');
+  document.getElementById('no-results').style.display = visible === 0 ? '' : 'none';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+name: Update WNBA Games
+
+on:
+  schedule:
+    # Daily at noon UTC — covers WNBA season (May–Sept)
+    - cron: '0 12 * * *'
+  workflow_dispatch:  # also allow manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install nba_api pandas
+
+      - name: Run pipeline (current year)
+        run: python -m pipeline.build_season --seasons 2026
+
+      - name: Commit and push if anything changed
+        run: |
+          git config user.name  "wnbarotations-bot"
+          git config user.email "bot@wnbarotations.com"
+          git add docs/ data/
+          git diff --cached --quiet \
+            || git commit -m "Auto-update: new WNBA games $(date -u +%Y-%m-%d) [skip ci]"
+          git push

@@ -1,0 +1,85 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #0f1117; color: #e0e0e0; font-family: 'Segoe UI', Arial, sans-serif; }
+
+/* ── Header ── */
+header {
+  padding: 24px 20px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  margin-bottom: 0;
+}
+header h1 {
+  font-size: 1.4rem; font-weight: 700; color: #fff;
+  letter-spacing: 0.04em; margin-bottom: 4px;
+}
+header .subtitle {
+  font-size: 0.82rem; color: #666; margin-bottom: 16px;
+}
+
+/* ── Season tabs ── */
+.season-tabs {
+  display: flex; gap: 6px; margin-bottom: 16px;
+}
+.tab {
+  padding: 5px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 600;
+  cursor: pointer; text-decoration: none;
+  color: #888; border: 1px solid rgba(255,255,255,0.1);
+  transition: background 0.15s, color 0.15s;
+}
+.tab:hover { color: #ccc; background: rgba(255,255,255,0.06); }
+.tab.active { color: #fff; background: rgba(74,144,217,0.25); border-color: #4a90d9; }
+
+/* ── Filters bar ── */
+.filters {
+  display: flex; gap: 10px; align-items: center;
+  padding: 10px 20px; background: #13161f;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  flex-wrap: wrap;
+}
+.filters select, .filters input {
+  background: #1a1d27; color: #e0e0e0; border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 6px; padding: 5px 10px; font-size: 0.82rem;
+  font-family: inherit; outline: none;
+}
+.filters select:focus, .filters input:focus {
+  border-color: #4a90d9;
+}
+.filters input { min-width: 180px; }
+#game-count { font-size: 0.78rem; color: #555; margin-left: auto; }
+
+/* ── Game list ── */
+#game-list { padding: 0 20px 40px; }
+
+.season-section { display: none; }
+.season-section.active { display: block; }
+
+.date-group { margin-top: 28px; }
+.date-header {
+  font-size: 0.72rem; font-weight: 700; color: #555;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  padding: 6px 0 6px 2px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  margin-bottom: 2px;
+}
+
+.game-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 7px 6px; border-radius: 6px;
+  transition: background 0.12s;
+  text-decoration: none; color: inherit;
+}
+.game-row:hover { background: rgba(255,255,255,0.04); }
+.game-matchup { font-size: 0.9rem; font-weight: 600; color: #ddd; min-width: 110px; }
+.game-score   { font-size: 0.82rem; color: #888; flex: 1; }
+.game-score .winner { color: #ccc; font-weight: 600; }
+.game-link {
+  font-size: 0.78rem; color: #4a90d9; text-decoration: none;
+  padding: 3px 10px; border: 1px solid rgba(74,144,217,0.35);
+  border-radius: 12px; white-space: nowrap;
+  transition: background 0.12s;
+}
+.game-link:hover { background: rgba(74,144,217,0.15); }
+
+.no-results {
+  text-align: center; color: #444; padding: 60px 20px;
+  font-size: 0.9rem;
+}
