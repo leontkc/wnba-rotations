@@ -342,7 +342,7 @@ def compute_stints(pbp_df: pd.DataFrame) -> list[dict]:
                     "end_elapsed":   elapsed_seconds(int(period), 0.0),
                 })
 
-    # Compute per-stint stats from PBP events
+    # Compute per-stint stats and events from PBP
     pbp_df = pbp_df.copy()
     pbp_df["_clock_secs"] = pbp_df["clock"].apply(clock_to_seconds)
 
@@ -353,7 +353,7 @@ def compute_stints(pbp_df: pd.DataFrame) -> list[dict]:
         clock_out = stint["clock_out"]
 
         if not player:
-            stint.update({"stint_pts": 0, "stint_reb": 0, "stint_ast": 0})
+            stint.update({"stint_pts": 0, "stint_reb": 0, "stint_ast": 0, "stint_stl": 0, "stint_blk": 0, "stint_to": 0, "events": []})
             continue
 
         window_mask = (
@@ -377,9 +377,46 @@ def compute_stints(pbp_df: pd.DataFrame) -> list[dict]:
         ast = int(made_in_window["description"].apply(
             lambda d: bool(ast_pat.search(str(d)))).sum())
 
+        stl = int(player_ev["description"].str.contains("STEAL", case=False, na=False).sum())
+        blk = int(player_ev["description"].str.contains("BLOCK", case=False, na=False).sum())
+        to = int((player_ev["actionType"] == "Turnover").sum())
+
         stint["stint_pts"] = pts
         stint["stint_reb"] = reb
         stint["stint_ast"] = ast
+        stint["stint_stl"] = stl
+        stint["stint_blk"] = blk
+        stint["stint_to"]  = to
+
+        # Collect timestamped events for this player during the stint
+        event_types = {"Made Shot", "Missed Shot", "Free Throw", "Rebound", "Turnover", "Foul"}
+        events = []
+
+        for _, ev in player_ev.iterrows():
+            action = str(ev.get("actionType", ""))
+            desc = str(ev.get("description", ""))
+
+            # Include known action types + steal/block events (which have empty actionType)
+            if action in event_types or "STEAL" in desc.upper() or "BLOCK" in desc.upper():
+                events.append({
+                    "clock": clock_display(ev.get("clock", "")),
+                    "type": action if action else ("Steal" if "STEAL" in desc.upper() else "Block"),
+                    "detail": desc,
+                })
+
+        # Also find assists: made shots by teammates where this player is credited
+        for _, ev in made_in_window.iterrows():
+            desc = str(ev.get("description", ""))
+            if ast_pat.search(desc):
+                events.append({
+                    "clock": clock_display(ev.get("clock", "")),
+                    "type": "Assist",
+                    "detail": desc,
+                })
+
+        # Sort events by clock descending (game clock counts down)
+        events.sort(key=lambda e: e["clock"], reverse=True)
+        stint["events"] = events
 
     return stints
 
