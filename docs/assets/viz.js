@@ -75,7 +75,7 @@ document.getElementById('game-title').textContent =
         ctx.stroke();
         ctx.setLineDash([]);
         ctx.fillStyle = 'rgba(255,255,255,0.45)';
-        ctx.font = '11px Segoe UI, Arial, sans-serif';
+        ctx.font = `${isSmallMobile() ? 9 : 11}px Segoe UI, Arial, sans-serif`;
         ctx.fillText(`Q${i + 2}`, xPx + 4, top + 14);
         ctx.restore();
       });
@@ -123,13 +123,19 @@ document.getElementById('game-title').textContent =
           grid: { color: 'rgba(255,255,255,0.06)' },
         },
         y: {
-          title: { display: true, text: 'Score', color: '#888' },
+          title: { display: !isSmallMobile(), text: 'Score', color: '#888' },
           ticks: { color: '#888' },
           grid: { color: 'rgba(255,255,255,0.06)' },
         }
       },
       plugins: {
-        legend: { labels: { color: '#ccc' } },
+        legend: {
+          labels: {
+            color: '#ccc',
+            font: { size: isSmallMobile() ? 10 : 12 },
+            boxWidth: isSmallMobile() ? 12 : 40
+          }
+        },
         tooltip: {
           callbacks: {
             title(items) {
