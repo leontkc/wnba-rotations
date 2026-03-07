@@ -216,8 +216,15 @@ function renderStints(data) {
 
   const ns = 'http://www.w3.org/2000/svg';
   const svg = document.createElementNS(ns, 'svg');
-  svg.setAttribute('width', svgW);
-  svg.setAttribute('height', svgH);
+  svg.setAttribute('viewBox', `0 0 ${svgW} ${svgH}`);
+  svg.setAttribute('preserveAspectRatio', 'xMinYMin meet');
+  if (mobile) {
+    svg.style.width = '100%';
+    svg.style.height = 'auto';
+  } else {
+    svg.setAttribute('width', svgW);
+    svg.setAttribute('height', svgH);
+  }
   svg.style.display = 'block';
 
   function el(tag, attrs = {}, parent = svg) {
