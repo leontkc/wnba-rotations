@@ -25,6 +25,26 @@ function teamColor(tc) {
   return tc === DATA.game.home_tricode ? HOME_COLOR : AWAY_COLOR;
 }
 
+// ─── Mobile Detection ───────────────────────────────────────────────────────
+function isMobile() {
+  return window.innerWidth <= 768;
+}
+
+function isSmallMobile() {
+  return window.innerWidth <= 480;
+}
+
+function isTouchDevice() {
+  return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+}
+
+function abbreviateName(name) {
+  if (!name) return '';
+  const parts = name.trim().split(' ');
+  if (parts.length < 2) return name;
+  return parts[0][0] + '. ' + parts.slice(1).join(' ');
+}
+
 // ─── Title ───────────────────────────────────────────────────────────────────
 const g = DATA.game;
 document.getElementById('game-title').textContent =
