@@ -354,16 +354,53 @@ function renderStints(data) {
 
     const tipHTML = buildTooltipHTML(s);
 
-    rect.addEventListener('mousemove', e => {
-      tooltip.innerHTML = tipHTML;
-      tooltip.style.display = 'block';
-      // Position: prefer right of cursor, flip if near right edge
-      const tx = (e.clientX + 16 + 340 > window.innerWidth) ? e.clientX - 350 : e.clientX + 16;
-      const ty = Math.min(e.clientY + 12, window.innerHeight - 320);
-      tooltip.style.left = tx + 'px';
-      tooltip.style.top  = ty + 'px';
-    });
-    rect.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+    // Desktop: mousemove/mouseleave
+    if (!isTouchDevice()) {
+      rect.addEventListener('mousemove', e => {
+        tooltip.innerHTML = tipHTML;
+        tooltip.style.display = 'block';
+        const tx = (e.clientX + 16 + 340 > window.innerWidth) ? e.clientX - 350 : e.clientX + 16;
+        const ty = Math.min(e.clientY + 12, window.innerHeight - 320);
+        tooltip.style.left = tx + 'px';
+        tooltip.style.top  = ty + 'px';
+      });
+      rect.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+    } else {
+      // Mobile: tap to show
+      rect.addEventListener('touchstart', e => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Hide any existing tooltip first
+        tooltip.style.display = 'none';
+
+        // Show this tooltip
+        tooltip.innerHTML = tipHTML;
+        tooltip.style.display = 'block';
+
+        // Position: centered horizontally, below the tap point
+        const touch = e.touches[0];
+        const tooltipRect = tooltip.getBoundingClientRect();
+        const viewportW = window.innerWidth;
+        const viewportH = window.innerHeight;
+
+        // Center horizontally
+        let tx = Math.max(10, Math.min(viewportW - tooltipRect.width - 10,
+                 (viewportW - tooltipRect.width) / 2));
+        // Position below tap, with fallback to above if too close to bottom
+        let ty = touch.clientY + 20;
+        if (ty + tooltipRect.height > viewportH - 10) {
+          ty = touch.clientY - tooltipRect.height - 20;
+        }
+
+        tooltip.style.left = tx + 'px';
+        tooltip.style.top = Math.max(10, ty) + 'px';
+
+        // Visual feedback
+        rect.style.opacity = '1';
+        setTimeout(() => { rect.style.opacity = '0.75'; }, 150);
+      }, { passive: false });
+    }
 
     const combo = (s.stint_reb || 0) + (s.stint_ast || 0);
     const cid = `cs${clipIdx++}`;
@@ -390,6 +427,18 @@ function renderStints(data) {
   });
 
   document.getElementById('gantt-container').appendChild(svg);
+
+  // Mobile: tap outside to dismiss tooltip
+  if (isTouchDevice()) {
+    document.addEventListener('touchstart', e => {
+      const tooltip = document.getElementById('gantt-tooltip');
+      if (tooltip.style.display !== 'none' &&
+          !tooltip.contains(e.target) &&
+          !e.target.closest('#gantt-container rect')) {
+        tooltip.style.display = 'none';
+      }
+    });
+  }
 }
 
 renderStints(DATA);
