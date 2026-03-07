@@ -265,12 +265,24 @@ function renderStints(data) {
         x: 0, y, width: svgW, height: ROW_H - 1,
         fill: isHome ? 'rgba(200,16,46,0.03)' : 'rgba(74,144,217,0.03)'
       });
+      // Responsive player name display
+      const nameFontSize = smallMobile ? '9' : mobile ? '10' : '11';
+      const maxLen = smallMobile ? 10 : mobile ? 14 : 18;
+      let displayName = row.player;
+
+      if (smallMobile) {
+        displayName = abbreviateName(row.player);
+      }
+      if (displayName.length > maxLen) {
+        displayName = displayName.slice(0, maxLen - 1) + '…';
+      }
+
       el('text', {
         x: PAD_LEFT - 6, y: y + ROW_H / 2 + 4,
         fill: isHome ? '#e8a0aa' : '#8ab8e0',
-        'font-size': '11', 'text-anchor': 'end',
+        'font-size': nameFontSize, 'text-anchor': 'end',
         'font-family': 'Segoe UI, Arial, sans-serif'
-      }).textContent = row.player.length > 18 ? row.player.slice(0, 17) + '…' : row.player;
+      }).textContent = displayName;
     }
   });
 
