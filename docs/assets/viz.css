@@ -68,3 +68,74 @@ tr:hover td { background: rgba(255,255,255,0.04); }
 #gantt-tooltip .tip-ev.ev-ast { color: #6fb3cf; }
 #gantt-tooltip .tip-ev.ev-to { color: #cf9f6f; }
 #gantt-tooltip .tip-ev.ev-stl, #gantt-tooltip .tip-ev.ev-blk { color: #b094d6; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE STYLES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Tablet: 481-768px ── */
+@media (max-width: 768px) {
+  body { padding: 12px; }
+  h1 { font-size: 1.1rem; margin-bottom: 16px; }
+  section { padding: 14px; margin-bottom: 18px; }
+
+  /* Box score: sticky player column */
+  #box-score-container { position: relative; }
+
+  table th:first-child,
+  table td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    min-width: 100px;
+  }
+
+  table th:first-child { background: #22263a; }
+  table td:first-child { background: inherit; }
+
+  /* Shadow hint for horizontal scroll */
+  table th:first-child::after,
+  table td:first-child::after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    background: linear-gradient(to right, rgba(0,0,0,0.2), transparent);
+    pointer-events: none;
+  }
+
+  /* Hide Team column on mobile (redundant with team headers) */
+  table th:nth-child(2),
+  table td:nth-child(2) { display: none; }
+}
+
+/* ── Small Mobile: ≤480px ── */
+@media (max-width: 480px) {
+  body { padding: 8px; }
+  h1 { font-size: 0.95rem; margin-bottom: 12px; }
+  h2 { font-size: 0.85rem; }
+  section { padding: 10px; margin-bottom: 14px; border-radius: 8px; }
+
+  /* Box score: smaller text */
+  table { font-size: 0.72rem; }
+  th, td { padding: 4px 6px; }
+  table th:first-child,
+  table td:first-child { min-width: 80px; }
+
+  /* Score chart: reduce height */
+  section:has(#scoreChart) > div { height: 220px !important; }
+
+  /* Gantt tooltip: mobile positioning */
+  #gantt-tooltip {
+    left: 50% !important;
+    transform: translateX(-50%);
+    max-width: calc(100vw - 20px);
+    min-width: auto;
+  }
+  #gantt-tooltip .tip-stats {
+    flex-wrap: wrap;
+    gap: 6px 10px;
+  }
+}
