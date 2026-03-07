@@ -183,13 +183,19 @@ function renderStints(data) {
   const playerRowIndex = new Map();
   rows.forEach((r, i) => { if (r.type === 'player') playerRowIndex.set(r.player, i); });
 
-  const ROW_H    = 18;
-  const HEADER_H = 22;
-  const PAD_TOP  = 28;
+  // Responsive dimensions
+  const smallMobile = isSmallMobile();
+  const mobile = isMobile();
+
+  const ROW_H    = smallMobile ? 14 : mobile ? 16 : 18;
+  const HEADER_H = smallMobile ? 18 : mobile ? 20 : 22;
+  const PAD_TOP  = smallMobile ? 24 : 28;
   const PAD_BOT  = 10;
-  const PAD_LEFT = 130;
-  const PAD_RIGHT = 20;
-  const svgW = Math.max(800, (document.getElementById('gantt-container').clientWidth || 900) - 4);
+  const PAD_LEFT = smallMobile ? 70 : mobile ? 100 : 130;
+  const PAD_RIGHT = smallMobile ? 10 : 20;
+
+  const containerW = document.getElementById('gantt-container').clientWidth || 900;
+  const svgW = Math.max(smallMobile ? 320 : 600, containerW - 4);
   const chartW = svgW - PAD_LEFT - PAD_RIGHT;
 
   let totalContentH = 0;
