@@ -375,12 +375,18 @@ function renderStints(data) {
     cp.appendChild(cr);
     defs.appendChild(cp);
 
-    el('text', {
-      x: x1 + 4, y: y + barH / 2 + 4,
-      fill: 'rgba(255,255,255,0.92)', 'font-size': '9', 'font-weight': '600',
-      'text-anchor': 'start', 'font-family': 'Segoe UI, Arial, sans-serif',
-      'pointer-events': 'none', 'clip-path': `url(#${cid})`
-    }).textContent = `${s.stint_pts || 0} · ${combo}`;
+    // Hide stats on narrow bars (mobile)
+    const minBarWidthForStats = smallMobile ? 35 : 30;
+    const statsFontSize = smallMobile ? '8' : '9';
+
+    if (barW >= minBarWidthForStats) {
+      el('text', {
+        x: x1 + 3, y: y + barH / 2 + (smallMobile ? 3 : 4),
+        fill: 'rgba(255,255,255,0.92)', 'font-size': statsFontSize, 'font-weight': '600',
+        'text-anchor': 'start', 'font-family': 'Segoe UI, Arial, sans-serif',
+        'pointer-events': 'none', 'clip-path': `url(#${cid})`
+      }).textContent = `${s.stint_pts || 0} · ${combo}`;
+    }
   });
 
   document.getElementById('gantt-container').appendChild(svg);
