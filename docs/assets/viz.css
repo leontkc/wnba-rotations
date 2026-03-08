@@ -154,3 +154,58 @@ tr:hover td { background: rgba(255,255,255,0.04); }
   color: #fff;
   text-decoration: underline;
 }
+
+/* Player search dropdown (game pages) */
+#game-nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+#player-search {
+  position: relative;
+  width: 160px;
+  margin-left: auto;
+}
+#player-input {
+  width: 100%;
+  padding: 5px 10px;
+  background: #22263a;
+  border: 1px solid #333;
+  border-radius: 6px;
+  color: #e0e0e0;
+  font-size: 0.78rem;
+  font-family: inherit;
+}
+#player-input:focus {
+  outline: none;
+  border-color: #4a90d9;
+}
+#player-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #1a1d27;
+  border: 1px solid #333;
+  border-radius: 6px;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+  z-index: 100;
+  margin-top: 4px;
+}
+#player-dropdown.active {
+  display: block;
+}
+.player-option {
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 0.78rem;
+  color: #e0e0e0;
+}
+.player-option:hover {
+  background: rgba(255,255,255,0.05);
+}
+@media (max-width: 480px) {
+  #player-search { width: 120px; }
+}

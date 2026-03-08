@@ -593,3 +593,54 @@ function renderBoxScore(data) {
 }
 
 renderBoxScore(DATA);
+
+// ─── Player Search Dropdown ──────────────────────────────────────────────────
+(function initPlayerSearch() {
+  const input = document.getElementById('player-input');
+  const dropdown = document.getElementById('player-dropdown');
+  if (!input || !dropdown) return;
+
+  let players = [];
+
+  // Load players manifest
+  fetch('../players/players.json')
+    .then(r => r.json())
+    .then(data => { players = data; })
+    .catch(() => { console.warn('Could not load players.json'); });
+
+  input.addEventListener('focus', () => {
+    if (players.length) renderDropdown('');
+  });
+
+  input.addEventListener('input', () => {
+    renderDropdown(input.value.trim().toLowerCase());
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#player-search')) {
+      dropdown.classList.remove('active');
+    }
+  });
+
+  function renderDropdown(filter) {
+    const filtered = players.filter(p =>
+      p.name.toLowerCase().includes(filter)
+    ).slice(0, 15);
+
+    if (!filtered.length) {
+      dropdown.classList.remove('active');
+      return;
+    }
+
+    dropdown.innerHTML = filtered.map(p =>
+      `<div class="player-option" data-slug="${p.slug}">${p.name} <span style="color:#666;font-size:0.7rem">(${p.team})</span></div>`
+    ).join('');
+    dropdown.classList.add('active');
+
+    dropdown.querySelectorAll('.player-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        window.location.href = `../players/${opt.dataset.slug}.html`;
+      });
+    });
+  }
+})();
