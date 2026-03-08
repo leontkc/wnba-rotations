@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>__PLAYER_NAME__ — wnbarotations</title>
+<link rel="stylesheet" href="../assets/viz.css">
+<link rel="stylesheet" href="../assets/player.css">
+</head>
+<body>
+<nav id="game-nav">
+  <a href="../index.html" id="nav-home">← wnbarotations</a>
+  <div id="player-search">
+    <input type="text" placeholder="Search players..." id="player-input">
+    <div id="player-dropdown"></div>
+  </div>
+</nav>
+
+<header class="player-header">
+  <h1>__PLAYER_NAME__</h1>
+  <p class="player-meta">__PLAYER_TEAM__ · __GAME_COUNT__ games</p>
+</header>
+
+<main id="player-games">
+__GAMES_HTML__
+</main>
+
+<script>
+const PLAYER_DATA = __PLAYER_DATA__;
+</script>
+<script src="../assets/player.js"></script>
+</body>
+</html>
