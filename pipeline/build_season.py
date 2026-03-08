@@ -229,6 +229,11 @@ def run_build(seasons: list[str], force_regen: bool = False, single_game_id: str
         from pipeline.build_index import generate_index
         from pipeline.config import DOCS_DIR
         generate_index(manifest["games"], DOCS_DIR / "index.html")
+
+        # Generate player pages
+        from pipeline.build_players import build_player_pages
+        log.info("Building player pages...")
+        build_player_pages()
     else:
         log.info("Single-game mode: skipping index regeneration.")
 
