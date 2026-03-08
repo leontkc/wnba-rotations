@@ -45,6 +45,18 @@ function abbreviateName(name) {
   return parts[0][0] + '. ' + parts.slice(1).join(' ');
 }
 
+function slugify(name) {
+  if (!name) return '';
+  return name.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // remove accents
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+}
+
+function playerPageUrl(name) {
+  return `../players/${slugify(name)}.html`;
+}
+
 // ─── Title ───────────────────────────────────────────────────────────────────
 const g = DATA.game;
 document.getElementById('game-title').textContent =
