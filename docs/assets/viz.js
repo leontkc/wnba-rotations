@@ -302,12 +302,22 @@ function renderStints(data) {
         displayName = displayName.slice(0, maxLen - 1) + '…';
       }
 
-      el('text', {
-        x: PAD_LEFT - 6, y: y + ROW_H / 2 + 4,
-        fill: isHome ? '#e8a0aa' : '#8ab8e0',
-        'font-size': nameFontSize, 'text-anchor': 'end',
-        'font-family': 'Segoe UI, Arial, sans-serif'
-      }).textContent = displayName;
+      // Create clickable player name link
+      const nameLink = document.createElementNS(ns, 'a');
+      nameLink.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', playerPageUrl(row.player));
+      nameLink.setAttribute('style', 'cursor: pointer;');
+
+      const nameText = document.createElementNS(ns, 'text');
+      nameText.setAttribute('x', PAD_LEFT - 6);
+      nameText.setAttribute('y', y + ROW_H / 2 + 4);
+      nameText.setAttribute('fill', isHome ? '#e8a0aa' : '#8ab8e0');
+      nameText.setAttribute('font-size', nameFontSize);
+      nameText.setAttribute('text-anchor', 'end');
+      nameText.setAttribute('font-family', 'Segoe UI, Arial, sans-serif');
+      nameText.textContent = displayName;
+
+      nameLink.appendChild(nameText);
+      svg.appendChild(nameLink);
     }
   });
 
