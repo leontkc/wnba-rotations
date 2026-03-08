@@ -498,7 +498,10 @@ function renderBoxScore(data) {
   }
 
   const cols = [
-    { key: 'first',      label: 'Player', fmt: (r) => `${r.first} ${r.last}`, sort: (a, b) => `${a.last}${a.first}`.localeCompare(`${b.last}${b.first}`) },
+    { key: 'first',      label: 'Player',
+      fmt: (r) => `<a href="${playerPageUrl(r.first + ' ' + r.last)}" class="player-link">${r.first} ${r.last}</a>`,
+      sort: (a, b) => `${a.last}${a.first}`.localeCompare(`${b.last}${b.first}`),
+      isHtml: true },
     { key: 'team',       label: 'Team',   fmt: (r) => r.team,       sort: (a, b) => a.team.localeCompare(b.team) },
     { key: 'minutes',    label: 'Min',    fmt: (r) => r.minutes,    sort: (a, b) => minutesToNum(a.minutes) - minutesToNum(b.minutes) },
     { key: 'pts',        label: 'Pts',    fmt: (r) => r.pts ?? '-', sort: (a, b) => (a.pts ?? 0) - (b.pts ?? 0) },
@@ -573,7 +576,11 @@ function renderBoxScore(data) {
           tr.style.background = light;
           cols.forEach(col => {
             const td = document.createElement('td');
-            td.textContent = col.fmt(row);
+            if (col.isHtml) {
+              td.innerHTML = col.fmt(row);
+            } else {
+              td.textContent = col.fmt(row);
+            }
             tr.appendChild(td);
           });
           tbody.appendChild(tr);
