@@ -52,32 +52,34 @@ header .subtitle {
 .season-section { display: none; }
 .season-section.active { display: block; }
 
-.date-group { margin-top: 28px; }
+.date-group { margin-top: 16px; }
 .date-header {
-  font-size: 0.72rem; font-weight: 700; color: #555;
+  font-size: 0.68rem; font-weight: 600; color: #555;
   text-transform: uppercase; letter-spacing: 0.1em;
-  padding: 6px 0 6px 2px;
+  padding: 4px 0;
   border-bottom: 1px solid rgba(255,255,255,0.05);
-  margin-bottom: 2px;
+  margin-bottom: 0;
 }
 
 .game-row {
-  display: flex; align-items: center; gap: 12px;
-  padding: 7px 6px; border-radius: 6px;
+  display: flex; align-items: center; gap: 8px;
+  padding: 4px 6px; border-radius: 4px;
   transition: background 0.12s;
   text-decoration: none; color: inherit;
+  font-size: 0.78rem;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
 }
 .game-row:hover { background: rgba(255,255,255,0.04); }
-.game-matchup { font-size: 0.9rem; font-weight: 600; color: #ddd; min-width: 110px; }
-.game-score   { font-size: 0.82rem; color: #888; flex: 1; }
-.game-score .winner { color: #ccc; font-weight: 600; }
+.game-matchup { font-size: 0.78rem; font-weight: 500; color: #bbb; min-width: 85px; }
+.game-score   { font-size: 0.78rem; color: #777; flex: 1; }
+.game-score .winner { color: #aaa; font-weight: 600; }
 .game-link {
-  font-size: 0.78rem; color: #4a90d9; text-decoration: none;
-  padding: 3px 10px; border: 1px solid rgba(74,144,217,0.35);
-  border-radius: 12px; white-space: nowrap;
+  font-size: 0.7rem; color: #4a90d9; text-decoration: none;
+  padding: 2px 6px; background: rgba(74,144,217,0.15);
+  border-radius: 4px; white-space: nowrap;
   transition: background 0.12s;
 }
-.game-link:hover { background: rgba(74,144,217,0.15); }
+.game-link:hover { background: rgba(74,144,217,0.25); }
 
 .no-results {
   text-align: center; color: #444; padding: 60px 20px;
