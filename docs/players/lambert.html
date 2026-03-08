@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lambert — wnbarotations</title>
+<link rel="stylesheet" href="../assets/viz.css">
+<link rel="stylesheet" href="../assets/player.css">
+</head>
+<body>
+<nav id="game-nav">
+  <a href="../index.html" id="nav-home">← wnbarotations</a>
+  <div id="player-search">
+    <input type="text" placeholder="Search players..." id="player-input">
+    <div id="player-dropdown"></div>
+  </div>
+</nav>
+
+<header class="player-header">
+  <h1>Lambert</h1>
+  <p class="player-meta">IND · 1 games</p>
+</header>
+
+<main id="player-games">
+
+<div class="player-game" data-href="../games/1022500218.html">
+  <div class="player-game-header">
+    <span>2025-08-17 @ CON</span>
+    <span class="game-result win">W 99-93</span>
+  </div>
+  <div class="mini-gantt" data-stints='[{"start": 2995.4, "end": 3000.0}]' data-ishome='false'></div>
+  <div class="player-game-stats">
+    <span><span class="stat-val">0</span> PTS</span>
+    <span><span class="stat-val">0</span> REB</span>
+    <span><span class="stat-val">0</span> AST</span>
+    <span class="player-minutes">0:04</span>
+  </div>
+</div>
+</main>
+
+<script>
+const PLAYER_DATA = {"name": "Lambert", "team": "IND", "games": [{"game_id": "1022500218", "date": "2025-08-17", "opponent": "CON", "is_home": false, "own_score": 99, "opp_score": 93, "won": true, "stints": [{"start": 2995.4, "end": 3000.0}], "minutes": "0:04", "pts": 0, "reb": 0, "ast": 0}]};
+</script>
+<script src="../assets/player.js"></script>
+</body>
+</html>

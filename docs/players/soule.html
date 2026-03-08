@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soule — wnbarotations</title>
+<link rel="stylesheet" href="../assets/viz.css">
+<link rel="stylesheet" href="../assets/player.css">
+</head>
+<body>
+<nav id="game-nav">
+  <a href="../index.html" id="nav-home">← wnbarotations</a>
+  <div id="player-search">
+    <input type="text" placeholder="Search players..." id="player-input">
+    <div id="player-dropdown"></div>
+  </div>
+</nav>
+
+<header class="player-header">
+  <h1>Soule</h1>
+  <p class="player-meta">MIN · 2 games</p>
+</header>
+
+<main id="player-games">
+
+<div class="player-game" data-href="../games/1022400021.html">
+  <div class="player-game-header">
+    <span>2024-05-23 @ CON</span>
+    <span class="game-result loss">L 82-83</span>
+  </div>
+  <div class="mini-gantt" data-stints='[{"start": 600.0, "end": 750.0}]' data-ishome='false'></div>
+  <div class="player-game-stats">
+    <span><span class="stat-val">0</span> PTS</span>
+    <span><span class="stat-val">1</span> REB</span>
+    <span><span class="stat-val">0</span> AST</span>
+    <span class="player-minutes">2:30</span>
+  </div>
+</div>
+
+<div class="player-game" data-href="../games/1022400004.html">
+  <div class="player-game-header">
+    <span>2024-05-14 @ SEA</span>
+    <span class="game-result win">W 83-70</span>
+  </div>
+  <div class="mini-gantt" data-stints='[{"start": 2367.1, "end": 2400.0}]' data-ishome='false'></div>
+  <div class="player-game-stats">
+    <span><span class="stat-val">0</span> PTS</span>
+    <span><span class="stat-val">0</span> REB</span>
+    <span><span class="stat-val">0</span> AST</span>
+    <span class="player-minutes">0:32</span>
+  </div>
+</div>
+</main>
+
+<script>
+const PLAYER_DATA = {"name": "Soule", "team": "MIN", "games": [{"game_id": "1022400021", "date": "2024-05-23", "opponent": "CON", "is_home": false, "own_score": 82, "opp_score": 83, "won": false, "stints": [{"start": 600.0, "end": 750.0}], "minutes": "2:30", "pts": 0, "reb": 1, "ast": 0}, {"game_id": "1022400004", "date": "2024-05-14", "opponent": "SEA", "is_home": false, "own_score": 83, "opp_score": 70, "won": true, "stints": [{"start": 2367.1, "end": 2400.0}], "minutes": "0:32", "pts": 0, "reb": 0, "ast": 0}]};
+</script>
+<script src="../assets/player.js"></script>
+</body>
+</html>
