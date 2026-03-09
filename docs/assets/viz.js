@@ -63,13 +63,27 @@ document.getElementById('game-title').textContent =
   `${g.home_tricode} vs. ${g.away_tricode}  ·  ${g.date}  ·  ` +
   `Final: ${g.home_tricode} ${g.score_home} – ${g.away_tricode} ${g.score_away}`;
 
-// ─── 1. Score Flow ───────────────────────────────────────────────────────────
-(function renderScoreFlow() {
+// ─── 1. Game Momentum (Score Margin) ─────────────────────────────────────────
+(function renderGameMomentum() {
   const flow = DATA.score_flow;
   if (!flow.length) return;
 
-  const homeData = flow.map(d => ({ x: d.elapsed_sec / 60, y: d.score_home }));
-  const awayData = flow.map(d => ({ x: d.elapsed_sec / 60, y: d.score_away }));
+  // Calculate margin: positive = home leading, negative = away leading
+  const marginData = flow.map(d => ({
+    x: d.elapsed_sec / 60,
+    y: d.score_home - d.score_away,
+    scoreHome: d.score_home,
+    scoreAway: d.score_away,
+    period: d.period,
+    clock: d.clock_display
+  }));
+
+  // Find max margin for symmetric y-axis
+  const maxMargin = Math.max(
+    Math.abs(Math.min(...marginData.map(d => d.y))),
+    Math.abs(Math.max(...marginData.map(d => d.y))),
+    10 // minimum range
+  );
 
   const quarterLines = {
     id: 'quarterLines',
@@ -94,29 +108,69 @@ document.getElementById('game-title').textContent =
     }
   };
 
+  // Plugin to fill above/below zero with different colors
+  const splitFill = {
+    id: 'splitFill',
+    beforeDatasetsDraw(chart) {
+      const { ctx, chartArea: { left, right, top, bottom }, scales: { x, y } } = chart;
+      const dataset = chart.data.datasets[0];
+      const meta = chart.getDatasetMeta(0);
+      const points = meta.data;
+
+      if (points.length < 2) return;
+
+      const zeroY = y.getPixelForValue(0);
+
+      ctx.save();
+
+      // Draw home (above zero) fill
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, zeroY);
+      points.forEach((pt, i) => {
+        const yVal = marginData[i].y;
+        if (yVal >= 0) {
+          ctx.lineTo(pt.x, pt.y);
+        } else {
+          ctx.lineTo(pt.x, zeroY);
+        }
+      });
+      ctx.lineTo(points[points.length - 1].x, zeroY);
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(200, 16, 46, 0.25)';
+      ctx.fill();
+
+      // Draw away (below zero) fill
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, zeroY);
+      points.forEach((pt, i) => {
+        const yVal = marginData[i].y;
+        if (yVal <= 0) {
+          ctx.lineTo(pt.x, pt.y);
+        } else {
+          ctx.lineTo(pt.x, zeroY);
+        }
+      });
+      ctx.lineTo(points[points.length - 1].x, zeroY);
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(74, 144, 217, 0.25)';
+      ctx.fill();
+
+      ctx.restore();
+    }
+  };
+
   new Chart(document.getElementById('scoreChart'), {
     type: 'line',
     data: {
       datasets: [
         {
-          label: g.home_tricode,
-          data: homeData,
-          borderColor: HOME_COLOR,
+          label: 'Margin',
+          data: marginData,
+          borderColor: '#888',
           backgroundColor: 'transparent',
-          tension: 0.3,
+          tension: 0.2,
           pointRadius: 0,
           borderWidth: 2,
-          stepped: false,
-        },
-        {
-          label: g.away_tricode,
-          data: awayData,
-          borderColor: AWAY_COLOR,
-          backgroundColor: 'transparent',
-          tension: 0.3,
-          pointRadius: 0,
-          borderWidth: 2,
-          stepped: false,
         }
       ]
     },
@@ -135,31 +189,45 @@ document.getElementById('game-title').textContent =
           grid: { color: 'rgba(255,255,255,0.06)' },
         },
         y: {
-          title: { display: !isSmallMobile(), text: 'Score', color: '#888' },
-          ticks: { color: '#888' },
-          grid: { color: 'rgba(255,255,255,0.06)' },
+          min: -Math.ceil(maxMargin / 5) * 5,
+          max: Math.ceil(maxMargin / 5) * 5,
+          title: { display: !isSmallMobile(), text: 'Lead', color: '#888' },
+          ticks: {
+            color: '#888',
+            callback: (val) => val === 0 ? 'TIE' : (val > 0 ? `+${val}` : val)
+          },
+          grid: {
+            color: (ctx) => ctx.tick.value === 0 ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.06)',
+            lineWidth: (ctx) => ctx.tick.value === 0 ? 2 : 1
+          },
         }
       },
       plugins: {
         legend: {
+          display: true,
           labels: {
             color: '#ccc',
             font: { size: isSmallMobile() ? 10 : 12 },
-            boxWidth: isSmallMobile() ? 12 : 40
+            generateLabels: () => [
+              { text: `${g.home_tricode} leads`, fillStyle: 'rgba(200, 16, 46, 0.5)', strokeStyle: HOME_COLOR },
+              { text: `${g.away_tricode} leads`, fillStyle: 'rgba(74, 144, 217, 0.5)', strokeStyle: AWAY_COLOR },
+            ]
           }
         },
         tooltip: {
           callbacks: {
             title(items) {
-              const elSec = items[0].parsed.x * 60;
-              const ev = flow.find(d => d.elapsed_sec >= elSec - 5 && d.elapsed_sec <= elSec + 5);
-              if (ev) return `Q${ev.period} ${ev.clock_display}`;
-              const period = Math.floor(items[0].parsed.x / 10) + 1;
-              return `Q${Math.min(period, 4)} ${(items[0].parsed.x % 10).toFixed(1)} min`;
+              const d = marginData[items[0].dataIndex];
+              return `Q${d.period} ${d.clock}`;
             },
             label(item) {
-              const tc = item.dataset.label;
-              return ` ${tc}: ${item.parsed.y}`;
+              const d = marginData[item.dataIndex];
+              const leader = d.y > 0 ? g.home_tricode : d.y < 0 ? g.away_tricode : 'Tied';
+              const lead = d.y === 0 ? '' : ` by ${Math.abs(d.y)}`;
+              return [
+                `${leader}${lead}`,
+                `${g.home_tricode} ${d.scoreHome} - ${g.away_tricode} ${d.scoreAway}`
+              ];
             }
           },
           backgroundColor: 'rgba(20,22,35,0.95)',
@@ -170,7 +238,7 @@ document.getElementById('game-title').textContent =
         }
       }
     },
-    plugins: [quarterLines]
+    plugins: [splitFill, quarterLines]
   });
 })();
 
