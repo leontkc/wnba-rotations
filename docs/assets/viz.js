@@ -68,15 +68,30 @@ document.getElementById('game-title').textContent =
   const flow = DATA.score_flow;
   if (!flow.length) return;
 
+  // Parse clock display (e.g., "5:30") to seconds remaining in quarter
+  function clockToSec(clock) {
+    const parts = clock.split(':');
+    return parseInt(parts[0]) * 60 + parseInt(parts[1]);
+  }
+
+  // Calculate true elapsed time from period and clock
+  // Each quarter is 10 minutes (600 sec for WNBA) or 12 minutes (720 sec for NBA)
+  // We'll detect based on first quarter start clock
+  const quarterLen = 600; // 10 min quarters (WNBA/NBA regular)
+
   // Calculate margin: positive = home leading, negative = away leading
-  const marginData = flow.map(d => ({
-    x: d.elapsed_sec / 60,
-    y: d.score_home - d.score_away,
-    scoreHome: d.score_home,
-    scoreAway: d.score_away,
-    period: d.period,
-    clock: d.clock_display
-  }));
+  const marginData = flow.map(d => {
+    const clockSec = clockToSec(d.clock_display);
+    const elapsedMin = ((d.period - 1) * quarterLen + (quarterLen - clockSec)) / 60;
+    return {
+      x: elapsedMin,
+      y: d.score_home - d.score_away,
+      scoreHome: d.score_home,
+      scoreAway: d.score_away,
+      period: d.period,
+      clock: d.clock_display
+    };
+  });
 
   // Find max margin for symmetric y-axis
   const maxMargin = Math.max(
