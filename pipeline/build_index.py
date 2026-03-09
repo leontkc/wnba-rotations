@@ -131,6 +131,10 @@ def generate_index(games: dict, output_path: Path) -> None:
 {team_options}
   </select>
   <input id="search-box" type="text" placeholder="🔍  Search team or date…" oninput="applyFilters()">
+  <div id="player-search">
+    <input id="player-input" type="text" placeholder="🔍  Find player…" autocomplete="off">
+    <div id="player-dropdown"></div>
+  </div>
   <span id="game-count">{total_games} games</span>
 </div>
 
@@ -182,6 +186,53 @@ function applyFilters() {{
   document.getElementById('game-count').textContent = visible + ' game' + (visible !== 1 ? 's' : '');
   document.getElementById('no-results').style.display = visible === 0 ? '' : 'none';
 }}
+
+// Player search
+(function initPlayerSearch() {{
+  const input = document.getElementById('player-input');
+  const dropdown = document.getElementById('player-dropdown');
+  if (!input || !dropdown) return;
+
+  let players = [];
+  fetch('players/players.json')
+    .then(r => r.json())
+    .then(data => {{ players = data; }})
+    .catch(() => {{}});
+
+  input.addEventListener('focus', () => {{
+    if (players.length) renderDropdown('');
+  }});
+
+  input.addEventListener('input', () => {{
+    renderDropdown(input.value.trim().toLowerCase());
+  }});
+
+  document.addEventListener('click', (e) => {{
+    if (!e.target.closest('#player-search')) dropdown.classList.remove('active');
+  }});
+
+  function renderDropdown(filter) {{
+    const filtered = players.filter(p =>
+      p.name.toLowerCase().includes(filter)
+    ).slice(0, 15);
+
+    if (!filtered.length) {{
+      dropdown.classList.remove('active');
+      return;
+    }}
+
+    dropdown.innerHTML = filtered.map(p =>
+      `<div class="player-option" data-slug="${{p.slug}}">${{p.name}} <span style="color:#666;font-size:0.7rem">(${{p.team}})</span></div>`
+    ).join('');
+    dropdown.classList.add('active');
+
+    dropdown.querySelectorAll('.player-option').forEach(opt => {{
+      opt.addEventListener('click', () => {{
+        window.location.href = `players/${{opt.dataset.slug}}.html`;
+      }});
+    }});
+  }}
+}})();
 </script>
 </body>
 </html>
