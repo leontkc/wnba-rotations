@@ -2,7 +2,7 @@ name: Update WNBA Games
 
 on:
   schedule:
-    # Daily at noon UTC — covers WNBA season (May–Sept)
+    # Daily at noon UTC during WNBA season (May–Oct)
     - cron: '0 12 * * *'
   workflow_dispatch:  # also allow manual trigger
 
@@ -13,21 +13,37 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Check if WNBA season (skip Nov–Apr on schedule)
+        if: github.event_name == 'schedule'
+        run: |
+          MONTH=$(date -u +%m)
+          if [ "$MONTH" -lt 5 ] || [ "$MONTH" -gt 10 ]; then
+            echo "Off-season (month $MONTH), skipping."
+            echo "SKIP=true" >> $GITHUB_ENV
+          fi
+
       - name: Checkout repo
+        if: env.SKIP != 'true'
         uses: actions/checkout@v4
 
       - name: Set up Python
+        if: env.SKIP != 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Install dependencies
+        if: env.SKIP != 'true'
         run: pip install nba_api pandas
 
-      - name: Run pipeline (current year)
-        run: python -m pipeline.build_season --seasons 2026
+      - name: Run pipeline
+        if: env.SKIP != 'true'
+        run: |
+          YEAR=$(date -u +%Y)
+          python -m pipeline.build_season --seasons "$YEAR" "$((YEAR - 1))"
 
       - name: Commit and push if anything changed
+        if: env.SKIP != 'true'
         run: |
           git config user.name  "wnbarotations-bot"
           git config user.email "bot@wnbarotations.com"
