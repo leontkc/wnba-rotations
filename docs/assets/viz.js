@@ -216,13 +216,16 @@ function renderStints(data) {
   const playerTotals = new Map();
   if (data.box_score && data.box_score.length) {
     data.box_score.forEach(b => {
-      const name = `${b.first} ${b.last}`;
-      playerTotals.set(name, {
+      const fullName = `${b.first} ${b.last}`;
+      const stats = {
         min: b.minutes || '0:00',
         pts: b.pts ?? 0,
         reb: b.reb ?? 0,
         ast: b.ast ?? 0,
-      });
+      };
+      // Add both full name and last name as keys (stints often use last name only)
+      playerTotals.set(fullName, stats);
+      playerTotals.set(b.last, stats);
     });
   } else {
     // Fallback: sum from stints
