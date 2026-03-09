@@ -185,7 +185,8 @@ document.getElementById('game-title').textContent =
           data: marginData,
           borderColor: '#888',
           backgroundColor: 'transparent',
-          tension: 0.2,
+          tension: 0,
+          stepped: 'after',
           pointRadius: 0,
           borderWidth: 2,
         }
