@@ -210,7 +210,7 @@ function renderStints(data) {
   const PAD_TOP  = smallMobile ? 24 : 28;
   const PAD_BOT  = 10;
   const PAD_LEFT = smallMobile ? 70 : mobile ? 100 : 130;
-  const PAD_RIGHT = smallMobile ? 85 : mobile ? 115 : 155;
+  const PAD_RIGHT = smallMobile ? 115 : mobile ? 160 : 210;
 
   // Build player totals from box_score or stints
   const playerTotals = new Map();
