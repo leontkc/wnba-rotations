@@ -302,14 +302,21 @@ function renderStints(data) {
     }).textContent = `Q${q + 1}`;
   });
 
-  // Totals column header
-  const totalsHeaderX = svgW - (smallMobile ? 4 : 8);
+  // Totals column headers - MIN left-aligned, stats right-aligned
+  const minHeaderX = svgW - PAD_RIGHT + (smallMobile ? 6 : 8);
   el('text', {
-    x: totalsHeaderX, y: PAD_TOP - 8,
+    x: minHeaderX, y: PAD_TOP - 8,
+    fill: '#555', 'font-size': smallMobile ? '7' : '9', 'font-weight': '500',
+    'text-anchor': 'start', 'font-family': 'Segoe UI, Arial, sans-serif',
+  }).textContent = 'MIN';
+
+  const statsHeaderX = svgW - (smallMobile ? 4 : 8);
+  el('text', {
+    x: statsHeaderX, y: PAD_TOP - 8,
     fill: '#555', 'font-size': smallMobile ? '7' : '9', 'font-weight': '500',
     'text-anchor': 'end', 'font-family': 'Segoe UI, Arial, sans-serif',
-    'letter-spacing': '0.06em'
-  }).textContent = smallMobile ? 'MIN · PTS REB AST STK' : 'MIN   PTS   REB   AST   STL   BLK';
+    'letter-spacing': '0.04em'
+  }).textContent = smallMobile ? 'PTS REB AST STK' : 'PTS   REB   AST   STL   BLK';
 
   [0, 10, 20, 30, 40].forEach(min => {
     const x = xOf(min * 60);
@@ -371,34 +378,38 @@ function renderStints(data) {
       const totals = playerTotals.get(row.player);
       if (totals) {
         const totalsFontSize = smallMobile ? '8' : mobile ? '9' : '10';
-        const totalsX = svgW - (smallMobile ? 4 : 8);
         const totalsY = y + ROW_H / 2 + (smallMobile ? 3 : 4);
+        const valColor = '#ccc';
+        const lblColor = '#666';
 
-        // Create text element with styled tspans for better readability
-        const totalsText = document.createElementNS(ns, 'text');
-        totalsText.setAttribute('x', totalsX);
-        totalsText.setAttribute('y', totalsY);
-        totalsText.setAttribute('text-anchor', 'end');
-        totalsText.setAttribute('font-family', 'Segoe UI, Arial, sans-serif');
-        totalsText.setAttribute('font-size', totalsFontSize);
+        // Minutes - left aligned after Gantt chart
+        const minX = svgW - PAD_RIGHT + (smallMobile ? 6 : 8);
+        el('text', {
+          x: minX, y: totalsY,
+          fill: valColor, 'font-size': totalsFontSize, 'font-weight': '500',
+          'text-anchor': 'start', 'font-family': 'Segoe UI, Arial, sans-serif'
+        }).textContent = totals.min;
 
-        // Helper to add tspan
+        // Stats - right aligned at edge
+        const statsX = svgW - (smallMobile ? 4 : 8);
+        const statsText = document.createElementNS(ns, 'text');
+        statsText.setAttribute('x', statsX);
+        statsText.setAttribute('y', totalsY);
+        statsText.setAttribute('text-anchor', 'end');
+        statsText.setAttribute('font-family', 'Segoe UI, Arial, sans-serif');
+        statsText.setAttribute('font-size', totalsFontSize);
+
         const addSpan = (text, fill, weight = '400') => {
           const tspan = document.createElementNS(ns, 'tspan');
           tspan.setAttribute('fill', fill);
           tspan.setAttribute('font-weight', weight);
           tspan.textContent = text;
-          totalsText.appendChild(tspan);
+          statsText.appendChild(tspan);
         };
 
-        // Format: 32:15  21p  8r  4a  2s  1b (values bright, labels dim)
-        const valColor = '#ccc';
-        const lblColor = '#666';
         const stocks = (totals.stl || 0) + (totals.blk || 0);
 
         if (smallMobile) {
-          addSpan(totals.min, valColor, '500');
-          addSpan(' · ', lblColor);
           addSpan(String(totals.pts), valColor, '600');
           addSpan('p ', lblColor);
           addSpan(String(totals.reb), valColor);
@@ -406,10 +417,8 @@ function renderStints(data) {
           addSpan(String(totals.ast), valColor);
           addSpan('a ', lblColor);
           addSpan(String(stocks), valColor);
-          addSpan('stk', lblColor);
+          addSpan('s', lblColor);
         } else {
-          addSpan(totals.min, valColor, '500');
-          addSpan('  ', lblColor);
           addSpan(String(totals.pts), valColor, '600');
           addSpan(' pts  ', lblColor);
           addSpan(String(totals.reb), valColor);
@@ -422,7 +431,7 @@ function renderStints(data) {
           addSpan(' blk', lblColor);
         }
 
-        svg.appendChild(totalsText);
+        svg.appendChild(statsText);
       }
     }
   });
