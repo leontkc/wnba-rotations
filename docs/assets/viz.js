@@ -302,10 +302,10 @@ function renderStints(data) {
   const totalsHeaderX = svgW - (smallMobile ? 4 : 8);
   el('text', {
     x: totalsHeaderX, y: PAD_TOP - 8,
-    fill: '#666', 'font-size': smallMobile ? '8' : '10', 'font-weight': '600',
+    fill: '#555', 'font-size': smallMobile ? '7' : '9', 'font-weight': '500',
     'text-anchor': 'end', 'font-family': 'Segoe UI, Arial, sans-serif',
-    'letter-spacing': '0.05em'
-  }).textContent = smallMobile ? 'MIN PTS R+A' : 'MIN    PTS    REB+AST';
+    'letter-spacing': '0.06em'
+  }).textContent = smallMobile ? 'MIN · PTS REB AST' : 'MIN   PTS   REB   AST';
 
   [0, 10, 20, 30, 40].forEach(min => {
     const x = xOf(min * 60);
@@ -370,22 +370,48 @@ function renderStints(data) {
         const totalsX = svgW - (smallMobile ? 4 : 8);
         const totalsY = y + ROW_H / 2 + (smallMobile ? 3 : 4);
 
-        // Format: MIN  PTS  R+A (or compact on small mobile)
-        let totalsStr;
+        // Create text element with styled tspans for better readability
+        const totalsText = document.createElementNS(ns, 'text');
+        totalsText.setAttribute('x', totalsX);
+        totalsText.setAttribute('y', totalsY);
+        totalsText.setAttribute('text-anchor', 'end');
+        totalsText.setAttribute('font-family', 'Segoe UI, Arial, sans-serif');
+        totalsText.setAttribute('font-size', totalsFontSize);
+
+        // Helper to add tspan
+        const addSpan = (text, fill, weight = '400') => {
+          const tspan = document.createElementNS(ns, 'tspan');
+          tspan.setAttribute('fill', fill);
+          tspan.setAttribute('font-weight', weight);
+          tspan.textContent = text;
+          totalsText.appendChild(tspan);
+        };
+
+        // Format: 32:15  21p  8r  4a (values bright, labels dim)
+        const valColor = '#ccc';
+        const lblColor = '#666';
+
         if (smallMobile) {
-          totalsStr = `${totals.min} ${totals.pts}p ${totals.reb + totals.ast}`;
+          addSpan(totals.min, valColor, '500');
+          addSpan(' · ', lblColor);
+          addSpan(String(totals.pts), valColor, '600');
+          addSpan('p ', lblColor);
+          addSpan(String(totals.reb), valColor);
+          addSpan('r ', lblColor);
+          addSpan(String(totals.ast), valColor);
+          addSpan('a', lblColor);
         } else {
-          totalsStr = `${totals.min}   ${totals.pts} pts   ${totals.reb}+${totals.ast}`;
+          addSpan(totals.min, valColor, '500');
+          addSpan('  ', lblColor);
+          addSpan(String(totals.pts), valColor, '600');
+          addSpan(' pts  ', lblColor);
+          addSpan(String(totals.reb), valColor);
+          addSpan(' reb  ', lblColor);
+          addSpan(String(totals.ast), valColor);
+          addSpan(' ast', lblColor);
         }
 
-        el('text', {
-          x: totalsX,
-          y: totalsY,
-          fill: '#888',
-          'font-size': totalsFontSize,
-          'text-anchor': 'end',
-          'font-family': 'Segoe UI, Arial, sans-serif',
-        }).textContent = totalsStr;
+        svg.appendChild(totalsText);
       }
     }
   });
