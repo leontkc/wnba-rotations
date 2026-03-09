@@ -210,7 +210,39 @@ function renderStints(data) {
   const PAD_TOP  = smallMobile ? 24 : 28;
   const PAD_BOT  = 10;
   const PAD_LEFT = smallMobile ? 70 : mobile ? 100 : 130;
-  const PAD_RIGHT = smallMobile ? 10 : 20;
+  const PAD_RIGHT = smallMobile ? 65 : mobile ? 85 : 110;
+
+  // Build player totals from box_score or stints
+  const playerTotals = new Map();
+  if (data.box_score && data.box_score.length) {
+    data.box_score.forEach(b => {
+      const name = `${b.first} ${b.last}`;
+      playerTotals.set(name, {
+        min: b.minutes || '0:00',
+        pts: b.pts ?? 0,
+        reb: b.reb ?? 0,
+        ast: b.ast ?? 0,
+      });
+    });
+  } else {
+    // Fallback: sum from stints
+    stints.forEach(s => {
+      const t = playerTotals.get(s.player) || { min: 0, pts: 0, reb: 0, ast: 0 };
+      t.min += s.duration_sec || 0;
+      t.pts += s.stint_pts || 0;
+      t.reb += s.stint_reb || 0;
+      t.ast += s.stint_ast || 0;
+      playerTotals.set(s.player, t);
+    });
+    // Convert seconds to MM:SS for fallback
+    playerTotals.forEach((t, name) => {
+      if (typeof t.min === 'number') {
+        const m = Math.floor(t.min / 60);
+        const s = Math.round(t.min % 60);
+        t.min = `${m}:${String(s).padStart(2, '0')}`;
+      }
+    });
+  }
 
   const containerW = document.getElementById('gantt-container').clientWidth || 900;
   const svgW = Math.max(smallMobile ? 320 : 600, containerW - 4);
@@ -262,6 +294,15 @@ function renderStints(data) {
       'text-anchor': 'middle', 'font-family': 'Segoe UI, Arial, sans-serif'
     }).textContent = `Q${q + 1}`;
   });
+
+  // Totals column header
+  const totalsHeaderX = svgW - (smallMobile ? 4 : 8);
+  el('text', {
+    x: totalsHeaderX, y: PAD_TOP - 8,
+    fill: '#666', 'font-size': smallMobile ? '8' : '10', 'font-weight': '600',
+    'text-anchor': 'end', 'font-family': 'Segoe UI, Arial, sans-serif',
+    'letter-spacing': '0.05em'
+  }).textContent = smallMobile ? 'MIN PTS R+A' : 'MIN    PTS    REB+AST';
 
   [0, 10, 20, 30, 40].forEach(min => {
     const x = xOf(min * 60);
@@ -318,6 +359,31 @@ function renderStints(data) {
 
       nameLink.appendChild(nameText);
       svg.appendChild(nameLink);
+
+      // Add player totals on the right side
+      const totals = playerTotals.get(row.player);
+      if (totals) {
+        const totalsFontSize = smallMobile ? '8' : mobile ? '9' : '10';
+        const totalsX = svgW - (smallMobile ? 4 : 8);
+        const totalsY = y + ROW_H / 2 + (smallMobile ? 3 : 4);
+
+        // Format: MIN  PTS  R+A (or compact on small mobile)
+        let totalsStr;
+        if (smallMobile) {
+          totalsStr = `${totals.min} ${totals.pts}p ${totals.reb + totals.ast}`;
+        } else {
+          totalsStr = `${totals.min}   ${totals.pts} pts   ${totals.reb}+${totals.ast}`;
+        }
+
+        el('text', {
+          x: totalsX,
+          y: totalsY,
+          fill: '#888',
+          'font-size': totalsFontSize,
+          'text-anchor': 'end',
+          'font-family': 'Segoe UI, Arial, sans-serif',
+        }).textContent = totalsStr;
+      }
     }
   });
 
