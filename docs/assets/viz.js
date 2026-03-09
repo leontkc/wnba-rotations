@@ -210,7 +210,7 @@ function renderStints(data) {
   const PAD_TOP  = smallMobile ? 24 : 28;
   const PAD_BOT  = 10;
   const PAD_LEFT = smallMobile ? 70 : mobile ? 100 : 130;
-  const PAD_RIGHT = smallMobile ? 65 : mobile ? 85 : 110;
+  const PAD_RIGHT = smallMobile ? 85 : mobile ? 115 : 155;
 
   // Build player totals from box_score or stints
   const playerTotals = new Map();
@@ -222,6 +222,8 @@ function renderStints(data) {
         pts: b.pts ?? 0,
         reb: b.reb ?? 0,
         ast: b.ast ?? 0,
+        stl: b.stl ?? 0,
+        blk: b.blk ?? 0,
       };
       // Add both full name and last name as keys (stints often use last name only)
       playerTotals.set(fullName, stats);
@@ -230,11 +232,13 @@ function renderStints(data) {
   } else {
     // Fallback: sum from stints
     stints.forEach(s => {
-      const t = playerTotals.get(s.player) || { min: 0, pts: 0, reb: 0, ast: 0 };
+      const t = playerTotals.get(s.player) || { min: 0, pts: 0, reb: 0, ast: 0, stl: 0, blk: 0 };
       t.min += s.duration_sec || 0;
       t.pts += s.stint_pts || 0;
       t.reb += s.stint_reb || 0;
       t.ast += s.stint_ast || 0;
+      t.stl += s.stint_stl || 0;
+      t.blk += s.stint_blk || 0;
       playerTotals.set(s.player, t);
     });
     // Convert seconds to MM:SS for fallback
@@ -305,7 +309,7 @@ function renderStints(data) {
     fill: '#555', 'font-size': smallMobile ? '7' : '9', 'font-weight': '500',
     'text-anchor': 'end', 'font-family': 'Segoe UI, Arial, sans-serif',
     'letter-spacing': '0.06em'
-  }).textContent = smallMobile ? 'MIN · PTS REB AST' : 'MIN   PTS   REB   AST';
+  }).textContent = smallMobile ? 'MIN · PTS REB AST STK' : 'MIN   PTS   REB   AST   STL   BLK';
 
   [0, 10, 20, 30, 40].forEach(min => {
     const x = xOf(min * 60);
@@ -387,9 +391,10 @@ function renderStints(data) {
           totalsText.appendChild(tspan);
         };
 
-        // Format: 32:15  21p  8r  4a (values bright, labels dim)
+        // Format: 32:15  21p  8r  4a  2s  1b (values bright, labels dim)
         const valColor = '#ccc';
         const lblColor = '#666';
+        const stocks = (totals.stl || 0) + (totals.blk || 0);
 
         if (smallMobile) {
           addSpan(totals.min, valColor, '500');
@@ -399,7 +404,9 @@ function renderStints(data) {
           addSpan(String(totals.reb), valColor);
           addSpan('r ', lblColor);
           addSpan(String(totals.ast), valColor);
-          addSpan('a', lblColor);
+          addSpan('a ', lblColor);
+          addSpan(String(stocks), valColor);
+          addSpan('stk', lblColor);
         } else {
           addSpan(totals.min, valColor, '500');
           addSpan('  ', lblColor);
@@ -408,7 +415,11 @@ function renderStints(data) {
           addSpan(String(totals.reb), valColor);
           addSpan(' reb  ', lblColor);
           addSpan(String(totals.ast), valColor);
-          addSpan(' ast', lblColor);
+          addSpan(' ast  ', lblColor);
+          addSpan(String(totals.stl || 0), valColor);
+          addSpan(' stl  ', lblColor);
+          addSpan(String(totals.blk || 0), valColor);
+          addSpan(' blk', lblColor);
         }
 
         svg.appendChild(totalsText);
