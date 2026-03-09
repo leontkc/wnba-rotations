@@ -700,23 +700,26 @@ function renderBoxScore(data) {
     return;
   }
 
+  // Players with 0 minutes show dashes for all stat columns
+  function dnp(r) { return !r.minutes; }
+
   const cols = [
     { key: 'first',      label: 'Player',
       fmt: (r) => `<a href="${playerPageUrl(r.first + ' ' + r.last)}" class="player-link">${r.first} ${r.last}</a>`,
       sort: (a, b) => `${a.last}${a.first}`.localeCompare(`${b.last}${b.first}`),
       isHtml: true },
     { key: 'team',       label: 'Team',   fmt: (r) => r.team,       sort: (a, b) => a.team.localeCompare(b.team) },
-    { key: 'minutes',    label: 'Min',    fmt: (r) => r.minutes,    sort: (a, b) => minutesToNum(a.minutes) - minutesToNum(b.minutes) },
-    { key: 'pts',        label: 'Pts',    fmt: (r) => r.pts ?? '-', sort: (a, b) => (a.pts ?? 0) - (b.pts ?? 0) },
-    { key: 'fgm',        label: 'FGM',   fmt: (r) => r.fgm ?? '-', sort: (a, b) => (a.fgm ?? 0) - (b.fgm ?? 0) },
-    { key: 'fga',        label: 'FGA',   fmt: (r) => r.fga ?? '-', sort: (a, b) => (a.fga ?? 0) - (b.fga ?? 0) },
-    { key: 'reb',        label: 'Reb',   fmt: (r) => r.reb ?? '-', sort: (a, b) => (a.reb ?? 0) - (b.reb ?? 0) },
-    { key: 'ast',        label: 'Ast',   fmt: (r) => r.ast ?? '-', sort: (a, b) => (a.ast ?? 0) - (b.ast ?? 0) },
-    { key: 'stl',        label: 'Stl',   fmt: (r) => r.stl ?? '-', sort: (a, b) => (a.stl ?? 0) - (b.stl ?? 0) },
-    { key: 'blk',        label: 'Blk',   fmt: (r) => r.blk ?? '-', sort: (a, b) => (a.blk ?? 0) - (b.blk ?? 0) },
-    { key: 'to',         label: 'TO',    fmt: (r) => r.to  ?? '-', sort: (a, b) => (a.to  ?? 0) - (b.to  ?? 0) },
-    { key: 'pf',         label: 'PF',    fmt: (r) => r.pf  ?? '-', sort: (a, b) => (a.pf  ?? 0) - (b.pf  ?? 0) },
-    { key: 'plus_minus', label: '+/-',   fmt: (r) => r.plus_minus != null ? (r.plus_minus > 0 ? '+' : '') + r.plus_minus : '-',
+    { key: 'minutes',    label: 'Min',    fmt: (r) => r.minutes || '-', sort: (a, b) => minutesToNum(a.minutes) - minutesToNum(b.minutes) },
+    { key: 'pts',        label: 'Pts',    fmt: (r) => dnp(r) ? '-' : r.pts ?? '-', sort: (a, b) => (a.pts ?? 0) - (b.pts ?? 0) },
+    { key: 'fgm',        label: 'FGM',   fmt: (r) => dnp(r) ? '-' : r.fgm ?? '-', sort: (a, b) => (a.fgm ?? 0) - (b.fgm ?? 0) },
+    { key: 'fga',        label: 'FGA',   fmt: (r) => dnp(r) ? '-' : r.fga ?? '-', sort: (a, b) => (a.fga ?? 0) - (b.fga ?? 0) },
+    { key: 'reb',        label: 'Reb',   fmt: (r) => dnp(r) ? '-' : r.reb ?? '-', sort: (a, b) => (a.reb ?? 0) - (b.reb ?? 0) },
+    { key: 'ast',        label: 'Ast',   fmt: (r) => dnp(r) ? '-' : r.ast ?? '-', sort: (a, b) => (a.ast ?? 0) - (b.ast ?? 0) },
+    { key: 'stl',        label: 'Stl',   fmt: (r) => dnp(r) ? '-' : r.stl ?? '-', sort: (a, b) => (a.stl ?? 0) - (b.stl ?? 0) },
+    { key: 'blk',        label: 'Blk',   fmt: (r) => dnp(r) ? '-' : r.blk ?? '-', sort: (a, b) => (a.blk ?? 0) - (b.blk ?? 0) },
+    { key: 'to',         label: 'TO',    fmt: (r) => dnp(r) ? '-' : r.to  ?? '-', sort: (a, b) => (a.to  ?? 0) - (b.to  ?? 0) },
+    { key: 'pf',         label: 'PF',    fmt: (r) => dnp(r) ? '-' : r.pf  ?? '-', sort: (a, b) => (a.pf  ?? 0) - (b.pf  ?? 0) },
+    { key: 'plus_minus', label: '+/-',   fmt: (r) => dnp(r) ? '-' : r.plus_minus != null ? (r.plus_minus > 0 ? '+' : '') + r.plus_minus : '-',
                                           sort: (a, b) => (a.plus_minus ?? 0) - (b.plus_minus ?? 0) },
   ];
 
