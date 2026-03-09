@@ -38,13 +38,6 @@ function isTouchDevice() {
   return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 }
 
-function abbreviateName(name) {
-  if (!name) return '';
-  const parts = name.trim().split(' ');
-  if (parts.length < 2) return name;
-  return parts[0][0] + '. ' + parts.slice(1).join(' ');
-}
-
 function slugify(name) {
   if (!name) return '';
   return name.toLowerCase()
@@ -295,16 +288,15 @@ function renderStints(data) {
   const HEADER_H = smallMobile ? 18 : mobile ? 20 : 22;
   const PAD_TOP  = smallMobile ? 24 : 28;
   const PAD_BOT  = 10;
-  const PAD_LEFT = smallMobile ? 70 : mobile ? 100 : 130;
+  const PAD_LEFT = smallMobile ? 90 : mobile ? 120 : 155;
   const PAD_RIGHT = smallMobile ? 115 : mobile ? 160 : 210;
 
   // Build player totals and display names from box_score or stints
   const playerTotals = new Map();
-  const playerDisplayNames = new Map(); // Maps stint name -> "F. Last" format
+  const playerDisplayNames = new Map(); // Maps stint name -> full name
   if (data.box_score && data.box_score.length) {
     data.box_score.forEach(b => {
       const fullName = `${b.first} ${b.last}`;
-      const displayName = `${b.first[0]}. ${b.last}`;
       const stats = {
         min: b.minutes || '0:00',
         pts: b.pts ?? 0,
@@ -316,8 +308,8 @@ function renderStints(data) {
       // Add both full name and last name as keys (stints often use last name only)
       playerTotals.set(fullName, stats);
       playerTotals.set(b.last, stats);
-      playerDisplayNames.set(fullName, displayName);
-      playerDisplayNames.set(b.last, displayName);
+      playerDisplayNames.set(fullName, fullName);
+      playerDisplayNames.set(b.last, fullName);
     });
   } else {
     // Fallback: sum from stints
@@ -437,8 +429,8 @@ function renderStints(data) {
       });
       // Responsive player name display
       const nameFontSize = smallMobile ? '9' : mobile ? '10' : '11';
-      const maxLen = smallMobile ? 10 : mobile ? 14 : 18;
-      // Use mapped display name (F. Last) if available, otherwise fall back to stint name
+      const maxLen = smallMobile ? 12 : mobile ? 16 : 22;
+      // Use mapped full name if available, otherwise fall back to stint name
       let displayName = playerDisplayNames.get(row.player) || row.player;
 
       if (displayName.length > maxLen) {
