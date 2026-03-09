@@ -212,11 +212,13 @@ function renderStints(data) {
   const PAD_LEFT = smallMobile ? 70 : mobile ? 100 : 130;
   const PAD_RIGHT = smallMobile ? 115 : mobile ? 160 : 210;
 
-  // Build player totals from box_score or stints
+  // Build player totals and display names from box_score or stints
   const playerTotals = new Map();
+  const playerDisplayNames = new Map(); // Maps stint name -> "F. Last" format
   if (data.box_score && data.box_score.length) {
     data.box_score.forEach(b => {
       const fullName = `${b.first} ${b.last}`;
+      const displayName = `${b.first[0]}. ${b.last}`;
       const stats = {
         min: b.minutes || '0:00',
         pts: b.pts ?? 0,
@@ -228,6 +230,8 @@ function renderStints(data) {
       // Add both full name and last name as keys (stints often use last name only)
       playerTotals.set(fullName, stats);
       playerTotals.set(b.last, stats);
+      playerDisplayNames.set(fullName, displayName);
+      playerDisplayNames.set(b.last, displayName);
     });
   } else {
     // Fallback: sum from stints
@@ -348,11 +352,9 @@ function renderStints(data) {
       // Responsive player name display
       const nameFontSize = smallMobile ? '9' : mobile ? '10' : '11';
       const maxLen = smallMobile ? 10 : mobile ? 14 : 18;
-      let displayName = row.player;
+      // Use mapped display name (F. Last) if available, otherwise fall back to stint name
+      let displayName = playerDisplayNames.get(row.player) || row.player;
 
-      if (smallMobile) {
-        displayName = abbreviateName(row.player);
-      }
       if (displayName.length > maxLen) {
         displayName = displayName.slice(0, maxLen - 1) + '…';
       }
