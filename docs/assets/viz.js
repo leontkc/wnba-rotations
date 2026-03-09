@@ -74,10 +74,9 @@ document.getElementById('game-title').textContent =
     return parseInt(parts[0]) * 60 + parseInt(parts[1]);
   }
 
-  // Calculate true elapsed time from period and clock
-  // Each quarter is 10 minutes (600 sec for WNBA) or 12 minutes (720 sec for NBA)
-  // We'll detect based on first quarter start clock
-  const quarterLen = 600; // 10 min quarters (WNBA/NBA regular)
+  // Auto-detect quarter length from first entry's clock
+  const firstClock = clockToSec(flow[0].clock_display);
+  const quarterLen = firstClock; // 720 for NBA (12:00), 600 for WNBA (10:00)
 
   // Calculate margin: positive = home leading, negative = away leading
   const marginData = flow.map(d => {
@@ -93,6 +92,9 @@ document.getElementById('game-title').textContent =
     };
   });
 
+  const totalGameMin = 4 * quarterLen / 60; // 48 for NBA, 40 for WNBA
+  const quarterMin = quarterLen / 60; // 12 or 10
+
   // Find max margin for symmetric y-axis
   const maxMargin = Math.max(
     Math.abs(Math.min(...marginData.map(d => d.y))),
@@ -104,7 +106,7 @@ document.getElementById('game-title').textContent =
     id: 'quarterLines',
     afterDraw(chart) {
       const { ctx, chartArea: { top, bottom }, scales: { x } } = chart;
-      [10, 20, 30].forEach((min, i) => {
+      [quarterMin, quarterMin * 2, quarterMin * 3].forEach((min, i) => {
         const xPx = x.getPixelForValue(min);
         ctx.save();
         ctx.strokeStyle = 'rgba(255,255,255,0.18)';
@@ -198,7 +200,7 @@ document.getElementById('game-title').textContent =
         x: {
           type: 'linear',
           min: 0,
-          max: 40,
+          max: totalGameMin,
           title: { display: true, text: 'Game Time (min)', color: '#888' },
           ticks: { color: '#888', stepSize: 5 },
           grid: { color: 'rgba(255,255,255,0.06)' },
