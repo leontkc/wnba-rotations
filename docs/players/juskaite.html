@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juskaite — wnbarotations</title>
+<link rel="stylesheet" href="../assets/viz.css">
+<link rel="stylesheet" href="../assets/player.css">
+</head>
+<body>
+<nav id="game-nav">
+  <a href="../index.html" id="nav-home">← wnbarotations</a>
+  <div id="player-search">
+    <input type="text" placeholder="Search players..." id="player-input">
+    <div id="player-dropdown"></div>
+  </div>
+</nav>
+
+<header class="player-header">
+  <h1>Juskaite</h1>
+  <p class="player-meta">TOR · 1 games</p>
+</header>
+
+<main id="player-games">
+
+<div class="player-game" data-href="../games/1022600002.html">
+  <div class="player-game-header">
+    <span>2026-05-08 vs WAS</span>
+    <span class="game-result loss">L 65-68</span>
+  </div>
+  <div class="mini-gantt" data-stints='[{"start": 555.6, "end": 600.0}, {"start": 600.0, "end": 813.0}, {"start": 1748.9, "end": 1800.0}, {"start": 1800.0, "end": 2400.0}]' data-ishome='true'></div>
+  <div class="player-game-stats">
+    <span><span class="stat-val">7</span> PTS</span>
+    <span><span class="stat-val">6</span> REB</span>
+    <span><span class="stat-val">0</span> AST</span>
+    <span class="player-minutes">15:08</span>
+  </div>
+</div>
+</main>
+
+<script>
+const PLAYER_DATA = {"name": "Juskaite", "team": "TOR", "games": [{"game_id": "1022600002", "date": "2026-05-08", "opponent": "WAS", "is_home": true, "own_score": 65, "opp_score": 68, "won": false, "stints": [{"start": 555.6, "end": 600.0}, {"start": 600.0, "end": 813.0}, {"start": 1748.9, "end": 1800.0}, {"start": 1800.0, "end": 2400.0}], "minutes": "15:08", "pts": 7, "reb": 6, "ast": 0}]};
+</script>
+<script src="../assets/player.js"></script>
+</body>
+</html>

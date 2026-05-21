@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-06T21:20:21.052091+00:00",
+  "generated_at": "2026-05-21T15:19:08.849530+00:00",
   "games": {
     "0022400235": {
       "game_id": "0022400235",
@@ -6303,6 +6303,50 @@
       "score_away": 97,
       "season": "2025",
       "html_path": "games/1042500304.html"
+    },
+    "1022600002": {
+      "game_id": "1022600002",
+      "date": "2026-05-08",
+      "matchup": "WAS @ TOR",
+      "home_tricode": "TOR",
+      "away_tricode": "WAS",
+      "score_home": 65,
+      "score_away": 68,
+      "season": "2026",
+      "html_path": "games/1022600002.html"
+    },
+    "1022600005": {
+      "game_id": "1022600005",
+      "date": "2026-05-09",
+      "matchup": "PHX @ LVA",
+      "home_tricode": "LVA",
+      "away_tricode": "PHX",
+      "score_home": 66,
+      "score_away": 99,
+      "season": "2026",
+      "html_path": "games/1022600005.html"
+    },
+    "1022600009": {
+      "game_id": "1022600009",
+      "date": "2026-05-10",
+      "matchup": "LVA @ LAS",
+      "home_tricode": "LAS",
+      "away_tricode": "LVA",
+      "score_home": 78,
+      "score_away": 105,
+      "season": "2026",
+      "html_path": "games/1022600009.html"
+    },
+    "1022600032": {
+      "game_id": "1022600032",
+      "date": "2026-05-20",
+      "matchup": "PDX @ IND",
+      "home_tricode": "IND",
+      "away_tricode": "PDX",
+      "score_home": 90,
+      "score_away": 73,
+      "season": "2026",
+      "html_path": "games/1022600032.html"
     }
   }
 }
