@@ -15,7 +15,7 @@
     "name": "Allemand",
     "slug": "allemand",
     "team": "LAS",
-    "games": 35
+    "games": 36
   },
   {
     "name": "Allen",
@@ -42,10 +42,16 @@
     "games": 1
   },
   {
+    "name": "Astier",
+    "slug": "astier",
+    "team": "NYL",
+    "games": 1
+  },
+  {
     "name": "Atkins",
     "slug": "atkins",
     "team": "CHI",
-    "games": 75
+    "games": 76
   },
   {
     "name": "Atwell",
@@ -141,7 +147,7 @@
     "name": "Brink",
     "slug": "brink",
     "team": "LAS",
-    "games": 35
+    "games": 36
   },
   {
     "name": "Brochant",
@@ -165,7 +171,7 @@
     "name": "Bueckers",
     "slug": "bueckers",
     "team": "DAL",
-    "games": 36
+    "games": 37
   },
   {
     "name": "Burke",
@@ -177,7 +183,7 @@
     "name": "Burrell",
     "slug": "burrell",
     "team": "LAS",
-    "games": 65
+    "games": 66
   },
   {
     "name": "Burton",
@@ -189,7 +195,7 @@
     "name": "Caldwell",
     "slug": "caldwell",
     "team": "ATL",
-    "games": 71
+    "games": 72
   },
   {
     "name": "Canada",
@@ -255,7 +261,7 @@
     "name": "Clark",
     "slug": "clark",
     "team": "LVA",
-    "games": 138
+    "games": 139
   },
   {
     "name": "Cloud",
@@ -267,7 +273,7 @@
     "name": "Coffey",
     "slug": "coffey",
     "team": "ATL",
-    "games": 89
+    "games": 90
   },
   {
     "name": "Collier",
@@ -285,13 +291,13 @@
     "name": "Conde",
     "slug": "conde",
     "team": "TOR",
-    "games": 1
+    "games": 2
   },
   {
     "name": "Cooke",
     "slug": "cooke",
     "team": "LAS",
-    "games": 55
+    "games": 56
   },
   {
     "name": "Copper",
@@ -336,6 +342,12 @@
     "games": 32
   },
   {
+    "name": "Delaere",
+    "slug": "delaere",
+    "team": "MIN",
+    "games": 1
+  },
+  {
     "name": "Diaby",
     "slug": "diaby",
     "team": "CON",
@@ -375,7 +387,7 @@
     "name": "Dolson",
     "slug": "dolson",
     "team": "WAS",
-    "games": 82
+    "games": 83
   },
   {
     "name": "Dugalic",
@@ -420,6 +432,12 @@
     "games": 1
   },
   {
+    "name": "Fam",
+    "slug": "fam",
+    "team": "SEA",
+    "games": 1
+  },
+  {
     "name": "Fankam Mendjiadeu",
     "slug": "fankam-mendjiadeu",
     "team": "SEA",
@@ -441,7 +459,13 @@
     "name": "Fiebich",
     "slug": "fiebich",
     "team": "NYL",
-    "games": 91
+    "games": 92
+  },
+  {
+    "name": "Fudd",
+    "slug": "fudd",
+    "team": "DAL",
+    "games": 1
   },
   {
     "name": "F\u00e1gb\u00e9nl\u00e9",
@@ -453,7 +477,7 @@
     "name": "Gardner",
     "slug": "gardner",
     "team": "NYL",
-    "games": 44
+    "games": 45
   },
   {
     "name": "Geiselsoder",
@@ -477,7 +501,7 @@
     "name": "Gray",
     "slug": "gray",
     "team": "ATL",
-    "games": 173
+    "games": 174
   },
   {
     "name": "Griner",
@@ -507,7 +531,13 @@
     "name": "Hamby",
     "slug": "hamby",
     "team": "LAS",
-    "games": 85
+    "games": 86
+  },
+  {
+    "name": "Han",
+    "slug": "han",
+    "team": "NYL",
+    "games": 1
   },
   {
     "name": "Harmon",
@@ -567,7 +597,7 @@
     "name": "Hiedeman",
     "slug": "hiedeman",
     "team": "MIN",
-    "games": 102
+    "games": 103
   },
   {
     "name": "Highsmith",
@@ -597,13 +627,13 @@
     "name": "Horston",
     "slug": "horston",
     "team": "SEA",
-    "games": 41
+    "games": 42
   },
   {
     "name": "Howard",
     "slug": "howard",
     "team": "DAL",
-    "games": 139
+    "games": 140
   },
   {
     "name": "Hull",
@@ -639,7 +669,7 @@
     "name": "James",
     "slug": "james",
     "team": "DAL",
-    "games": 38
+    "games": 39
   },
   {
     "name": "Jaquez Jr.",
@@ -654,6 +684,12 @@
     "games": 28
   },
   {
+    "name": "Johannes",
+    "slug": "johannes",
+    "team": "NYL",
+    "games": 1
+  },
+  {
     "name": "Johann\u00e8s",
     "slug": "johannes",
     "team": "NYL",
@@ -663,13 +699,13 @@
     "name": "Johnson",
     "slug": "johnson",
     "team": "IND",
-    "games": 1
+    "games": 2
   },
   {
     "name": "Jones",
     "slug": "jones",
     "team": "PDX",
-    "games": 228
+    "games": 229
   },
   {
     "name": "Jovi\u0107",
@@ -687,7 +723,7 @@
     "name": "Juskaite",
     "slug": "juskaite",
     "team": "TOR",
-    "games": 1
+    "games": 2
   },
   {
     "name": "K. Brown",
@@ -711,7 +747,7 @@
     "name": "Key",
     "slug": "key",
     "team": "TOR",
-    "games": 1
+    "games": 2
   },
   {
     "name": "King",
@@ -741,7 +777,7 @@
     "name": "Kosu",
     "slug": "kosu",
     "team": "MIN",
-    "games": 24
+    "games": 25
   },
   {
     "name": "Lacan",
@@ -765,7 +801,7 @@
     "name": "Laney-Hamilton",
     "slug": "laney-hamilton",
     "team": "NYL",
-    "games": 39
+    "games": 40
   },
   {
     "name": "Latson",
@@ -804,10 +840,16 @@
     "games": 97
   },
   {
+    "name": "M. Holmes",
+    "slug": "m-holmes",
+    "team": "SEA",
+    "games": 1
+  },
+  {
     "name": "Mabrey",
     "slug": "mabrey",
     "team": "CON",
-    "games": 83
+    "games": 84
   },
   {
     "name": "Mack",
@@ -822,6 +864,12 @@
     "games": 85
   },
   {
+    "name": "Mair",
+    "slug": "mair",
+    "team": "SEA",
+    "games": 1
+  },
+  {
     "name": "Maley",
     "slug": "maley",
     "team": "PHX",
@@ -831,7 +879,7 @@
     "name": "Malonga",
     "slug": "malonga",
     "team": "SEA",
-    "games": 45
+    "games": 46
   },
   {
     "name": "Marshall",
@@ -843,7 +891,7 @@
     "name": "Martin",
     "slug": "martin",
     "team": "LVA",
-    "games": 79
+    "games": 80
   },
   {
     "name": "Mathurin",
@@ -855,7 +903,7 @@
     "name": "McBride",
     "slug": "mcbride",
     "team": "MIN",
-    "games": 96
+    "games": 97
   },
   {
     "name": "McConnell",
@@ -867,7 +915,7 @@
     "name": "McCowan",
     "slug": "mccowan",
     "team": "DAL",
-    "games": 56
+    "games": 57
   },
   {
     "name": "McDonald",
@@ -885,7 +933,19 @@
     "name": "Melbourne",
     "slug": "melbourne",
     "team": "WAS",
-    "games": 80
+    "games": 81
+  },
+  {
+    "name": "Miles",
+    "slug": "miles",
+    "team": "MIN",
+    "games": 1
+  },
+  {
+    "name": "Milic",
+    "slug": "milic",
+    "team": "TOR",
+    "games": 1
   },
   {
     "name": "Miller",
@@ -939,7 +999,7 @@
     "name": "Nurse",
     "slug": "nurse",
     "team": "LAS",
-    "games": 85
+    "games": 86
   },
   {
     "name": "Nye",
@@ -951,13 +1011,13 @@
     "name": "Ogunbowale",
     "slug": "ogunbowale",
     "team": "DAL",
-    "games": 67
+    "games": 68
   },
   {
     "name": "Ogwumike",
     "slug": "ogwumike",
     "team": "SEA",
-    "games": 87
+    "games": 88
   },
   {
     "name": "Okonkwo",
@@ -1041,7 +1101,13 @@
     "name": "Plum",
     "slug": "plum",
     "team": "LVA",
-    "games": 88
+    "games": 89
+  },
+  {
+    "name": "Pouye",
+    "slug": "pouye",
+    "team": "TOR",
+    "games": 1
   },
   {
     "name": "Powers",
@@ -1083,7 +1149,7 @@
     "name": "Rice",
     "slug": "rice",
     "team": "TOR",
-    "games": 1
+    "games": 2
   },
   {
     "name": "Richards",
@@ -1131,7 +1197,7 @@
     "name": "Sabally",
     "slug": "sabally",
     "team": "DAL",
-    "games": 111
+    "games": 112
   },
   {
     "name": "Sala\u00fcn",
@@ -1143,7 +1209,7 @@
     "name": "Samuelson",
     "slug": "samuelson",
     "team": "IND",
-    "games": 80
+    "games": 81
   },
   {
     "name": "Saxton",
@@ -1167,7 +1233,7 @@
     "name": "Shepard",
     "slug": "shepard",
     "team": "MIN",
-    "games": 46
+    "games": 47
   },
   {
     "name": "Sheppard",
@@ -1191,13 +1257,13 @@
     "name": "Siegrist",
     "slug": "siegrist",
     "team": "DAL",
-    "games": 53
+    "games": 54
   },
   {
     "name": "Sims",
     "slug": "sims",
     "team": "LAS",
-    "games": 56
+    "games": 57
   },
   {
     "name": "Smalls",
@@ -1209,7 +1275,7 @@
     "name": "Smith",
     "slug": "smith",
     "team": "MIN",
-    "games": 192
+    "games": 193
   },
   {
     "name": "Soares",
@@ -1233,7 +1299,7 @@
     "name": "Stewart",
     "slug": "stewart",
     "team": "NYL",
-    "games": 83
+    "games": 84
   },
   {
     "name": "Stokes",
@@ -1257,7 +1323,7 @@
     "name": "Sykes",
     "slug": "sykes",
     "team": "SEA",
-    "games": 61
+    "games": 62
   },
   {
     "name": "Talbot",
@@ -1281,7 +1347,7 @@
     "name": "Thierry",
     "slug": "thierry",
     "team": "ATL",
-    "games": 18
+    "games": 19
   },
   {
     "name": "Thomas",
@@ -1377,7 +1443,7 @@
     "name": "Wheeler",
     "slug": "wheeler",
     "team": "SEA",
-    "games": 89
+    "games": 90
   },
   {
     "name": "Whitcomb",
@@ -1389,7 +1455,7 @@
     "name": "Williams",
     "slug": "williams",
     "team": "PDX",
-    "games": 228
+    "games": 229
   },
   {
     "name": "Wilson",
@@ -1401,6 +1467,12 @@
     "name": "Winterburn",
     "slug": "winterburn",
     "team": "PDX",
+    "games": 1
+  },
+  {
+    "name": "Xu",
+    "slug": "xu",
+    "team": "NYL",
     "games": 1
   },
   {

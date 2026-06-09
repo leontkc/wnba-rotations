@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fam — wnbarotations</title>
+<link rel="stylesheet" href="../assets/viz.css">
+<link rel="stylesheet" href="../assets/player.css">
+</head>
+<body>
+<nav id="game-nav">
+  <a href="../index.html" id="nav-home">← wnbarotations</a>
+  <div id="player-search">
+    <input type="text" placeholder="Search players..." id="player-input">
+    <div id="player-dropdown"></div>
+  </div>
+</nav>
+
+<header class="player-header">
+  <h1>Fam</h1>
+  <p class="player-meta">SEA · 1 games</p>
+</header>
+
+<main id="player-games">
+
+<div class="player-game" data-href="../games/1022600077.html">
+  <div class="player-game-header">
+    <span>2026-06-06 @ MIN</span>
+    <span class="game-result loss">L 68-88</span>
+  </div>
+  <div class="mini-gantt" data-stints='[{"start": 0.0, "end": 315.0}, {"start": 600.0, "end": 913.0}, {"start": 1044.0, "end": 1200.0}, {"start": 1200.0, "end": 1732.0}, {"start": 1800.0, "end": 2295.0}]' data-ishome='false'></div>
+  <div class="player-game-stats">
+    <span><span class="stat-val">5</span> PTS</span>
+    <span><span class="stat-val">4</span> REB</span>
+    <span><span class="stat-val">4</span> AST</span>
+    <span class="player-minutes">30:11</span>
+  </div>
+</div>
+</main>
+
+<script>
+const PLAYER_DATA = {"name": "Fam", "team": "SEA", "games": [{"game_id": "1022600077", "date": "2026-06-06", "opponent": "MIN", "is_home": false, "own_score": 68, "opp_score": 88, "won": false, "stints": [{"start": 0.0, "end": 315.0}, {"start": 600.0, "end": 913.0}, {"start": 1044.0, "end": 1200.0}, {"start": 1200.0, "end": 1732.0}, {"start": 1800.0, "end": 2295.0}], "minutes": "30:11", "pts": 5, "reb": 4, "ast": 4}]};
+</script>
+<script src="../assets/player.js"></script>
+</body>
+</html>
