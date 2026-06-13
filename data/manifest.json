@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-09T14:46:11.109936+00:00",
+  "generated_at": "2026-06-13T13:55:44.758549+00:00",
   "games": {
     "0022400235": {
       "game_id": "0022400235",
@@ -6380,6 +6380,17 @@
       "score_away": 68,
       "season": "2026",
       "html_path": "games/1022600077.html"
+    },
+    "1022600093": {
+      "game_id": "1022600093",
+      "date": "2026-06-11",
+      "matchup": "PHX @ DAL",
+      "home_tricode": "DAL",
+      "away_tricode": "PHX",
+      "score_home": 85,
+      "score_away": 70,
+      "season": "2026",
+      "html_path": "games/1022600093.html"
     }
   }
 }

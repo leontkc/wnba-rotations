@@ -9,7 +9,7 @@
     "name": "Akoa Makani",
     "slug": "akoa-makani",
     "team": "PHX",
-    "games": 52
+    "games": 53
   },
   {
     "name": "Allemand",
@@ -129,7 +129,7 @@
     "name": "Bonner",
     "slug": "bonner",
     "team": "PHX",
-    "games": 92
+    "games": 93
   },
   {
     "name": "Boston",
@@ -153,7 +153,7 @@
     "name": "Brochant",
     "slug": "brochant",
     "team": "PHX",
-    "games": 1
+    "games": 2
   },
   {
     "name": "Brown",
@@ -171,7 +171,7 @@
     "name": "Bueckers",
     "slug": "bueckers",
     "team": "DAL",
-    "games": 37
+    "games": 38
   },
   {
     "name": "Burke",
@@ -231,7 +231,7 @@
     "name": "Carter",
     "slug": "carter",
     "team": "LVA",
-    "games": 37
+    "games": 38
   },
   {
     "name": "Charles",
@@ -261,7 +261,7 @@
     "name": "Clark",
     "slug": "clark",
     "team": "IND",
-    "games": 139
+    "games": 140
   },
   {
     "name": "Cloud",
@@ -303,7 +303,7 @@
     "name": "Copper",
     "slug": "copper",
     "team": "PHX",
-    "games": 79
+    "games": 80
   },
   {
     "name": "Cubaj",
@@ -465,7 +465,7 @@
     "name": "Fudd",
     "slug": "fudd",
     "team": "DAL",
-    "games": 1
+    "games": 2
   },
   {
     "name": "F\u00e1gb\u00e9nl\u00e9",
@@ -573,7 +573,7 @@
     "name": "Held",
     "slug": "held",
     "team": "PHX",
-    "games": 35
+    "games": 36
   },
   {
     "name": "Henderson",
@@ -669,7 +669,7 @@
     "name": "James",
     "slug": "james",
     "team": "DAL",
-    "games": 39
+    "games": 40
   },
   {
     "name": "Jaquez Jr.",
@@ -780,6 +780,12 @@
     "games": 25
   },
   {
+    "name": "Kuier",
+    "slug": "kuier",
+    "team": "DAL",
+    "games": 1
+  },
+  {
     "name": "Lacan",
     "slug": "lacan",
     "team": "CON",
@@ -855,7 +861,7 @@
     "name": "Mack",
     "slug": "mack",
     "team": "PHX",
-    "games": 88
+    "games": 89
   },
   {
     "name": "Magbegor",
@@ -993,7 +999,7 @@
     "name": "Nogic",
     "slug": "nogic",
     "team": "PHX",
-    "games": 1
+    "games": 2
   },
   {
     "name": "Nurse",
@@ -1011,7 +1017,7 @@
     "name": "Ogunbowale",
     "slug": "ogunbowale",
     "team": "DAL",
-    "games": 68
+    "games": 69
   },
   {
     "name": "Ogwumike",
@@ -1137,7 +1143,7 @@
     "name": "Quinerly",
     "slug": "quinerly",
     "team": "DAL",
-    "games": 34
+    "games": 35
   },
   {
     "name": "Reese",
@@ -1233,7 +1239,7 @@
     "name": "Shepard",
     "slug": "shepard",
     "team": "MIN",
-    "games": 47
+    "games": 48
   },
   {
     "name": "Sheppard",
@@ -1257,7 +1263,7 @@
     "name": "Siegrist",
     "slug": "siegrist",
     "team": "DAL",
-    "games": 54
+    "games": 55
   },
   {
     "name": "Sims",
@@ -1275,7 +1281,7 @@
     "name": "Smith",
     "slug": "smith",
     "team": "LVA",
-    "games": 193
+    "games": 194
   },
   {
     "name": "Soares",
@@ -1353,7 +1359,7 @@
     "name": "Thomas",
     "slug": "thomas",
     "team": "PHX",
-    "games": 98
+    "games": 99
   },
   {
     "name": "Thornton",
@@ -1485,7 +1491,7 @@
     "name": "Yueru",
     "slug": "yueru",
     "team": "LAS",
-    "games": 69
+    "games": 70
   },
   {
     "name": "Zandalasini",
