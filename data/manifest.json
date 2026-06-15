@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-13T13:55:44.758549+00:00",
+  "generated_at": "2026-06-15T17:13:46.224091+00:00",
   "games": {
     "0022400235": {
       "game_id": "0022400235",
@@ -6391,6 +6391,28 @@
       "score_away": 70,
       "season": "2026",
       "html_path": "games/1022600093.html"
+    },
+    "1022600098": {
+      "game_id": "1022600098",
+      "date": "2026-06-13",
+      "matchup": "MIN @ LVA",
+      "home_tricode": "LVA",
+      "away_tricode": "MIN",
+      "score_home": 100,
+      "score_away": 97,
+      "season": "2026",
+      "html_path": "games/1022600098.html"
+    },
+    "1022600102": {
+      "game_id": "1022600102",
+      "date": "2026-06-14",
+      "matchup": "ATL @ TOR",
+      "home_tricode": "TOR",
+      "away_tricode": "ATL",
+      "score_home": 77,
+      "score_away": 102,
+      "season": "2026",
+      "html_path": "games/1022600102.html"
     }
   }
 }
