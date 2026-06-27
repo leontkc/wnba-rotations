@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-15T17:13:46.224091+00:00",
+  "generated_at": "2026-06-27T13:29:45.632089+00:00",
   "games": {
     "0022400235": {
       "game_id": "0022400235",
@@ -6413,6 +6413,17 @@
       "score_away": 102,
       "season": "2026",
       "html_path": "games/1022600102.html"
+    },
+    "1022600120": {
+      "game_id": "1022600120",
+      "date": "2026-06-21",
+      "matchup": "GSV @ LVA",
+      "home_tricode": "LVA",
+      "away_tricode": "GSV",
+      "score_home": 92,
+      "score_away": 73,
+      "season": "2026",
+      "html_path": "games/1022600120.html"
     }
   }
 }
