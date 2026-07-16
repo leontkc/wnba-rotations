@@ -74,7 +74,7 @@
   {
     "name": "Banham",
     "slug": "banham",
-    "team": "CON",
+    "team": "CHI",
     "games": 81
   },
   {
@@ -98,7 +98,7 @@
   {
     "name": "Bertsch",
     "slug": "bertsch",
-    "team": "DAL",
+    "team": "PHO",
     "games": 11
   },
   {
@@ -122,13 +122,13 @@
   {
     "name": "Billings",
     "slug": "billings",
-    "team": "DAL",
+    "team": "PHO",
     "games": 68
   },
   {
     "name": "Bonner",
     "slug": "bonner",
-    "team": "PHX",
+    "team": "CON",
     "games": 93
   },
   {
@@ -212,7 +212,7 @@
   {
     "name": "Cannon",
     "slug": "cannon",
-    "team": "LAS",
+    "team": "LVA",
     "games": 27
   },
   {
@@ -230,19 +230,19 @@
   {
     "name": "Carrington",
     "slug": "carrington",
-    "team": "CON",
+    "team": "MIN",
     "games": 79
   },
   {
     "name": "Carter",
     "slug": "carter",
-    "team": "LVA",
+    "team": "CHI",
     "games": 39
   },
   {
     "name": "Charles",
     "slug": "charles",
-    "team": "DAL",
+    "team": "GSV",
     "games": 120
   },
   {
@@ -266,7 +266,7 @@
   {
     "name": "Clark",
     "slug": "clark",
-    "team": "IND",
+    "team": "WAS",
     "games": 140
   },
   {
@@ -290,7 +290,7 @@
   {
     "name": "Colson",
     "slug": "colson",
-    "team": "LVA",
+    "team": "IND",
     "games": 65
   },
   {
@@ -302,13 +302,13 @@
   {
     "name": "Cooke",
     "slug": "cooke",
-    "team": "SEA",
+    "team": "LAS",
     "games": 56
   },
   {
     "name": "Copper",
     "slug": "copper",
-    "team": "PHX",
+    "team": "PHO",
     "games": 80
   },
   {
@@ -320,7 +320,7 @@
   {
     "name": "Cunningham",
     "slug": "cunningham",
-    "team": "IND",
+    "team": "PHO",
     "games": 73
   },
   {
@@ -338,7 +338,7 @@
   {
     "name": "Davis",
     "slug": "davis",
-    "team": "CHI",
+    "team": "NYL",
     "games": 36
   },
   {
@@ -578,7 +578,7 @@
   {
     "name": "Hayes",
     "slug": "hayes",
-    "team": "LVA",
+    "team": "GSV",
     "games": 66
   },
   {
@@ -626,7 +626,7 @@
   {
     "name": "Hines-Allen",
     "slug": "hines-allen",
-    "team": "WAS",
+    "team": "MIN",
     "games": 92
   },
   {
@@ -722,7 +722,7 @@
   {
     "name": "Jones",
     "slug": "jones",
-    "team": "CON",
+    "team": "NYL",
     "games": 229
   },
   {
@@ -794,7 +794,7 @@
   {
     "name": "Kon\u00e9",
     "slug": "kone",
-    "team": "ATL",
+    "team": "WAS",
     "games": 48
   },
   {
@@ -884,7 +884,7 @@
   {
     "name": "Mack",
     "slug": "mack",
-    "team": "PHX",
+    "team": "PHO",
     "games": 89
   },
   {
@@ -920,7 +920,7 @@
   {
     "name": "Martin",
     "slug": "martin",
-    "team": "LVA",
+    "team": "GSV",
     "games": 80
   },
   {
@@ -986,7 +986,7 @@
   {
     "name": "Mitchell",
     "slug": "mitchell",
-    "team": "IND",
+    "team": "LVA",
     "games": 153
   },
   {
@@ -1106,7 +1106,7 @@
   {
     "name": "Parker-Tyus",
     "slug": "parker-tyus",
-    "team": "ATL",
+    "team": "LVA",
     "games": 37
   },
   {
@@ -1136,7 +1136,7 @@
   {
     "name": "Pili",
     "slug": "pili",
-    "team": "LAS",
+    "team": "MIN",
     "games": 44
   },
   {
@@ -1238,7 +1238,7 @@
   {
     "name": "Sabally",
     "slug": "sabally",
-    "team": "PHX",
+    "team": "NYL",
     "games": 112
   },
   {
@@ -1256,7 +1256,7 @@
   {
     "name": "Samuelson",
     "slug": "samuelson",
-    "team": "IND",
+    "team": "WAS",
     "games": 81
   },
   {
@@ -1310,7 +1310,7 @@
   {
     "name": "Sims",
     "slug": "sims",
-    "team": "DAL",
+    "team": "LAS",
     "games": 57
   },
   {
@@ -1400,13 +1400,13 @@
   {
     "name": "Thomas",
     "slug": "thomas",
-    "team": "PHX",
+    "team": "CON",
     "games": 99
   },
   {
     "name": "Thornton",
     "slug": "thornton",
-    "team": "NYL",
+    "team": "GSV",
     "games": 74
   },
   {
@@ -1430,7 +1430,7 @@
   {
     "name": "Turner",
     "slug": "turner",
-    "team": "IND",
+    "team": "CHI",
     "games": 65
   },
   {
@@ -1472,7 +1472,7 @@
   {
     "name": "Walker-Kimbrough",
     "slug": "walker-kimbrough",
-    "team": "WAS",
+    "team": "ATL",
     "games": 84
   },
   {
@@ -1490,19 +1490,19 @@
   {
     "name": "Wheeler",
     "slug": "wheeler",
-    "team": "IND",
+    "team": "SEA",
     "games": 90
   },
   {
     "name": "Whitcomb",
     "slug": "whitcomb",
-    "team": "PHX",
+    "team": "SEA",
     "games": 95
   },
   {
     "name": "Williams",
     "slug": "williams",
-    "team": "SEA",
+    "team": "MIN",
     "games": 231
   },
   {
