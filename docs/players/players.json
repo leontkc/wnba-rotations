@@ -92,7 +92,7 @@
   {
     "name": "Berger",
     "slug": "berger",
-    "team": "IND",
+    "team": "DAL",
     "games": 31
   },
   {
@@ -164,7 +164,7 @@
   {
     "name": "Brown",
     "slug": "brown",
-    "team": "DAL",
+    "team": "PHX",
     "games": 109
   },
   {
@@ -266,7 +266,7 @@
   {
     "name": "Clark",
     "slug": "clark",
-    "team": "WAS",
+    "team": "LVA",
     "games": 140
   },
   {
@@ -302,13 +302,13 @@
   {
     "name": "Cooke",
     "slug": "cooke",
-    "team": "LAS",
+    "team": "SEA",
     "games": 56
   },
   {
     "name": "Copper",
     "slug": "copper",
-    "team": "PHX",
+    "team": "PHO",
     "games": 80
   },
   {
@@ -320,13 +320,13 @@
   {
     "name": "Cunningham",
     "slug": "cunningham",
-    "team": "IND",
+    "team": "PHO",
     "games": 73
   },
   {
     "name": "Dangerfield",
     "slug": "dangerfield",
-    "team": "LAS",
+    "team": "ATL",
     "games": 33
   },
   {
@@ -422,7 +422,7 @@
   {
     "name": "Evans",
     "slug": "evans",
-    "team": "CHI",
+    "team": "LVA",
     "games": 95
   },
   {
@@ -536,7 +536,7 @@
   {
     "name": "Hall",
     "slug": "hall",
-    "team": "IND",
+    "team": "GSV",
     "games": 8
   },
   {
@@ -644,7 +644,7 @@
   {
     "name": "Howard",
     "slug": "howard",
-    "team": "DAL",
+    "team": "ATL",
     "games": 142
   },
   {
@@ -692,7 +692,7 @@
   {
     "name": "Jefferson",
     "slug": "jefferson",
-    "team": "CON",
+    "team": "CHI",
     "games": 28
   },
   {
@@ -716,7 +716,7 @@
   {
     "name": "Johnson",
     "slug": "johnson",
-    "team": "IND",
+    "team": "SEA",
     "games": 2
   },
   {
@@ -878,7 +878,7 @@
   {
     "name": "Mabrey",
     "slug": "mabrey",
-    "team": "CHI",
+    "team": "CON",
     "games": 85
   },
   {
@@ -920,7 +920,7 @@
   {
     "name": "Martin",
     "slug": "martin",
-    "team": "GSV",
+    "team": "LVA",
     "games": 80
   },
   {
@@ -1106,7 +1106,7 @@
   {
     "name": "Parker-Tyus",
     "slug": "parker-tyus",
-    "team": "LVA",
+    "team": "ATL",
     "games": 37
   },
   {
@@ -1154,7 +1154,7 @@
   {
     "name": "Powers",
     "slug": "powers",
-    "team": "IND",
+    "team": "ATL",
     "games": 35
   },
   {
@@ -1232,13 +1232,13 @@
   {
     "name": "Russell",
     "slug": "russell",
-    "team": "LAS",
+    "team": "SEA",
     "games": 59
   },
   {
     "name": "Sabally",
     "slug": "sabally",
-    "team": "PHX",
+    "team": "NYL",
     "games": 112
   },
   {
@@ -1256,7 +1256,7 @@
   {
     "name": "Samuelson",
     "slug": "samuelson",
-    "team": "IND",
+    "team": "WAS",
     "games": 81
   },
   {
@@ -1274,7 +1274,7 @@
   {
     "name": "Sheldon",
     "slug": "sheldon",
-    "team": "DAL",
+    "team": "CON",
     "games": 70
   },
   {
@@ -1322,7 +1322,7 @@
   {
     "name": "Smith",
     "slug": "smith",
-    "team": "IND",
+    "team": "MIN",
     "games": 196
   },
   {
@@ -1364,7 +1364,7 @@
   {
     "name": "Sutton",
     "slug": "sutton",
-    "team": "WAS",
+    "team": "PHO",
     "games": 73
   },
   {
@@ -1376,7 +1376,7 @@
   {
     "name": "Talbot",
     "slug": "talbot",
-    "team": "GSV",
+    "team": "NYL",
     "games": 80
   },
   {
@@ -1388,7 +1388,7 @@
   {
     "name": "Taylor",
     "slug": "taylor",
-    "team": "MIN",
+    "team": "PHO",
     "games": 32
   },
   {
@@ -1406,7 +1406,7 @@
   {
     "name": "Thornton",
     "slug": "thornton",
-    "team": "GSV",
+    "team": "NYL",
     "games": 74
   },
   {
@@ -1430,13 +1430,13 @@
   {
     "name": "Turner",
     "slug": "turner",
-    "team": "CHI",
+    "team": "IND",
     "games": 65
   },
   {
     "name": "Uzun",
     "slug": "uzun",
-    "team": "DAL",
+    "team": "CHI",
     "games": 65
   },
   {
@@ -1454,7 +1454,7 @@
   {
     "name": "Vanloo",
     "slug": "vanloo",
-    "team": "GSV",
+    "team": "WAS",
     "games": 73
   },
   {
@@ -1490,7 +1490,7 @@
   {
     "name": "Wheeler",
     "slug": "wheeler",
-    "team": "IND",
+    "team": "SEA",
     "games": 90
   },
   {
@@ -1538,7 +1538,7 @@
   {
     "name": "Zandalasini",
     "slug": "zandalasini",
-    "team": "MIN",
+    "team": "GSV",
     "games": 73
   },
   {
