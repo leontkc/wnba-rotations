@@ -3,72 +3,108 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Marième Badiane — wnbarotations</title>
-<link rel="stylesheet" href="../assets/viz.css">
+<title>Marième Badiane — rotations &amp; stints · wnbarotations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/player.css">
 </head>
 <body>
-<nav id="game-nav">
-  <a href="../index.html" id="nav-home">← wnbarotations</a>
-  <div id="player-search">
-    <input type="text" placeholder="Search players..." id="player-input">
-    <div id="player-dropdown"></div>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"></span>wnba<span class="dim">rotations</span></a>
+    <div class="player-search" data-root="../">
+      <input type="search" placeholder="Find a player" aria-label="Find a player" autocomplete="off">
+      <div class="player-dropdown"></div>
+    </div>
   </div>
-</nav>
-
-<header class="player-header">
-  <h1>Marième Badiane</h1>
-  <p class="player-meta">MIN · 3 games</p>
 </header>
 
-<main id="player-games">
+<main class="page">
+  <header class="player-header">
+    <div class="player-id">
+      <span class="eyebrow">Minnesota Lynx</span>
+      <h1>Marième Badiane</h1>
+    </div>
+    <div class="season-tabs" role="tablist" aria-label="Season">
+      <span class="tab active static">2025</span>
+    </div>
+  </header>
 
-<div class="player-game" data-href="../games/1022500038.html">
-  <div class="player-game-header">
-    <span>2025-05-30 @ PHX</span>
-    <span class="game-result win">W 74-71</span>
+  <div class="stat-tiles" id="stat-tiles" aria-live="polite">
+    <div class="tile"><span class="tile-val" data-stat="gp">3</span><span class="tile-lbl">Games</span></div>
+    <div class="tile"><span class="tile-val" data-stat="min">–</span><span class="tile-lbl">Min / G</span></div>
+    <div class="tile"><span class="tile-val" data-stat="pts">–</span><span class="tile-lbl">Pts / G</span></div>
+    <div class="tile"><span class="tile-val" data-stat="reb">–</span><span class="tile-lbl">Reb / G</span></div>
+    <div class="tile"><span class="tile-val" data-stat="ast">–</span><span class="tile-lbl">Ast / G</span></div>
+    <div class="tile"><span class="tile-val" data-stat="stints">–</span><span class="tile-lbl">Stints / G</span></div>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 325.0, "end": 441.0, "pts": 0, "reb": 0, "ast": 0, "stl": 1, "blk": 0, "to": 0}]' data-ishome='false'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">0</span> PTS</span>
-    <span><span class="stat-val">0</span> REB</span>
-    <span><span class="stat-val">0</span> AST</span>
-    <span class="player-minutes">1:56</span>
-  </div>
-</div>
 
-<div class="player-game" data-href="../games/1022500008.html">
-  <div class="player-game-header">
-    <span>2025-05-18 @ LAS</span>
-    <span class="game-result win">W 89-75</span>
+  <div class="games-head">
+    <h2>Game log</h2>
+    <p class="panel-note">Each bar is a stint, labeled with its stats: <b>p</b>oints, <b>r</b>ebounds, <b>a</b>ssists, <b>s</b>teals, <b>b</b>locks.</p>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 694.0, "end": 885.0, "pts": 0, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 1}, {"start": 2380.5, "end": 2400.0, "pts": 0, "reb": 0, "ast": 0, "stl": 1, "blk": 0, "to": 0}]' data-ishome='false'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">0</span> PTS</span>
-    <span><span class="stat-val">1</span> REB</span>
-    <span><span class="stat-val">0</span> AST</span>
-    <span class="player-minutes">3:30</span>
-  </div>
-</div>
 
-<div class="player-game" data-href="../games/1022500002.html">
-  <div class="player-game-header">
-    <span>2025-05-16 @ DAL</span>
-    <span class="game-result win">W 99-84</span>
+  <div id="player-games">
+
+<a class="player-game" href="../games/1022500038.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Fri, May 30, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">@</span> Phoenix Mercury</span>
+    <span class="pg-result win"><b>W</b> 74–71</span>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 366.0, "end": 638.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1154.4, "end": 1200.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 1}]' data-ishome='false'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">0</span> PTS</span>
-    <span><span class="stat-val">0</span> REB</span>
-    <span><span class="stat-val">0</span> AST</span>
-    <span class="player-minutes">5:17</span>
+  <div class="mini-gantt away" data-stints="[{&quot;start&quot;: 325.0, &quot;end&quot;: 441.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 1, &quot;blk&quot;: 0, &quot;to&quot;: 0}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
   </div>
-</div>
+  <div class="pg-stats">
+    <span><b>0</b> PTS</span>
+    <span><b>0</b> REB</span>
+    <span><b>0</b> AST</span>
+    <span class="pg-min"><b>1:56</b> MIN</span>
+  </div>
+</a>
+
+<a class="player-game" href="../games/1022500008.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Sun, May 18, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">@</span> Los Angeles Sparks</span>
+    <span class="pg-result win"><b>W</b> 89–75</span>
+  </div>
+  <div class="mini-gantt away" data-stints="[{&quot;start&quot;: 694.0, &quot;end&quot;: 885.0, &quot;pts&quot;: 0, &quot;reb&quot;: 1, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 1}, {&quot;start&quot;: 2380.5, &quot;end&quot;: 2400.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 1, &quot;blk&quot;: 0, &quot;to&quot;: 0}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
+  </div>
+  <div class="pg-stats">
+    <span><b>0</b> PTS</span>
+    <span><b>1</b> REB</span>
+    <span><b>0</b> AST</span>
+    <span class="pg-min"><b>3:30</b> MIN</span>
+  </div>
+</a>
+
+<a class="player-game" href="../games/1022500002.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Fri, May 16, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">@</span> Dallas Wings</span>
+    <span class="pg-result win"><b>W</b> 99–84</span>
+  </div>
+  <div class="mini-gantt away" data-stints="[{&quot;start&quot;: 366.0, &quot;end&quot;: 638.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1154.4, &quot;end&quot;: 1200.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 1}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
+  </div>
+  <div class="pg-stats">
+    <span><b>0</b> PTS</span>
+    <span><b>0</b> REB</span>
+    <span><b>0</b> AST</span>
+    <span class="pg-min"><b>5:17</b> MIN</span>
+  </div>
+</a>
+  </div>
 </main>
 
 <script>
 const PLAYER_DATA = {"name": "Mari\u00e8me Badiane", "team": "MIN", "games": [{"game_id": "1022500038", "date": "2025-05-30", "name": "Mari\u00e8me Badiane", "team": "MIN", "opponent": "PHX", "is_home": false, "own_score": 74, "opp_score": 71, "won": true, "stints": [{"start": 325.0, "end": 441.0, "pts": 0, "reb": 0, "ast": 0, "stl": 1, "blk": 0, "to": 0}], "minutes": "1:56", "pts": 0, "reb": 0, "ast": 0}, {"game_id": "1022500008", "date": "2025-05-18", "name": "Mari\u00e8me Badiane", "team": "MIN", "opponent": "LAS", "is_home": false, "own_score": 89, "opp_score": 75, "won": true, "stints": [{"start": 694.0, "end": 885.0, "pts": 0, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 1}, {"start": 2380.5, "end": 2400.0, "pts": 0, "reb": 0, "ast": 0, "stl": 1, "blk": 0, "to": 0}], "minutes": "3:30", "pts": 0, "reb": 1, "ast": 0}, {"game_id": "1022500002", "date": "2025-05-16", "name": "Mari\u00e8me Badiane", "team": "MIN", "opponent": "DAL", "is_home": false, "own_score": 99, "opp_score": 84, "won": true, "stints": [{"start": 366.0, "end": 638.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1154.4, "end": 1200.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 1}], "minutes": "5:17", "pts": 0, "reb": 0, "ast": 0}]};
 </script>
 <script src="../assets/player.js"></script>
+<script src="../assets/search.js"></script>
 </body>
 </html>

@@ -11,8 +11,11 @@ import logging
 import re
 import unicodedata
 from collections import defaultdict
+from datetime import date as _date
+from html import escape
 from pathlib import Path
 
+from pipeline.build_index import team_name
 from pipeline.config import DOCS_DIR, GAMES_DIR, TEMPLATES_DIR
 
 log = logging.getLogger(__name__)
@@ -164,6 +167,15 @@ def extract_player_data_from_games() -> dict:
     return dict(players)
 
 
+def _format_date(date_str: str) -> str:
+    """'2026-08-30' → 'Sun, Aug 30, 2026'"""
+    try:
+        d = _date.fromisoformat(date_str)
+        return f"{d.strftime('%a')}, {d.strftime('%b')} {d.day}, {d.year}"
+    except ValueError:
+        return date_str
+
+
 def generate_player_html(player_data: dict) -> str:
     """Generate HTML for a single player page."""
     template = (TEMPLATES_DIR / 'player.html').read_text(encoding='utf-8')
@@ -174,36 +186,48 @@ def generate_player_html(player_data: dict) -> str:
 
     # Build games HTML
     games_html_parts = []
+    seasons = sorted({g['date'][:4] for g in games if g['date']}, reverse=True)
     for g in games:
         result_class = 'win' if g['won'] else 'loss'
         result_text = 'W' if g['won'] else 'L'
         location = 'vs' if g['is_home'] else '@'
-
-        stints_json = json.dumps(g['stints'])
+        side = 'home' if g['is_home'] else 'away'
+        stints_json = escape(json.dumps(g['stints']), quote=True)
 
         games_html_parts.append(f'''
-<div class="player-game" data-href="../games/{g['game_id']}.html">
-  <div class="player-game-header">
-    <span>{g['date']} {location} {g['opponent']}</span>
-    <span class="game-result {result_class}">{result_text} {g['own_score']}-{g['opp_score']}</span>
+<a class="player-game" href="../games/{g['game_id']}.html" data-season="{g['date'][:4]}">
+  <div class="pg-head">
+    <span class="pg-date">{_format_date(g['date'])}</span>
+    <span class="pg-opp"><span class="pg-loc">{location}</span> {escape(team_name(g['opponent']))}</span>
+    <span class="pg-result {result_class}"><b>{result_text}</b> {g['own_score']}–{g['opp_score']}</span>
   </div>
-  <div class="mini-gantt" data-stints='{stints_json}' data-ishome='{str(g["is_home"]).lower()}'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">{g['pts']}</span> PTS</span>
-    <span><span class="stat-val">{g['reb']}</span> REB</span>
-    <span><span class="stat-val">{g['ast']}</span> AST</span>
-    <span class="player-minutes">{g['minutes']}</span>
+  <div class="mini-gantt {side}" data-stints="{stints_json}">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
   </div>
-</div>''')
+  <div class="pg-stats">
+    <span><b>{g['pts']}</b> PTS</span>
+    <span><b>{g['reb']}</b> REB</span>
+    <span><b>{g['ast']}</b> AST</span>
+    <span class="pg-min"><b>{g['minutes']}</b> MIN</span>
+  </div>
+</a>''')
 
     games_html = '\n'.join(games_html_parts)
 
+    tabs = ['<button type="button" class="tab active" data-season="" role="tab" aria-selected="true">All</button>']
+    if len(seasons) > 1:
+        tabs += [f'<button type="button" class="tab" data-season="{y}" role="tab" aria-selected="false">{y}</button>'
+                 for y in seasons]
+    else:
+        tabs = [f'<span class="tab active static">{seasons[0]}</span>'] if seasons else []
+
     # Replace placeholders
-    html = template.replace('__PLAYER_NAME__', name)
-    html = html.replace('__PLAYER_TEAM__', team)
+    html = template.replace('__PLAYER_NAME__', escape(name))
+    html = html.replace('__PLAYER_TEAM_NAME__', escape(team_name(team)))
     html = html.replace('__GAME_COUNT__', str(len(games)))
+    html = html.replace('__SEASON_TABS__', '\n'.join('      ' + t for t in tabs))
     html = html.replace('__GAMES_HTML__', games_html)
-    html = html.replace('__PLAYER_DATA__', json.dumps(player_data))
+    html = html.replace('__PLAYER_DATA__', json.dumps(player_data).replace('</', '<\\/'))
 
     return html
 

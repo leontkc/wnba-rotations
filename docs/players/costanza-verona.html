@@ -3,44 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Costanza Verona — wnbarotations</title>
-<link rel="stylesheet" href="../assets/viz.css">
+<title>Costanza Verona — rotations &amp; stints · wnbarotations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/player.css">
 </head>
 <body>
-<nav id="game-nav">
-  <a href="../index.html" id="nav-home">← wnbarotations</a>
-  <div id="player-search">
-    <input type="text" placeholder="Search players..." id="player-input">
-    <div id="player-dropdown"></div>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"></span>wnba<span class="dim">rotations</span></a>
+    <div class="player-search" data-root="../">
+      <input type="search" placeholder="Find a player" aria-label="Find a player" autocomplete="off">
+      <div class="player-dropdown"></div>
+    </div>
   </div>
-</nav>
-
-<header class="player-header">
-  <h1>Costanza Verona</h1>
-  <p class="player-meta">DAL · 1 games</p>
 </header>
 
-<main id="player-games">
+<main class="page">
+  <header class="player-header">
+    <div class="player-id">
+      <span class="eyebrow">Dallas Wings</span>
+      <h1>Costanza Verona</h1>
+    </div>
+    <div class="season-tabs" role="tablist" aria-label="Season">
+      <span class="tab active static">2026</span>
+    </div>
+  </header>
 
-<div class="player-game" data-href="../games/1022600087.html">
-  <div class="player-game-header">
-    <span>2026-06-09 @ MIN</span>
-    <span class="game-result loss">L 76-100</span>
+  <div class="stat-tiles" id="stat-tiles" aria-live="polite">
+    <div class="tile"><span class="tile-val" data-stat="gp">1</span><span class="tile-lbl">Games</span></div>
+    <div class="tile"><span class="tile-val" data-stat="min">–</span><span class="tile-lbl">Min / G</span></div>
+    <div class="tile"><span class="tile-val" data-stat="pts">–</span><span class="tile-lbl">Pts / G</span></div>
+    <div class="tile"><span class="tile-val" data-stat="reb">–</span><span class="tile-lbl">Reb / G</span></div>
+    <div class="tile"><span class="tile-val" data-stat="ast">–</span><span class="tile-lbl">Ast / G</span></div>
+    <div class="tile"><span class="tile-val" data-stat="stints">–</span><span class="tile-lbl">Stints / G</span></div>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 2053.0, "end": 2400.0, "pts": 4, "reb": 0, "ast": 2, "stl": 0, "blk": 0, "to": 0}]' data-ishome='false'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">4</span> PTS</span>
-    <span><span class="stat-val">0</span> REB</span>
-    <span><span class="stat-val">2</span> AST</span>
-    <span class="player-minutes">5:47</span>
+
+  <div class="games-head">
+    <h2>Game log</h2>
+    <p class="panel-note">Each bar is a stint, labeled with its stats: <b>p</b>oints, <b>r</b>ebounds, <b>a</b>ssists, <b>s</b>teals, <b>b</b>locks.</p>
   </div>
-</div>
+
+  <div id="player-games">
+
+<a class="player-game" href="../games/1022600087.html" data-season="2026">
+  <div class="pg-head">
+    <span class="pg-date">Tue, Jun 9, 2026</span>
+    <span class="pg-opp"><span class="pg-loc">@</span> Minnesota Lynx</span>
+    <span class="pg-result loss"><b>L</b> 76–100</span>
+  </div>
+  <div class="mini-gantt away" data-stints="[{&quot;start&quot;: 2053.0, &quot;end&quot;: 2400.0, &quot;pts&quot;: 4, &quot;reb&quot;: 0, &quot;ast&quot;: 2, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
+  </div>
+  <div class="pg-stats">
+    <span><b>4</b> PTS</span>
+    <span><b>0</b> REB</span>
+    <span><b>2</b> AST</span>
+    <span class="pg-min"><b>5:47</b> MIN</span>
+  </div>
+</a>
+  </div>
 </main>
 
 <script>
 const PLAYER_DATA = {"name": "Costanza Verona", "team": "DAL", "games": [{"game_id": "1022600087", "date": "2026-06-09", "name": "Costanza Verona", "team": "DAL", "opponent": "MIN", "is_home": false, "own_score": 76, "opp_score": 100, "won": false, "stints": [{"start": 2053.0, "end": 2400.0, "pts": 4, "reb": 0, "ast": 2, "stl": 0, "blk": 0, "to": 0}], "minutes": "5:47", "pts": 4, "reb": 0, "ast": 2}]};
 </script>
 <script src="../assets/player.js"></script>
+<script src="../assets/search.js"></script>
 </body>
 </html>

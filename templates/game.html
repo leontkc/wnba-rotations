@@ -4,44 +4,63 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>__GAME_TITLE__</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/viz.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
 </head>
 <body>
-<div id="gantt-tooltip"></div>
+<div id="gantt-tooltip" role="tooltip"></div>
 
-<nav id="game-nav">
-  <a href="../index.html" id="nav-home">← wnbarotations</a>
-  <div id="player-search">
-    <input type="text" placeholder="Search players..." id="player-input">
-    <div id="player-dropdown"></div>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"></span>wnba<span class="dim">rotations</span></a>
+    <nav class="topbar-nav" id="nav-adjacent" aria-label="Adjacent games"></nav>
+    <div class="player-search" data-root="../">
+      <input type="search" placeholder="Find a player" aria-label="Find a player" autocomplete="off">
+      <div class="player-dropdown"></div>
+    </div>
   </div>
-  <span id="nav-adjacent"></span>
-</nav>
+</header>
 
-<h1 id="game-title">Loading …</h1>
+<main class="page">
+  <h1 id="game-title" class="visually-hidden">Loading …</h1>
+  <div id="scoreboard" class="scoreboard card"></div>
 
-<section>
-  <h2>Game Momentum</h2>
-  <div style="position:relative;height:300px;">
-    <canvas id="scoreChart"></canvas>
-  </div>
-</section>
+  <section class="panel">
+    <div class="panel-head">
+      <h2>Game flow</h2>
+      <div class="legend" id="flow-legend"></div>
+    </div>
+    <div class="chart-wrap">
+      <canvas id="scoreChart" aria-label="Score margin over the game"></canvas>
+    </div>
+  </section>
 
-<section>
-  <h2>Player Stints</h2>
-  <div id="gantt-container"></div>
-</section>
+  <section class="panel">
+    <div class="panel-head">
+      <h2>Rotations</h2>
+      <p class="panel-note">Bar labels: points · rebounds + assists. <span class="hover-hint">Hover</span><span class="tap-hint">Tap</span> a bar for that stint's plays.</p>
+    </div>
+    <div id="gantt-container"></div>
+  </section>
 
-<section>
-  <h2>Box Score</h2>
-  <div id="box-score-container"></div>
-</section>
+  <section class="panel">
+    <div class="panel-head">
+      <h2>Box score</h2>
+      <p class="panel-note">Click a column to sort.</p>
+    </div>
+    <div id="box-score-container"></div>
+  </section>
+</main>
 
 <script>
 const DATA = __GAME_DATA__;
 const NAV  = __GAME_NAV__;
 </script>
 <script src="../assets/viz.js"></script>
+<script src="../assets/search.js"></script>
 </body>
 </html>

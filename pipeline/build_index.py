@@ -5,9 +5,37 @@ build_index.py — Generate docs/index.html from the manifest.
 import json
 import logging
 from collections import defaultdict
+from html import escape
 from pathlib import Path
 
 log = logging.getLogger(__name__)
+
+TEAM_NAMES = {
+    "ATL": "Atlanta Dream",
+    "CHI": "Chicago Sky",
+    "CON": "Connecticut Sun",
+    "DAL": "Dallas Wings",
+    "GSV": "Golden State Valkyries",
+    "IND": "Indiana Fever",
+    "LAS": "Los Angeles Sparks",
+    "LVA": "Las Vegas Aces",
+    "MIN": "Minnesota Lynx",
+    "NYL": "New York Liberty",
+    "PDX": "Portland Fire",
+    "PHO": "Phoenix Mercury",
+    "PHX": "Phoenix Mercury",
+    "SEA": "Seattle Storm",
+    "TOR": "Toronto Tempo",
+    "WAS": "Washington Mystics",
+}
+
+# Older seasons use a different code for the same franchise; the team filter
+# treats them as one team.
+TRICODE_ALIASES = {"PHO": "PHX"}
+
+
+def team_name(tc: str) -> str:
+    return TEAM_NAMES.get(tc, tc)
 
 
 def generate_index(games: dict, output_path: Path) -> None:
@@ -15,6 +43,7 @@ def generate_index(games: dict, output_path: Path) -> None:
     Build the index page from the manifest's games dict.
     games: {game_id: {date, matchup, home_tricode, away_tricode,
                        score_home, score_away, season, html_path}}
+    Games without a season (e.g. one-off test games) are left off the index.
     """
     if not games:
         log.warning("No games in manifest — writing empty index.")
@@ -23,78 +52,44 @@ def generate_index(games: dict, output_path: Path) -> None:
     by_season: dict[str, dict[str, list]] = defaultdict(lambda: defaultdict(list))
     all_tricodes: set = set()
 
-    for gid, g in games.items():
-        season = g.get("season", "unknown")
-        date   = g.get("date", "")
-        by_season[season][date].append(g)
-        all_tricodes.add(g.get("home_tricode", ""))
-        all_tricodes.add(g.get("away_tricode", ""))
+    for g in games.values():
+        season = g.get("season", "")
+        if not season:
+            continue
+        by_season[season][g.get("date", "")].append(g)
+        for tc in (g.get("home_tricode", ""), g.get("away_tricode", "")):
+            all_tricodes.add(TRICODE_ALIASES.get(tc, tc))
 
     all_tricodes.discard("")
-    sorted_tricodes = sorted(all_tricodes)
-    sorted_seasons  = sorted(by_season.keys(), reverse=True)  # newest season first
+    sorted_seasons = sorted(by_season.keys(), reverse=True)  # newest season first
     most_recent_season = sorted_seasons[0] if sorted_seasons else ""
+    season_counts = {s: sum(len(v) for v in by_season[s].values()) for s in sorted_seasons}
 
-    # Build season tab HTML
     tabs_html = "\n".join(
-        f'    <span class="tab{" active" if s == most_recent_season else ""}" '
-        f'data-season="{s}" onclick="switchSeason(\'{s}\')">{s}</span>'
+        f'      <button type="button" class="tab{" active" if s == most_recent_season else ""}" '
+        f'data-season="{s}" role="tab" aria-selected="{"true" if s == most_recent_season else "false"}">'
+        f'{s}</button>'
         for s in sorted_seasons
     )
 
-    # Build team filter options
-    team_options = '\n'.join(
-        f'      <option value="{tc}">{tc}</option>' for tc in sorted_tricodes
+    team_options = "\n".join(
+        f'        <option value="{tc}">{escape(team_name(tc))}</option>'
+        for tc in sorted(all_tricodes, key=team_name)
     )
 
-    # Build game rows per season
     sections_html_parts = []
-    manifest_for_js = []
-
     for season in sorted_seasons:
-        dates = sorted(by_season[season].keys(), reverse=True)  # newest date first
         date_groups = []
-        for date in dates:
-            day_games = by_season[season][date]
-            rows = []
-            for g in day_games:
-                gid        = g["game_id"]
-                home_tc    = g["home_tricode"]
-                away_tc    = g["away_tricode"]
-                score_home = g["score_home"]
-                score_away = g["score_away"]
-                html_path  = g["html_path"]
-
-                home_wins = score_home > score_away
-                home_score_html = f'<span class="winner">{score_home}</span>' if home_wins else str(score_home)
-                away_score_html = f'<span class="winner">{score_away}</span>' if not home_wins else str(score_away)
-
-                rows.append(
-                    f'        <div class="game-row" '
-                    f'data-teams="{home_tc} {away_tc}" data-date="{date}">\n'
-                    f'          <span class="game-matchup">{away_tc} @ {home_tc}</span>\n'
-                    f'          <span class="game-score">Final: '
-                    f'{home_tc} {home_score_html} – {away_tc} {away_score_html}</span>\n'
-                    f'          <a class="game-link" href="{html_path}">View →</a>\n'
-                    f'        </div>'
-                )
-
-                manifest_for_js.append({
-                    "id":   gid,
-                    "s":    season,
-                    "d":    date,
-                    "h":    home_tc,
-                    "a":    away_tc,
-                    "sh":   score_home,
-                    "sa":   score_away,
-                })
-
-            formatted_date = _format_date(date)
+        for date in sorted(by_season[season].keys(), reverse=True):  # newest date first
+            day_games = sorted(by_season[season][date], key=lambda g: g["game_id"])
+            cards = "\n".join(_game_card(g, date) for g in day_games)
+            n = len(day_games)
             date_groups.append(
-                f'      <div class="date-group" data-date="{date}">\n'
-                f'        <div class="date-header">{formatted_date}</div>\n'
-                + "\n".join(rows) + "\n"
-                f"      </div>"
+                f'      <section class="date-group" data-date="{date}">\n'
+                f'        <h2 class="date-header"><span>{_format_date(date)}</span>'
+                f'<span class="date-count">{n} game{"s" if n != 1 else ""}</span></h2>\n'
+                f'        <div class="game-grid">\n{cards}\n        </div>\n'
+                f"      </section>"
             )
 
         active_class = " active" if season == most_recent_season else ""
@@ -105,48 +100,71 @@ def generate_index(games: dict, output_path: Path) -> None:
         )
 
     sections_html = "\n".join(sections_html_parts)
-    manifest_json = json.dumps(manifest_for_js)
-    total_games = len(games)
+    total_games = sum(season_counts.values())
+    initial_count = season_counts.get(most_recent_season, 0)
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>wnbarotations — WNBA Game Flows</title>
+<title>wnbarotations — WNBA rotations, game flow &amp; box scores</title>
+<meta name="description" content="Score flow, player rotations and box scores for every WNBA game.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="assets/base.css">
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-<header>
-  <h1>wnbarotations</h1>
-  <p class="subtitle">Score flow, player rotations &amp; box scores for every WNBA game</p>
-  <div class="season-tabs">
-{tabs_html}
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>wnba<span class="dim">rotations</span></a>
+    <div class="player-search" data-root="">
+      <input type="search" placeholder="Find a player" aria-label="Find a player" autocomplete="off">
+      <div class="player-dropdown"></div>
+    </div>
   </div>
 </header>
 
-<div class="filters">
-  <select id="team-filter" onchange="applyFilters()">
-    <option value="">All Teams</option>
-{team_options}
-  </select>
-  <input id="search-box" type="text" placeholder="🔍  Search team or date…" oninput="applyFilters()">
-  <div id="player-search">
-    <input id="player-input" type="text" placeholder="🔍  Find player…" autocomplete="off">
-    <div id="player-dropdown"></div>
+<main class="page">
+  <div class="hero">
+    <h1>Every WNBA game, minute by minute</h1>
+    <p class="subtitle">Who was on the floor, how the lead swung, and what each stint produced.</p>
   </div>
-  <span id="game-count">{total_games} games</span>
-</div>
 
-<main id="game-list">
+  <div class="toolbar">
+    <div class="season-tabs" role="tablist" aria-label="Season">
+{tabs_html}
+    </div>
+    <div class="filters">
+      <select id="team-filter" aria-label="Filter by team">
+        <option value="">All teams</option>
+{team_options}
+      </select>
+      <input id="search-box" type="search" placeholder="Team or date" aria-label="Search by team or date">
+      <span id="game-count">{initial_count} games</span>
+    </div>
+  </div>
+
+  <div id="game-list">
 {sections_html}
-  <div class="no-results" id="no-results" style="display:none">No games match your search.</div>
+    <div class="no-results" id="no-results" hidden>No games match your filters.</div>
+  </div>
 </main>
 
-<script>
-const MANIFEST = {manifest_json};
+<footer class="site-footer">
+  {total_games} games · Play-by-play and box scores from NBA Stats, updated daily.
+</footer>
 
+<script>
 let currentSeason = '{most_recent_season}';
+
+document.querySelectorAll('.tab').forEach(tab => {{
+  tab.addEventListener('click', () => switchSeason(tab.dataset.season));
+}});
+document.getElementById('team-filter').addEventListener('change', applyFilters);
+document.getElementById('search-box').addEventListener('input', applyFilters);
 
 function switchSeason(season) {{
   currentSeason = season;
@@ -154,7 +172,9 @@ function switchSeason(season) {{
     el.classList.toggle('active', el.dataset.season === season);
   }});
   document.querySelectorAll('.tab').forEach(el => {{
-    el.classList.toggle('active', el.dataset.season === season);
+    const on = el.dataset.season === season;
+    el.classList.toggle('active', on);
+    el.setAttribute('aria-selected', on);
   }});
   applyFilters();
 }}
@@ -167,73 +187,25 @@ function applyFilters() {{
   if (!section) return;
 
   let visible = 0;
-  section.querySelectorAll('.game-row').forEach(row => {{
-    const teams = (row.dataset.teams || '').toUpperCase();
-    const date  = (row.dataset.date  || '').toUpperCase();
-    const teamOk   = !team   || teams.includes(team);
+  section.querySelectorAll('.game-card').forEach(card => {{
+    const teams = card.dataset.teams.toUpperCase();
+    const date  = card.dataset.date;
+    const teamOk   = !team   || teams.split(' ').includes(team);
     const searchOk = !search || teams.includes(search) || date.includes(search);
     const show = teamOk && searchOk;
-    row.style.display = show ? '' : 'none';
+    card.hidden = !show;
     if (show) visible++;
   }});
 
-  // Hide empty date groups
   section.querySelectorAll('.date-group').forEach(dg => {{
-    const hasVisible = [...dg.querySelectorAll('.game-row')].some(r => r.style.display !== 'none');
-    dg.style.display = hasVisible ? '' : 'none';
+    dg.hidden = !dg.querySelector('.game-card:not([hidden])');
   }});
 
   document.getElementById('game-count').textContent = visible + ' game' + (visible !== 1 ? 's' : '');
-  document.getElementById('no-results').style.display = visible === 0 ? '' : 'none';
+  document.getElementById('no-results').hidden = visible !== 0;
 }}
-
-// Player search
-(function initPlayerSearch() {{
-  const input = document.getElementById('player-input');
-  const dropdown = document.getElementById('player-dropdown');
-  if (!input || !dropdown) return;
-
-  let players = [];
-  fetch('players/players.json')
-    .then(r => r.json())
-    .then(data => {{ players = data; }})
-    .catch(() => {{}});
-
-  input.addEventListener('focus', () => {{
-    if (players.length) renderDropdown('');
-  }});
-
-  input.addEventListener('input', () => {{
-    renderDropdown(input.value.trim().toLowerCase());
-  }});
-
-  document.addEventListener('click', (e) => {{
-    if (!e.target.closest('#player-search')) dropdown.classList.remove('active');
-  }});
-
-  function renderDropdown(filter) {{
-    const filtered = players.filter(p =>
-      p.name.toLowerCase().includes(filter)
-    ).slice(0, 15);
-
-    if (!filtered.length) {{
-      dropdown.classList.remove('active');
-      return;
-    }}
-
-    dropdown.innerHTML = filtered.map(p =>
-      `<div class="player-option" data-slug="${{p.slug}}">${{p.name}} <span style="color:#666;font-size:0.7rem">(${{p.team}})</span></div>`
-    ).join('');
-    dropdown.classList.add('active');
-
-    dropdown.querySelectorAll('.player-option').forEach(opt => {{
-      opt.addEventListener('click', () => {{
-        window.location.href = `players/${{opt.dataset.slug}}.html`;
-      }});
-    }});
-  }}
-}})();
 </script>
+<script src="assets/search.js"></script>
 </body>
 </html>
 """
@@ -243,11 +215,36 @@ function applyFilters() {{
     log.info(f"Index written → {output_path}  ({total_games} games)")
 
 
+def _game_card(g: dict, date: str) -> str:
+    home_tc, away_tc = g["home_tricode"], g["away_tricode"]
+    score_home, score_away = g["score_home"], g["score_away"]
+    home_wins = score_home > score_away
+    search_codes = {home_tc, away_tc} | {TRICODE_ALIASES.get(t, t) for t in (home_tc, away_tc)}
+
+    def row(tc, score, won, side):
+        return (
+            f'            <div class="gc-team {side}{" won" if won else ""}">'
+            f'<span class="gc-tc">{tc}</span>'
+            f'<span class="gc-name">{escape(team_name(tc))}</span>'
+            f'<span class="gc-score">{score}</span></div>'
+        )
+
+    return (
+        f'          <a class="game-card" href="{g["html_path"]}" '
+        f'data-teams="{" ".join(sorted(search_codes))}" data-date="{date}" '
+        f'aria-label="{escape(team_name(away_tc))} {score_away} at {escape(team_name(home_tc))} {score_home}">\n'
+        f'{row(away_tc, score_away, not home_wins, "away")}\n'
+        f'{row(home_tc, score_home, home_wins, "home")}\n'
+        f'            <div class="gc-foot"><span>Final</span><span class="gc-go">Rotations →</span></div>\n'
+        f'          </a>'
+    )
+
+
 def _format_date(date_str: str) -> str:
-    """'2024-09-19' → 'September 19, 2024'"""
+    """'2024-09-19' → 'Thursday, September 19'"""
     try:
         from datetime import date
         d = date.fromisoformat(date_str)
-        return f"{d.strftime('%B')} {d.day}, {d.year}"
+        return f"{d.strftime('%A')}, {d.strftime('%B')} {d.day}"
     except Exception:
         return date_str

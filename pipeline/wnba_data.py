@@ -171,6 +171,16 @@ def fetch_pbp(game_id: str) -> pd.DataFrame:
 
 # ── Box score ─────────────────────────────────────────────────────────────────
 
+def _norm_minutes(minutes: str) -> str:
+    """The API sometimes reports '29:60'; normalize to '30:00'."""
+    m = re.match(r"^(\d+):(\d+)", minutes or "")
+    if not m:
+        return minutes
+    mins, secs = int(m.group(1)), int(m.group(2))
+    mins, secs = mins + secs // 60, secs % 60
+    return f"{mins}:{secs:02d}"
+
+
 def fetch_boxscore(game_id: str) -> list[dict]:
     """
     Fetch BoxScoreTraditionalV3 for game_id. Uses raw cache if available.
@@ -212,6 +222,8 @@ def fetch_boxscore(game_id: str) -> list[dict]:
                     entry[dst] = int(val)
                 elif dst == "plus_minus":
                     entry[dst] = float(val)
+                elif dst == "minutes":
+                    entry[dst] = _norm_minutes(str(val))
                 else:
                     entry[dst] = str(val)
             result.append(entry)

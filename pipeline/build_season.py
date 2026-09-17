@@ -5,11 +5,13 @@ Usage:
   python -m pipeline.build_season --seasons 2024 2025 2026
   python -m pipeline.build_season --game-id 0022400235
   python -m pipeline.build_season --seasons 2024 --force
+  python -m pipeline.build_season --rerender   # re-apply templates, no API calls
 """
 
 import argparse
 import json
 import logging
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -69,7 +71,8 @@ def generate_game_html(payload: dict, nav: dict, game_id: str) -> None:
     html = _get_game_template()
 
     g = payload["game"]
-    title = f"{g['away_tricode']} @ {g['home_tricode']}  ·  {g['date']}  ·  {g['home_tricode']} {g['score_home']} – {g['away_tricode']} {g['score_away']}"
+    title = (f"{g['away_tricode']} {g['score_away']} @ {g['home_tricode']} {g['score_home']}"
+             f" · {g['date']} — wnbarotations")
 
     html = html.replace("__GAME_TITLE__", title)
     html = html.replace("__GAME_DATA__", json.dumps(payload))
@@ -78,6 +81,23 @@ def generate_game_html(payload: dict, nav: dict, game_id: str) -> None:
     out = GAMES_DIR / f"{game_id}.html"
     out.write_text(html, encoding="utf-8")
     log.info(f"  Written {out.name}")
+
+
+def rerender_existing_games() -> int:
+    """
+    Re-render every docs/games/*.html with the current template, reusing the
+    DATA/NAV already embedded in each page. Returns the number of pages written.
+    """
+    pat = re.compile(r"const DATA = (\{.*?\});\s*\nconst NAV\s*= (.*?);\s*\n</script>", re.DOTALL)
+    count = 0
+    for page in sorted(GAMES_DIR.glob("*.html")):
+        m = pat.search(page.read_text(encoding="utf-8"))
+        if not m:
+            log.warning(f"  {page.name}: no embedded data, skipping")
+            continue
+        generate_game_html(json.loads(m.group(1)), json.loads(m.group(2)), page.stem)
+        count += 1
+    return count
 
 
 # ── Single game pipeline ──────────────────────────────────────────────────────
@@ -253,7 +273,22 @@ if __name__ == "__main__":
                         help="Regenerate existing game HTML files")
     parser.add_argument("--game-id", dest="game_id",
                         help="Process a single game ID only")
+    parser.add_argument("--rerender", action="store_true",
+                        help="Re-render existing pages from their embedded data "
+                             "(after template changes); no API calls")
     args = parser.parse_args()
+
+    if args.rerender:
+        from pipeline.build_index import generate_index
+        from pipeline.build_players import build_player_pages
+        from pipeline.config import DOCS_DIR
+        log.setLevel(logging.WARNING)
+        n = rerender_existing_games()
+        log.setLevel(logging.INFO)
+        log.info(f"Re-rendered {n} game pages")
+        generate_index(load_manifest()["games"], DOCS_DIR / "index.html")
+        build_player_pages()
+        sys.exit(0)
 
     run_build(
         seasons=args.seasons,

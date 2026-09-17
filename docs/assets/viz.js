@@ -1,31 +1,45 @@
 // wnbarotations — shared visualization script
 // DATA and NAV are injected by the game HTML shell before this script loads.
 
+// ─── Theme ───────────────────────────────────────────────────────────────────
+const CSS = getComputedStyle(document.documentElement);
+const cssVar = (name, fallback) => (CSS.getPropertyValue(name) || '').trim() || fallback;
+
+const HOME_COLOR = cssVar('--home', '#e0364f');
+const AWAY_COLOR = cssVar('--away', '#4a90d9');
+const SURFACE    = cssVar('--surface', '#141821');
+const TEXT_2     = cssVar('--text-2', '#b4bacb');
+const MUTED      = cssVar('--muted', '#8089a0');
+const FAINT      = cssVar('--faint', '#5a6378');
+const FONT       = cssVar('--font', 'Inter, system-ui, sans-serif');
+
+// "#e0364f" -> "rgba(224,54,79,a)"
+function withAlpha(hex, a) {
+  const n = parseInt(hex.replace('#', ''), 16);
+  return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`;
+}
+
+const TEAM_NAMES = {
+  ATL: 'Atlanta Dream', CHI: 'Chicago Sky', CON: 'Connecticut Sun', DAL: 'Dallas Wings',
+  GSV: 'Golden State Valkyries', IND: 'Indiana Fever', LAS: 'Los Angeles Sparks',
+  LVA: 'Las Vegas Aces', MIN: 'Minnesota Lynx', NYL: 'New York Liberty', PDX: 'Portland Fire',
+  PHO: 'Phoenix Mercury', PHX: 'Phoenix Mercury', SEA: 'Seattle Storm', TOR: 'Toronto Tempo',
+  WAS: 'Washington Mystics',
+};
+const teamName = tc => TEAM_NAMES[tc] || tc;
+
 // ─── Prev / Next nav ────────────────────────────────────────────────────────
 (function renderNav() {
   const adjacent = document.getElementById('nav-adjacent');
   if (!adjacent || typeof NAV === 'undefined' || !NAV) return;
-  const parts = [];
-  if (NAV.prev) parts.push(`<a href="${NAV.prev}.html">← Prev</a>`);
-  if (NAV.next) parts.push(`<a href="${NAV.next}.html">Next →</a>`);
-  adjacent.innerHTML = parts.join(' · ');
+  const link = (id, text) => id
+    ? `<a href="${id}.html">${text}</a>`
+    : `<a class="disabled" aria-disabled="true">${text}</a>`;
+  adjacent.innerHTML = link(NAV.prev, '← <span class="label">Prev game</span>') +
+                       link(NAV.next, '<span class="label">Next game</span> →');
 })();
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
-function minLabel(sec) {
-  return (sec / 60).toFixed(1);
-}
-
-const HOME_COLOR = '#c8102e';  // crimson
-const AWAY_COLOR = '#4a90d9';  // steel blue
-const HOME_LIGHT = 'rgba(200,16,46,0.12)';
-const AWAY_LIGHT = 'rgba(74,144,217,0.12)';
-
-function teamColor(tc) {
-  return tc === DATA.game.home_tricode ? HOME_COLOR : AWAY_COLOR;
-}
-
-// ─── Mobile Detection ───────────────────────────────────────────────────────
 function isMobile() {
   return window.innerWidth <= 768;
 }
@@ -41,7 +55,7 @@ function isTouchDevice() {
 function slugify(name) {
   if (!name) return '';
   return name.toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // remove accents
+    .normalize('NFD').replace(/[̀-ͯ]/g, '') // remove accents
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '');
 }
@@ -50,11 +64,46 @@ function playerPageUrl(name) {
   return `../players/${slugify(name)}.html`;
 }
 
-// ─── Title ───────────────────────────────────────────────────────────────────
+// The API sometimes reports "29:60"; show it as "30:00"
+function normMinutes(min) {
+  if (!min) return min;
+  const m = String(min).match(/^(\d+):(\d+)/);
+  if (!m) return min;
+  let mins = parseInt(m[1], 10), secs = parseInt(m[2], 10);
+  if (secs >= 60) { mins += Math.floor(secs / 60); secs %= 60; }
+  return `${mins}:${String(secs).padStart(2, '0')}`;
+}
+
+// ─── Title + scoreboard ──────────────────────────────────────────────────────
 const g = DATA.game;
 document.getElementById('game-title').textContent =
-  `${g.home_tricode} vs. ${g.away_tricode}  ·  ${g.date}  ·  ` +
-  `Final: ${g.home_tricode} ${g.score_home} – ${g.away_tricode} ${g.score_away}`;
+  `${teamName(g.away_tricode)} ${g.score_away} at ${teamName(g.home_tricode)} ${g.score_home}, ${g.date}`;
+
+(function renderScoreboard() {
+  const el = document.getElementById('scoreboard');
+  if (!el) return;
+  const homeWon = g.score_home > g.score_away;
+  let dateText = g.date;
+  if (g.date) {
+    const d = new Date(`${g.date}T12:00:00`);
+    dateText = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+  }
+  const side = (tc, score, won, cls, label) => `
+    <div class="sb-team ${cls}${won ? ' won' : ''}">
+      <div class="sb-id">
+        <span class="sb-tc">${tc}</span>
+        <span class="sb-name">${teamName(tc)}</span>
+        <span class="sb-side">${label}</span>
+      </div>
+      <span class="sb-score">${score}</span>
+    </div>`;
+  const margin = Math.abs(g.score_home - g.score_away);
+  el.innerHTML =
+    side(g.away_tricode, g.score_away, !homeWon, 'away', 'Away') +
+    `<div class="sb-mid"><span class="sb-status">Final</span><span class="sb-date">${dateText}</span>` +
+    `<span class="sb-margin">${homeWon ? g.home_tricode : g.away_tricode} by ${margin}</span></div>` +
+    side(g.home_tricode, g.score_home, homeWon, 'home', 'Home');
+})();
 
 // ─── 1. Game Momentum (Score Margin) ─────────────────────────────────────────
 (function renderGameMomentum() {
@@ -102,7 +151,7 @@ document.getElementById('game-title').textContent =
       [quarterMin, quarterMin * 2, quarterMin * 3].forEach((min, i) => {
         const xPx = x.getPixelForValue(min);
         ctx.save();
-        ctx.strokeStyle = 'rgba(255,255,255,0.18)';
+        ctx.strokeStyle = 'rgba(255,255,255,0.14)';
         ctx.lineWidth = 1;
         ctx.setLineDash([4, 4]);
         ctx.beginPath();
@@ -110,8 +159,8 @@ document.getElementById('game-title').textContent =
         ctx.lineTo(xPx, bottom);
         ctx.stroke();
         ctx.setLineDash([]);
-        ctx.fillStyle = 'rgba(255,255,255,0.45)';
-        ctx.font = `${isSmallMobile() ? 9 : 11}px Segoe UI, Arial, sans-serif`;
+        ctx.fillStyle = MUTED;
+        ctx.font = `600 ${isSmallMobile() ? 9 : 11}px ${FONT}`;
         ctx.fillText(`Q${i + 2}`, xPx + 4, top + 14);
         ctx.restore();
       });
@@ -146,7 +195,7 @@ document.getElementById('game-title').textContent =
       });
       ctx.lineTo(points[points.length - 1].x, zeroY);
       ctx.closePath();
-      ctx.fillStyle = 'rgba(200, 16, 46, 0.25)';
+      ctx.fillStyle = withAlpha(HOME_COLOR, 0.28);
       ctx.fill();
 
       // Draw away (below zero) fill
@@ -162,12 +211,22 @@ document.getElementById('game-title').textContent =
       });
       ctx.lineTo(points[points.length - 1].x, zeroY);
       ctx.closePath();
-      ctx.fillStyle = 'rgba(74, 144, 217, 0.25)';
+      ctx.fillStyle = withAlpha(AWAY_COLOR, 0.28);
       ctx.fill();
 
       ctx.restore();
     }
   };
+
+  const legend = document.getElementById('flow-legend');
+  if (legend) {
+    legend.innerHTML = [[g.home_tricode, HOME_COLOR], [g.away_tricode, AWAY_COLOR]]
+      .map(([tc, c]) => `<span class="legend-item"><span class="legend-swatch" style="background:${withAlpha(c, 0.55)};box-shadow:inset 0 0 0 1px ${c}"></span>${tc} leads</span>`)
+      .join('');
+  }
+
+  Chart.defaults.font.family = FONT;
+  Chart.defaults.color = MUTED;
 
   new Chart(document.getElementById('scoreChart'), {
     type: 'line',
@@ -176,7 +235,7 @@ document.getElementById('game-title').textContent =
         {
           label: 'Margin',
           data: marginData,
-          borderColor: '#888',
+          borderColor: TEXT_2,
           backgroundColor: 'transparent',
           tension: 0,
           stepped: 'after',
@@ -195,36 +254,28 @@ document.getElementById('game-title').textContent =
           type: 'linear',
           min: 0,
           max: totalGameMin,
-          title: { display: true, text: 'Game Time (min)', color: '#888' },
-          ticks: { color: '#888', stepSize: 5 },
-          grid: { color: 'rgba(255,255,255,0.06)' },
+          title: { display: !isSmallMobile(), text: 'Minutes played', color: FAINT },
+          ticks: { color: MUTED, stepSize: 5 },
+          grid: { color: 'rgba(255,255,255,0.05)' },
+          border: { display: false },
         },
         y: {
           min: -Math.ceil(maxMargin / 5) * 5,
           max: Math.ceil(maxMargin / 5) * 5,
-          title: { display: !isSmallMobile(), text: 'Lead', color: '#888' },
+          title: { display: false },
+          border: { display: false },
           ticks: {
-            color: '#888',
+            color: MUTED,
             callback: (val) => val === 0 ? 'TIE' : (val > 0 ? `+${val}` : val)
           },
           grid: {
-            color: (ctx) => ctx.tick.value === 0 ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.06)',
+            color: (ctx) => ctx.tick.value === 0 ? 'rgba(255,255,255,0.35)' : 'rgba(255,255,255,0.05)',
             lineWidth: (ctx) => ctx.tick.value === 0 ? 2 : 1
           },
         }
       },
       plugins: {
-        legend: {
-          display: true,
-          labels: {
-            color: '#ccc',
-            font: { size: isSmallMobile() ? 10 : 12 },
-            generateLabels: () => [
-              { text: `${g.home_tricode} leads`, fillStyle: 'rgba(200, 16, 46, 0.5)', strokeStyle: HOME_COLOR },
-              { text: `${g.away_tricode} leads`, fillStyle: 'rgba(74, 144, 217, 0.5)', strokeStyle: AWAY_COLOR },
-            ]
-          }
-        },
+        legend: { display: false },
         tooltip: {
           callbacks: {
             title(items) {
@@ -241,11 +292,14 @@ document.getElementById('game-title').textContent =
               ];
             }
           },
-          backgroundColor: 'rgba(20,22,35,0.95)',
-          titleColor: '#ddd',
-          bodyColor: '#bbb',
-          borderColor: '#444',
+          backgroundColor: cssVar('--surface-2', '#1b2030'),
+          titleColor: '#fff',
+          bodyColor: TEXT_2,
+          borderColor: 'rgba(255,255,255,0.14)',
           borderWidth: 1,
+          padding: 10,
+          cornerRadius: 8,
+          displayColors: false,
         }
       }
     },
@@ -264,21 +318,23 @@ function renderStints(data) {
   const homeTC = data.game.home_tricode;
   const awayTC = data.game.away_tricode;
 
+  // Rows are keyed by team + stint name: both teams can have a "Howard"
+  const rowKey = s => `${s.team}|${s.player}`;
   const seen = new Map();
-  stints.forEach(s => { if (!seen.has(s.player)) seen.set(s.player, s.team); });
+  stints.forEach(s => { if (!seen.has(rowKey(s))) seen.set(rowKey(s), s); });
 
-  const homePlayers = [...seen.entries()].filter(([,t]) => t === homeTC).map(([p]) => p);
-  const awayPlayers = [...seen.entries()].filter(([,t]) => t !== homeTC).map(([p]) => p);
+  const playersFor = tc => [...seen.values()].filter(s => s.team === tc)
+    .map(s => ({ type: 'player', key: rowKey(s), player: s.player, team: tc }));
 
   const rows = [
     { type: 'header', team: homeTC },
-    ...homePlayers.map(p => ({ type: 'player', player: p, team: homeTC })),
+    ...playersFor(homeTC),
     { type: 'header', team: awayTC },
-    ...awayPlayers.map(p => ({ type: 'player', player: p, team: awayTC })),
+    ...playersFor(awayTC),
   ];
 
   const playerRowIndex = new Map();
-  rows.forEach((r, i) => { if (r.type === 'player') playerRowIndex.set(r.player, i); });
+  rows.forEach((r, i) => { if (r.type === 'player') playerRowIndex.set(r.key, i); });
 
   // Responsive dimensions
   const smallMobile = isSmallMobile();
@@ -293,35 +349,34 @@ function renderStints(data) {
 
   // Build player totals and display names from box_score or stints
   const playerTotals = new Map();
-  const playerDisplayNames = new Map(); // Maps stint name -> full name
+  const playerDisplayNames = new Map(); // Maps row key (team|stint name) -> full name
   if (data.box_score && data.box_score.length) {
     data.box_score.forEach(b => {
       const fullName = `${b.first} ${b.last}`;
       const stats = {
-        min: b.minutes || '0:00',
+        min: normMinutes(b.minutes) || '0:00',
         pts: b.pts ?? 0,
         reb: b.reb ?? 0,
         ast: b.ast ?? 0,
         stl: b.stl ?? 0,
         blk: b.blk ?? 0,
       };
-      // Add both full name and last name as keys (stints often use last name only)
+      // Key by full name, plus team|last name (stints often use last name only)
       playerTotals.set(fullName, stats);
-      playerTotals.set(b.last, stats);
-      playerDisplayNames.set(fullName, fullName);
-      playerDisplayNames.set(b.last, fullName);
+      playerTotals.set(`${b.team}|${b.last}`, stats);
+      playerDisplayNames.set(`${b.team}|${b.last}`, fullName);
     });
   } else {
     // Fallback: sum from stints
     stints.forEach(s => {
-      const t = playerTotals.get(s.player) || { min: 0, pts: 0, reb: 0, ast: 0, stl: 0, blk: 0 };
+      const t = playerTotals.get(rowKey(s)) || { min: 0, pts: 0, reb: 0, ast: 0, stl: 0, blk: 0 };
       t.min += s.duration_sec || 0;
       t.pts += s.stint_pts || 0;
       t.reb += s.stint_reb || 0;
       t.ast += s.stint_ast || 0;
       t.stl += s.stint_stl || 0;
       t.blk += s.stint_blk || 0;
-      playerTotals.set(s.player, t);
+      playerTotals.set(rowKey(s), t);
     });
     // Convert seconds to MM:SS for fallback
     playerTotals.forEach((t, name) => {
@@ -333,7 +388,7 @@ function renderStints(data) {
     });
   }
   // Resolved full names from the pipeline take precedence over last-name keys
-  stints.forEach(s => { if (s.player_full) playerDisplayNames.set(s.player, s.player_full); });
+  stints.forEach(s => { if (s.player_full) playerDisplayNames.set(rowKey(s), s.player_full); });
 
   const containerW = document.getElementById('gantt-container').clientWidth || 900;
   const svgW = Math.max(smallMobile ? 320 : 600, containerW - 4);
@@ -369,7 +424,7 @@ function renderStints(data) {
     return e;
   }
 
-  el('rect', { x: 0, y: 0, width: svgW, height: svgH, fill: '#1a1d27' });
+  el('rect', { x: 0, y: 0, width: svgW, height: svgH, fill: SURFACE });
 
   const defs = el('defs', {});
 
@@ -381,8 +436,8 @@ function renderStints(data) {
     el('rect', { x: x1, y: PAD_TOP, width: x2 - x1, height: totalContentH, fill: quarterShades[q] });
     el('text', {
       x: (x1 + x2) / 2, y: PAD_TOP - 8,
-      fill: '#777', 'font-size': '12', 'font-weight': '600',
-      'text-anchor': 'middle', 'font-family': 'Segoe UI, Arial, sans-serif'
+      fill: MUTED, 'font-size': '11', 'font-weight': '700',
+      'text-anchor': 'middle', 'font-family': FONT
     }).textContent = `Q${q + 1}`;
   });
 
@@ -390,15 +445,15 @@ function renderStints(data) {
   const minHeaderX = svgW - PAD_RIGHT + (smallMobile ? 6 : 8);
   el('text', {
     x: minHeaderX, y: PAD_TOP - 8,
-    fill: '#555', 'font-size': smallMobile ? '7' : '9', 'font-weight': '500',
-    'text-anchor': 'start', 'font-family': 'Segoe UI, Arial, sans-serif',
+    fill: FAINT, 'font-size': smallMobile ? '7' : '9', 'font-weight': '600',
+    'text-anchor': 'start', 'font-family': FONT,
   }).textContent = 'MIN';
 
   const statsHeaderX = svgW - (smallMobile ? 4 : 8);
   el('text', {
     x: statsHeaderX, y: PAD_TOP - 8,
-    fill: '#555', 'font-size': smallMobile ? '7' : '9', 'font-weight': '500',
-    'text-anchor': 'end', 'font-family': 'Segoe UI, Arial, sans-serif',
+    fill: FAINT, 'font-size': smallMobile ? '7' : '9', 'font-weight': '600',
+    'text-anchor': 'end', 'font-family': FONT,
     'letter-spacing': '0.04em'
   }).textContent = smallMobile ? 'PTS REB AST STK' : 'PTS   REB   AST   STL   BLK';
 
@@ -406,7 +461,7 @@ function renderStints(data) {
     const x = xOf(min * 60);
     el('line', {
       x1: x, y1: PAD_TOP, x2: x, y2: PAD_TOP + totalContentH,
-      stroke: 'rgba(255,255,255,0.2)', 'stroke-width': 1,
+      stroke: 'rgba(255,255,255,0.12)', 'stroke-width': 1,
     });
   });
 
@@ -417,23 +472,24 @@ function renderStints(data) {
 
     if (row.type === 'header') {
       el('rect', { x: 0, y, width: svgW, height: HEADER_H,
-        fill: isHome ? 'rgba(200,16,46,0.18)' : 'rgba(74,144,217,0.18)' });
+        fill: withAlpha(color, 0.16) });
       el('rect', { x: 0, y, width: 4, height: HEADER_H, fill: color });
       el('text', {
         x: 12, y: y + HEADER_H / 2 + 5,
-        fill: color, 'font-size': '12', 'font-weight': '700',
-        'font-family': 'Segoe UI, Arial, sans-serif', 'letter-spacing': '0.06em'
+        fill: color, 'font-size': '11', 'font-weight': '800',
+        'font-family': FONT, 'letter-spacing': '0.06em'
       }).textContent = row.team;
     } else {
       el('rect', {
         x: 0, y, width: svgW, height: ROW_H - 1,
-        fill: isHome ? 'rgba(200,16,46,0.03)' : 'rgba(74,144,217,0.03)'
+        fill: i % 2 ? 'rgba(255,255,255,0.015)' : 'transparent'
       });
       // Responsive player name display
       const nameFontSize = smallMobile ? '9' : mobile ? '10' : '11';
       const maxLen = smallMobile ? 12 : mobile ? 16 : 22;
       // Use mapped full name if available, otherwise fall back to stint name
-      let displayName = playerDisplayNames.get(row.player) || row.player;
+      const fullName = playerDisplayNames.get(row.key) || row.player;
+      let displayName = fullName;
 
       if (displayName.length > maxLen) {
         displayName = displayName.slice(0, maxLen - 1) + '…';
@@ -441,35 +497,35 @@ function renderStints(data) {
 
       // Create clickable player name link
       const nameLink = document.createElementNS(ns, 'a');
-      nameLink.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', playerPageUrl(playerDisplayNames.get(row.player) || row.player));
+      nameLink.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', playerPageUrl(fullName));
       nameLink.setAttribute('style', 'cursor: pointer;');
 
       const nameText = document.createElementNS(ns, 'text');
       nameText.setAttribute('x', PAD_LEFT - 6);
       nameText.setAttribute('y', y + ROW_H / 2 + 4);
-      nameText.setAttribute('fill', isHome ? '#e8a0aa' : '#8ab8e0');
+      nameText.setAttribute('fill', TEXT_2);
       nameText.setAttribute('font-size', nameFontSize);
       nameText.setAttribute('text-anchor', 'end');
-      nameText.setAttribute('font-family', 'Segoe UI, Arial, sans-serif');
+      nameText.setAttribute('font-family', FONT);
       nameText.textContent = displayName;
 
       nameLink.appendChild(nameText);
       svg.appendChild(nameLink);
 
       // Add player totals on the right side
-      const totals = playerTotals.get(playerDisplayNames.get(row.player)) || playerTotals.get(row.player);
+      const totals = playerTotals.get(fullName) || playerTotals.get(row.key);
       if (totals) {
         const totalsFontSize = smallMobile ? '8' : mobile ? '9' : '10';
         const totalsY = y + ROW_H / 2 + (smallMobile ? 3 : 4);
-        const valColor = '#ccc';
-        const lblColor = '#666';
+        const valColor = TEXT_2;
+        const lblColor = FAINT;
 
         // Minutes - left aligned after Gantt chart
         const minX = svgW - PAD_RIGHT + (smallMobile ? 6 : 8);
         el('text', {
           x: minX, y: totalsY,
           fill: valColor, 'font-size': totalsFontSize, 'font-weight': '500',
-          'text-anchor': 'start', 'font-family': 'Segoe UI, Arial, sans-serif'
+          'text-anchor': 'start', 'font-family': FONT
         }).textContent = totals.min;
 
         // Stats - right aligned at edge
@@ -478,7 +534,7 @@ function renderStints(data) {
         statsText.setAttribute('x', statsX);
         statsText.setAttribute('y', totalsY);
         statsText.setAttribute('text-anchor', 'end');
-        statsText.setAttribute('font-family', 'Segoe UI, Arial, sans-serif');
+        statsText.setAttribute('font-family', FONT);
         statsText.setAttribute('font-size', totalsFontSize);
 
         const addSpan = (text, fill, weight = '400') => {
@@ -538,8 +594,8 @@ function renderStints(data) {
     const dSec = Math.round(s.duration_sec % 60);
     const dur = `${dMin}:${String(dSec).padStart(2, '0')}`;
 
-    let html = `<div class="tip-header">${s.player_full || s.player} <span style="color:${s.team === homeTC ? HOME_COLOR : AWAY_COLOR}">(${s.team})</span>`
-      + `<br><span class="tip-time">Q${s.period} ${fmtClock(s.clock_in)} → ${fmtClock(s.clock_out)}  ·  ${dur}</span></div>`;
+    let html = `<div class="tip-header">${s.player_full || s.player}<span class="tip-team" style="color:${s.team === homeTC ? HOME_COLOR : AWAY_COLOR}">${s.team}</span>`
+      + `<span class="tip-time">Q${s.period} ${fmtClock(s.clock_in)} → ${fmtClock(s.clock_out)} · ${dur} on court</span></div>`;
 
     html += `<div class="tip-stats">`
       + `<span><span class="stat-val">${s.stint_pts || 0}</span> PTS</span>`
@@ -568,7 +624,7 @@ function renderStints(data) {
 
   let clipIdx = 0;
   stints.forEach(s => {
-    const i = playerRowIndex.get(s.player);
+    const i = playerRowIndex.get(rowKey(s));
     if (i === undefined) return;
     const x1 = xOf(s.start_elapsed);
     const x2 = xOf(s.end_elapsed);
@@ -580,7 +636,7 @@ function renderStints(data) {
 
     const rect = el('rect', {
       x: x1, y, width: barW, height: barH,
-      fill: color, opacity: '0.75', rx: '2',
+      fill: color, opacity: '0.85', rx: '3',
       style: 'cursor:pointer'
     });
 
@@ -630,7 +686,7 @@ function renderStints(data) {
 
         // Visual feedback
         rect.style.opacity = '1';
-        setTimeout(() => { rect.style.opacity = '0.75'; }, 150);
+        setTimeout(() => { rect.style.opacity = '0.85'; }, 150);
       }, { passive: false });
     }
 
@@ -652,7 +708,7 @@ function renderStints(data) {
       el('text', {
         x: x1 + 3, y: y + barH / 2 + (smallMobile ? 3 : 4),
         fill: 'rgba(255,255,255,0.92)', 'font-size': statsFontSize, 'font-weight': '600',
-        'text-anchor': 'start', 'font-family': 'Segoe UI, Arial, sans-serif',
+        'text-anchor': 'start', 'font-family': FONT,
         'pointer-events': 'none', 'clip-path': `url(#${cid})`
       }).textContent = `${s.stint_pts || 0} · ${combo}`;
     }
@@ -703,7 +759,7 @@ function renderBoxScore(data) {
       sort: (a, b) => `${a.last}${a.first}`.localeCompare(`${b.last}${b.first}`),
       isHtml: true },
     { key: 'team',       label: 'Team',   fmt: (r) => r.team,       sort: (a, b) => a.team.localeCompare(b.team) },
-    { key: 'minutes',    label: 'Min',    fmt: (r) => r.minutes || '-', sort: (a, b) => minutesToNum(a.minutes) - minutesToNum(b.minutes) },
+    { key: 'minutes',    label: 'Min',    fmt: (r) => normMinutes(r.minutes) || 'DNP', sort: (a, b) => minutesToNum(a.minutes) - minutesToNum(b.minutes) },
     { key: 'pts',        label: 'Pts',    fmt: (r) => dnp(r) ? '-' : r.pts ?? '-', sort: (a, b) => (a.pts ?? 0) - (b.pts ?? 0) },
     { key: 'fgm',        label: 'FGM',   fmt: (r) => dnp(r) ? '-' : r.fgm ?? '-', sort: (a, b) => (a.fgm ?? 0) - (b.fgm ?? 0) },
     { key: 'fga',        label: 'FGA',   fmt: (r) => dnp(r) ? '-' : r.fga ?? '-', sort: (a, b) => (a.fga ?? 0) - (b.fga ?? 0) },
@@ -719,7 +775,7 @@ function renderBoxScore(data) {
 
   function minutesToNum(min) {
     if (!min) return 0;
-    const parts = String(min).split(':');
+    const parts = String(normMinutes(min)).split(':');
     return parseInt(parts[0] || 0) * 60 + parseInt(parts[1] || 0);
   }
 
@@ -760,26 +816,29 @@ function renderBoxScore(data) {
     const homeRows = rows.filter(r => r.team === homeTC).sort((a, b) => sortCol.sort(a, b) * sortDir);
     const awayRows = rows.filter(r => r.team !== homeTC).sort((a, b) => sortCol.sort(a, b) * sortDir);
 
-    [[homeTC, homeRows, HOME_COLOR, HOME_LIGHT], [data.game.away_tricode, awayRows, AWAY_COLOR, AWAY_LIGHT]]
-      .forEach(([tc, teamRows, color, light]) => {
+    [[homeTC, homeRows, 'home'], [data.game.away_tricode, awayRows, 'away']]
+      .forEach(([tc, teamRows, side]) => {
         const htr = document.createElement('tr');
+        htr.className = `team-row ${side}`;
         const htd = document.createElement('td');
         htd.colSpan = cols.length;
-        htd.textContent = tc;
-        htd.style.cssText = `color:${color};font-weight:700;font-size:0.8rem;` +
-          `background:${light};padding:4px 10px;letter-spacing:0.06em;`;
+        htd.textContent = teamName(tc).toUpperCase();
         htr.appendChild(htd);
         tbody.appendChild(htr);
 
         teamRows.forEach(row => {
           const tr = document.createElement('tr');
-          tr.style.background = light;
+          if (dnp(row)) tr.className = 'dnp';
           cols.forEach(col => {
             const td = document.createElement('td');
+            td.className = `col-${col.key}`;
             if (col.isHtml) {
               td.innerHTML = col.fmt(row);
             } else {
               td.textContent = col.fmt(row);
+            }
+            if (col.key === 'plus_minus' && !dnp(row) && row.plus_minus) {
+              td.classList.add(row.plus_minus > 0 ? 'pm-pos' : 'pm-neg');
             }
             tr.appendChild(td);
           });
@@ -793,54 +852,3 @@ function renderBoxScore(data) {
 }
 
 renderBoxScore(DATA);
-
-// ─── Player Search Dropdown ──────────────────────────────────────────────────
-(function initPlayerSearch() {
-  const input = document.getElementById('player-input');
-  const dropdown = document.getElementById('player-dropdown');
-  if (!input || !dropdown) return;
-
-  let players = [];
-
-  // Load players manifest
-  fetch('../players/players.json')
-    .then(r => r.json())
-    .then(data => { players = data; })
-    .catch(() => { console.warn('Could not load players.json'); });
-
-  input.addEventListener('focus', () => {
-    if (players.length) renderDropdown('');
-  });
-
-  input.addEventListener('input', () => {
-    renderDropdown(input.value.trim().toLowerCase());
-  });
-
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('#player-search')) {
-      dropdown.classList.remove('active');
-    }
-  });
-
-  function renderDropdown(filter) {
-    const filtered = players.filter(p =>
-      p.name.toLowerCase().includes(filter)
-    ).slice(0, 15);
-
-    if (!filtered.length) {
-      dropdown.classList.remove('active');
-      return;
-    }
-
-    dropdown.innerHTML = filtered.map(p =>
-      `<div class="player-option" data-slug="${p.slug}">${p.name} <span style="color:#666;font-size:0.7rem">(${p.team})</span></div>`
-    ).join('');
-    dropdown.classList.add('active');
-
-    dropdown.querySelectorAll('.player-option').forEach(opt => {
-      opt.addEventListener('click', () => {
-        window.location.href = `../players/${opt.dataset.slug}.html`;
-      });
-    });
-  }
-})();

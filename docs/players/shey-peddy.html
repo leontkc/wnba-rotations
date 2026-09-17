@@ -3,352 +3,448 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shey Peddy — wnbarotations</title>
-<link rel="stylesheet" href="../assets/viz.css">
+<title>Shey Peddy — rotations &amp; stints · wnbarotations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/player.css">
 </head>
 <body>
-<nav id="game-nav">
-  <a href="../index.html" id="nav-home">← wnbarotations</a>
-  <div id="player-search">
-    <input type="text" placeholder="Search players..." id="player-input">
-    <div id="player-dropdown"></div>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"></span>wnba<span class="dim">rotations</span></a>
+    <div class="player-search" data-root="../">
+      <input type="search" placeholder="Find a player" aria-label="Find a player" autocomplete="off">
+      <div class="player-dropdown"></div>
+    </div>
   </div>
-</nav>
-
-<header class="player-header">
-  <h1>Shey Peddy</h1>
-  <p class="player-meta">IND · 23 games</p>
 </header>
 
-<main id="player-games">
+<main class="page">
+  <header class="player-header">
+    <div class="player-id">
+      <span class="eyebrow">Indiana Fever</span>
+      <h1>Shey Peddy</h1>
+    </div>
+    <div class="season-tabs" role="tablist" aria-label="Season">
+      <span class="tab active static">2025</span>
+    </div>
+  </header>
 
-<div class="player-game" data-href="../games/1042500215.html">
-  <div class="player-game-header">
-    <span>2025-09-30 @ LVA</span>
-    <span class="game-result loss">L 98-107</span>
+  <div class="stat-tiles" id="stat-tiles" aria-live="polite">
+    <div class="tile"><span class="tile-val" data-stat="gp">23</span><span class="tile-lbl">Games</span></div>
+    <div class="tile"><span class="tile-val" data-stat="min">–</span><span class="tile-lbl">Min / G</span></div>
+    <div class="tile"><span class="tile-val" data-stat="pts">–</span><span class="tile-lbl">Pts / G</span></div>
+    <div class="tile"><span class="tile-val" data-stat="reb">–</span><span class="tile-lbl">Reb / G</span></div>
+    <div class="tile"><span class="tile-val" data-stat="ast">–</span><span class="tile-lbl">Ast / G</span></div>
+    <div class="tile"><span class="tile-val" data-stat="stints">–</span><span class="tile-lbl">Stints / G</span></div>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 334.0, "end": 600.0, "pts": 7, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 744.0, "end": 844.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1495.0, "end": 2003.0, "pts": 3, "reb": 2, "ast": 2, "stl": 0, "blk": 0, "to": 0}, {"start": 2250.0, "end": 3000.0, "pts": 3, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}]' data-ishome='false'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">13</span> PTS</span>
-    <span><span class="stat-val">2</span> REB</span>
-    <span><span class="stat-val">2</span> AST</span>
-    <span class="player-minutes">27:04</span>
-  </div>
-</div>
 
-<div class="player-game" data-href="../games/1042500214.html">
-  <div class="player-game-header">
-    <span>2025-09-28 vs LVA</span>
-    <span class="game-result win">W 90-83</span>
+  <div class="games-head">
+    <h2>Game log</h2>
+    <p class="panel-note">Each bar is a stint, labeled with its stats: <b>p</b>oints, <b>r</b>ebounds, <b>a</b>ssists, <b>s</b>teals, <b>b</b>locks.</p>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 360.0, "end": 913.0, "pts": 7, "reb": 2, "ast": 1, "stl": 2, "blk": 0, "to": 1}, {"start": 1490.0, "end": 1800.0, "pts": 0, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 2369.9, "end": 2372.4, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}]' data-ishome='true'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">7</span> PTS</span>
-    <span><span class="stat-val">3</span> REB</span>
-    <span><span class="stat-val">1</span> AST</span>
-    <span class="player-minutes">14:25</span>
-  </div>
-</div>
 
-<div class="player-game" data-href="../games/1042500213.html">
-  <div class="player-game-header">
-    <span>2025-09-26 vs LVA</span>
-    <span class="game-result loss">L 72-84</span>
-  </div>
-  <div class="mini-gantt" data-stints='[{"start": 318.0, "end": 600.0, "pts": 1, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 0}, {"start": 1016.0, "end": 1200.0, "pts": 0, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 0}, {"start": 1525.0, "end": 1994.0, "pts": 2, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 2063.0, "end": 2332.0, "pts": 0, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 1}, {"start": 2333.0, "end": 2365.6, "pts": 3, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 2368.3, "end": 2400.0, "pts": 2, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 1}]' data-ishome='true'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">8</span> PTS</span>
-    <span><span class="stat-val">2</span> REB</span>
-    <span><span class="stat-val">2</span> AST</span>
-    <span class="player-minutes">21:08</span>
-  </div>
-</div>
+  <div id="player-games">
 
-<div class="player-game" data-href="../games/1042500212.html">
-  <div class="player-game-header">
-    <span>2025-09-23 @ LVA</span>
-    <span class="game-result loss">L 68-90</span>
+<a class="player-game" href="../games/1042500215.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Tue, Sep 30, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">@</span> Las Vegas Aces</span>
+    <span class="pg-result loss"><b>L</b> 98–107</span>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 443.0, "end": 738.0, "pts": 2, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1403.0, "end": 1719.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 1}, {"start": 1985.0, "end": 2400.0, "pts": 2, "reb": 2, "ast": 0, "stl": 0, "blk": 1, "to": 0}]' data-ishome='false'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">4</span> PTS</span>
-    <span><span class="stat-val">2</span> REB</span>
-    <span><span class="stat-val">0</span> AST</span>
-    <span class="player-minutes">17:06</span>
+  <div class="mini-gantt away" data-stints="[{&quot;start&quot;: 334.0, &quot;end&quot;: 600.0, &quot;pts&quot;: 7, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 744.0, &quot;end&quot;: 844.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1495.0, &quot;end&quot;: 2003.0, &quot;pts&quot;: 3, &quot;reb&quot;: 2, &quot;ast&quot;: 2, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 2250.0, &quot;end&quot;: 3000.0, &quot;pts&quot;: 3, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
   </div>
-</div>
+  <div class="pg-stats">
+    <span><b>13</b> PTS</span>
+    <span><b>2</b> REB</span>
+    <span><b>2</b> AST</span>
+    <span class="pg-min"><b>27:04</b> MIN</span>
+  </div>
+</a>
 
-<div class="player-game" data-href="../games/1042500211.html">
-  <div class="player-game-header">
-    <span>2025-09-21 @ LVA</span>
-    <span class="game-result win">W 89-73</span>
+<a class="player-game" href="../games/1042500214.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Sun, Sep 28, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">vs</span> Las Vegas Aces</span>
+    <span class="pg-result win"><b>W</b> 90–83</span>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 310.0, "end": 600.0, "pts": 2, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1800.0, "end": 2140.0, "pts": 2, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 0}]' data-ishome='false'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">4</span> PTS</span>
-    <span><span class="stat-val">0</span> REB</span>
-    <span><span class="stat-val">1</span> AST</span>
-    <span class="player-minutes">10:30</span>
+  <div class="mini-gantt home" data-stints="[{&quot;start&quot;: 360.0, &quot;end&quot;: 913.0, &quot;pts&quot;: 7, &quot;reb&quot;: 2, &quot;ast&quot;: 1, &quot;stl&quot;: 2, &quot;blk&quot;: 0, &quot;to&quot;: 1}, {&quot;start&quot;: 1490.0, &quot;end&quot;: 1800.0, &quot;pts&quot;: 0, &quot;reb&quot;: 1, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 2369.9, &quot;end&quot;: 2372.4, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
   </div>
-</div>
+  <div class="pg-stats">
+    <span><b>7</b> PTS</span>
+    <span><b>3</b> REB</span>
+    <span><b>1</b> AST</span>
+    <span class="pg-min"><b>14:25</b> MIN</span>
+  </div>
+</a>
 
-<div class="player-game" data-href="../games/1042500123.html">
-  <div class="player-game-header">
-    <span>2025-09-18 @ ATL</span>
-    <span class="game-result win">W 87-85</span>
+<a class="player-game" href="../games/1042500213.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Fri, Sep 26, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">vs</span> Las Vegas Aces</span>
+    <span class="pg-result loss"><b>L</b> 72–84</span>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 474.0, "end": 754.0, "pts": 0, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 0}, {"start": 973.0, "end": 1110.0, "pts": 0, "reb": 0, "ast": 0, "stl": 1, "blk": 0, "to": 0}, {"start": 2012.0, "end": 2109.0, "pts": 3, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 1}, {"start": 2170.0, "end": 2303.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}]' data-ishome='false'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">3</span> PTS</span>
-    <span><span class="stat-val">0</span> REB</span>
-    <span><span class="stat-val">1</span> AST</span>
-    <span class="player-minutes">10:47</span>
+  <div class="mini-gantt home" data-stints="[{&quot;start&quot;: 318.0, &quot;end&quot;: 600.0, &quot;pts&quot;: 1, &quot;reb&quot;: 0, &quot;ast&quot;: 1, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1016.0, &quot;end&quot;: 1200.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 1, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1525.0, &quot;end&quot;: 1994.0, &quot;pts&quot;: 2, &quot;reb&quot;: 1, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 2063.0, &quot;end&quot;: 2332.0, &quot;pts&quot;: 0, &quot;reb&quot;: 1, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 1}, {&quot;start&quot;: 2333.0, &quot;end&quot;: 2365.6, &quot;pts&quot;: 3, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 2368.3, &quot;end&quot;: 2400.0, &quot;pts&quot;: 2, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 1}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
   </div>
-</div>
+  <div class="pg-stats">
+    <span><b>8</b> PTS</span>
+    <span><b>2</b> REB</span>
+    <span><b>2</b> AST</span>
+    <span class="pg-min"><b>21:08</b> MIN</span>
+  </div>
+</a>
 
-<div class="player-game" data-href="../games/1042500122.html">
-  <div class="player-game-header">
-    <span>2025-09-16 vs ATL</span>
-    <span class="game-result win">W 77-60</span>
+<a class="player-game" href="../games/1042500212.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Tue, Sep 23, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">@</span> Las Vegas Aces</span>
+    <span class="pg-result loss"><b>L</b> 68–90</span>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 430.0, "end": 740.0, "pts": 3, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 1}, {"start": 1089.0, "end": 1200.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1463.0, "end": 1800.0, "pts": 0, "reb": 1, "ast": 1, "stl": 1, "blk": 0, "to": 0}]' data-ishome='true'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">3</span> PTS</span>
-    <span><span class="stat-val">2</span> REB</span>
-    <span><span class="stat-val">1</span> AST</span>
-    <span class="player-minutes">12:38</span>
+  <div class="mini-gantt away" data-stints="[{&quot;start&quot;: 443.0, &quot;end&quot;: 738.0, &quot;pts&quot;: 2, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1403.0, &quot;end&quot;: 1719.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 1}, {&quot;start&quot;: 1985.0, &quot;end&quot;: 2400.0, &quot;pts&quot;: 2, &quot;reb&quot;: 2, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 1, &quot;to&quot;: 0}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
   </div>
-</div>
+  <div class="pg-stats">
+    <span><b>4</b> PTS</span>
+    <span><b>2</b> REB</span>
+    <span><b>0</b> AST</span>
+    <span class="pg-min"><b>17:06</b> MIN</span>
+  </div>
+</a>
 
-<div class="player-game" data-href="../games/1042500121.html">
-  <div class="player-game-header">
-    <span>2025-09-14 @ ATL</span>
-    <span class="game-result loss">L 68-80</span>
+<a class="player-game" href="../games/1042500211.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Sun, Sep 21, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">@</span> Las Vegas Aces</span>
+    <span class="pg-result win"><b>W</b> 89–73</span>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 600.0, "end": 886.0, "pts": 0, "reb": 1, "ast": 0, "stl": 1, "blk": 0, "to": 0}, {"start": 917.0, "end": 1003.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1800.0, "end": 1905.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 1}, {"start": 2307.0, "end": 2400.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}]' data-ishome='false'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">0</span> PTS</span>
-    <span><span class="stat-val">1</span> REB</span>
-    <span><span class="stat-val">0</span> AST</span>
-    <span class="player-minutes">9:30</span>
+  <div class="mini-gantt away" data-stints="[{&quot;start&quot;: 310.0, &quot;end&quot;: 600.0, &quot;pts&quot;: 2, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1800.0, &quot;end&quot;: 2140.0, &quot;pts&quot;: 2, &quot;reb&quot;: 0, &quot;ast&quot;: 1, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
   </div>
-</div>
+  <div class="pg-stats">
+    <span><b>4</b> PTS</span>
+    <span><b>0</b> REB</span>
+    <span><b>1</b> AST</span>
+    <span class="pg-min"><b>10:30</b> MIN</span>
+  </div>
+</a>
 
-<div class="player-game" data-href="../games/1022500278.html">
-  <div class="player-game-header">
-    <span>2025-09-09 vs MIN</span>
-    <span class="game-result win">W 83-72</span>
+<a class="player-game" href="../games/1042500123.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Thu, Sep 18, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">@</span> Atlanta Dream</span>
+    <span class="pg-result win"><b>W</b> 87–85</span>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 517.0, "end": 846.0, "pts": 3, "reb": 0, "ast": 2, "stl": 2, "blk": 0, "to": 0}, {"start": 1800.0, "end": 2400.0, "pts": 0, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 2}]' data-ishome='true'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">3</span> PTS</span>
-    <span><span class="stat-val">0</span> REB</span>
-    <span><span class="stat-val">3</span> AST</span>
-    <span class="player-minutes">15:29</span>
+  <div class="mini-gantt away" data-stints="[{&quot;start&quot;: 474.0, &quot;end&quot;: 754.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 1, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 973.0, &quot;end&quot;: 1110.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 1, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 2012.0, &quot;end&quot;: 2109.0, &quot;pts&quot;: 3, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 1}, {&quot;start&quot;: 2170.0, &quot;end&quot;: 2303.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
   </div>
-</div>
+  <div class="pg-stats">
+    <span><b>3</b> PTS</span>
+    <span><b>0</b> REB</span>
+    <span><b>1</b> AST</span>
+    <span class="pg-min"><b>10:47</b> MIN</span>
+  </div>
+</a>
 
-<div class="player-game" data-href="../games/1022500273.html">
-  <div class="player-game-header">
-    <span>2025-09-07 @ WAS</span>
-    <span class="game-result win">W 94-65</span>
+<a class="player-game" href="../games/1042500122.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Tue, Sep 16, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">vs</span> Atlanta Dream</span>
+    <span class="pg-result win"><b>W</b> 77–60</span>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 496.0, "end": 600.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 884.0, "end": 1200.0, "pts": 8, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1559.0, "end": 1800.0, "pts": 0, "reb": 1, "ast": 0, "stl": 1, "blk": 0, "to": 0}, {"start": 2098.0, "end": 2400.0, "pts": 5, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}]' data-ishome='false'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">13</span> PTS</span>
-    <span><span class="stat-val">2</span> REB</span>
-    <span><span class="stat-val">0</span> AST</span>
-    <span class="player-minutes">16:03</span>
+  <div class="mini-gantt home" data-stints="[{&quot;start&quot;: 430.0, &quot;end&quot;: 740.0, &quot;pts&quot;: 3, &quot;reb&quot;: 1, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 1}, {&quot;start&quot;: 1089.0, &quot;end&quot;: 1200.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1463.0, &quot;end&quot;: 1800.0, &quot;pts&quot;: 0, &quot;reb&quot;: 1, &quot;ast&quot;: 1, &quot;stl&quot;: 1, &quot;blk&quot;: 0, &quot;to&quot;: 0}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
   </div>
-</div>
+  <div class="pg-stats">
+    <span><b>3</b> PTS</span>
+    <span><b>2</b> REB</span>
+    <span><b>1</b> AST</span>
+    <span class="pg-min"><b>12:38</b> MIN</span>
+  </div>
+</a>
 
-<div class="player-game" data-href="../games/1022500269.html">
-  <div class="player-game-header">
-    <span>2025-09-05 vs CHI</span>
-    <span class="game-result win">W 97-77</span>
+<a class="player-game" href="../games/1042500121.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Sun, Sep 14, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">@</span> Atlanta Dream</span>
+    <span class="pg-result loss"><b>L</b> 68–80</span>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 432.0, "end": 600.0, "pts": 0, "reb": 1, "ast": 2, "stl": 0, "blk": 0, "to": 1}, {"start": 1506.0, "end": 1800.0, "pts": 3, "reb": 0, "ast": 0, "stl": 1, "blk": 0, "to": 1}, {"start": 2129.0, "end": 2400.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 1}]' data-ishome='true'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">3</span> PTS</span>
-    <span><span class="stat-val">1</span> REB</span>
-    <span><span class="stat-val">2</span> AST</span>
-    <span class="player-minutes">12:13</span>
+  <div class="mini-gantt away" data-stints="[{&quot;start&quot;: 600.0, &quot;end&quot;: 886.0, &quot;pts&quot;: 0, &quot;reb&quot;: 1, &quot;ast&quot;: 0, &quot;stl&quot;: 1, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 917.0, &quot;end&quot;: 1003.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1800.0, &quot;end&quot;: 1905.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 1}, {&quot;start&quot;: 2307.0, &quot;end&quot;: 2400.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
   </div>
-</div>
+  <div class="pg-stats">
+    <span><b>0</b> PTS</span>
+    <span><b>1</b> REB</span>
+    <span><b>0</b> AST</span>
+    <span class="pg-min"><b>9:30</b> MIN</span>
+  </div>
+</a>
 
-<div class="player-game" data-href="../games/1022500262.html">
-  <div class="player-game-header">
-    <span>2025-09-02 @ PHX</span>
-    <span class="game-result loss">L 79-85</span>
+<a class="player-game" href="../games/1022500278.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Tue, Sep 9, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">vs</span> Minnesota Lynx</span>
+    <span class="pg-result win"><b>W</b> 83–72</span>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 343.0, "end": 600.0, "pts": 0, "reb": 2, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1115.0, "end": 1200.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}]' data-ishome='false'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">0</span> PTS</span>
-    <span><span class="stat-val">2</span> REB</span>
-    <span><span class="stat-val">0</span> AST</span>
-    <span class="player-minutes">5:42</span>
+  <div class="mini-gantt home" data-stints="[{&quot;start&quot;: 517.0, &quot;end&quot;: 846.0, &quot;pts&quot;: 3, &quot;reb&quot;: 0, &quot;ast&quot;: 2, &quot;stl&quot;: 2, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1800.0, &quot;end&quot;: 2400.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 1, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 2}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
   </div>
-</div>
+  <div class="pg-stats">
+    <span><b>3</b> PTS</span>
+    <span><b>0</b> REB</span>
+    <span><b>3</b> AST</span>
+    <span class="pg-min"><b>15:29</b> MIN</span>
+  </div>
+</a>
 
-<div class="player-game" data-href="../games/1022500257.html">
-  <div class="player-game-header">
-    <span>2025-08-31 @ GSV</span>
-    <span class="game-result loss">L 63-75</span>
+<a class="player-game" href="../games/1022500273.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Sun, Sep 7, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">@</span> Washington Mystics</span>
+    <span class="pg-result win"><b>W</b> 94–65</span>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 689.0, "end": 903.0, "pts": 0, "reb": 1, "ast": 1, "stl": 0, "blk": 0, "to": 0}, {"start": 1666.0, "end": 1800.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 2308.0, "end": 2400.0, "pts": 0, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 0}]' data-ishome='false'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">0</span> PTS</span>
-    <span><span class="stat-val">1</span> REB</span>
-    <span><span class="stat-val">2</span> AST</span>
-    <span class="player-minutes">7:20</span>
+  <div class="mini-gantt away" data-stints="[{&quot;start&quot;: 496.0, &quot;end&quot;: 600.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 884.0, &quot;end&quot;: 1200.0, &quot;pts&quot;: 8, &quot;reb&quot;: 1, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1559.0, &quot;end&quot;: 1800.0, &quot;pts&quot;: 0, &quot;reb&quot;: 1, &quot;ast&quot;: 0, &quot;stl&quot;: 1, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 2098.0, &quot;end&quot;: 2400.0, &quot;pts&quot;: 5, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
   </div>
-</div>
+  <div class="pg-stats">
+    <span><b>13</b> PTS</span>
+    <span><b>2</b> REB</span>
+    <span><b>0</b> AST</span>
+    <span class="pg-min"><b>16:03</b> MIN</span>
+  </div>
+</a>
 
-<div class="player-game" data-href="../games/1022500251.html">
-  <div class="player-game-header">
-    <span>2025-08-29 @ LAS</span>
-    <span class="game-result win">W 76-75</span>
+<a class="player-game" href="../games/1022500269.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Fri, Sep 5, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">vs</span> Chicago Sky</span>
+    <span class="pg-result win"><b>W</b> 97–77</span>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 435.0, "end": 600.0, "pts": 0, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 0}, {"start": 1567.0, "end": 1800.0, "pts": 0, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 0}]' data-ishome='false'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">0</span> PTS</span>
-    <span><span class="stat-val">0</span> REB</span>
-    <span><span class="stat-val">2</span> AST</span>
-    <span class="player-minutes">6:38</span>
+  <div class="mini-gantt home" data-stints="[{&quot;start&quot;: 432.0, &quot;end&quot;: 600.0, &quot;pts&quot;: 0, &quot;reb&quot;: 1, &quot;ast&quot;: 2, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 1}, {&quot;start&quot;: 1506.0, &quot;end&quot;: 1800.0, &quot;pts&quot;: 3, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 1, &quot;blk&quot;: 0, &quot;to&quot;: 1}, {&quot;start&quot;: 2129.0, &quot;end&quot;: 2400.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 1}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
   </div>
-</div>
+  <div class="pg-stats">
+    <span><b>3</b> PTS</span>
+    <span><b>1</b> REB</span>
+    <span><b>2</b> AST</span>
+    <span class="pg-min"><b>12:13</b> MIN</span>
+  </div>
+</a>
 
-<div class="player-game" data-href="../games/1022500243.html">
-  <div class="player-game-header">
-    <span>2025-08-26 vs SEA</span>
-    <span class="game-result win">W 95-75</span>
+<a class="player-game" href="../games/1022500262.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Tue, Sep 2, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">@</span> Phoenix Mercury</span>
+    <span class="pg-result loss"><b>L</b> 79–85</span>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 368.0, "end": 600.0, "pts": 2, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1058.0, "end": 1148.9, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1599.0, "end": 1757.9, "pts": 0, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 2114.0, "end": 2400.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}]' data-ishome='true'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">2</span> PTS</span>
-    <span><span class="stat-val">1</span> REB</span>
-    <span><span class="stat-val">1</span> AST</span>
-    <span class="player-minutes">12:47</span>
+  <div class="mini-gantt away" data-stints="[{&quot;start&quot;: 343.0, &quot;end&quot;: 600.0, &quot;pts&quot;: 0, &quot;reb&quot;: 2, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1115.0, &quot;end&quot;: 1200.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
   </div>
-</div>
+  <div class="pg-stats">
+    <span><b>0</b> PTS</span>
+    <span><b>2</b> REB</span>
+    <span><b>0</b> AST</span>
+    <span class="pg-min"><b>5:42</b> MIN</span>
+  </div>
+</a>
 
-<div class="player-game" data-href="../games/1022500240.html">
-  <div class="player-game-header">
-    <span>2025-08-24 @ MIN</span>
-    <span class="game-result loss">L 84-97</span>
+<a class="player-game" href="../games/1022500257.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Sun, Aug 31, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">@</span> Golden State Valkyries</span>
+    <span class="pg-result loss"><b>L</b> 63–75</span>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 241.0, "end": 475.0, "pts": 3, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 880.0, "end": 1011.0, "pts": 3, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1473.0, "end": 1735.0, "pts": 8, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1961.0, "end": 2400.0, "pts": 2, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 1}]' data-ishome='false'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">16</span> PTS</span>
-    <span><span class="stat-val">0</span> REB</span>
-    <span><span class="stat-val">1</span> AST</span>
-    <span class="player-minutes">17:46</span>
+  <div class="mini-gantt away" data-stints="[{&quot;start&quot;: 689.0, &quot;end&quot;: 903.0, &quot;pts&quot;: 0, &quot;reb&quot;: 1, &quot;ast&quot;: 1, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1666.0, &quot;end&quot;: 1800.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 2308.0, &quot;end&quot;: 2400.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 1, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
   </div>
-</div>
+  <div class="pg-stats">
+    <span><b>0</b> PTS</span>
+    <span><b>1</b> REB</span>
+    <span><b>2</b> AST</span>
+    <span class="pg-min"><b>7:20</b> MIN</span>
+  </div>
+</a>
 
-<div class="player-game" data-href="../games/1022500232.html">
-  <div class="player-game-header">
-    <span>2025-08-22 vs MIN</span>
-    <span class="game-result loss">L 90-95</span>
+<a class="player-game" href="../games/1022500251.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Fri, Aug 29, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">@</span> Los Angeles Sparks</span>
+    <span class="pg-result win"><b>W</b> 76–75</span>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 344.0, "end": 789.0, "pts": 9, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 1}, {"start": 1057.0, "end": 1200.0, "pts": 0, "reb": 0, "ast": 2, "stl": 0, "blk": 0, "to": 1}, {"start": 1464.0, "end": 1748.2, "pts": 1, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 0}, {"start": 1970.0, "end": 2400.0, "pts": 0, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 1}]' data-ishome='true'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">10</span> PTS</span>
-    <span><span class="stat-val">0</span> REB</span>
-    <span><span class="stat-val">4</span> AST</span>
-    <span class="player-minutes">21:42</span>
+  <div class="mini-gantt away" data-stints="[{&quot;start&quot;: 435.0, &quot;end&quot;: 600.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 1, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1567.0, &quot;end&quot;: 1800.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 1, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
   </div>
-</div>
+  <div class="pg-stats">
+    <span><b>0</b> PTS</span>
+    <span><b>0</b> REB</span>
+    <span><b>2</b> AST</span>
+    <span class="pg-min"><b>6:38</b> MIN</span>
+  </div>
+</a>
 
-<div class="player-game" data-href="../games/1022500105.html">
-  <div class="player-game-header">
-    <span>2025-06-29 vs CHI</span>
-    <span class="game-result loss">L 85-92</span>
+<a class="player-game" href="../games/1022500243.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Tue, Aug 26, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">vs</span> Seattle Storm</span>
+    <span class="pg-result win"><b>W</b> 95–75</span>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 0.0, "end": 426.0, "pts": 0, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 851.0, "end": 1539.0, "pts": 3, "reb": 5, "ast": 1, "stl": 0, "blk": 0, "to": 0}, {"start": 1911.0, "end": 2161.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}]' data-ishome='true'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">3</span> PTS</span>
-    <span><span class="stat-val">6</span> REB</span>
-    <span><span class="stat-val">1</span> AST</span>
-    <span class="player-minutes">22:44</span>
+  <div class="mini-gantt home" data-stints="[{&quot;start&quot;: 368.0, &quot;end&quot;: 600.0, &quot;pts&quot;: 2, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1058.0, &quot;end&quot;: 1148.9, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1599.0, &quot;end&quot;: 1757.9, &quot;pts&quot;: 0, &quot;reb&quot;: 1, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 2114.0, &quot;end&quot;: 2400.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
   </div>
-</div>
+  <div class="pg-stats">
+    <span><b>2</b> PTS</span>
+    <span><b>1</b> REB</span>
+    <span><b>1</b> AST</span>
+    <span class="pg-min"><b>12:47</b> MIN</span>
+  </div>
+</a>
 
-<div class="player-game" data-href="../games/1022500096.html">
-  <div class="player-game-header">
-    <span>2025-06-26 @ IND</span>
-    <span class="game-result win">W 85-75</span>
+<a class="player-game" href="../games/1022500240.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Sun, Aug 24, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">@</span> Minnesota Lynx</span>
+    <span class="pg-result loss"><b>L</b> 84–97</span>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 0.0, "end": 370.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 521.0, "end": 774.0, "pts": 0, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 950.0, "end": 1433.0, "pts": 3, "reb": 0, "ast": 2, "stl": 0, "blk": 0, "to": 0}, {"start": 1559.0, "end": 1800.0, "pts": 2, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 0}]' data-ishome='false'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">5</span> PTS</span>
-    <span><span class="stat-val">2</span> REB</span>
-    <span><span class="stat-val">4</span> AST</span>
-    <span class="player-minutes">22:27</span>
+  <div class="mini-gantt away" data-stints="[{&quot;start&quot;: 241.0, &quot;end&quot;: 475.0, &quot;pts&quot;: 3, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 880.0, &quot;end&quot;: 1011.0, &quot;pts&quot;: 3, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1473.0, &quot;end&quot;: 1735.0, &quot;pts&quot;: 8, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1961.0, &quot;end&quot;: 2400.0, &quot;pts&quot;: 2, &quot;reb&quot;: 0, &quot;ast&quot;: 1, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 1}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
   </div>
-</div>
+  <div class="pg-stats">
+    <span><b>16</b> PTS</span>
+    <span><b>0</b> REB</span>
+    <span><b>1</b> AST</span>
+    <span class="pg-min"><b>17:46</b> MIN</span>
+  </div>
+</a>
 
-<div class="player-game" data-href="../games/1022500091.html">
-  <div class="player-game-header">
-    <span>2025-06-24 @ CHI</span>
-    <span class="game-result loss">L 86-97</span>
+<a class="player-game" href="../games/1022500232.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Fri, Aug 22, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">vs</span> Minnesota Lynx</span>
+    <span class="pg-result loss"><b>L</b> 90–95</span>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 0.0, "end": 398.0, "pts": 0, "reb": 1, "ast": 1, "stl": 0, "blk": 0, "to": 0}, {"start": 475.0, "end": 881.0, "pts": 4, "reb": 2, "ast": 2, "stl": 0, "blk": 0, "to": 0}, {"start": 1083.0, "end": 1200.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1958.0, "end": 2400.0, "pts": 3, "reb": 1, "ast": 2, "stl": 0, "blk": 0, "to": 0}]' data-ishome='false'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">7</span> PTS</span>
-    <span><span class="stat-val">4</span> REB</span>
-    <span><span class="stat-val">5</span> AST</span>
-    <span class="player-minutes">22:43</span>
+  <div class="mini-gantt home" data-stints="[{&quot;start&quot;: 344.0, &quot;end&quot;: 789.0, &quot;pts&quot;: 9, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 1}, {&quot;start&quot;: 1057.0, &quot;end&quot;: 1200.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 2, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 1}, {&quot;start&quot;: 1464.0, &quot;end&quot;: 1748.2, &quot;pts&quot;: 1, &quot;reb&quot;: 0, &quot;ast&quot;: 1, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1970.0, &quot;end&quot;: 2400.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 1, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 1}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
   </div>
-</div>
+  <div class="pg-stats">
+    <span><b>10</b> PTS</span>
+    <span><b>0</b> REB</span>
+    <span><b>4</b> AST</span>
+    <span class="pg-min"><b>21:42</b> MIN</span>
+  </div>
+</a>
 
-<div class="player-game" data-href="../games/1022500084.html">
-  <div class="player-game-header">
-    <span>2025-06-21 @ MIN</span>
-    <span class="game-result loss">L 66-82</span>
+<a class="player-game" href="../games/1022500105.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Sun, Jun 29, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">vs</span> Chicago Sky</span>
+    <span class="pg-result loss"><b>L</b> 85–92</span>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 0.0, "end": 343.0, "pts": 0, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 1}, {"start": 1200.0, "end": 1663.0, "pts": 6, "reb": 0, "ast": 0, "stl": 1, "blk": 0, "to": 0}, {"start": 2088.0, "end": 2400.0, "pts": 0, "reb": 0, "ast": 1, "stl": 1, "blk": 0, "to": 0}]' data-ishome='false'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">6</span> PTS</span>
-    <span><span class="stat-val">1</span> REB</span>
-    <span><span class="stat-val">1</span> AST</span>
-    <span class="player-minutes">18:38</span>
+  <div class="mini-gantt home" data-stints="[{&quot;start&quot;: 0.0, &quot;end&quot;: 426.0, &quot;pts&quot;: 0, &quot;reb&quot;: 1, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 851.0, &quot;end&quot;: 1539.0, &quot;pts&quot;: 3, &quot;reb&quot;: 5, &quot;ast&quot;: 1, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1911.0, &quot;end&quot;: 2161.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
   </div>
-</div>
+  <div class="pg-stats">
+    <span><b>3</b> PTS</span>
+    <span><b>6</b> REB</span>
+    <span><b>1</b> AST</span>
+    <span class="pg-min"><b>22:44</b> MIN</span>
+  </div>
+</a>
 
-<div class="player-game" data-href="../games/1022500076.html">
-  <div class="player-game-header">
-    <span>2025-06-17 vs SEA</span>
-    <span class="game-result loss">L 67-98</span>
+<a class="player-game" href="../games/1022500096.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Thu, Jun 26, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">@</span> Indiana Fever</span>
+    <span class="pg-result win"><b>W</b> 85–75</span>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 0.0, "end": 222.0, "pts": 3, "reb": 1, "ast": 1, "stl": 0, "blk": 0, "to": 1}, {"start": 600.0, "end": 828.0, "pts": 2, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1200.0, "end": 1437.0, "pts": 0, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 1}, {"start": 1659.0, "end": 2400.0, "pts": 1, "reb": 2, "ast": 2, "stl": 0, "blk": 0, "to": 1}]' data-ishome='true'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">6</span> PTS</span>
-    <span><span class="stat-val">4</span> REB</span>
-    <span><span class="stat-val">3</span> AST</span>
-    <span class="player-minutes">23:48</span>
+  <div class="mini-gantt away" data-stints="[{&quot;start&quot;: 0.0, &quot;end&quot;: 370.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 521.0, &quot;end&quot;: 774.0, &quot;pts&quot;: 0, &quot;reb&quot;: 1, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 950.0, &quot;end&quot;: 1433.0, &quot;pts&quot;: 3, &quot;reb&quot;: 0, &quot;ast&quot;: 2, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1559.0, &quot;end&quot;: 1800.0, &quot;pts&quot;: 2, &quot;reb&quot;: 1, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
   </div>
-</div>
+  <div class="pg-stats">
+    <span><b>5</b> PTS</span>
+    <span><b>2</b> REB</span>
+    <span><b>4</b> AST</span>
+    <span class="pg-min"><b>22:27</b> MIN</span>
+  </div>
+</a>
 
-<div class="player-game" data-href="../games/1022500065.html">
-  <div class="player-game-header">
-    <span>2025-06-14 @ MIN</span>
-    <span class="game-result loss">L 78-101</span>
+<a class="player-game" href="../games/1022500091.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Tue, Jun 24, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">@</span> Chicago Sky</span>
+    <span class="pg-result loss"><b>L</b> 86–97</span>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 594.8, "end": 826.0, "pts": 0, "reb": 1, "ast": 1, "stl": 0, "blk": 0, "to": 0}, {"start": 2203.0, "end": 2400.0, "pts": 3, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 0}]' data-ishome='false'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">3</span> PTS</span>
-    <span><span class="stat-val">1</span> REB</span>
-    <span><span class="stat-val">2</span> AST</span>
-    <span class="player-minutes">7:08</span>
+  <div class="mini-gantt away" data-stints="[{&quot;start&quot;: 0.0, &quot;end&quot;: 398.0, &quot;pts&quot;: 0, &quot;reb&quot;: 1, &quot;ast&quot;: 1, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 475.0, &quot;end&quot;: 881.0, &quot;pts&quot;: 4, &quot;reb&quot;: 2, &quot;ast&quot;: 2, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1083.0, &quot;end&quot;: 1200.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1958.0, &quot;end&quot;: 2400.0, &quot;pts&quot;: 3, &quot;reb&quot;: 1, &quot;ast&quot;: 2, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
   </div>
-</div>
+  <div class="pg-stats">
+    <span><b>7</b> PTS</span>
+    <span><b>4</b> REB</span>
+    <span><b>5</b> AST</span>
+    <span class="pg-min"><b>22:43</b> MIN</span>
+  </div>
+</a>
+
+<a class="player-game" href="../games/1022500084.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Sat, Jun 21, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">@</span> Minnesota Lynx</span>
+    <span class="pg-result loss"><b>L</b> 66–82</span>
+  </div>
+  <div class="mini-gantt away" data-stints="[{&quot;start&quot;: 0.0, &quot;end&quot;: 343.0, &quot;pts&quot;: 0, &quot;reb&quot;: 1, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 1}, {&quot;start&quot;: 1200.0, &quot;end&quot;: 1663.0, &quot;pts&quot;: 6, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 1, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 2088.0, &quot;end&quot;: 2400.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 1, &quot;stl&quot;: 1, &quot;blk&quot;: 0, &quot;to&quot;: 0}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
+  </div>
+  <div class="pg-stats">
+    <span><b>6</b> PTS</span>
+    <span><b>1</b> REB</span>
+    <span><b>1</b> AST</span>
+    <span class="pg-min"><b>18:38</b> MIN</span>
+  </div>
+</a>
+
+<a class="player-game" href="../games/1022500076.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Tue, Jun 17, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">vs</span> Seattle Storm</span>
+    <span class="pg-result loss"><b>L</b> 67–98</span>
+  </div>
+  <div class="mini-gantt home" data-stints="[{&quot;start&quot;: 0.0, &quot;end&quot;: 222.0, &quot;pts&quot;: 3, &quot;reb&quot;: 1, &quot;ast&quot;: 1, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 1}, {&quot;start&quot;: 600.0, &quot;end&quot;: 828.0, &quot;pts&quot;: 2, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1200.0, &quot;end&quot;: 1437.0, &quot;pts&quot;: 0, &quot;reb&quot;: 1, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 1}, {&quot;start&quot;: 1659.0, &quot;end&quot;: 2400.0, &quot;pts&quot;: 1, &quot;reb&quot;: 2, &quot;ast&quot;: 2, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 1}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
+  </div>
+  <div class="pg-stats">
+    <span><b>6</b> PTS</span>
+    <span><b>4</b> REB</span>
+    <span><b>3</b> AST</span>
+    <span class="pg-min"><b>23:48</b> MIN</span>
+  </div>
+</a>
+
+<a class="player-game" href="../games/1022500065.html" data-season="2025">
+  <div class="pg-head">
+    <span class="pg-date">Sat, Jun 14, 2025</span>
+    <span class="pg-opp"><span class="pg-loc">@</span> Minnesota Lynx</span>
+    <span class="pg-result loss"><b>L</b> 78–101</span>
+  </div>
+  <div class="mini-gantt away" data-stints="[{&quot;start&quot;: 594.8, &quot;end&quot;: 826.0, &quot;pts&quot;: 0, &quot;reb&quot;: 1, &quot;ast&quot;: 1, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 2203.0, &quot;end&quot;: 2400.0, &quot;pts&quot;: 3, &quot;reb&quot;: 0, &quot;ast&quot;: 1, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
+  </div>
+  <div class="pg-stats">
+    <span><b>3</b> PTS</span>
+    <span><b>1</b> REB</span>
+    <span><b>2</b> AST</span>
+    <span class="pg-min"><b>7:08</b> MIN</span>
+  </div>
+</a>
+  </div>
 </main>
 
 <script>
 const PLAYER_DATA = {"name": "Shey Peddy", "team": "IND", "games": [{"game_id": "1042500215", "date": "2025-09-30", "name": "Shey Peddy", "team": "IND", "opponent": "LVA", "is_home": false, "own_score": 98, "opp_score": 107, "won": false, "stints": [{"start": 334.0, "end": 600.0, "pts": 7, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 744.0, "end": 844.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1495.0, "end": 2003.0, "pts": 3, "reb": 2, "ast": 2, "stl": 0, "blk": 0, "to": 0}, {"start": 2250.0, "end": 3000.0, "pts": 3, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}], "minutes": "27:04", "pts": 13, "reb": 2, "ast": 2}, {"game_id": "1042500214", "date": "2025-09-28", "name": "Shey Peddy", "team": "IND", "opponent": "LVA", "is_home": true, "own_score": 90, "opp_score": 83, "won": true, "stints": [{"start": 360.0, "end": 913.0, "pts": 7, "reb": 2, "ast": 1, "stl": 2, "blk": 0, "to": 1}, {"start": 1490.0, "end": 1800.0, "pts": 0, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 2369.9, "end": 2372.4, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}], "minutes": "14:25", "pts": 7, "reb": 3, "ast": 1}, {"game_id": "1042500213", "date": "2025-09-26", "name": "Shey Peddy", "team": "IND", "opponent": "LVA", "is_home": true, "own_score": 72, "opp_score": 84, "won": false, "stints": [{"start": 318.0, "end": 600.0, "pts": 1, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 0}, {"start": 1016.0, "end": 1200.0, "pts": 0, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 0}, {"start": 1525.0, "end": 1994.0, "pts": 2, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 2063.0, "end": 2332.0, "pts": 0, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 1}, {"start": 2333.0, "end": 2365.6, "pts": 3, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 2368.3, "end": 2400.0, "pts": 2, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 1}], "minutes": "21:08", "pts": 8, "reb": 2, "ast": 2}, {"game_id": "1042500212", "date": "2025-09-23", "name": "Shey Peddy", "team": "IND", "opponent": "LVA", "is_home": false, "own_score": 68, "opp_score": 90, "won": false, "stints": [{"start": 443.0, "end": 738.0, "pts": 2, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1403.0, "end": 1719.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 1}, {"start": 1985.0, "end": 2400.0, "pts": 2, "reb": 2, "ast": 0, "stl": 0, "blk": 1, "to": 0}], "minutes": "17:06", "pts": 4, "reb": 2, "ast": 0}, {"game_id": "1042500211", "date": "2025-09-21", "name": "Shey Peddy", "team": "IND", "opponent": "LVA", "is_home": false, "own_score": 89, "opp_score": 73, "won": true, "stints": [{"start": 310.0, "end": 600.0, "pts": 2, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1800.0, "end": 2140.0, "pts": 2, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 0}], "minutes": "10:30", "pts": 4, "reb": 0, "ast": 1}, {"game_id": "1042500123", "date": "2025-09-18", "name": "Shey Peddy", "team": "IND", "opponent": "ATL", "is_home": false, "own_score": 87, "opp_score": 85, "won": true, "stints": [{"start": 474.0, "end": 754.0, "pts": 0, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 0}, {"start": 973.0, "end": 1110.0, "pts": 0, "reb": 0, "ast": 0, "stl": 1, "blk": 0, "to": 0}, {"start": 2012.0, "end": 2109.0, "pts": 3, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 1}, {"start": 2170.0, "end": 2303.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}], "minutes": "10:47", "pts": 3, "reb": 0, "ast": 1}, {"game_id": "1042500122", "date": "2025-09-16", "name": "Shey Peddy", "team": "IND", "opponent": "ATL", "is_home": true, "own_score": 77, "opp_score": 60, "won": true, "stints": [{"start": 430.0, "end": 740.0, "pts": 3, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 1}, {"start": 1089.0, "end": 1200.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1463.0, "end": 1800.0, "pts": 0, "reb": 1, "ast": 1, "stl": 1, "blk": 0, "to": 0}], "minutes": "12:38", "pts": 3, "reb": 2, "ast": 1}, {"game_id": "1042500121", "date": "2025-09-14", "name": "Shey Peddy", "team": "IND", "opponent": "ATL", "is_home": false, "own_score": 68, "opp_score": 80, "won": false, "stints": [{"start": 600.0, "end": 886.0, "pts": 0, "reb": 1, "ast": 0, "stl": 1, "blk": 0, "to": 0}, {"start": 917.0, "end": 1003.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1800.0, "end": 1905.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 1}, {"start": 2307.0, "end": 2400.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}], "minutes": "9:30", "pts": 0, "reb": 1, "ast": 0}, {"game_id": "1022500278", "date": "2025-09-09", "name": "Shey Peddy", "team": "IND", "opponent": "MIN", "is_home": true, "own_score": 83, "opp_score": 72, "won": true, "stints": [{"start": 517.0, "end": 846.0, "pts": 3, "reb": 0, "ast": 2, "stl": 2, "blk": 0, "to": 0}, {"start": 1800.0, "end": 2400.0, "pts": 0, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 2}], "minutes": "15:29", "pts": 3, "reb": 0, "ast": 3}, {"game_id": "1022500273", "date": "2025-09-07", "name": "Shey Peddy", "team": "IND", "opponent": "WAS", "is_home": false, "own_score": 94, "opp_score": 65, "won": true, "stints": [{"start": 496.0, "end": 600.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 884.0, "end": 1200.0, "pts": 8, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1559.0, "end": 1800.0, "pts": 0, "reb": 1, "ast": 0, "stl": 1, "blk": 0, "to": 0}, {"start": 2098.0, "end": 2400.0, "pts": 5, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}], "minutes": "16:03", "pts": 13, "reb": 2, "ast": 0}, {"game_id": "1022500269", "date": "2025-09-05", "name": "Shey Peddy", "team": "IND", "opponent": "CHI", "is_home": true, "own_score": 97, "opp_score": 77, "won": true, "stints": [{"start": 432.0, "end": 600.0, "pts": 0, "reb": 1, "ast": 2, "stl": 0, "blk": 0, "to": 1}, {"start": 1506.0, "end": 1800.0, "pts": 3, "reb": 0, "ast": 0, "stl": 1, "blk": 0, "to": 1}, {"start": 2129.0, "end": 2400.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 1}], "minutes": "12:13", "pts": 3, "reb": 1, "ast": 2}, {"game_id": "1022500262", "date": "2025-09-02", "name": "Shey Peddy", "team": "IND", "opponent": "PHX", "is_home": false, "own_score": 79, "opp_score": 85, "won": false, "stints": [{"start": 343.0, "end": 600.0, "pts": 0, "reb": 2, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1115.0, "end": 1200.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}], "minutes": "5:42", "pts": 0, "reb": 2, "ast": 0}, {"game_id": "1022500257", "date": "2025-08-31", "name": "Shey Peddy", "team": "IND", "opponent": "GSV", "is_home": false, "own_score": 63, "opp_score": 75, "won": false, "stints": [{"start": 689.0, "end": 903.0, "pts": 0, "reb": 1, "ast": 1, "stl": 0, "blk": 0, "to": 0}, {"start": 1666.0, "end": 1800.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 2308.0, "end": 2400.0, "pts": 0, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 0}], "minutes": "7:20", "pts": 0, "reb": 1, "ast": 2}, {"game_id": "1022500251", "date": "2025-08-29", "name": "Shey Peddy", "team": "IND", "opponent": "LAS", "is_home": false, "own_score": 76, "opp_score": 75, "won": true, "stints": [{"start": 435.0, "end": 600.0, "pts": 0, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 0}, {"start": 1567.0, "end": 1800.0, "pts": 0, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 0}], "minutes": "6:38", "pts": 0, "reb": 0, "ast": 2}, {"game_id": "1022500243", "date": "2025-08-26", "name": "Shey Peddy", "team": "IND", "opponent": "SEA", "is_home": true, "own_score": 95, "opp_score": 75, "won": true, "stints": [{"start": 368.0, "end": 600.0, "pts": 2, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1058.0, "end": 1148.9, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1599.0, "end": 1757.9, "pts": 0, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 2114.0, "end": 2400.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}], "minutes": "12:47", "pts": 2, "reb": 1, "ast": 1}, {"game_id": "1022500240", "date": "2025-08-24", "name": "Shey Peddy", "team": "IND", "opponent": "MIN", "is_home": false, "own_score": 84, "opp_score": 97, "won": false, "stints": [{"start": 241.0, "end": 475.0, "pts": 3, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 880.0, "end": 1011.0, "pts": 3, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1473.0, "end": 1735.0, "pts": 8, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1961.0, "end": 2400.0, "pts": 2, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 1}], "minutes": "17:46", "pts": 16, "reb": 0, "ast": 1}, {"game_id": "1022500232", "date": "2025-08-22", "name": "Shey Peddy", "team": "IND", "opponent": "MIN", "is_home": true, "own_score": 90, "opp_score": 95, "won": false, "stints": [{"start": 344.0, "end": 789.0, "pts": 9, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 1}, {"start": 1057.0, "end": 1200.0, "pts": 0, "reb": 0, "ast": 2, "stl": 0, "blk": 0, "to": 1}, {"start": 1464.0, "end": 1748.2, "pts": 1, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 0}, {"start": 1970.0, "end": 2400.0, "pts": 0, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 1}], "minutes": "21:42", "pts": 10, "reb": 0, "ast": 4}, {"game_id": "1022500105", "date": "2025-06-29", "name": "Shey Peddy", "team": "LAS", "opponent": "CHI", "is_home": true, "own_score": 85, "opp_score": 92, "won": false, "stints": [{"start": 0.0, "end": 426.0, "pts": 0, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 851.0, "end": 1539.0, "pts": 3, "reb": 5, "ast": 1, "stl": 0, "blk": 0, "to": 0}, {"start": 1911.0, "end": 2161.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}], "minutes": "22:44", "pts": 3, "reb": 6, "ast": 1}, {"game_id": "1022500096", "date": "2025-06-26", "name": "Shey Peddy", "team": "LAS", "opponent": "IND", "is_home": false, "own_score": 85, "opp_score": 75, "won": true, "stints": [{"start": 0.0, "end": 370.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 521.0, "end": 774.0, "pts": 0, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 950.0, "end": 1433.0, "pts": 3, "reb": 0, "ast": 2, "stl": 0, "blk": 0, "to": 0}, {"start": 1559.0, "end": 1800.0, "pts": 2, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 0}], "minutes": "22:27", "pts": 5, "reb": 2, "ast": 4}, {"game_id": "1022500091", "date": "2025-06-24", "name": "Shey Peddy", "team": "LAS", "opponent": "CHI", "is_home": false, "own_score": 86, "opp_score": 97, "won": false, "stints": [{"start": 0.0, "end": 398.0, "pts": 0, "reb": 1, "ast": 1, "stl": 0, "blk": 0, "to": 0}, {"start": 475.0, "end": 881.0, "pts": 4, "reb": 2, "ast": 2, "stl": 0, "blk": 0, "to": 0}, {"start": 1083.0, "end": 1200.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1958.0, "end": 2400.0, "pts": 3, "reb": 1, "ast": 2, "stl": 0, "blk": 0, "to": 0}], "minutes": "22:43", "pts": 7, "reb": 4, "ast": 5}, {"game_id": "1022500084", "date": "2025-06-21", "name": "Shey Peddy", "team": "LAS", "opponent": "MIN", "is_home": false, "own_score": 66, "opp_score": 82, "won": false, "stints": [{"start": 0.0, "end": 343.0, "pts": 0, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 1}, {"start": 1200.0, "end": 1663.0, "pts": 6, "reb": 0, "ast": 0, "stl": 1, "blk": 0, "to": 0}, {"start": 2088.0, "end": 2400.0, "pts": 0, "reb": 0, "ast": 1, "stl": 1, "blk": 0, "to": 0}], "minutes": "18:38", "pts": 6, "reb": 1, "ast": 1}, {"game_id": "1022500076", "date": "2025-06-17", "name": "Shey Peddy", "team": "LAS", "opponent": "SEA", "is_home": true, "own_score": 67, "opp_score": 98, "won": false, "stints": [{"start": 0.0, "end": 222.0, "pts": 3, "reb": 1, "ast": 1, "stl": 0, "blk": 0, "to": 1}, {"start": 600.0, "end": 828.0, "pts": 2, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1200.0, "end": 1437.0, "pts": 0, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 1}, {"start": 1659.0, "end": 2400.0, "pts": 1, "reb": 2, "ast": 2, "stl": 0, "blk": 0, "to": 1}], "minutes": "23:48", "pts": 6, "reb": 4, "ast": 3}, {"game_id": "1022500065", "date": "2025-06-14", "name": "Shey Peddy", "team": "LAS", "opponent": "MIN", "is_home": false, "own_score": 78, "opp_score": 101, "won": false, "stints": [{"start": 594.8, "end": 826.0, "pts": 0, "reb": 1, "ast": 1, "stl": 0, "blk": 0, "to": 0}, {"start": 2203.0, "end": 2400.0, "pts": 3, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 0}], "minutes": "7:08", "pts": 3, "reb": 1, "ast": 2}]};
 </script>
 <script src="../assets/player.js"></script>
+<script src="../assets/search.js"></script>
 </body>
 </html>

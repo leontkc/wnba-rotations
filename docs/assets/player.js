@@ -43,7 +43,7 @@
 
   document.querySelectorAll('.mini-gantt').forEach(container => {
     const stints = JSON.parse(container.dataset.stints || '[]');
-    const isHome = container.dataset.ishome === 'true';
+    const isHome = container.classList.contains('home');
 
     stints.forEach(stint => {
       const bar = document.createElement('div');
@@ -59,6 +59,7 @@
     });
   });
 
+  window.fitStintLabels = fitLabels;
   fitLabels();
   let resizeTimer;
   window.addEventListener('resize', () => {
@@ -67,68 +68,42 @@
   });
 })();
 
-// Click game to navigate
-document.querySelectorAll('.player-game').forEach(el => {
-  el.addEventListener('click', () => {
-    window.location.href = el.dataset.href;
-  });
-});
+// Season tabs: filter the game log and recompute per-game averages
+(function initSeasonFilter() {
+  const games = (typeof PLAYER_DATA !== 'undefined' && PLAYER_DATA.games) || [];
+  const cards = [...document.querySelectorAll('.player-game')];
+  const tabs = [...document.querySelectorAll('.season-tabs .tab[data-season]')];
 
-// Player search dropdown
-(function initPlayerSearch() {
-  const input = document.getElementById('player-input');
-  const dropdown = document.getElementById('player-dropdown');
-  if (!input || !dropdown) return;
+  const toSec = m => {
+    const [mm, ss] = String(m || '0:00').split(':').map(Number);
+    return (mm || 0) * 60 + (ss || 0);
+  };
+  const setStat = (key, val) => {
+    const el = document.querySelector(`[data-stat="${key}"]`);
+    if (el) el.textContent = val;
+  };
 
-  let players = [];
+  function apply(season) {
+    const list = season ? games.filter(g => g.date.startsWith(season)) : games;
+    const n = list.length || 1;
+    const avg = key => (list.reduce((t, g) => t + (g[key] || 0), 0) / n).toFixed(1);
+    const minSec = Math.round(list.reduce((t, g) => t + toSec(g.minutes), 0) / n);
+    setStat('gp', list.length);
+    setStat('min', list.length ? `${Math.floor(minSec / 60)}:${String(minSec % 60).padStart(2, '0')}` : '–');
+    setStat('pts', list.length ? avg('pts') : '–');
+    setStat('reb', list.length ? avg('reb') : '–');
+    setStat('ast', list.length ? avg('ast') : '–');
+    setStat('stints', list.length ? (list.reduce((t, g) => t + g.stints.length, 0) / n).toFixed(1) : '–');
 
-  // Load players manifest
-  fetch('players.json')
-    .then(r => r.json())
-    .then(data => { players = data; })
-    .catch(() => { console.warn('Could not load players.json'); });
-
-  function slugify(name) {
-    if (!name) return '';
-    return name.toLowerCase()
-      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/(^-|-$)/g, '');
-  }
-
-  input.addEventListener('focus', () => {
-    if (players.length) renderDropdown('');
-  });
-
-  input.addEventListener('input', () => {
-    renderDropdown(input.value.trim().toLowerCase());
-  });
-
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('#player-search')) {
-      dropdown.classList.remove('active');
-    }
-  });
-
-  function renderDropdown(filter) {
-    const filtered = players.filter(p =>
-      p.name.toLowerCase().includes(filter)
-    ).slice(0, 20);
-
-    if (!filtered.length) {
-      dropdown.classList.remove('active');
-      return;
-    }
-
-    dropdown.innerHTML = filtered.map(p =>
-      `<div class="player-option" data-slug="${p.slug}">${p.name}</div>`
-    ).join('');
-    dropdown.classList.add('active');
-
-    dropdown.querySelectorAll('.player-option').forEach(opt => {
-      opt.addEventListener('click', () => {
-        window.location.href = `${opt.dataset.slug}.html`;
-      });
+    cards.forEach(c => { c.hidden = !!season && c.dataset.season !== season; });
+    tabs.forEach(t => {
+      const on = t.dataset.season === season;
+      t.classList.toggle('active', on);
+      t.setAttribute('aria-selected', on);
     });
+    window.fitStintLabels();
   }
+
+  tabs.forEach(t => t.addEventListener('click', () => apply(t.dataset.season)));
+  apply('');
 })();

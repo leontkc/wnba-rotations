@@ -3,44 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>T.J. McConnell — wnbarotations</title>
-<link rel="stylesheet" href="../assets/viz.css">
+<title>T.J. McConnell — rotations &amp; stints · wnbarotations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/player.css">
 </head>
 <body>
-<nav id="game-nav">
-  <a href="../index.html" id="nav-home">← wnbarotations</a>
-  <div id="player-search">
-    <input type="text" placeholder="Search players..." id="player-input">
-    <div id="player-dropdown"></div>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"></span>wnba<span class="dim">rotations</span></a>
+    <div class="player-search" data-root="../">
+      <input type="search" placeholder="Find a player" aria-label="Find a player" autocomplete="off">
+      <div class="player-dropdown"></div>
+    </div>
   </div>
-</nav>
-
-<header class="player-header">
-  <h1>T.J. McConnell</h1>
-  <p class="player-meta">IND · 1 games</p>
 </header>
 
-<main id="player-games">
+<main class="page">
+  <header class="player-header">
+    <div class="player-id">
+      <span class="eyebrow">Indiana Fever</span>
+      <h1>T.J. McConnell</h1>
+    </div>
+    <div class="season-tabs" role="tablist" aria-label="Season">
 
-<div class="player-game" data-href="../games/0022400235.html">
-  <div class="player-game-header">
-    <span> vs MIA</span>
-    <span class="game-result win">W 119-110</span>
+    </div>
+  </header>
+
+  <div class="stat-tiles" id="stat-tiles" aria-live="polite">
+    <div class="tile"><span class="tile-val" data-stat="gp">1</span><span class="tile-lbl">Games</span></div>
+    <div class="tile"><span class="tile-val" data-stat="min">–</span><span class="tile-lbl">Min / G</span></div>
+    <div class="tile"><span class="tile-val" data-stat="pts">–</span><span class="tile-lbl">Pts / G</span></div>
+    <div class="tile"><span class="tile-val" data-stat="reb">–</span><span class="tile-lbl">Reb / G</span></div>
+    <div class="tile"><span class="tile-val" data-stat="ast">–</span><span class="tile-lbl">Ast / G</span></div>
+    <div class="tile"><span class="tile-val" data-stat="stints">–</span><span class="tile-lbl">Stints / G</span></div>
   </div>
-  <div class="mini-gantt" data-stints='[{"start": 301.0, "end": 673.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1503.0, "end": 1847.0, "pts": 0, "reb": 1, "ast": 1, "stl": 0, "blk": 0, "to": 0}, {"start": 1954.0, "end": 2400.0, "pts": 4, "reb": 2, "ast": 3, "stl": 0, "blk": 0, "to": 0}]' data-ishome='true'></div>
-  <div class="player-game-stats">
-    <span><span class="stat-val">8</span> PTS</span>
-    <span><span class="stat-val">3</span> REB</span>
-    <span><span class="stat-val">5</span> AST</span>
-    <span class="player-minutes">19:22</span>
+
+  <div class="games-head">
+    <h2>Game log</h2>
+    <p class="panel-note">Each bar is a stint, labeled with its stats: <b>p</b>oints, <b>r</b>ebounds, <b>a</b>ssists, <b>s</b>teals, <b>b</b>locks.</p>
   </div>
-</div>
+
+  <div id="player-games">
+
+<a class="player-game" href="../games/0022400235.html" data-season="">
+  <div class="pg-head">
+    <span class="pg-date"></span>
+    <span class="pg-opp"><span class="pg-loc">vs</span> MIA</span>
+    <span class="pg-result win"><b>W</b> 119–110</span>
+  </div>
+  <div class="mini-gantt home" data-stints="[{&quot;start&quot;: 301.0, &quot;end&quot;: 673.0, &quot;pts&quot;: 0, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1503.0, &quot;end&quot;: 1847.0, &quot;pts&quot;: 0, &quot;reb&quot;: 1, &quot;ast&quot;: 1, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1954.0, &quot;end&quot;: 2400.0, &quot;pts&quot;: 4, &quot;reb&quot;: 2, &quot;ast&quot;: 3, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}]">
+    <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
+  </div>
+  <div class="pg-stats">
+    <span><b>8</b> PTS</span>
+    <span><b>3</b> REB</span>
+    <span><b>5</b> AST</span>
+    <span class="pg-min"><b>19:22</b> MIN</span>
+  </div>
+</a>
+  </div>
 </main>
 
 <script>
 const PLAYER_DATA = {"name": "T.J. McConnell", "team": "IND", "games": [{"game_id": "0022400235", "date": "", "name": "T.J. McConnell", "team": "IND", "opponent": "MIA", "is_home": true, "own_score": 119, "opp_score": 110, "won": true, "stints": [{"start": 301.0, "end": 673.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1503.0, "end": 1847.0, "pts": 0, "reb": 1, "ast": 1, "stl": 0, "blk": 0, "to": 0}, {"start": 1954.0, "end": 2400.0, "pts": 4, "reb": 2, "ast": 3, "stl": 0, "blk": 0, "to": 0}], "minutes": "19:22", "pts": 8, "reb": 3, "ast": 5}]};
 </script>
 <script src="../assets/player.js"></script>
+<script src="../assets/search.js"></script>
 </body>
 </html>
