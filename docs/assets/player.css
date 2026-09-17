@@ -85,15 +85,20 @@
 .panel-note { font-size: 0.78rem; color: var(--faint); }
 .panel-note b { color: var(--text-2); }
 
+/* One game per row, newest first, so the log reads straight down */
 #player-games {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .player-game {
-  display: block;
-  padding: 12px 14px;
+  display: grid;
+  grid-template-columns: minmax(230px, 280px) 1fr auto;
+  grid-template-areas: "head gantt stats";
+  align-items: center;
+  column-gap: 20px;
+  padding: 10px 14px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -104,12 +109,18 @@
 .player-game:hover { background: var(--surface-2); border-color: var(--border-2); }
 
 .pg-head {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  margin-bottom: 10px;
+  grid-area: head;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "date result" "opp result";
+  align-items: center;
+  column-gap: 10px;
   font-size: 0.85rem;
+  min-width: 0;
 }
+.pg-head .pg-date { grid-area: date; font-size: 0.75rem; }
+.pg-head .pg-opp { grid-area: opp; }
+.pg-head .pg-result { grid-area: result; }
 .pg-date { color: var(--muted); white-space: nowrap; }
 .pg-opp {
   font-weight: 600;
@@ -119,12 +130,13 @@
   min-width: 0;
 }
 .pg-loc { color: var(--faint); font-weight: 500; }
-.pg-result { margin-left: auto; white-space: nowrap; color: var(--text-2); }
+.pg-result { white-space: nowrap; color: var(--text-2); text-align: right; }
 .pg-result b { font-weight: 800; margin-right: 2px; }
 .pg-result.win b  { color: var(--win); }
 .pg-result.loss b { color: var(--loss); }
 
 .mini-gantt {
+  grid-area: gantt;
   position: relative;
   height: 24px;
   background: var(--surface-3);
@@ -163,26 +175,32 @@
 }
 
 .pg-stats {
+  grid-area: stats;
   display: flex;
   gap: 14px;
-  margin-top: 10px;
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   color: var(--faint);
 }
 .pg-stats b { font-size: 0.92rem; font-weight: 700; color: var(--text); margin-right: 2px; letter-spacing: 0; }
-.pg-min { margin-left: auto; }
+.pg-min { margin-left: 4px; min-width: 76px; text-align: right; }
+
+@media (max-width: 900px) {
+  .player-game {
+    grid-template-columns: 1fr;
+    grid-template-areas: "head" "gantt" "stats";
+    row-gap: 10px;
+  }
+  .pg-min { margin-left: auto; min-width: 0; }
+}
 
 @media (max-width: 760px) {
   .stat-tiles { grid-template-columns: repeat(3, 1fr); }
-  #player-games { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
   .player-header { padding: 4px 0 16px; }
   .tile { padding: 10px 12px; }
   .tile-val { font-size: 1.25rem; }
-  .pg-head { flex-wrap: wrap; gap: 2px 8px; }
-  .pg-date { width: 100%; font-size: 0.75rem; }
 }

@@ -204,6 +204,7 @@ def fetch_boxscore(game_id: str) -> list[dict]:
 
     log.info(f"  Fetching boxscore {game_id}…")
     col_map = {
+        "personId":            "person_id",
         "firstName":           "first",
         "familyName":          "last",
         "teamTricode":         "team",
@@ -229,7 +230,7 @@ def fetch_boxscore(game_id: str) -> list[dict]:
                 val = row.get(src, None)
                 if val is None or (isinstance(val, float) and pd.isna(val)):
                     entry[dst] = None
-                elif dst in ("pts", "fgm", "fga", "reb", "ast", "stl", "blk", "to", "pf"):
+                elif dst in ("person_id", "pts", "fgm", "fga", "reb", "ast", "stl", "blk", "to", "pf"):
                     entry[dst] = int(val)
                 elif dst == "plus_minus":
                     entry[dst] = float(val)
@@ -285,165 +286,325 @@ def compute_score_flow(pbp_df: pd.DataFrame):
 
 # ── Player stints ─────────────────────────────────────────────────────────────
 
-def compute_stints(pbp_df: pd.DataFrame) -> list[dict]:
+# Plays that don't mean a player is on the court
+NON_PLAYING_ACTIONS = {"period", "ejection", "timeout", "instant replay"}
+NON_PLAYING_MARKERS = ("T.FOUL", "TECHNICAL", "EJECT")
+SUB_RE = re.compile(r"SUB:\s+(.+?)\s+FOR\s+")
+AST_RE = re.compile(r"\(([^()]+?)\s+\d+\s+AST\)")
+
+
+def _person_id(value) -> int | None:
+    try:
+        pid = int(value)
+    except (TypeError, ValueError):
+        return None
+    return pid if pid > 0 else None
+
+
+class _Roster:
+    """
+    One team's players in a game, keyed by personId. Substitution text names
+    the incoming player loosely ('Dojkic', 'K. Brown', 'Xu'), so names are
+    resolved against every spelling seen in the PBP plus the box score.
+    """
+
+    def __init__(self, team_events: pd.DataFrame, team: str, box_score: list[dict]):
+        self.short: dict[int, str] = {}      # personId -> playerName
+        self.initial: dict[int, str] = {}    # personId -> playerNameI ("K. Brown")
+        self.index: dict[str, set] = {}      # folded name -> {personId}
+        for _, row in team_events.iterrows():
+            pid = _person_id(row.get("personId"))
+            name = str(row.get("playerName") or "").strip()
+            if pid is None or not name:
+                continue
+            self.short.setdefault(pid, name)
+            self.initial.setdefault(pid, str(row.get("playerNameI") or "").strip())
+        for pid in self.short:
+            self._add(self.short[pid], pid)
+            self._add(self.initial[pid], pid)
+        for b in box_score or []:
+            pid = _person_id(b.get("person_id"))
+            if b.get("team") != team or pid is None:
+                continue
+            first, last = b.get("first") or "", b.get("last") or ""
+            for key in (last, first, f"{first} {last}", f"{first[:1]}. {last}"):
+                self._add(key, pid)
+            # Box-score-only players (e.g. no PBP plays) still need a name
+            self.short.setdefault(pid, last)
+            self.initial.setdefault(pid, f"{first[:1]}. {last}")
+        self.unresolved: dict[str, str] = {}
+
+    def _add(self, name: str, pid: int):
+        if name and name.strip(". "):
+            self.index.setdefault(_fold(name), set()).add(pid)
+
+    def resolve(self, name: str):
+        """personId for a name, or a stable 'name:...' key if it can't be pinned down."""
+        ids = self.index.get(_fold(name), set())
+        if len(ids) == 1:
+            return next(iter(ids))
+        self.unresolved.setdefault(_fold(name), name)
+        return f"name:{_fold(name)}"
+
+    def display(self, key) -> str:
+        """Short name for a stint row; initials when teammates share a last name."""
+        if isinstance(key, str):
+            return self.unresolved.get(key[5:], key[5:])
+        name = self.short.get(key, "")
+        if sum(1 for n in self.short.values() if _fold(n) == _fold(name)) > 1:
+            return self.initial.get(key) or name
+        return name
+
+
+def compute_stints(pbp_df: pd.DataFrame, box_score: list[dict] | None = None) -> list[dict]:
     """
     Compute player stint records from PBP substitution events.
-    Returns list of dicts: {player, team, period, clock_in, clock_out,
-                             duration_sec, start_elapsed, end_elapsed,
-                             stint_pts, stint_reb, stint_ast}.
+
+    Players are tracked by personId. A period's starters are the players whose
+    first appearance in it isn't being subbed in (a play, or being subbed
+    out); anyone still missing is filled from the previous period's closing
+    lineup if they never appear.
+    Returns list of dicts: {player, person_id, team, period, clock_in,
+                             clock_out, duration_sec, start_elapsed,
+                             end_elapsed, stint_pts, ..., events}.
     """
     stints = []
+    # actionId is chronological; actionNumber is not (subs are often numbered late)
+    order = "actionId" if "actionId" in pbp_df else "actionNumber"
+    pbp_df = pbp_df.sort_values(order, kind="stable").copy()
+    pbp_df["_clock_secs"] = pbp_df["clock"].apply(clock_to_seconds)
+    # Plain objects so missing ids stay None (a float column would turn them into NaN)
+    pids = pbp_df["personId"] if "personId" in pbp_df else [None] * len(pbp_df)
+    pbp_df["_pid"] = pd.Series([_person_id(v) for v in pids], index=pbp_df.index, dtype=object)
 
     # Skip events with no team (period markers, team rebounds, timeouts,
     # instant replays tagged with a referee's name); they aren't player stints.
     teams = pbp_df["teamTricode"].dropna().astype(str).str.strip()
     for team in teams[teams != ""].unique():
-        team_events = pbp_df[pbp_df["teamTricode"] == team].copy()
-        team_events = team_events.sort_values("actionNumber")
+        team_events = pbp_df[pbp_df["teamTricode"] == team]
+        roster = _Roster(team_events, team, box_score)
+        team_stints = []
+        prev_lineup: list = []   # on court at the end of the previous period
+
+        def add_stint(key, period, clock_in, clock_out, guessed=False):
+            if clock_in - clock_out <= 0:
+                return  # e.g. subbed out at the very start of a period
+            team_stints.append({
+                "key":           key,
+                "_guessed":      guessed,
+                "team":          str(team),
+                "period":        int(period),
+                "clock_in":      float(clock_in),
+                "clock_out":     float(clock_out),
+                "duration_sec":  round(float(clock_in - clock_out), 1),
+                "start_elapsed": elapsed_seconds(int(period), float(clock_in)),
+                "end_elapsed":   elapsed_seconds(int(period), float(clock_out)),
+            })
 
         for period in sorted(pbp_df["period"].unique()):
             period_events = team_events[team_events["period"] == period]
             if period_events.empty:
                 continue
-
-            # Infer starters
-            first_sub_idx = period_events[
-                period_events["actionType"].str.lower() == "substitution"
-            ].index.min()
-
-            if pd.isna(first_sub_idx):
-                pre_sub = period_events[
-                    ~period_events["actionType"].str.lower().isin({"period", "substitution"})
-                ]
-            else:
-                pre_sub = period_events[period_events.index < first_sub_idx]
-                pre_sub = pre_sub[
-                    ~pre_sub["actionType"].str.lower().isin({"period", "substitution"})
-                ]
-
-            starters = pre_sub["playerName"].dropna().unique().tolist()
             p_start = float(period_length(int(period)))
-            on_court = {p: p_start for p in starters}
+
+            on_court: dict = {}      # player key -> clock when they came on
+            starters: list = []
+            touched: set = set()     # anyone subbed in/out or credited this period
+
+            def start_period(key):
+                # First sight of a player who wasn't subbed in: they started the period
+                if key not in touched:
+                    on_court[key] = p_start
+                    starters.append(key)
+                touched.add(key)
 
             for _, row in period_events.iterrows():
                 action = str(row.get("actionType", "")).lower()
-                if action != "substitution":
+                desc = str(row.get("description", ""))
+                name = str(row.get("playerName") or "").strip()
+                key = row["_pid"] or (roster.resolve(name) if name else None)
+                clock_secs = row["_clock_secs"]
+
+                if action == "substitution":
+                    if clock_secs is None or pd.isna(clock_secs):
+                        continue
+                    if key is not None:
+                        start_period(key)
+                        if key in on_court:
+                            add_stint(key, period, on_court.pop(key), clock_secs)
+                    m = SUB_RE.match(desc)
+                    if m:
+                        key_in = roster.resolve(m.group(1).strip())
+                        touched.add(key_in)
+                        on_court[key_in] = clock_secs
                     continue
 
-                clock_str = row.get("clock", "")
-                clock_secs = clock_to_seconds(clock_str)
-                desc = str(row.get("description", ""))
+                # Bench players can draw technicals or ejections without playing
+                if action in NON_PLAYING_ACTIONS or any(k in desc.upper() for k in NON_PLAYING_MARKERS):
+                    continue
+                if key is not None and key not in touched:
+                    start_period(key)
+                # An assist is only named in the scorer's play, but still shows who's on court
+                m = AST_RE.search(desc) if action == "made shot" else None
+                if m:
+                    key_ast = roster.resolve(m.group(1).strip())
+                    if key_ast not in touched:
+                        start_period(key_ast)
 
-                player_out = row.get("playerName")
-                m = re.match(r"SUB:\s+(.+?)\s+FOR\s+", desc)
-                player_in = m.group(1).strip() if m else None
+            # Players still on from last period who never appear in this one
+            # (no plays, no subs) played the whole period.
+            guessed = set()
+            for key in prev_lineup:
+                if len(on_court) >= 5:
+                    break
+                if key not in touched:
+                    on_court[key] = p_start
+                    starters.append(key)
+                    touched.add(key)
+                    guessed.add(key)
 
-                if player_out and player_out in on_court:
-                    clock_in = on_court.pop(player_out)
-                    if clock_secs is not None:
-                        stints.append({
-                            "player":        player_out,
-                            "team":          str(team),
-                            "period":        int(period),
-                            "clock_in":      float(clock_in),
-                            "clock_out":     float(clock_secs),
-                            "duration_sec":  round(float(clock_in - clock_secs), 1),
-                            "start_elapsed": elapsed_seconds(int(period), float(clock_in)),
-                            "end_elapsed":   elapsed_seconds(int(period), float(clock_secs)),
-                        })
+            if len(starters) != 5 or len(on_court) != 5:
+                log.debug(f"  {team} P{period}: {len(starters)} starters, {len(on_court)} at end")
 
-                if player_in and clock_secs is not None:
-                    on_court[player_in] = clock_secs
+            prev_lineup = list(on_court)
+            for key, clock_in in on_court.items():
+                add_stint(key, period, clock_in, 0.0, key in guessed)
 
-            # Close open stints at period end
-            for player, clock_in in on_court.items():
-                stints.append({
-                    "player":        player,
-                    "team":          str(team),
-                    "period":        int(period),
-                    "clock_in":      float(clock_in),
-                    "clock_out":     0.0,
-                    "duration_sec":  round(float(clock_in), 1),
-                    "start_elapsed": elapsed_seconds(int(period), float(clock_in)),
-                    "end_elapsed":   elapsed_seconds(int(period), 0.0),
-                })
+        _reconcile_guesses(team_stints, box_score, team)
 
-    # Compute per-stint stats and events from PBP
-    pbp_df = pbp_df.copy()
-    pbp_df["_clock_secs"] = pbp_df["clock"].apply(clock_to_seconds)
-
-    for stint in stints:
-        player   = stint["player"]
-        period   = stint["period"]
-        clock_in = stint["clock_in"]
-        clock_out = stint["clock_out"]
-
-        if not player:
-            stint.update({"stint_pts": 0, "stint_reb": 0, "stint_ast": 0, "stint_stl": 0, "stint_blk": 0, "stint_to": 0, "events": []})
-            continue
-
-        window_mask = (
-            (pbp_df["period"] == period) &
-            (pbp_df["_clock_secs"] >= clock_out) &
-            (pbp_df["_clock_secs"] <= clock_in)
-        )
-        window = pbp_df[window_mask]
-        player_ev = window[window["playerName"] == player]
-
-        made_shots = player_ev[player_ev["actionType"] == "Made Shot"]
-        pts = int(made_shots["shotValue"].fillna(0).sum())
-
-        free_throws = player_ev[player_ev["actionType"] == "Free Throw"]
-        pts += int((~free_throws["description"].str.upper().str.startswith("MISS")).sum())
-
-        reb = int((player_ev["actionType"] == "Rebound").sum())
-
-        ast_pat = re.compile(rf"\({re.escape(player)}\s+\d+\s+AST\)", re.IGNORECASE)
-        made_in_window = window[window["actionType"] == "Made Shot"]
-        ast = int(made_in_window["description"].str.contains(ast_pat, na=False).sum())
-
-        stl = int(player_ev["description"].str.contains("STEAL", case=False, na=False).sum())
-        blk = int(player_ev["description"].str.contains("BLOCK", case=False, na=False).sum())
-        to = int((player_ev["actionType"] == "Turnover").sum())
-
-        stint["stint_pts"] = pts
-        stint["stint_reb"] = reb
-        stint["stint_ast"] = ast
-        stint["stint_stl"] = stl
-        stint["stint_blk"] = blk
-        stint["stint_to"]  = to
-
-        # Collect timestamped events for this player during the stint
-        event_types = {"Made Shot", "Missed Shot", "Free Throw", "Rebound", "Turnover", "Foul"}
-        events = []
-
-        for _, ev in player_ev.iterrows():
-            action = str(ev.get("actionType", ""))
-            desc = str(ev.get("description", ""))
-
-            # Include known action types + steal/block events (which have empty actionType)
-            if action in event_types or "STEAL" in desc.upper() or "BLOCK" in desc.upper():
-                events.append({
-                    "clock": clock_display(ev.get("clock", "")),
-                    "type": action if action else ("Steal" if "STEAL" in desc.upper() else "Block"),
-                    "detail": desc,
-                })
-
-        # Also find assists: made shots by teammates where this player is credited
-        for _, ev in made_in_window.iterrows():
-            desc = str(ev.get("description", ""))
-            if ast_pat.search(desc):
-                events.append({
-                    "clock": clock_display(ev.get("clock", "")),
-                    "type": "Assist",
-                    "detail": desc,
-                })
-
-        # Sort events by clock descending (game clock counts down)
-        events.sort(key=lambda e: e["clock"], reverse=True)
-        stint["events"] = events
+        for st in team_stints:
+            key = st.pop("key")
+            st.pop("_guessed", None)
+            st["player"] = roster.display(key)
+            st["person_id"] = key if isinstance(key, int) else None
+            _add_stint_stats(st, pbp_df, team)
+            stints.append(st)
 
     return stints
+
+
+def _reconcile_guesses(team_stints: list[dict], box_score: list[dict] | None, team: str) -> None:
+    """
+    Fix filled-in lineup spots using box-score minutes.
+
+    When a player starts a period without appearing in the play-by-play, the
+    spot is filled from the previous period's lineup, which is occasionally the
+    wrong player. The box score says who actually played how long: if a guess
+    leaves one player over by exactly that stint and a teammate short by the
+    same amount, the stint belongs to the teammate.
+    """
+    minutes = {}
+    for b in box_score or []:
+        m = b.get("minutes") or ""
+        pid = _person_id(b.get("person_id"))
+        if b.get("team") != team or pid is None or ":" not in m:
+            continue
+        mm, ss = m.split(":")[:2]
+        minutes[pid] = int(mm) * 60 + int(ss)
+    if not minutes:
+        return
+
+    for guess in [st for st in team_stints if st["_guessed"]]:
+        got = {}
+        for st in team_stints:
+            got[st["key"]] = got.get(st["key"], 0) + st["duration_sec"]
+        dur = guess["duration_sec"]
+        if got.get(guess["key"], 0) - minutes.get(guess["key"], 0) < dur - 1:
+            continue  # this player's total is fine, so the guess stands
+        busy = {st["key"] for st in team_stints
+                if st["period"] == guess["period"] and st is not guess}
+        short = [pid for pid, box in minutes.items()
+                 if pid not in busy and box - got.get(pid, 0) >= dur - 1]
+        if len(short) == 1:
+            log.debug(f"  {team} P{guess['period']}: reassigned a filled stint "
+                      f"from {guess['key']} to {short[0]}")
+            guess["key"] = short[0]
+
+    # A period can also come up a whole player short: someone was substituted in
+    # between periods without a sub being logged and never touched the ball.
+    for period in sorted({st["period"] for st in team_stints}):
+        length = period_length(period)
+        got = {}
+        for st in team_stints:
+            got[st["key"]] = got.get(st["key"], 0) + st["duration_sec"]
+        covered = sum(st["duration_sec"] for st in team_stints if st["period"] == period)
+        if 5 * length - covered < length - 1:
+            continue
+        busy = {st["key"] for st in team_stints if st["period"] == period}
+        missing = [pid for pid, box in minutes.items()
+                   if pid not in busy and box - got.get(pid, 0) >= length - 1]
+        if len(missing) == 1:
+            log.debug(f"  {team} P{period}: added a full period for {missing[0]}")
+            team_stints.append({
+                "key": missing[0], "_guessed": True, "team": str(team), "period": int(period),
+                "clock_in": float(length), "clock_out": 0.0, "duration_sec": float(length),
+                "start_elapsed": elapsed_seconds(int(period), float(length)),
+                "end_elapsed": elapsed_seconds(int(period), 0.0),
+            })
+
+
+def _add_stint_stats(stint: dict, pbp_df: pd.DataFrame, team: str) -> None:
+    """Fill stint_* counts and the play list for one stint."""
+    player, pid = stint["player"], stint["person_id"]
+    window = pbp_df[
+        (pbp_df["period"] == stint["period"]) &
+        (pbp_df["_clock_secs"] >= stint["clock_out"]) &
+        (pbp_df["_clock_secs"] <= stint["clock_in"]) &
+        (pbp_df["teamTricode"] == team)
+    ]
+    if pid is not None:
+        player_ev = window[window["_pid"] == pid]
+    else:
+        player_ev = window[window["playerName"].map(lambda n: _fold(str(n or ""))) == _fold(player)]
+
+    made_shots = player_ev[player_ev["actionType"] == "Made Shot"]
+    pts = int(made_shots["shotValue"].fillna(0).sum())
+    free_throws = player_ev[player_ev["actionType"] == "Free Throw"]
+    pts += int((~free_throws["description"].str.upper().str.startswith("MISS")).sum())
+
+    # Assists are only named in the scorer's description, e.g. "(Hiedeman 1 AST)"
+    last = player.split(". ", 1)[-1]
+    ast_pat = re.compile(rf"\({re.escape(last)}\s+\d+\s+AST\)", re.IGNORECASE)
+    made_in_window = window[(window["actionType"] == "Made Shot") & (window["_pid"] != pid)]
+    assisted = made_in_window[made_in_window["description"].str.contains(ast_pat, na=False)]
+
+    stint["stint_pts"] = pts
+    stint["stint_reb"] = int((player_ev["actionType"] == "Rebound").sum())
+    stint["stint_ast"] = len(assisted)
+    stint["stint_stl"] = int(player_ev["description"].str.contains("STEAL", case=False, na=False).sum())
+    stint["stint_blk"] = int(player_ev["description"].str.contains("BLOCK", case=False, na=False).sum())
+    stint["stint_to"] = int((player_ev["actionType"] == "Turnover").sum())
+
+    event_types = {"Made Shot", "Missed Shot", "Free Throw", "Rebound", "Turnover", "Foul"}
+    events = []
+    for _, ev in player_ev.iterrows():
+        action = str(ev.get("actionType", ""))
+        desc = str(ev.get("description", ""))
+        # Include known action types + steal/block events (which have empty actionType)
+        if action in event_types or "STEAL" in desc.upper() or "BLOCK" in desc.upper():
+            events.append({
+                "clock": clock_display(ev.get("clock", "")),
+                "type": action if action else ("Steal" if "STEAL" in desc.upper() else "Block"),
+                "detail": desc,
+            })
+    for _, ev in assisted.iterrows():
+        events.append({
+            "clock": clock_display(ev.get("clock", "")),
+            "type": "Assist",
+            "detail": str(ev.get("description", "")),
+        })
+    # Game clock counts down
+    events.sort(key=lambda e: clock_to_seconds_display(e["clock"]), reverse=True)
+    stint["events"] = events
+
+
+def clock_to_seconds_display(clock: str) -> int:
+    """'6:13' → 373."""
+    m, _, sec = clock.partition(":")
+    try:
+        return int(m) * 60 + int(sec)
+    except ValueError:
+        return 0
 
 
 # ── Box score → player_game_stats lookup ─────────────────────────────────────
@@ -512,8 +673,13 @@ def resolve_full_name(pbp_name: str, team: str, box_score: list[dict]) -> str | 
 
 def add_full_names(stints: list[dict], box_score: list[dict]) -> None:
     """Set stint['player_full'] for every stint whose player resolves uniquely."""
+    by_id = {b["person_id"]: f"{b.get('first', '')} {b.get('last', '')}".strip()
+             for b in box_score if b.get("person_id")}
     cache = {}
     for s in stints:
+        if s.get("person_id") in by_id:
+            s["player_full"] = by_id[s["person_id"]]
+            continue
         key = (s["player"], s["team"])
         if key not in cache:
             cache[key] = resolve_full_name(s["player"], s["team"], box_score)

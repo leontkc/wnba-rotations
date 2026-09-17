@@ -318,8 +318,8 @@ function renderStints(data) {
   const homeTC = data.game.home_tricode;
   const awayTC = data.game.away_tricode;
 
-  // Rows are keyed by team + stint name: both teams can have a "Howard"
-  const rowKey = s => `${s.team}|${s.player}`;
+  // Rows are keyed by team + player id (or name on older data): both teams can have a "Howard"
+  const rowKey = s => `${s.team}|${s.person_id || s.player}`;
   const seen = new Map();
   stints.forEach(s => { if (!seen.has(rowKey(s))) seen.set(rowKey(s), s); });
 
@@ -365,6 +365,10 @@ function renderStints(data) {
       playerTotals.set(fullName, stats);
       playerTotals.set(`${b.team}|${b.last}`, stats);
       playerDisplayNames.set(`${b.team}|${b.last}`, fullName);
+      if (b.person_id) {
+        playerTotals.set(`${b.team}|${b.person_id}`, stats);
+        playerDisplayNames.set(`${b.team}|${b.person_id}`, fullName);
+      }
     });
   } else {
     // Fallback: sum from stints

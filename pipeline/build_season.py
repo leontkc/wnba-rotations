@@ -141,16 +141,17 @@ def process_game(game_id: str, game_info: dict) -> dict | None:
     if game_info.get("away_tricode"):
         away_tc = game_info["away_tricode"]
 
-    # 3. Player stints
+    # 3. Box score (non-fatal; also used to match player ids and names)
+    box_score = fetch_boxscore(game_id)
+
+    # 4. Player stints
     try:
-        stints = compute_stints(pbp_df)
+        stints = compute_stints(pbp_df, box_score)
     except Exception as e:
         log.exception(f"  compute_stints failed for {game_id}")
         log_error(game_id, date, matchup, str(e))
         return None
 
-    # 4. Box score (non-fatal)
-    box_score = fetch_boxscore(game_id)
     add_full_names(stints, box_score)
     stint_players = {s["player"] for s in stints}
     player_game_stats = build_player_game_stats(box_score, stint_players)
