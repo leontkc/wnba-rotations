@@ -89,9 +89,9 @@ document.getElementById('game-title').textContent =
     dateText = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
   }
   const side = (tc, score, won, cls, label) => `
-    <div class="sb-team ${cls}${won ? ' won' : ''}">
+    <div class="sb-team ${cls} t-${tc}${won ? ' won' : ''}">
       <div class="sb-id">
-        <span class="sb-tc">${tc}</span>
+        <span class="sb-tc"><span class="team-chip" aria-hidden="true"></span>${tc}</span>
         <span class="sb-name">${teamName(tc)}</span>
         <span class="sb-side">${label}</span>
       </div>
@@ -103,6 +103,12 @@ document.getElementById('game-title').textContent =
     `<div class="sb-mid"><span class="sb-status">Final</span><span class="sb-date">${dateText}</span>` +
     `<span class="sb-margin">${homeWon ? g.home_tricode : g.away_tricode} by ${margin}</span></div>` +
     side(g.home_tricode, g.score_home, homeWon, 'home', 'Home');
+
+  // Tint each end of the scoreboard with that team's main color
+  el.querySelectorAll('.sb-team').forEach(t => {
+    const c = getComputedStyle(t).getPropertyValue('--tc').trim();
+    if (c) el.style.setProperty(t.classList.contains('home') ? '--home-tint' : '--away-tint', c);
+  });
 })();
 
 // ─── 1. Game Momentum (Score Margin) ─────────────────────────────────────────

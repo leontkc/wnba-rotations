@@ -205,3 +205,32 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .topbar-nav a { padding: 6px 8px; }
   .topbar-nav .label { display: none; }
 }
+
+/* ── Team colors (official, via TruColor) ──
+   One main color per team. Indiana (navy) and Las Vegas (black) use their
+   next official color, since their main color can't be seen on this background. */
+.t-ATL { --tc: #C8102E; }
+.t-CHI { --tc: #418FDE; }
+.t-CON { --tc: #FC4C02; }
+.t-DAL { --tc: #C4D600; }
+.t-GSV { --tc: #AD96DC; }
+.t-IND { --tc: #C8102E; }
+.t-LAS { --tc: #702F8A; }
+.t-LVA { --tc: #A7A8A9; }
+.t-MIN { --tc: #236192; }
+.t-NYL { --tc: #6ECEB2; }
+.t-PDX { --tc: #C8102E; }
+.t-PHO, .t-PHX { --tc: #582C83; }
+.t-SEA { --tc: #2C5234; }
+.t-TOR { --tc: #612C51; }
+.t-WAS { --tc: #C8102E; }
+
+.team-chip {
+  display: inline-block;
+  width: 5px;
+  height: 16px;
+  border-radius: 2px;
+  background: var(--tc, var(--faint));
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.14);
+  flex-shrink: 0;
+}

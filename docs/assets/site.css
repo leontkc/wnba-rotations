@@ -109,33 +109,20 @@
 }
 .gc-team {
   display: grid;
-  grid-template-columns: 44px 1fr auto;
+  grid-template-columns: 50px 1fr auto;
   align-items: center;
   gap: 8px;
   padding: 3px 0;
   color: var(--muted);
 }
-.gc-team::before { content: none; }
 .gc-tc {
+  display: flex;
+  align-items: center;
+  gap: 7px;
   font-weight: 800;
   font-size: 0.8rem;
   letter-spacing: 0.04em;
-  position: relative;
-  padding-left: 10px;
 }
-.gc-tc::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 4px;
-  height: 14px;
-  margin-top: -7px;
-  border-radius: 2px;
-  background: var(--faint);
-}
-.gc-team.home .gc-tc::before { background: var(--home); }
-.gc-team.away .gc-tc::before { background: var(--away); }
 .gc-name {
   font-size: 0.85rem;
   white-space: nowrap;

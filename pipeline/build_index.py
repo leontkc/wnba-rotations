@@ -223,8 +223,8 @@ def _game_card(g: dict, date: str) -> str:
 
     def row(tc, score, won, side):
         return (
-            f'            <div class="gc-team {side}{" won" if won else ""}">'
-            f'<span class="gc-tc">{tc}</span>'
+            f'            <div class="gc-team {side} t-{tc}{" won" if won else ""}">'
+            f'<span class="gc-tc"><span class="team-chip" aria-hidden="true"></span>{tc}</span>'
             f'<span class="gc-name">{escape(team_name(tc))}</span>'
             f'<span class="gc-score">{score}</span></div>'
         )

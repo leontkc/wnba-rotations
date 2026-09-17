@@ -28,8 +28,8 @@
   width: 40%;
   pointer-events: none;
 }
-.scoreboard::before { left: 0;  background: linear-gradient(90deg, var(--away-dim), transparent); }
-.scoreboard::after  { right: 0; background: linear-gradient(-90deg, var(--home-dim), transparent); }
+.scoreboard::before { left: 0;  background: linear-gradient(90deg, color-mix(in srgb, var(--away-tint, var(--away)) 22%, transparent), transparent); }
+.scoreboard::after  { right: 0; background: linear-gradient(-90deg, color-mix(in srgb, var(--home-tint, var(--home)) 22%, transparent), transparent); }
 .sb-team {
   display: flex;
   align-items: center;
@@ -41,12 +41,15 @@
 .sb-team.home { flex-direction: row-reverse; text-align: right; }
 .sb-id { display: flex; flex-direction: column; min-width: 0; }
 .sb-tc {
+  display: flex;
+  align-items: center;
+  gap: 7px;
   font-size: 0.8rem;
   font-weight: 800;
   letter-spacing: 0.1em;
+  color: var(--text-2);
 }
-.sb-team.away .sb-tc { color: var(--away); }
-.sb-team.home .sb-tc { color: var(--home); }
+.sb-team.home .sb-tc { flex-direction: row-reverse; }
 .sb-name {
   font-size: 1.05rem;
   font-weight: 600;
@@ -241,9 +244,10 @@ td.pm-neg { color: var(--loss) !important; }
 @media (max-width: 480px) {
   .scoreboard { grid-template-columns: 1fr; padding: 14px 16px; }
   .scoreboard::before, .scoreboard::after { width: 100%; height: 50%; }
-  .scoreboard::before { top: 0; bottom: auto; background: linear-gradient(180deg, var(--away-dim), transparent); }
-  .scoreboard::after  { top: auto; bottom: 0; background: linear-gradient(0deg, var(--home-dim), transparent); }
+  .scoreboard::before { top: 0; bottom: auto; background: linear-gradient(180deg, color-mix(in srgb, var(--away-tint, var(--away)) 22%, transparent), transparent); }
+  .scoreboard::after  { top: auto; bottom: 0; background: linear-gradient(0deg, color-mix(in srgb, var(--home-tint, var(--home)) 22%, transparent), transparent); }
   .sb-team, .sb-team.home { flex-direction: row; justify-content: space-between; text-align: left; }
+  .sb-team.home .sb-tc { flex-direction: row; }
   .sb-mid { order: -1; flex-direction: row; gap: 8px; justify-content: space-between; }
   .sb-team.home { order: 2; }
   .sb-name { font-size: 0.95rem; }
