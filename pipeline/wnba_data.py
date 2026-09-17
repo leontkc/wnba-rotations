@@ -95,6 +95,8 @@ def fetch_season_games(season: str, season_types=None) -> list[dict]:
     Fetch all WNBA games for a season from LeagueGameFinder.
     Returns deduplicated list (one entry per game) sorted by date ascending:
       [{game_id, date, home_tricode, away_tricode, matchup}, ...]
+    Raises RuntimeError if the schedule can't be fetched, so a blocked API
+    fails the run instead of silently reporting zero games.
     """
     if season_types is None:
         season_types = ["Regular Season", "Playoffs"]
@@ -102,19 +104,16 @@ def fetch_season_games(season: str, season_types=None) -> list[dict]:
     all_rows = []
     for stype in season_types:
         log.info(f"Fetching {season} WNBA {stype} schedule…")
-        try:
-            finder = api_call_with_retry(
-                LeagueGameFinder,
-                season_nullable=season,
-                league_id_nullable=LEAGUE_ID,
-                season_type_nullable=stype,
-                timeout=REQUEST_TIMEOUT,
-            )
-            df = finder.get_data_frames()[0]
-            if not df.empty:
-                all_rows.append(df)
-        except Exception as e:
-            log.error(f"LeagueGameFinder failed for {season} {stype}: {e}")
+        finder = api_call_with_retry(
+            LeagueGameFinder,
+            season_nullable=season,
+            league_id_nullable=LEAGUE_ID,
+            season_type_nullable=stype,
+            timeout=REQUEST_TIMEOUT,
+        )
+        df = finder.get_data_frames()[0]
+        if not df.empty:
+            all_rows.append(df)
 
     if not all_rows:
         return []
@@ -374,8 +373,7 @@ def compute_stints(pbp_df: pd.DataFrame) -> list[dict]:
 
         ast_pat = re.compile(rf"\({re.escape(player)}\s+\d+\s+AST\)", re.IGNORECASE)
         made_in_window = window[window["actionType"] == "Made Shot"]
-        ast = int(made_in_window["description"].apply(
-            lambda d: bool(ast_pat.search(str(d)))).sum())
+        ast = int(made_in_window["description"].str.contains(ast_pat, na=False).sum())
 
         stl = int(player_ev["description"].str.contains("STEAL", case=False, na=False).sum())
         blk = int(player_ev["description"].str.contains("BLOCK", case=False, na=False).sum())

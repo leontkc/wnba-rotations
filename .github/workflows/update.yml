@@ -2,8 +2,8 @@ name: Update WNBA Games
 
 on:
   schedule:
-    # Daily at noon UTC during WNBA season (May–Oct)
-    - cron: '0 12 * * *'
+    # Daily at 13:00 UTC (~9 AM ET) during WNBA season (May–Oct)
+    - cron: '0 13 * * *'
   workflow_dispatch:  # also allow manual trigger
 
 permissions:
@@ -11,7 +11,13 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # stats.nba.com blocks GitHub-hosted runners, so this runs on a self-hosted
+    # runner (Windows PC). Steps use Git Bash, which must be on the runner's PATH.
+    runs-on: self-hosted
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
     steps:
       - name: Check if WNBA season (skip Nov–Apr on schedule)
         if: github.event_name == 'schedule'
@@ -26,21 +32,19 @@ jobs:
         if: env.SKIP != 'true'
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        if: env.SKIP != 'true'
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
+      # Uses the runner machine's Python in a venv (setup-python needs admin
+      # rights on self-hosted Windows).
       - name: Install dependencies
         if: env.SKIP != 'true'
-        run: pip install nba_api pandas
+        run: |
+          python -m venv .venv
+          .venv/Scripts/python -m pip install -r requirements.txt
 
       - name: Run pipeline
         if: env.SKIP != 'true'
         run: |
           YEAR=$(date -u +%Y)
-          python -m pipeline.build_season --seasons "$YEAR" "$((YEAR - 1))"
+          .venv/Scripts/python -m pipeline.build_season --seasons "$YEAR" "$((YEAR - 1))"
 
       - name: Commit and push if anything changed
         if: env.SKIP != 'true'
@@ -48,6 +52,9 @@ jobs:
           git config user.name  "wnbarotations-bot"
           git config user.email "bot@wnbarotations.com"
           git add docs/ data/
-          git diff --cached --quiet \
-            || git commit -m "Auto-update: new WNBA games $(date -u +%Y-%m-%d) [skip ci]"
-          git push
+          if git diff --cached --quiet; then
+            echo "No changes."
+          else
+            git commit -m "Auto-update: new WNBA games $(date -u +%Y-%m-%d) [skip ci]"
+            git push
+          fi

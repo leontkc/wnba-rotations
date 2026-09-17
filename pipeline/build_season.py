@@ -101,7 +101,7 @@ def process_game(game_id: str, game_info: dict) -> dict | None:
     try:
         score_flow, home_tc, away_tc, score_home, score_away = compute_score_flow(pbp_df)
     except Exception as e:
-        log.error(f"  compute_score_flow failed: {e}")
+        log.exception(f"  compute_score_flow failed for {game_id}")
         log_error(game_id, date, matchup, str(e))
         return None
 
@@ -115,7 +115,7 @@ def process_game(game_id: str, game_info: dict) -> dict | None:
     try:
         stints = compute_stints(pbp_df)
     except Exception as e:
-        log.error(f"  compute_stints failed: {e}")
+        log.exception(f"  compute_stints failed for {game_id}")
         log_error(game_id, date, matchup, str(e))
         return None
 
@@ -202,7 +202,7 @@ def run_build(seasons: list[str], force_regen: bool = False, single_game_id: str
         try:
             generate_game_html(payload, nav, game_id)
         except Exception as e:
-            log.error(f"  generate_game_html failed for {game_id}: {e}")
+            log.exception(f"  generate_game_html failed for {game_id}")
             log_error(game_id, game_info["date"], game_info["matchup"], str(e))
             errors += 1
             continue
@@ -236,6 +236,10 @@ def run_build(seasons: list[str], force_regen: bool = False, single_game_id: str
         build_player_pages()
     else:
         log.info("Single-game mode: skipping index regeneration.")
+
+    if errors and not processed:
+        log.error(f"All {errors} attempted games failed; exiting with error.")
+        sys.exit(1)
 
 
 # ── CLI ───────────────────────────────────────────────────────────────────────
