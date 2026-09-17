@@ -1,1808 +1,1946 @@
 [
   {
-    "name": "Adebayo",
-    "slug": "adebayo",
-    "team": "MIA",
-    "games": 1
+    "name": "A'ja Wilson",
+    "slug": "a-ja-wilson",
+    "team": "LVA",
+    "games": 133
   },
   {
-    "name": "Akoa Makani",
-    "slug": "akoa-makani",
-    "team": "PHX",
-    "games": 78
+    "name": "Aaliyah Edwards",
+    "slug": "aaliyah-edwards",
+    "team": "CON",
+    "games": 95
   },
   {
-    "name": "Alexander",
-    "slug": "alexander",
-    "team": "TOR",
+    "name": "Aaliyah Nye",
+    "slug": "aaliyah-nye",
+    "team": "ATL",
+    "games": 67
+  },
+  {
+    "name": "Aari McDonald",
+    "slug": "aari-mcdonald",
+    "team": "IND",
+    "games": 46
+  },
+  {
+    "name": "Aerial Powers",
+    "slug": "aerial-powers",
+    "team": "IND",
+    "games": 35
+  },
+  {
+    "name": "Aicha Coulibaly",
+    "slug": "aicha-coulibaly",
+    "team": "CHI",
+    "games": 28
+  },
+  {
+    "name": "Ajae Petty",
+    "slug": "ajae-petty",
+    "team": "DAL",
+    "games": 2
+  },
+  {
+    "name": "Alanna Smith",
+    "slug": "alanna-smith",
+    "team": "DAL",
+    "games": 131
+  },
+  {
+    "name": "Alex Fowler",
+    "slug": "alex-fowler",
+    "team": "NYL",
+    "games": 2
+  },
+  {
+    "name": "Alex Wilson",
+    "slug": "alex-wilson",
+    "team": "WAS",
     "games": 4
   },
   {
-    "name": "Allemand",
-    "slug": "allemand",
-    "team": "LAS",
-    "games": 63
-  },
-  {
-    "name": "Allen",
-    "slug": "allen",
-    "team": "PHO",
-    "games": 154
-  },
-  {
-    "name": "Amihere",
-    "slug": "amihere",
-    "team": "ATL",
-    "games": 83
-  },
-  {
-    "name": "Amoore",
-    "slug": "amoore",
-    "team": "WAS",
-    "games": 40
-  },
-  {
-    "name": "Anderson",
-    "slug": "anderson",
-    "team": "MIN",
+    "name": "Alexa Held",
+    "slug": "alexa-held",
+    "team": "PHX",
     "games": 1
   },
   {
-    "name": "Angloma",
-    "slug": "angloma",
-    "team": "CON",
-    "games": 36
-  },
-  {
-    "name": "Astier",
-    "slug": "astier",
-    "team": "NYL",
-    "games": 40
-  },
-  {
-    "name": "Atkins",
-    "slug": "atkins",
-    "team": "WAS",
-    "games": 112
-  },
-  {
-    "name": "Atwell",
-    "slug": "atwell",
-    "team": "PHO",
-    "games": 7
-  },
-  {
-    "name": "Austin",
-    "slug": "austin",
-    "team": "WAS",
-    "games": 89
-  },
-  {
-    "name": "Ayayi",
-    "slug": "ayayi",
+    "name": "Alexis Prince",
+    "slug": "alexis-prince",
     "team": "PHX",
-    "games": 33
+    "games": 1
   },
   {
-    "name": "Badiane",
-    "slug": "badiane",
-    "team": "MIN",
+    "name": "Alicia Florez",
+    "slug": "alicia-florez",
+    "team": "WAS",
+    "games": 28
+  },
+  {
+    "name": "Alicia Florez Getino",
+    "slug": "alicia-florez-getino",
+    "team": "WAS",
     "games": 3
   },
   {
-    "name": "Banham",
-    "slug": "banham",
-    "team": "CON",
-    "games": 117
-  },
-  {
-    "name": "Bankole",
-    "slug": "bankole",
-    "team": "TOR",
-    "games": 10
-  },
-  {
-    "name": "Barker",
-    "slug": "barker",
+    "name": "Alissa Pili",
+    "slug": "alissa-pili",
     "team": "LAS",
-    "games": 60
+    "games": 49
   },
   {
-    "name": "Beers",
-    "slug": "beers",
-    "team": "CON",
-    "games": 34
-  },
-  {
-    "name": "Bell",
-    "slug": "bell",
-    "team": "LVA",
-    "games": 79
-  },
-  {
-    "name": "Berger",
-    "slug": "berger",
-    "team": "IND",
-    "games": 31
-  },
-  {
-    "name": "Bertsch",
-    "slug": "bertsch",
-    "team": "PHO",
-    "games": 11
-  },
-  {
-    "name": "Betts",
-    "slug": "betts",
-    "team": "WAS",
-    "games": 40
-  },
-  {
-    "name": "Bibby",
-    "slug": "bibby",
-    "team": "GSV",
-    "games": 21
-  },
-  {
-    "name": "Bickle",
-    "slug": "bickle",
-    "team": "CON",
-    "games": 11
-  },
-  {
-    "name": "Billings",
-    "slug": "billings",
-    "team": "DAL",
-    "games": 106
-  },
-  {
-    "name": "Bonner",
-    "slug": "bonner",
-    "team": "CON",
-    "games": 129
-  },
-  {
-    "name": "Borlase",
-    "slug": "borlase",
-    "team": "ATL",
-    "games": 40
-  },
-  {
-    "name": "Boston",
-    "slug": "boston",
+    "name": "Aliyah Boston",
+    "slug": "aliyah-boston",
     "team": "IND",
     "games": 130
   },
   {
-    "name": "Bradford",
-    "slug": "bradford",
-    "team": "LVA",
+    "name": "Allisha Gray",
+    "slug": "allisha-gray",
+    "team": "ATL",
+    "games": 127
+  },
+  {
+    "name": "Alysha Clark",
+    "slug": "alysha-clark",
+    "team": "DAL",
+    "games": 115
+  },
+  {
+    "name": "Alyssa Thomas",
+    "slug": "alyssa-thomas",
+    "team": "PHX",
+    "games": 135
+  },
+  {
+    "name": "Amy Atwell",
+    "slug": "amy-atwell",
+    "team": "PHO",
+    "games": 7
+  },
+  {
+    "name": "Amy Okonkwo",
+    "slug": "amy-okonkwo",
+    "team": "PDX",
+    "games": 12
+  },
+  {
+    "name": "Anastasiia Olairi Kosu",
+    "slug": "anastasiia-olairi-kosu",
+    "team": "MIN",
+    "games": 54
+  },
+  {
+    "name": "Aneesah Morrow",
+    "slug": "aneesah-morrow",
+    "team": "TOR",
+    "games": 68
+  },
+  {
+    "name": "Angel Reese",
+    "slug": "angel-reese",
+    "team": "ATL",
+    "games": 103
+  },
+  {
+    "name": "Angela Dugalic",
+    "slug": "angela-dugalic",
+    "team": "WAS",
+    "games": 34
+  },
+  {
+    "name": "Anneli Maley",
+    "slug": "anneli-maley",
+    "team": "NYL",
+    "games": 9
+  },
+  {
+    "name": "Antonia Delaere",
+    "slug": "antonia-delaere",
+    "team": "MIN",
+    "games": 37
+  },
+  {
+    "name": "Ariel Atkins",
+    "slug": "ariel-atkins",
+    "team": "LAS",
+    "games": 112
+  },
+  {
+    "name": "Arike Ogunbowale",
+    "slug": "arike-ogunbowale",
+    "team": "DAL",
+    "games": 107
+  },
+  {
+    "name": "Ashlon Jackson",
+    "slug": "ashlon-jackson",
+    "team": "CON",
+    "games": 15
+  },
+  {
+    "name": "Ashten Prechtel",
+    "slug": "ashten-prechtel",
+    "team": "GSV",
     "games": 4
   },
   {
-    "name": "Brink",
-    "slug": "brink",
-    "team": "LAS",
-    "games": 64
+    "name": "Astou Ndour-Fall",
+    "slug": "astou-ndour-fall",
+    "team": "CON",
+    "games": 25
   },
   {
-    "name": "Brochant",
-    "slug": "brochant",
-    "team": "PHX",
-    "games": 39
+    "name": "Aubrey Griffin",
+    "slug": "aubrey-griffin",
+    "team": "NYL",
+    "games": 4
+  },
+  {
+    "name": "Awa Fam",
+    "slug": "awa-fam",
+    "team": "SEA",
+    "games": 33
+  },
+  {
+    "name": "Awak Kuier",
+    "slug": "awak-kuier",
+    "team": "DAL",
+    "games": 37
+  },
+  {
+    "name": "Aziaha James",
+    "slug": "aziaha-james",
+    "team": "DAL",
+    "games": 73
+  },
+  {
+    "name": "Azura Stevens",
+    "slug": "azura-stevens",
+    "team": "CHI",
+    "games": 95
+  },
+  {
+    "name": "Azzi Fudd",
+    "slug": "azzi-fudd",
+    "team": "DAL",
+    "games": 30
+  },
+  {
+    "name": "Bam Adebayo",
+    "slug": "bam-adebayo",
+    "team": "MIA",
+    "games": 1
+  },
+  {
+    "name": "Ben Sheppard",
+    "slug": "ben-sheppard",
+    "team": "IND",
+    "games": 1
+  },
+  {
+    "name": "Bennedict Mathurin",
+    "slug": "bennedict-mathurin",
+    "team": "IND",
+    "games": 1
+  },
+  {
+    "name": "Betnijah Laney-Hamilton",
+    "slug": "betnijah-laney-hamilton",
+    "team": "WAS",
+    "games": 65
+  },
+  {
+    "name": "Breanna Stewart",
+    "slug": "breanna-stewart",
+    "team": "NYL",
+    "games": 122
+  },
+  {
+    "name": "Bree Hall",
+    "slug": "bree-hall",
+    "team": "IND",
+    "games": 12
+  },
+  {
+    "name": "Bria Hartley",
+    "slug": "bria-hartley",
+    "team": "CON",
+    "games": 38
+  },
+  {
+    "name": "Brianna Turner",
+    "slug": "brianna-turner",
+    "team": "LVA",
+    "games": 96
+  },
+  {
+    "name": "Bridget Carleton",
+    "slug": "bridget-carleton",
+    "team": "PDX",
+    "games": 140
+  },
+  {
+    "name": "Brionna Jones",
+    "slug": "brionna-jones",
+    "team": "ATL",
+    "games": 103
+  },
+  {
+    "name": "Brittney Griner",
+    "slug": "brittney-griner",
+    "team": "CON",
+    "games": 92
+  },
+  {
+    "name": "Brittney Sykes",
+    "slug": "brittney-sykes",
+    "team": "TOR",
+    "games": 77
   },
   {
     "name": "Brown",
     "slug": "brown",
     "team": "DAL",
-    "games": 119
+    "games": 17
   },
   {
-    "name": "Brown-Turner",
-    "slug": "brown-turner",
-    "team": "WAS",
-    "games": 2
+    "name": "Caitlin Bickle",
+    "slug": "caitlin-bickle",
+    "team": "CON",
+    "games": 11
   },
   {
-    "name": "Bueckers",
-    "slug": "bueckers",
-    "team": "DAL",
-    "games": 74
+    "name": "Caitlin Clark",
+    "slug": "caitlin-clark",
+    "team": "IND",
+    "games": 91
   },
   {
-    "name": "Buhner",
-    "slug": "buhner",
+    "name": "Cameron Brink",
+    "slug": "cameron-brink",
+    "team": "LAS",
+    "games": 64
+  },
+  {
+    "name": "Camryn Taylor",
+    "slug": "camryn-taylor",
+    "team": "MIN",
+    "games": 8
+  },
+  {
+    "name": "Carla Leite",
+    "slug": "carla-leite",
     "team": "PDX",
+    "games": 75
+  },
+  {
+    "name": "Cassandre Prosper",
+    "slug": "cassandre-prosper",
+    "team": "WAS",
     "games": 35
   },
   {
-    "name": "Burke",
-    "slug": "burke",
-    "team": "NYL",
-    "games": 120
+    "name": "Cecilia Zandalasini",
+    "slug": "cecilia-zandalasini",
+    "team": "GSV",
+    "games": 107
   },
   {
-    "name": "Burrell",
-    "slug": "burrell",
+    "name": "Celeste Taylor",
+    "slug": "celeste-taylor",
+    "team": "PHO",
+    "games": 24
+  },
+  {
+    "name": "Chance Gray",
+    "slug": "chance-gray",
     "team": "LAS",
-    "games": 103
+    "games": 37
   },
   {
-    "name": "Burton",
-    "slug": "burton",
+    "name": "Charisma Osborne",
+    "slug": "charisma-osborne",
+    "team": "PHO",
+    "games": 2
+  },
+  {
+    "name": "Charlisse Leger-Walker",
+    "slug": "charlisse-leger-walker",
     "team": "CON",
-    "games": 122
+    "games": 40
   },
   {
-    "name": "Caldwell",
-    "slug": "caldwell",
-    "team": "ATL",
-    "games": 111
-  },
-  {
-    "name": "Canada",
-    "slug": "canada",
-    "team": "ATL",
-    "games": 92
-  },
-  {
-    "name": "Cannon",
-    "slug": "cannon",
+    "name": "Chelsea Gray",
+    "slug": "chelsea-gray",
     "team": "LVA",
-    "games": 42
+    "games": 128
   },
   {
-    "name": "Cardoso",
-    "slug": "cardoso",
-    "team": "CHI",
-    "games": 111
+    "name": "Chennedy Carter",
+    "slug": "chennedy-carter",
+    "team": "LVA",
+    "games": 46
   },
   {
-    "name": "Carleton",
-    "slug": "carleton",
-    "team": "MIN",
-    "games": 140
-  },
-  {
-    "name": "Carrera",
-    "slug": "carrera",
-    "team": "NYL",
-    "games": 19
-  },
-  {
-    "name": "Carrington",
-    "slug": "carrington",
-    "team": "CON",
-    "games": 90
-  },
-  {
-    "name": "Carter",
-    "slug": "carter",
-    "team": "CHI",
+    "name": "Cheyenne Parker-Tyus",
+    "slug": "cheyenne-parker-tyus",
+    "team": "LVA",
     "games": 60
   },
   {
-    "name": "Cechova",
-    "slug": "cechova",
+    "name": "Chloe Bibby",
+    "slug": "chloe-bibby",
     "team": "MIN",
-    "games": 3
-  },
-  {
-    "name": "Charles",
-    "slug": "charles",
-    "team": "ATL",
-    "games": 159
-  },
-  {
-    "name": "Chen",
-    "slug": "chen",
-    "team": "GSV",
-    "games": 65
-  },
-  {
-    "name": "Ciezki",
-    "slug": "ciezki",
-    "team": "PHX",
-    "games": 4
-  },
-  {
-    "name": "Citron",
-    "slug": "citron",
-    "team": "WAS",
-    "games": 81
-  },
-  {
-    "name": "Clarendon",
-    "slug": "clarendon",
-    "team": "LAS",
     "games": 21
   },
   {
-    "name": "Clark",
-    "slug": "clark",
+    "name": "Christyn Williams",
+    "slug": "christyn-williams",
+    "team": "DAL",
+    "games": 5
+  },
+  {
+    "name": "Costanza Verona",
+    "slug": "costanza-verona",
+    "team": "DAL",
+    "games": 1
+  },
+  {
+    "name": "Cotie McMahon",
+    "slug": "cotie-mcmahon",
+    "team": "WAS",
+    "games": 38
+  },
+  {
+    "name": "Courtney Vandersloot",
+    "slug": "courtney-vandersloot",
+    "team": "CHI",
+    "games": 72
+  },
+  {
+    "name": "Courtney Williams",
+    "slug": "courtney-williams",
+    "team": "MIN",
+    "games": 141
+  },
+  {
+    "name": "Crystal Bradford",
+    "slug": "crystal-bradford",
+    "team": "LVA",
+    "games": 4
+  },
+  {
+    "name": "Crystal Dangerfield",
+    "slug": "crystal-dangerfield",
+    "team": "LAS",
+    "games": 33
+  },
+  {
+    "name": "Damiris Dantas",
+    "slug": "damiris-dantas",
     "team": "IND",
-    "games": 198
+    "games": 72
   },
   {
-    "name": "Cloud",
-    "slug": "cloud",
-    "team": "PHO",
-    "games": 123
+    "name": "Dana Evans",
+    "slug": "dana-evans",
+    "team": "LVA",
+    "games": 106
   },
   {
-    "name": "Coffey",
-    "slug": "coffey",
+    "name": "Darianna Littlepage-Buggs",
+    "slug": "darianna-littlepage-buggs",
+    "team": "WAS",
+    "games": 3
+  },
+  {
+    "name": "DeWanna Bonner",
+    "slug": "dewanna-bonner",
     "team": "ATL",
     "games": 129
   },
   {
-    "name": "Collier",
-    "slug": "collier",
-    "team": "MIN",
-    "games": 96
-  },
-  {
-    "name": "Colson",
-    "slug": "colson",
-    "team": "LVA",
-    "games": 65
-  },
-  {
-    "name": "Conde",
-    "slug": "conde",
-    "team": "TOR",
-    "games": 33
-  },
-  {
-    "name": "Cooke",
-    "slug": "cooke",
-    "team": "LAS",
-    "games": 95
-  },
-  {
-    "name": "Copper",
-    "slug": "copper",
-    "team": "PHO",
-    "games": 116
-  },
-  {
-    "name": "Coulibaly",
-    "slug": "coulibaly",
-    "team": "CHI",
-    "games": 28
-  },
-  {
-    "name": "Cubaj",
-    "slug": "cubaj",
-    "team": "ATL",
-    "games": 30
-  },
-  {
-    "name": "Cunningham",
-    "slug": "cunningham",
-    "team": "PHO",
-    "games": 111
-  },
-  {
-    "name": "Dangerfield",
-    "slug": "dangerfield",
-    "team": "ATL",
-    "games": 33
-  },
-  {
-    "name": "Dantas",
-    "slug": "dantas",
-    "team": "IND",
-    "games": 72
-  },
-  {
-    "name": "Davis",
-    "slug": "davis",
-    "team": "NYL",
-    "games": 36
-  },
-  {
-    "name": "DeShields",
-    "slug": "deshields",
-    "team": "CHI",
-    "games": 32
-  },
-  {
-    "name": "Delaere",
-    "slug": "delaere",
-    "team": "MIN",
-    "games": 37
-  },
-  {
-    "name": "DiLeo",
-    "slug": "dileo",
-    "team": "PDX",
-    "games": 14
-  },
-  {
-    "name": "Diaby",
-    "slug": "diaby",
-    "team": "CON",
-    "games": 13
-  },
-  {
-    "name": "Diggins",
-    "slug": "diggins",
-    "team": "SEA",
-    "games": 65
-  },
-  {
-    "name": "Diggins-Smith",
-    "slug": "diggins-smith",
-    "team": "SEA",
-    "games": 42
-  },
-  {
-    "name": "Dixon",
-    "slug": "dixon",
-    "team": "PHO",
-    "games": 18
-  },
-  {
-    "name": "Dojkic",
-    "slug": "dojkic",
-    "team": "NYL",
-    "games": 28
-  },
-  {
-    "name": "Dojki\u0107",
-    "slug": "dojkic",
-    "team": "NYL",
-    "games": 12
-  },
-  {
-    "name": "Dolson",
-    "slug": "dolson",
-    "team": "WAS",
-    "games": 122
-  },
-  {
-    "name": "Dugalic",
-    "slug": "dugalic",
-    "team": "WAS",
-    "games": 34
-  },
-  {
-    "name": "Dunn",
-    "slug": "dunn",
-    "team": "PHX",
-    "games": 1
-  },
-  {
-    "name": "Edwards",
-    "slug": "edwards",
-    "team": "WAS",
-    "games": 95
-  },
-  {
-    "name": "Egbo",
-    "slug": "egbo",
-    "team": "CON",
-    "games": 9
-  },
-  {
-    "name": "Engstler",
-    "slug": "engstler",
-    "team": "WAS",
-    "games": 112
-  },
-  {
-    "name": "Evans",
-    "slug": "evans",
-    "team": "CHI",
-    "games": 106
-  },
-  {
-    "name": "Fagbenle",
-    "slug": "fagbenle",
-    "team": "IND",
-    "games": 47
-  },
-  {
-    "name": "Fair",
-    "slug": "fair",
-    "team": "LVA",
-    "games": 1
-  },
-  {
-    "name": "Fam",
-    "slug": "fam",
-    "team": "SEA",
-    "games": 33
-  },
-  {
-    "name": "Fankam Mendjiadeu",
-    "slug": "fankam-mendjiadeu",
-    "team": "SEA",
-    "games": 7
-  },
-  {
-    "name": "Fasoula",
-    "slug": "fasoula",
-    "team": "TOR",
-    "games": 3
-  },
-  {
-    "name": "Fauthoux",
-    "slug": "fauthoux",
-    "team": "NYL",
-    "games": 18
-  },
-  {
-    "name": "Feagin",
-    "slug": "feagin",
-    "team": "LAS",
-    "games": 19
-  },
-  {
-    "name": "Fiebich",
-    "slug": "fiebich",
-    "team": "NYL",
-    "games": 108
-  },
-  {
-    "name": "Fingall",
-    "slug": "fingall",
-    "team": "GSV",
-    "games": 9
-  },
-  {
-    "name": "Florez",
-    "slug": "florez",
-    "team": "WAS",
-    "games": 28
-  },
-  {
-    "name": "Florez Getino",
-    "slug": "florez-getino",
-    "team": "WAS",
-    "games": 3
-  },
-  {
-    "name": "Fowler",
-    "slug": "fowler",
-    "team": "NYL",
-    "games": 2
-  },
-  {
-    "name": "Fudd",
-    "slug": "fudd",
-    "team": "DAL",
-    "games": 30
-  },
-  {
-    "name": "F\u00e1gb\u00e9nl\u00e9",
-    "slug": "fagbenle",
-    "team": "GSV",
-    "games": 40
-  },
-  {
-    "name": "Gardner",
-    "slug": "gardner",
-    "team": "NYL",
-    "games": 81
-  },
-  {
-    "name": "Geiselsoder",
-    "slug": "geiselsoder",
-    "team": "PDX",
-    "games": 21
-  },
-  {
-    "name": "Geisels\u00f6der",
-    "slug": "geiselsoder",
-    "team": "DAL",
-    "games": 28
-  },
-  {
-    "name": "Gondrezick",
-    "slug": "gondrezick",
-    "team": "CHI",
-    "games": 5
-  },
-  {
-    "name": "Gray",
-    "slug": "gray",
-    "team": "ATL",
-    "games": 279
-  },
-  {
-    "name": "Green",
-    "slug": "green",
-    "team": "TOR",
-    "games": 3
-  },
-  {
-    "name": "Griffin",
-    "slug": "griffin",
-    "team": "NYL",
-    "games": 4
-  },
-  {
-    "name": "Griner",
-    "slug": "griner",
-    "team": "PHO",
-    "games": 92
-  },
-  {
-    "name": "Gustafson",
-    "slug": "gustafson",
-    "team": "LVA",
-    "games": 95
-  },
-  {
-    "name": "Haliburton",
-    "slug": "haliburton",
-    "team": "IND",
-    "games": 1
-  },
-  {
-    "name": "Hall",
-    "slug": "hall",
-    "team": "GSV",
-    "games": 12
-  },
-  {
-    "name": "Hamby",
-    "slug": "hamby",
+    "name": "Dearica Hamby",
+    "slug": "dearica-hamby",
     "team": "LAS",
     "games": 124
   },
   {
-    "name": "Hamzova",
-    "slug": "hamzova",
-    "team": "MIN",
-    "games": 14
-  },
-  {
-    "name": "Han",
-    "slug": "han",
-    "team": "NYL",
-    "games": 29
-  },
-  {
-    "name": "Harmon",
-    "slug": "harmon",
-    "team": "WAS",
-    "games": 12
-  },
-  {
-    "name": "Harris",
-    "slug": "harris",
-    "team": "CON",
-    "games": 83
-  },
-  {
-    "name": "Harrison",
-    "slug": "harrison",
-    "team": "CHI",
-    "games": 110
-  },
-  {
-    "name": "Hartley",
-    "slug": "hartley",
-    "team": "CON",
-    "games": 38
-  },
-  {
-    "name": "Hayes",
-    "slug": "hayes",
-    "team": "LVA",
-    "games": 103
-  },
-  {
-    "name": "Held",
-    "slug": "held",
-    "team": "PHX",
-    "games": 72
-  },
-  {
-    "name": "Henderson",
-    "slug": "henderson",
+    "name": "Destanni Henderson",
+    "slug": "destanni-henderson",
     "team": "ATL",
     "games": 6
   },
   {
-    "name": "Herbert Harrigan",
-    "slug": "herbert-harrigan",
-    "team": "PHO",
-    "games": 33
-  },
-  {
-    "name": "Herro",
-    "slug": "herro",
-    "team": "MIA",
-    "games": 1
-  },
-  {
-    "name": "Hiedeman",
-    "slug": "hiedeman",
-    "team": "MIN",
-    "games": 138
-  },
-  {
-    "name": "Highsmith",
-    "slug": "highsmith",
-    "team": "MIA",
-    "games": 1
-  },
-  {
-    "name": "Hillmon",
-    "slug": "hillmon",
-    "team": "ATL",
-    "games": 128
-  },
-  {
-    "name": "Hines-Allen",
-    "slug": "hines-allen",
+    "name": "DiDi Richards",
+    "slug": "didi-richards",
     "team": "WAS",
-    "games": 125
+    "games": 20
   },
   {
-    "name": "Hof",
-    "slug": "hof",
+    "name": "DiJonai Carrington",
+    "slug": "dijonai-carrington",
+    "team": "CHI",
+    "games": 90
+  },
+  {
+    "name": "Diamond DeShields",
+    "slug": "diamond-deshields",
+    "team": "CHI",
+    "games": 32
+  },
+  {
+    "name": "Diamond Miller",
+    "slug": "diamond-miller",
+    "team": "CON",
+    "games": 106
+  },
+  {
+    "name": "Diana Taurasi",
+    "slug": "diana-taurasi",
+    "team": "PHO",
+    "games": 38
+  },
+  {
+    "name": "Dominique Malonga",
+    "slug": "dominique-malonga",
+    "team": "SEA",
+    "games": 76
+  },
+  {
+    "name": "Dorka Juhasz",
+    "slug": "dorka-juhasz",
+    "team": "MIN",
+    "games": 58
+  },
+  {
+    "name": "Dulcy Fankam Mendjiadeu",
+    "slug": "dulcy-fankam-mendjiadeu",
+    "team": "SEA",
+    "games": 7
+  },
+  {
+    "name": "Duncan Robinson",
+    "slug": "duncan-robinson",
+    "team": "MIA",
+    "games": 1
+  },
+  {
+    "name": "Dyaisha Fair",
+    "slug": "dyaisha-fair",
+    "team": "LVA",
+    "games": 1
+  },
+  {
+    "name": "Eliska Hamzova",
+    "slug": "eliska-hamzova",
+    "team": "MIN",
+    "games": 14
+  },
+  {
+    "name": "Eliska Joklova",
+    "slug": "eliska-joklova",
+    "team": "MIN",
+    "games": 7
+  },
+  {
+    "name": "Elizabeth Kitley",
+    "slug": "elizabeth-kitley",
+    "team": "LVA",
+    "games": 12
+  },
+  {
+    "name": "Elizabeth Williams",
+    "slug": "elizabeth-williams",
+    "team": "CHI",
+    "games": 92
+  },
+  {
+    "name": "Emese Hof",
+    "slug": "emese-hof",
     "team": "MIN",
     "games": 3
+  },
+  {
+    "name": "Emily Engstler",
+    "slug": "emily-engstler",
+    "team": "PDX",
+    "games": 112
+  },
+  {
+    "name": "Emma Cannon",
+    "slug": "emma-cannon",
+    "team": "LAS",
+    "games": 42
+  },
+  {
+    "name": "Emma Cechova",
+    "slug": "emma-cechova",
+    "team": "MIN",
+    "games": 3
+  },
+  {
+    "name": "Emma Meesseman",
+    "slug": "emma-meesseman",
+    "team": "NYL",
+    "games": 20
+  },
+  {
+    "name": "Erica Wheeler",
+    "slug": "erica-wheeler",
+    "team": "LAS",
+    "games": 127
+  },
+  {
+    "name": "Ezi Magbegor",
+    "slug": "ezi-magbegor",
+    "team": "SEA",
+    "games": 99
+  },
+  {
+    "name": "Ezinne Kalu",
+    "slug": "ezinne-kalu",
+    "team": "ATL",
+    "games": 2
+  },
+  {
+    "name": "Flau'jae Johnson",
+    "slug": "flau-jae-johnson",
+    "team": "SEA",
+    "games": 38
+  },
+  {
+    "name": "Frieda Buhner",
+    "slug": "frieda-buhner",
+    "team": "PDX",
+    "games": 35
+  },
+  {
+    "name": "Gabby Williams",
+    "slug": "gabby-williams",
+    "team": "GSV",
+    "games": 98
+  },
+  {
+    "name": "Gabriela Jaquez",
+    "slug": "gabriela-jaquez",
+    "team": "CHI",
+    "games": 35
+  },
+  {
+    "name": "Georgia Amoore",
+    "slug": "georgia-amoore",
+    "team": "WAS",
+    "games": 40
+  },
+  {
+    "name": "Gianna Kneepkens",
+    "slug": "gianna-kneepkens",
+    "team": "CON",
+    "games": 32
+  },
+  {
+    "name": "Grace Berger",
+    "slug": "grace-berger",
+    "team": "DAL",
+    "games": 31
+  },
+  {
+    "name": "Grace VanSlooten",
+    "slug": "grace-vanslooten",
+    "team": "IND",
+    "games": 18
+  },
+  {
+    "name": "Hailey Van Lith",
+    "slug": "hailey-van-lith",
+    "team": "CON",
+    "games": 48
+  },
+  {
+    "name": "Haley Jones",
+    "slug": "haley-jones",
+    "team": "DAL",
+    "games": 77
+  },
+  {
+    "name": "Haley Peters",
+    "slug": "haley-peters",
+    "team": "CON",
+    "games": 32
+  },
+  {
+    "name": "Haywood Highsmith",
+    "slug": "haywood-highsmith",
+    "team": "MIA",
+    "games": 1
+  },
+  {
+    "name": "Holly Winterburn",
+    "slug": "holly-winterburn",
+    "team": "PDX",
+    "games": 27
   },
   {
     "name": "Holmes",
     "slug": "holmes",
     "team": "SEA",
-    "games": 66
-  },
-  {
-    "name": "Horston",
-    "slug": "horston",
-    "team": "SEA",
-    "games": 76
-  },
-  {
-    "name": "Howard",
-    "slug": "howard",
-    "team": "DAL",
-    "games": 215
-  },
-  {
-    "name": "Hull",
-    "slug": "hull",
-    "team": "IND",
-    "games": 128
-  },
-  {
-    "name": "Ionescu",
-    "slug": "ionescu",
-    "team": "NYL",
-    "games": 117
-  },
-  {
-    "name": "Iriafen",
-    "slug": "iriafen",
-    "team": "WAS",
-    "games": 81
-  },
-  {
-    "name": "J. Brown",
-    "slug": "j-brown",
-    "team": "DAL",
-    "games": 14
-  },
-  {
-    "name": "J. Holmes",
-    "slug": "j-holmes",
-    "team": "SEA",
-    "games": 1
-  },
-  {
-    "name": "Jackson",
-    "slug": "jackson",
-    "team": "IND",
-    "games": 98
-  },
-  {
-    "name": "James",
-    "slug": "james",
-    "team": "DAL",
-    "games": 73
-  },
-  {
-    "name": "Jaquez",
-    "slug": "jaquez",
-    "team": "CHI",
-    "games": 35
-  },
-  {
-    "name": "Jaquez Jr.",
-    "slug": "jaquez-jr",
-    "team": "MIA",
-    "games": 1
-  },
-  {
-    "name": "Jefferson",
-    "slug": "jefferson",
-    "team": "CON",
-    "games": 28
-  },
-  {
-    "name": "Jocyte",
-    "slug": "jocyte",
-    "team": "GSV",
-    "games": 14
-  },
-  {
-    "name": "Johannes",
-    "slug": "johannes",
-    "team": "NYL",
-    "games": 37
-  },
-  {
-    "name": "Johann\u00e8s",
-    "slug": "johannes",
-    "team": "NYL",
-    "games": 44
-  },
-  {
-    "name": "Johnson",
-    "slug": "johnson",
-    "team": "SEA",
-    "games": 71
-  },
-  {
-    "name": "Joklova",
-    "slug": "joklova",
-    "team": "MIN",
-    "games": 7
-  },
-  {
-    "name": "Jones",
-    "slug": "jones",
-    "team": "NYL",
-    "games": 281
-  },
-  {
-    "name": "Jovi\u0107",
-    "slug": "jovic",
-    "team": "MIA",
-    "games": 1
-  },
-  {
-    "name": "Juhasz",
-    "slug": "juhasz",
-    "team": "MIN",
-    "games": 17
-  },
-  {
-    "name": "Juh\u00e1sz",
-    "slug": "juhasz",
-    "team": "MIN",
-    "games": 41
-  },
-  {
-    "name": "Juskaite",
-    "slug": "juskaite",
-    "team": "TOR",
-    "games": 40
-  },
-  {
-    "name": "K. Brown",
-    "slug": "k-brown",
-    "team": "DAL",
-    "games": 23
-  },
-  {
-    "name": "K. Williams",
-    "slug": "k-williams",
-    "team": "PHX",
-    "games": 2
-  },
-  {
-    "name": "Kalu",
-    "slug": "kalu",
-    "team": "ATL",
-    "games": 2
-  },
-  {
-    "name": "Key",
-    "slug": "key",
-    "team": "TOR",
-    "games": 35
-  },
-  {
-    "name": "King",
-    "slug": "king",
-    "team": "LAS",
-    "games": 23
-  },
-  {
-    "name": "Kitley",
-    "slug": "kitley",
-    "team": "LVA",
-    "games": 12
-  },
-  {
-    "name": "Kliundikova",
-    "slug": "kliundikova",
-    "team": "MIN",
-    "games": 39
-  },
-  {
-    "name": "Kneepkens",
-    "slug": "kneepkens",
-    "team": "CON",
-    "games": 32
-  },
-  {
-    "name": "Kone",
-    "slug": "kone",
-    "team": "ATL",
-    "games": 32
-  },
-  {
-    "name": "Kon\u00e9",
-    "slug": "kone",
-    "team": "MIN",
-    "games": 48
-  },
-  {
-    "name": "Kosu",
-    "slug": "kosu",
-    "team": "MIN",
-    "games": 54
-  },
-  {
-    "name": "Kuier",
-    "slug": "kuier",
-    "team": "DAL",
-    "games": 37
-  },
-  {
-    "name": "Lacan",
-    "slug": "lacan",
-    "team": "CON",
-    "games": 52
-  },
-  {
-    "name": "Laksa",
-    "slug": "laksa",
-    "team": "PHX",
-    "games": 35
-  },
-  {
-    "name": "Lambert",
-    "slug": "lambert",
-    "team": "IND",
-    "games": 1
-  },
-  {
-    "name": "Laney-Hamilton",
-    "slug": "laney-hamilton",
-    "team": "NYL",
-    "games": 65
-  },
-  {
-    "name": "Latson",
-    "slug": "latson",
-    "team": "LAS",
-    "games": 17
-  },
-  {
-    "name": "Leger-Walker",
-    "slug": "leger-walker",
-    "team": "CON",
-    "games": 40
-  },
-  {
-    "name": "Leite",
-    "slug": "leite",
-    "team": "GSV",
-    "games": 75
-  },
-  {
-    "name": "Linskens",
-    "slug": "linskens",
-    "team": "GSV",
-    "games": 23
-  },
-  {
-    "name": "Littlepage-Buggs",
-    "slug": "littlepage-buggs",
-    "team": "WAS",
     "games": 3
   },
   {
-    "name": "Lopez S\u00e9n\u00e9chal",
-    "slug": "lopez-senechal",
-    "team": "DAL",
-    "games": 27
+    "name": "Iliana Rupert",
+    "slug": "iliana-rupert",
+    "team": "GSV",
+    "games": 23
   },
   {
-    "name": "Love",
-    "slug": "love",
+    "name": "Indya Nivar",
+    "slug": "indya-nivar",
+    "team": "ATL",
+    "games": 20
+  },
+  {
+    "name": "Isabelle Harrison",
+    "slug": "isabelle-harrison",
+    "team": "TOR",
+    "games": 99
+  },
+  {
+    "name": "Isobel Borlase",
+    "slug": "isobel-borlase",
+    "team": "ATL",
+    "games": 40
+  },
+  {
+    "name": "Ivana Dojki\u0107",
+    "slug": "ivana-dojkic",
+    "team": "NYL",
+    "games": 28
+  },
+  {
+    "name": "JJ Quinerly",
+    "slug": "jj-quinerly",
+    "team": "DAL",
+    "games": 36
+  },
+  {
+    "name": "Jackie Young",
+    "slug": "jackie-young",
+    "team": "LVA",
+    "games": 138
+  },
+  {
+    "name": "Jacy Sheldon",
+    "slug": "jacy-sheldon",
+    "team": "CHI",
+    "games": 110
+  },
+  {
+    "name": "Jade Melbourne",
+    "slug": "jade-melbourne",
+    "team": "SEA",
+    "games": 119
+  },
+  {
+    "name": "Jaelyn Brown",
+    "slug": "jaelyn-brown",
+    "team": "CON",
+    "games": 24
+  },
+  {
+    "name": "Jaime Jaquez Jr.",
+    "slug": "jaime-jaquez-jr",
     "team": "MIA",
     "games": 1
   },
   {
-    "name": "Loyd",
-    "slug": "loyd",
-    "team": "SEA",
-    "games": 133
+    "name": "Jakia Brown-Turner",
+    "slug": "jakia-brown-turner",
+    "team": "WAS",
+    "games": 2
   },
   {
-    "name": "M. Holmes",
-    "slug": "m-holmes",
-    "team": "SEA",
-    "games": 7
-  },
-  {
-    "name": "Mabrey",
-    "slug": "mabrey",
-    "team": "CHI",
-    "games": 114
-  },
-  {
-    "name": "Mack",
-    "slug": "mack",
-    "team": "PHO",
-    "games": 119
-  },
-  {
-    "name": "Magbegor",
-    "slug": "magbegor",
-    "team": "SEA",
-    "games": 99
-  },
-  {
-    "name": "Mair",
-    "slug": "mair",
-    "team": "SEA",
-    "games": 9
-  },
-  {
-    "name": "Maley",
-    "slug": "maley",
-    "team": "PHX",
-    "games": 9
-  },
-  {
-    "name": "Malonga",
-    "slug": "malonga",
-    "team": "SEA",
+    "name": "Janelle Salaun",
+    "slug": "janelle-salaun",
+    "team": "GSV",
     "games": 76
   },
   {
-    "name": "Maly",
-    "slug": "maly",
-    "team": "CHI",
-    "games": 2
+    "name": "Jarace Walker",
+    "slug": "jarace-walker",
+    "team": "IND",
+    "games": 1
   },
   {
-    "name": "Marshall",
-    "slug": "marshall",
-    "team": "CON",
-    "games": 19
+    "name": "Jaylyn Sherrod",
+    "slug": "jaylyn-sherrod",
+    "team": "ATL",
+    "games": 49
   },
   {
-    "name": "Martin",
-    "slug": "martin",
+    "name": "Jessica Shepard",
+    "slug": "jessica-shepard",
+    "team": "DAL",
+    "games": 84
+  },
+  {
+    "name": "Jessika Carter",
+    "slug": "jessika-carter",
     "team": "LVA",
-    "games": 96
-  },
-  {
-    "name": "Mathurin",
-    "slug": "mathurin",
-    "team": "IND",
-    "games": 1
-  },
-  {
-    "name": "McBride",
-    "slug": "mcbride",
-    "team": "MIN",
-    "games": 136
-  },
-  {
-    "name": "McConnell",
-    "slug": "mcconnell",
-    "team": "IND",
     "games": 2
   },
   {
-    "name": "McCowan",
-    "slug": "mccowan",
-    "team": "DAL",
-    "games": 65
-  },
-  {
-    "name": "McDonald",
-    "slug": "mcdonald",
-    "team": "LAS",
-    "games": 46
-  },
-  {
-    "name": "McMahon",
-    "slug": "mcmahon",
-    "team": "WAS",
-    "games": 38
-  },
-  {
-    "name": "Meesseman",
-    "slug": "meesseman",
-    "team": "NYL",
-    "games": 20
-  },
-  {
-    "name": "Melbourne",
-    "slug": "melbourne",
-    "team": "WAS",
-    "games": 119
-  },
-  {
-    "name": "Miles",
-    "slug": "miles",
-    "team": "MIN",
-    "games": 38
-  },
-  {
-    "name": "Milic",
-    "slug": "milic",
-    "team": "TOR",
-    "games": 7
-  },
-  {
-    "name": "Miller",
-    "slug": "miller",
-    "team": "MIN",
-    "games": 106
-  },
-  {
-    "name": "Mitchell",
-    "slug": "mitchell",
-    "team": "IND",
-    "games": 192
-  },
-  {
-    "name": "Morgan",
-    "slug": "morgan",
-    "team": "LAS",
-    "games": 8
-  },
-  {
-    "name": "Morrow",
-    "slug": "morrow",
-    "team": "CON",
-    "games": 68
-  },
-  {
-    "name": "Musa",
-    "slug": "musa",
-    "team": "PHX",
-    "games": 12
-  },
-  {
-    "name": "Mwenentanda",
-    "slug": "mwenentanda",
-    "team": "GSV",
-    "games": 5
-  },
-  {
-    "name": "M\u00fchl",
-    "slug": "muhl",
-    "team": "SEA",
-    "games": 16
-  },
-  {
-    "name": "Ndour-Fall",
-    "slug": "ndour-fall",
-    "team": "CON",
-    "games": 25
-  },
-  {
-    "name": "Nelson-Ododa",
-    "slug": "nelson-ododa",
-    "team": "CON",
-    "games": 113
-  },
-  {
-    "name": "Nivar",
-    "slug": "nivar",
-    "team": "ATL",
-    "games": 20
-  },
-  {
-    "name": "Nogic",
-    "slug": "nogic",
-    "team": "PHX",
-    "games": 16
-  },
-  {
-    "name": "Nurse",
-    "slug": "nurse",
-    "team": "LAS",
-    "games": 123
-  },
-  {
-    "name": "Nye",
-    "slug": "nye",
+    "name": "Jewell Loyd",
+    "slug": "jewell-loyd",
     "team": "LVA",
-    "games": 67
+    "games": 133
   },
   {
-    "name": "Oblak",
-    "slug": "oblak",
-    "team": "PDX",
-    "games": 29
-  },
-  {
-    "name": "Ogunbowale",
-    "slug": "ogunbowale",
-    "team": "DAL",
-    "games": 107
-  },
-  {
-    "name": "Ogwumike",
-    "slug": "ogwumike",
-    "team": "SEA",
-    "games": 125
-  },
-  {
-    "name": "Okonkwo",
-    "slug": "okonkwo",
-    "team": "DAL",
-    "games": 12
-  },
-  {
-    "name": "Okot",
-    "slug": "okot",
-    "team": "ATL",
-    "games": 39
-  },
-  {
-    "name": "Olsen",
-    "slug": "olsen",
-    "team": "WAS",
-    "games": 60
-  },
-  {
-    "name": "Onyenwere",
-    "slug": "onyenwere",
-    "team": "CHI",
-    "games": 112
-  },
-  {
-    "name": "Onyiah",
-    "slug": "onyiah",
-    "team": "IND",
-    "games": 1
-  },
-  {
-    "name": "Osborne",
-    "slug": "osborne",
-    "team": "PHO",
-    "games": 2
-  },
-  {
-    "name": "P. Williams",
-    "slug": "p-williams",
-    "team": "PHX",
-    "games": 1
-  },
-  {
-    "name": "Paopao",
-    "slug": "paopao",
-    "team": "ATL",
-    "games": 77
-  },
-  {
-    "name": "Park",
-    "slug": "park",
+    "name": "Jihyun Park",
+    "slug": "jihyun-park",
     "team": "LAS",
     "games": 30
   },
   {
-    "name": "Parker-Tyus",
-    "slug": "parker-tyus",
+    "name": "Jonquel Jones",
+    "slug": "jonquel-jones",
+    "team": "NYL",
+    "games": 123
+  },
+  {
+    "name": "Jordan Harrison",
+    "slug": "jordan-harrison",
+    "team": "PDX",
+    "games": 12
+  },
+  {
+    "name": "Jordan Horston",
+    "slug": "jordan-horston",
+    "team": "SEA",
+    "games": 76
+  },
+  {
+    "name": "Jordin Canada",
+    "slug": "jordin-canada",
     "team": "ATL",
-    "games": 60
+    "games": 92
   },
   {
-    "name": "Parks",
-    "slug": "parks",
-    "team": "CON",
-    "games": 6
+    "name": "Josh Richardson",
+    "slug": "josh-richardson",
+    "team": "MIA",
+    "games": 1
   },
   {
-    "name": "Peddy",
-    "slug": "peddy",
-    "team": "LAS",
-    "games": 23
+    "name": "Jovana Nogic",
+    "slug": "jovana-nogic",
+    "team": "PHX",
+    "games": 16
   },
   {
-    "name": "Peters",
-    "slug": "peters",
-    "team": "CON",
-    "games": 32
+    "name": "Joyner Holmes",
+    "slug": "joyner-holmes",
+    "team": "SEA",
+    "games": 35
   },
   {
-    "name": "Petty",
-    "slug": "petty",
-    "team": "DAL",
-    "games": 2
+    "name": "Julie Allemand",
+    "slug": "julie-allemand",
+    "team": "TOR",
+    "games": 63
   },
   {
-    "name": "Pili",
-    "slug": "pili",
-    "team": "MIN",
-    "games": 49
+    "name": "Julie Vanloo",
+    "slug": "julie-vanloo",
+    "team": "NYL",
+    "games": 78
   },
   {
-    "name": "Pissott",
-    "slug": "pissott",
+    "name": "Juste Jocyte",
+    "slug": "juste-jocyte",
+    "team": "GSV",
+    "games": 14
+  },
+  {
+    "name": "Justine Pissott",
+    "slug": "justine-pissott",
     "team": "LVA",
     "games": 9
   },
   {
-    "name": "Plum",
-    "slug": "plum",
-    "team": "LVA",
-    "games": 104
-  },
-  {
-    "name": "Poffenbarger",
-    "slug": "poffenbarger",
+    "name": "Kaela Davis",
+    "slug": "kaela-davis",
     "team": "CHI",
-    "games": 6
-  },
-  {
-    "name": "Pouye",
-    "slug": "pouye",
-    "team": "TOR",
-    "games": 19
-  },
-  {
-    "name": "Powers",
-    "slug": "powers",
-    "team": "ATL",
-    "games": 35
-  },
-  {
-    "name": "Prechtel",
-    "slug": "prechtel",
-    "team": "GSV",
     "games": 4
   },
   {
-    "name": "Prince",
-    "slug": "prince",
+    "name": "Kahleah Copper",
+    "slug": "kahleah-copper",
+    "team": "PHX",
+    "games": 116
+  },
+  {
+    "name": "Kaila Charles",
+    "slug": "kaila-charles",
+    "team": "GSV",
+    "games": 77
+  },
+  {
+    "name": "Kaitlyn Chen",
+    "slug": "kaitlyn-chen",
+    "team": "GSV",
+    "games": 65
+  },
+  {
+    "name": "Kalani Brown",
+    "slug": "kalani-brown",
+    "team": "PHX",
+    "games": 70
+  },
+  {
+    "name": "Kamiah Smalls",
+    "slug": "kamiah-smalls",
+    "team": "PDX",
+    "games": 5
+  },
+  {
+    "name": "Kamilla Cardoso",
+    "slug": "kamilla-cardoso",
+    "team": "CHI",
+    "games": 111
+  },
+  {
+    "name": "Kara Dunn",
+    "slug": "kara-dunn",
     "team": "PHX",
     "games": 1
   },
   {
-    "name": "Prosper",
-    "slug": "prosper",
-    "team": "WAS",
-    "games": 35
+    "name": "Kariata Diaby",
+    "slug": "kariata-diaby",
+    "team": "CON",
+    "games": 13
   },
   {
-    "name": "Puoch",
-    "slug": "puoch",
+    "name": "Karlie Samuelson",
+    "slug": "karlie-samuelson",
     "team": "PDX",
-    "games": 39
+    "games": 73
   },
   {
-    "name": "Quinerly",
-    "slug": "quinerly",
-    "team": "DAL",
-    "games": 36
+    "name": "Kate Martin",
+    "slug": "kate-martin",
+    "team": "LAS",
+    "games": 96
   },
   {
-    "name": "Reese",
-    "slug": "reese",
-    "team": "CHI",
-    "games": 103
+    "name": "Kathryn Westbeld",
+    "slug": "kathryn-westbeld",
+    "team": "PHX",
+    "games": 54
   },
   {
-    "name": "Rice",
-    "slug": "rice",
+    "name": "Katie Lou Samuelson",
+    "slug": "katie-lou-samuelson",
+    "team": "SEA",
+    "games": 70
+  },
+  {
+    "name": "Kayla Alexander",
+    "slug": "kayla-alexander",
+    "team": "TOR",
+    "games": 4
+  },
+  {
+    "name": "Kayla McBride",
+    "slug": "kayla-mcbride",
+    "team": "MIN",
+    "games": 136
+  },
+  {
+    "name": "Kayla Thornton",
+    "slug": "kayla-thornton",
+    "team": "GSV",
+    "games": 113
+  },
+  {
+    "name": "Kelsey Mitchell",
+    "slug": "kelsey-mitchell",
+    "team": "IND",
+    "games": 134
+  },
+  {
+    "name": "Kelsey Plum",
+    "slug": "kelsey-plum",
+    "team": "PHX",
+    "games": 104
+  },
+  {
+    "name": "Kennedy Burke",
+    "slug": "kennedy-burke",
+    "team": "CON",
+    "games": 120
+  },
+  {
+    "name": "Kevin Love",
+    "slug": "kevin-love",
+    "team": "MIA",
+    "games": 1
+  },
+  {
+    "name": "Kia Nurse",
+    "slug": "kia-nurse",
+    "team": "TOR",
+    "games": 123
+  },
+  {
+    "name": "Kiah Stokes",
+    "slug": "kiah-stokes",
+    "team": "GSV",
+    "games": 131
+  },
+  {
+    "name": "Kiana Williams",
+    "slug": "kiana-williams",
+    "team": "TOR",
+    "games": 50
+  },
+  {
+    "name": "Kierstan Bell",
+    "slug": "kierstan-bell",
+    "team": "LVA",
+    "games": 79
+  },
+  {
+    "name": "Kiki Iriafen",
+    "slug": "kiki-iriafen",
+    "team": "WAS",
+    "games": 81
+  },
+  {
+    "name": "Kiki Rice",
+    "slug": "kiki-rice",
     "team": "TOR",
     "games": 24
   },
   {
-    "name": "Richards",
-    "slug": "richards",
-    "team": "WAS",
-    "games": 20
+    "name": "Kitija Laksa",
+    "slug": "kitija-laksa",
+    "team": "PHX",
+    "games": 35
   },
   {
-    "name": "Richardson",
-    "slug": "richardson",
-    "team": "MIA",
-    "games": 1
+    "name": "Kristy Wallace",
+    "slug": "kristy-wallace",
+    "team": "IND",
+    "games": 27
   },
   {
-    "name": "Rivers",
-    "slug": "rivers",
-    "team": "CON",
-    "games": 78
-  },
-  {
-    "name": "Robinson",
-    "slug": "robinson",
-    "team": "MIA",
-    "games": 1
-  },
-  {
-    "name": "Rozier",
-    "slug": "rozier",
-    "team": "MIA",
-    "games": 1
-  },
-  {
-    "name": "Rupert",
-    "slug": "rupert",
-    "team": "GSV",
+    "name": "Kyara Linskens",
+    "slug": "kyara-linskens",
+    "team": "PHX",
     "games": 23
   },
   {
-    "name": "Russell",
-    "slug": "russell",
-    "team": "SEA",
-    "games": 64
-  },
-  {
-    "name": "Sabally",
-    "slug": "sabally",
-    "team": "NYL",
-    "games": 146
-  },
-  {
-    "name": "Salaun",
-    "slug": "salaun",
-    "team": "GSV",
-    "games": 38
-  },
-  {
-    "name": "Sala\u00fcn",
-    "slug": "salaun",
-    "team": "GSV",
-    "games": 38
-  },
-  {
-    "name": "Samuelson",
-    "slug": "samuelson",
-    "team": "WAS",
-    "games": 138
-  },
-  {
-    "name": "Saxton",
-    "slug": "saxton",
-    "team": "IND",
-    "games": 10
-  },
-  {
-    "name": "Scott",
-    "slug": "scott",
-    "team": "WAS",
-    "games": 8
-  },
-  {
-    "name": "Sheldon",
-    "slug": "sheldon",
-    "team": "DAL",
-    "games": 110
-  },
-  {
-    "name": "Shepard",
-    "slug": "shepard",
-    "team": "MIN",
-    "games": 84
-  },
-  {
-    "name": "Sheppard",
-    "slug": "sheppard",
+    "name": "Kyra Lambert",
+    "slug": "kyra-lambert",
     "team": "IND",
     "games": 1
   },
   {
-    "name": "Sherrod",
-    "slug": "sherrod",
-    "team": "NYL",
-    "games": 49
-  },
-  {
-    "name": "Siakam",
-    "slug": "siakam",
-    "team": "IND",
-    "games": 1
-  },
-  {
-    "name": "Siegrist",
-    "slug": "siegrist",
-    "team": "DAL",
-    "games": 90
-  },
-  {
-    "name": "Sims",
-    "slug": "sims",
-    "team": "DAL",
-    "games": 86
-  },
-  {
-    "name": "Smalls",
-    "slug": "smalls",
-    "team": "ATL",
+    "name": "Kysre Gondrezick",
+    "slug": "kysre-gondrezick",
+    "team": "CHI",
     "games": 5
   },
   {
-    "name": "Smith",
-    "slug": "smith",
-    "team": "IND",
-    "games": 259
-  },
-  {
-    "name": "Soares",
-    "slug": "soares",
-    "team": "DAL",
-    "games": 22
-  },
-  {
-    "name": "Soule",
-    "slug": "soule",
-    "team": "MIN",
-    "games": 2
-  },
-  {
-    "name": "Sowah",
-    "slug": "sowah",
+    "name": "Laeticia Amihere",
+    "slug": "laeticia-amihere",
     "team": "GSV",
-    "games": 6
+    "games": 83
   },
   {
-    "name": "Stevens",
-    "slug": "stevens",
+    "name": "Laura Juskaite",
+    "slug": "laura-juskaite",
+    "team": "TOR",
+    "games": 40
+  },
+  {
+    "name": "Laura Ziegler",
+    "slug": "laura-ziegler",
     "team": "LAS",
-    "games": 95
-  },
-  {
-    "name": "Stewart",
-    "slug": "stewart",
-    "team": "NYL",
-    "games": 122
-  },
-  {
-    "name": "Stokes",
-    "slug": "stokes",
-    "team": "LVA",
-    "games": 131
-  },
-  {
-    "name": "Suarez",
-    "slug": "suarez",
-    "team": "PHX",
-    "games": 15
-  },
-  {
-    "name": "Sundell",
-    "slug": "sundell",
-    "team": "DAL",
     "games": 3
   },
   {
-    "name": "Sutton",
-    "slug": "sutton",
-    "team": "PHO",
-    "games": 96
-  },
-  {
-    "name": "Sykes",
-    "slug": "sykes",
+    "name": "Lauren Betts",
+    "slug": "lauren-betts",
     "team": "WAS",
-    "games": 77
+    "games": 40
   },
   {
-    "name": "Talbot",
-    "slug": "talbot",
+    "name": "Layshia Clarendon",
+    "slug": "layshia-clarendon",
     "team": "LAS",
-    "games": 115
+    "games": 21
   },
   {
-    "name": "Taurasi",
-    "slug": "taurasi",
-    "team": "PHO",
-    "games": 38
-  },
-  {
-    "name": "Taylor",
-    "slug": "taylor",
-    "team": "IND",
-    "games": 65
-  },
-  {
-    "name": "Thierry",
-    "slug": "thierry",
-    "team": "ATL",
-    "games": 31
-  },
-  {
-    "name": "Thomas",
-    "slug": "thomas",
+    "name": "Leila Lacan",
+    "slug": "leila-lacan",
     "team": "CON",
-    "games": 135
+    "games": 52
   },
   {
-    "name": "Thornton",
-    "slug": "thornton",
+    "name": "Leonie Fiebich",
+    "slug": "leonie-fiebich",
     "team": "NYL",
-    "games": 113
+    "games": 108
   },
   {
-    "name": "Timpson",
-    "slug": "timpson",
+    "name": "Lexi Held",
+    "slug": "lexi-held",
+    "team": "PHX",
+    "games": 71
+  },
+  {
+    "name": "Lexie Brown",
+    "slug": "lexie-brown",
+    "team": "SEA",
+    "games": 51
+  },
+  {
+    "name": "Lexie Hull",
+    "slug": "lexie-hull",
     "team": "IND",
-    "games": 77
+    "games": 128
   },
   {
-    "name": "Toppin",
-    "slug": "toppin",
-    "team": "IND",
-    "games": 1
+    "name": "Li Yueru",
+    "slug": "li-yueru",
+    "team": "DAL",
+    "games": 98
   },
   {
-    "name": "Tour\u00e9",
-    "slug": "toure",
+    "name": "Liatu King",
+    "slug": "liatu-king",
+    "team": "MIN",
+    "games": 23
+  },
+  {
+    "name": "Lindsay Allen",
+    "slug": "lindsay-allen",
     "team": "CON",
+    "games": 71
+  },
+  {
+    "name": "Liz Dixon",
+    "slug": "liz-dixon",
+    "team": "PHO",
     "games": 18
   },
   {
-    "name": "Turner",
-    "slug": "turner",
-    "team": "IND",
-    "games": 97
+    "name": "Lorela Cubaj",
+    "slug": "lorela-cubaj",
+    "team": "ATL",
+    "games": 30
   },
   {
-    "name": "Uzun",
-    "slug": "uzun",
+    "name": "Lou Lopez S\u00e9n\u00e9chal",
+    "slug": "lou-lopez-senechal",
     "team": "DAL",
-    "games": 65
+    "games": 27
   },
   {
-    "name": "Van Lith",
-    "slug": "van-lith",
-    "team": "CHI",
-    "games": 48
-  },
-  {
-    "name": "VanSlooten",
-    "slug": "vanslooten",
-    "team": "IND",
-    "games": 14
-  },
-  {
-    "name": "Vandersloot",
-    "slug": "vandersloot",
-    "team": "NYL",
-    "games": 72
-  },
-  {
-    "name": "Vanloo",
-    "slug": "vanloo",
+    "name": "Lucy Olsen",
+    "slug": "lucy-olsen",
     "team": "WAS",
-    "games": 78
+    "games": 60
   },
   {
-    "name": "Vanslooten",
-    "slug": "vanslooten",
-    "team": "SEA",
-    "games": 4
+    "name": "Luisa Geiselsoder",
+    "slug": "luisa-geiselsoder",
+    "team": "PDX",
+    "games": 49
   },
   {
-    "name": "Verona",
-    "slug": "verona",
-    "team": "DAL",
-    "games": 1
-  },
-  {
-    "name": "Vivians",
-    "slug": "vivians",
+    "name": "Mackenzie Holmes",
+    "slug": "mackenzie-holmes",
     "team": "SEA",
     "games": 36
   },
   {
-    "name": "Walker",
-    "slug": "walker",
-    "team": "IND",
-    "games": 1
+    "name": "Maddy Siegrist",
+    "slug": "maddy-siegrist",
+    "team": "DAL",
+    "games": 90
   },
   {
-    "name": "Walker-Kimbrough",
-    "slug": "walker-kimbrough",
+    "name": "Maddy Westbeld",
+    "slug": "maddy-westbeld",
+    "team": "PHX",
+    "games": 32
+  },
+  {
+    "name": "Madina Okot",
+    "slug": "madina-okot",
+    "team": "ATL",
+    "games": 39
+  },
+  {
+    "name": "Madison Scott",
+    "slug": "madison-scott",
     "team": "WAS",
-    "games": 95
+    "games": 8
   },
   {
-    "name": "Wallace",
-    "slug": "wallace",
-    "team": "IND",
-    "games": 27
-  },
-  {
-    "name": "Westbeld",
-    "slug": "westbeld",
-    "team": "CHI",
-    "games": 84
-  },
-  {
-    "name": "Wheeler",
-    "slug": "wheeler",
-    "team": "IND",
-    "games": 127
-  },
-  {
-    "name": "Whitcomb",
-    "slug": "whitcomb",
-    "team": "SEA",
-    "games": 112
-  },
-  {
-    "name": "Williams",
-    "slug": "williams",
-    "team": "MIN",
-    "games": 380
-  },
-  {
-    "name": "Wilson",
-    "slug": "wilson",
-    "team": "LVA",
-    "games": 137
-  },
-  {
-    "name": "Winterburn",
-    "slug": "winterburn",
-    "team": "PDX",
-    "games": 27
-  },
-  {
-    "name": "Xu",
-    "slug": "xu",
-    "team": "NYL",
-    "games": 40
-  },
-  {
-    "name": "Yamamoto",
-    "slug": "yamamoto",
+    "name": "Mai Yamamoto",
+    "slug": "mai-yamamoto",
     "team": "LVA",
     "games": 10
   },
   {
-    "name": "Young",
-    "slug": "young",
-    "team": "LVA",
-    "games": 138
+    "name": "Makayla Timpson",
+    "slug": "makayla-timpson",
+    "team": "IND",
+    "games": 77
   },
   {
-    "name": "Yueru",
-    "slug": "yueru",
-    "team": "LAS",
-    "games": 98
+    "name": "Mamignan Tour\u00e9",
+    "slug": "mamignan-toure",
+    "team": "CON",
+    "games": 18
   },
   {
-    "name": "Zandalasini",
-    "slug": "zandalasini",
+    "name": "Maria Conde",
+    "slug": "maria-conde",
+    "team": "TOR",
+    "games": 33
+  },
+  {
+    "name": "Maria Kliundikova",
+    "slug": "maria-kliundikova",
     "team": "MIN",
-    "games": 107
+    "games": 39
   },
   {
-    "name": "Ziegler",
-    "slug": "ziegler",
-    "team": "LAS",
+    "name": "Mariella Fasoula",
+    "slug": "mariella-fasoula",
+    "team": "TOR",
     "games": 3
   },
   {
-    "name": "\u00c9poupa",
-    "slug": "epoupa",
+    "name": "Marina Mabrey",
+    "slug": "marina-mabrey",
+    "team": "TOR",
+    "games": 114
+  },
+  {
+    "name": "Marine Fauthoux",
+    "slug": "marine-fauthoux",
+    "team": "NYL",
+    "games": 18
+  },
+  {
+    "name": "Marine Johannes",
+    "slug": "marine-johannes",
+    "team": "NYL",
+    "games": 81
+  },
+  {
+    "name": "Mari\u00e8me Badiane",
+    "slug": "marieme-badiane",
+    "team": "MIN",
+    "games": 3
+  },
+  {
+    "name": "Marquesha Davis",
+    "slug": "marquesha-davis",
+    "team": "CHI",
+    "games": 32
+  },
+  {
+    "name": "Marta Suarez",
+    "slug": "marta-suarez",
+    "team": "PHX",
+    "games": 15
+  },
+  {
+    "name": "Maya Caldwell",
+    "slug": "maya-caldwell",
+    "team": "MIN",
+    "games": 111
+  },
+  {
+    "name": "Megan DiLeo",
+    "slug": "megan-dileo",
+    "team": "PDX",
+    "games": 14
+  },
+  {
+    "name": "Megan Gustafson",
+    "slug": "megan-gustafson",
+    "team": "PDX",
+    "games": 95
+  },
+  {
+    "name": "Megan McConnell",
+    "slug": "megan-mcconnell",
+    "team": "PHX",
+    "games": 1
+  },
+  {
+    "name": "Mercedes Russell",
+    "slug": "mercedes-russell",
+    "team": "IND",
+    "games": 64
+  },
+  {
+    "name": "Michaela Onyenwere",
+    "slug": "michaela-onyenwere",
+    "team": "WAS",
+    "games": 112
+  },
+  {
+    "name": "Michelle Onyiah",
+    "slug": "michelle-onyiah",
+    "team": "IND",
+    "games": 1
+  },
+  {
+    "name": "Miela Sowah",
+    "slug": "miela-sowah",
+    "team": "GSV",
+    "games": 6
+  },
+  {
+    "name": "Mikiah Herbert Harrigan",
+    "slug": "mikiah-herbert-harrigan",
+    "team": "PHO",
+    "games": 33
+  },
+  {
+    "name": "Monique Akoa Makani",
+    "slug": "monique-akoa-makani",
+    "team": "LAS",
+    "games": 78
+  },
+  {
+    "name": "Monique Billings",
+    "slug": "monique-billings",
+    "team": "IND",
+    "games": 106
+  },
+  {
+    "name": "Morgan Bertsch",
+    "slug": "morgan-bertsch",
+    "team": "DAL",
+    "games": 11
+  },
+  {
+    "name": "Morgan Maly",
+    "slug": "morgan-maly",
+    "team": "CHI",
+    "games": 2
+  },
+  {
+    "name": "Moriah Jefferson",
+    "slug": "moriah-jefferson",
+    "team": "CHI",
+    "games": 28
+  },
+  {
+    "name": "Murjanatu Musa",
+    "slug": "murjanatu-musa",
+    "team": "PHX",
+    "games": 12
+  },
+  {
+    "name": "Myisha Hines-Allen",
+    "slug": "myisha-hines-allen",
+    "team": "IND",
+    "games": 125
+  },
+  {
+    "name": "Myles Turner",
+    "slug": "myles-turner",
+    "team": "IND",
+    "games": 1
+  },
+  {
+    "name": "NaLyssa Smith",
+    "slug": "nalyssa-smith",
+    "team": "LVA",
+    "games": 137
+  },
+  {
+    "name": "Nadia Fingall",
+    "slug": "nadia-fingall",
+    "team": "GSV",
+    "games": 9
+  },
+  {
+    "name": "Napheesa Collier",
+    "slug": "napheesa-collier",
+    "team": "MIN",
+    "games": 96
+  },
+  {
+    "name": "Natasha Cloud",
+    "slug": "natasha-cloud",
+    "team": "CHI",
+    "games": 123
+  },
+  {
+    "name": "Natasha Howard",
+    "slug": "natasha-howard",
+    "team": "MIN",
+    "games": 119
+  },
+  {
+    "name": "Natasha Mack",
+    "slug": "natasha-mack",
+    "team": "PHX",
+    "games": 119
+  },
+  {
+    "name": "Natisha Hiedeman",
+    "slug": "natisha-hiedeman",
+    "team": "SEA",
+    "games": 138
+  },
+  {
+    "name": "Naz Hillmon",
+    "slug": "naz-hillmon",
+    "team": "ATL",
+    "games": 128
+  },
+  {
+    "name": "Ndjakalenga Mwenentanda",
+    "slug": "ndjakalenga-mwenentanda",
+    "team": "GSV",
+    "games": 5
+  },
+  {
+    "name": "Nell Angloma",
+    "slug": "nell-angloma",
+    "team": "CON",
+    "games": 36
+  },
+  {
+    "name": "Nia Coffey",
+    "slug": "nia-coffey",
+    "team": "MIN",
+    "games": 129
+  },
+  {
+    "name": "Nika M\u00fchl",
+    "slug": "nika-muhl",
+    "team": "SEA",
+    "games": 16
+  },
+  {
+    "name": "Nikola Jovi\u0107",
+    "slug": "nikola-jovic",
+    "team": "MIA",
+    "games": 1
+  },
+  {
+    "name": "Nikolina Milic",
+    "slug": "nikolina-milic",
+    "team": "TOR",
+    "games": 7
+  },
+  {
+    "name": "Nneka Ogwumike",
+    "slug": "nneka-ogwumike",
+    "team": "LAS",
+    "games": 125
+  },
+  {
+    "name": "Noemie Brochant",
+    "slug": "noemie-brochant",
+    "team": "PHX",
+    "games": 39
+  },
+  {
+    "name": "Nyadiew Puoch",
+    "slug": "nyadiew-puoch",
+    "team": "PDX",
+    "games": 39
+  },
+  {
+    "name": "Nyara Sabally",
+    "slug": "nyara-sabally",
+    "team": "TOR",
+    "games": 77
+  },
+  {
+    "name": "Obi Toppin",
+    "slug": "obi-toppin",
+    "team": "IND",
+    "games": 1
+  },
+  {
+    "name": "Odyssey Sims",
+    "slug": "odyssey-sims",
+    "team": "DAL",
+    "games": 86
+  },
+  {
+    "name": "Olivia Miles",
+    "slug": "olivia-miles",
+    "team": "MIN",
+    "games": 38
+  },
+  {
+    "name": "Olivia Nelson-Ododa",
+    "slug": "olivia-nelson-ododa",
+    "team": "CON",
+    "games": 113
+  },
+  {
+    "name": "Olivia \u00c9poupa",
+    "slug": "olivia-epoupa",
     "team": "MIN",
     "games": 21
+  },
+  {
+    "name": "Ornella Bankole",
+    "slug": "ornella-bankole",
+    "team": "TOR",
+    "games": 10
+  },
+  {
+    "name": "Paige Bueckers",
+    "slug": "paige-bueckers",
+    "team": "DAL",
+    "games": 74
+  },
+  {
+    "name": "Pascal Siakam",
+    "slug": "pascal-siakam",
+    "team": "IND",
+    "games": 1
+  },
+  {
+    "name": "Pauline Astier",
+    "slug": "pauline-astier",
+    "team": "NYL",
+    "games": 40
+  },
+  {
+    "name": "Peyton Williams",
+    "slug": "peyton-williams",
+    "team": "PHX",
+    "games": 1
+  },
+  {
+    "name": "Queen Egbo",
+    "slug": "queen-egbo",
+    "team": "LVA",
+    "games": 9
+  },
+  {
+    "name": "Quenton Jackson",
+    "slug": "quenton-jackson",
+    "team": "IND",
+    "games": 1
+  },
+  {
+    "name": "Quionche Carter",
+    "slug": "quionche-carter",
+    "team": "PHX",
+    "games": 13
+  },
+  {
+    "name": "Rachel Banham",
+    "slug": "rachel-banham",
+    "team": "CHI",
+    "games": 117
+  },
+  {
+    "name": "Rae Burrell",
+    "slug": "rae-burrell",
+    "team": "LAS",
+    "games": 103
+  },
+  {
+    "name": "Raegan Beers",
+    "slug": "raegan-beers",
+    "team": "CON",
+    "games": 34
+  },
+  {
+    "name": "Raquel Carrera",
+    "slug": "raquel-carrera",
+    "team": "NYL",
+    "games": 19
+  },
+  {
+    "name": "Raven Johnson",
+    "slug": "raven-johnson",
+    "team": "IND",
+    "games": 35
+  },
+  {
+    "name": "Rayah Marshall",
+    "slug": "rayah-marshall",
+    "team": "CON",
+    "games": 19
+  },
+  {
+    "name": "Rebecca Allen",
+    "slug": "rebecca-allen",
+    "team": "NYL",
+    "games": 86
+  },
+  {
+    "name": "Rebekah Gardner",
+    "slug": "rebekah-gardner",
+    "team": "NYL",
+    "games": 81
+  },
+  {
+    "name": "Rhyne Howard",
+    "slug": "rhyne-howard",
+    "team": "ATL",
+    "games": 107
+  },
+  {
+    "name": "Rickea Jackson",
+    "slug": "rickea-jackson",
+    "team": "CHI",
+    "games": 82
+  },
+  {
+    "name": "Robyn Parks",
+    "slug": "robyn-parks",
+    "team": "CON",
+    "games": 6
+  },
+  {
+    "name": "Rori Harmon",
+    "slug": "rori-harmon",
+    "team": "WAS",
+    "games": 12
+  },
+  {
+    "name": "Sabrina Ionescu",
+    "slug": "sabrina-ionescu",
+    "team": "NYL",
+    "games": 117
+  },
+  {
+    "name": "Sami Whitcomb",
+    "slug": "sami-whitcomb",
+    "team": "PHX",
+    "games": 112
+  },
+  {
+    "name": "Sania Feagin",
+    "slug": "sania-feagin",
+    "team": "LAS",
+    "games": 19
+  },
+  {
+    "name": "Saniya Rivers",
+    "slug": "saniya-rivers",
+    "team": "CON",
+    "games": 78
+  },
+  {
+    "name": "Sarah Ashlee Barker",
+    "slug": "sarah-ashlee-barker",
+    "team": "PDX",
+    "games": 60
+  },
+  {
+    "name": "Satou Sabally",
+    "slug": "satou-sabally",
+    "team": "NYL",
+    "games": 77
+  },
+  {
+    "name": "Saylor Poffenbarger",
+    "slug": "saylor-poffenbarger",
+    "team": "PHX",
+    "games": 6
+  },
+  {
+    "name": "Serah Williams",
+    "slug": "serah-williams",
+    "team": "PDX",
+    "games": 35
+  },
+  {
+    "name": "Serena Sundell",
+    "slug": "serena-sundell",
+    "team": "DAL",
+    "games": 3
+  },
+  {
+    "name": "Sevgi Uzun",
+    "slug": "sevgi-uzun",
+    "team": "CHI",
+    "games": 65
+  },
+  {
+    "name": "Shakira Austin",
+    "slug": "shakira-austin",
+    "team": "WAS",
+    "games": 89
+  },
+  {
+    "name": "Shatori Walker-Kimbrough",
+    "slug": "shatori-walker-kimbrough",
+    "team": "ATL",
+    "games": 95
+  },
+  {
+    "name": "Shay Ciezki",
+    "slug": "shay-ciezki",
+    "team": "PHX",
+    "games": 4
+  },
+  {
+    "name": "Shey Peddy",
+    "slug": "shey-peddy",
+    "team": "IND",
+    "games": 23
+  },
+  {
+    "name": "Sika Kone",
+    "slug": "sika-kone",
+    "team": "ATL",
+    "games": 80
+  },
+  {
+    "name": "Skylar Diggins",
+    "slug": "skylar-diggins",
+    "team": "CHI",
+    "games": 65
+  },
+  {
+    "name": "Skylar Diggins-Smith",
+    "slug": "skylar-diggins-smith",
+    "team": "SEA",
+    "games": 42
+  },
+  {
+    "name": "Sonia Citron",
+    "slug": "sonia-citron",
+    "team": "WAS",
+    "games": 81
+  },
+  {
+    "name": "Sophie Cunningham",
+    "slug": "sophie-cunningham",
+    "team": "IND",
+    "games": 111
+  },
+  {
+    "name": "Stefanie Dolson",
+    "slug": "stefanie-dolson",
+    "team": "SEA",
+    "games": 122
+  },
+  {
+    "name": "Stephanie Soares",
+    "slug": "stephanie-soares",
+    "team": "DAL",
+    "games": 22
+  },
+  {
+    "name": "Stephanie Talbot",
+    "slug": "stephanie-talbot",
+    "team": "LVA",
+    "games": 115
+  },
+  {
+    "name": "Sug Sutton",
+    "slug": "sug-sutton",
+    "team": "DAL",
+    "games": 96
+  },
+  {
+    "name": "Sydney Colson",
+    "slug": "sydney-colson",
+    "team": "IND",
+    "games": 65
+  },
+  {
+    "name": "Sydney Taylor",
+    "slug": "sydney-taylor",
+    "team": "CHI",
+    "games": 33
+  },
+  {
+    "name": "T.J. McConnell",
+    "slug": "t-j-mcconnell",
+    "team": "IND",
+    "games": 1
+  },
+  {
+    "name": "Ta'Niya Latson",
+    "slug": "ta-niya-latson",
+    "team": "LVA",
+    "games": 17
+  },
+  {
+    "name": "Taina Mair",
+    "slug": "taina-mair",
+    "team": "SEA",
+    "games": 9
+  },
+  {
+    "name": "Taylor Soule",
+    "slug": "taylor-soule",
+    "team": "MIN",
+    "games": 2
+  },
+  {
+    "name": "Taylor Thierry",
+    "slug": "taylor-thierry",
+    "team": "SEA",
+    "games": 31
+  },
+  {
+    "name": "Te-Hina Paopao",
+    "slug": "te-hina-paopao",
+    "team": "ATL",
+    "games": 77
+  },
+  {
+    "name": "Teaira McCowan",
+    "slug": "teaira-mccowan",
+    "team": "MIN",
+    "games": 65
+  },
+  {
+    "name": "Teja Oblak",
+    "slug": "teja-oblak",
+    "team": "PDX",
+    "games": 29
+  },
+  {
+    "name": "Temi Fagbenle",
+    "slug": "temi-fagbenle",
+    "team": "TOR",
+    "games": 87
+  },
+  {
+    "name": "Teonni Key",
+    "slug": "teonni-key",
+    "team": "TOR",
+    "games": 35
+  },
+  {
+    "name": "Terry Rozier",
+    "slug": "terry-rozier",
+    "team": "MIA",
+    "games": 1
+  },
+  {
+    "name": "Tiffany Hayes",
+    "slug": "tiffany-hayes",
+    "team": "GSV",
+    "games": 103
+  },
+  {
+    "name": "Tiffany Mitchell",
+    "slug": "tiffany-mitchell",
+    "team": "SEA",
+    "games": 64
+  },
+  {
+    "name": "Tima Pouye",
+    "slug": "tima-pouye",
+    "team": "TOR",
+    "games": 19
+  },
+  {
+    "name": "Tina Charles",
+    "slug": "tina-charles",
+    "team": "CON",
+    "games": 84
+  },
+  {
+    "name": "Tonie Morgan",
+    "slug": "tonie-morgan",
+    "team": "LAS",
+    "games": 8
+  },
+  {
+    "name": "Tyasha Harris",
+    "slug": "tyasha-harris",
+    "team": "IND",
+    "games": 83
+  },
+  {
+    "name": "Tyler Herro",
+    "slug": "tyler-herro",
+    "team": "MIA",
+    "games": 1
+  },
+  {
+    "name": "Tyrese Haliburton",
+    "slug": "tyrese-haliburton",
+    "team": "IND",
+    "games": 1
+  },
+  {
+    "name": "Valeriane Ayayi",
+    "slug": "valeriane-ayayi",
+    "team": "PHX",
+    "games": 33
+  },
+  {
+    "name": "Veronica Burton",
+    "slug": "veronica-burton",
+    "team": "GSV",
+    "games": 122
+  },
+  {
+    "name": "Victaria Saxton",
+    "slug": "victaria-saxton",
+    "team": "IND",
+    "games": 10
+  },
+  {
+    "name": "Victoria Vivians",
+    "slug": "victoria-vivians",
+    "team": "SEA",
+    "games": 36
+  },
+  {
+    "name": "Williams",
+    "slug": "williams",
+    "team": "PHX",
+    "games": 1
+  },
+  {
+    "name": "Xu Han",
+    "slug": "xu-han",
+    "team": "NYL",
+    "games": 40
+  },
+  {
+    "name": "Yvonne Anderson",
+    "slug": "yvonne-anderson",
+    "team": "MIN",
+    "games": 1
+  },
+  {
+    "name": "Zaay Green",
+    "slug": "zaay-green",
+    "team": "TOR",
+    "games": 3
+  },
+  {
+    "name": "Zia Cooke",
+    "slug": "zia-cooke",
+    "team": "SEA",
+    "games": 95
   }
 ]

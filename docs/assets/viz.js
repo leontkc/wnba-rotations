@@ -332,6 +332,8 @@ function renderStints(data) {
       }
     });
   }
+  // Resolved full names from the pipeline take precedence over last-name keys
+  stints.forEach(s => { if (s.player_full) playerDisplayNames.set(s.player, s.player_full); });
 
   const containerW = document.getElementById('gantt-container').clientWidth || 900;
   const svgW = Math.max(smallMobile ? 320 : 600, containerW - 4);
@@ -439,7 +441,7 @@ function renderStints(data) {
 
       // Create clickable player name link
       const nameLink = document.createElementNS(ns, 'a');
-      nameLink.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', playerPageUrl(row.player));
+      nameLink.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', playerPageUrl(playerDisplayNames.get(row.player) || row.player));
       nameLink.setAttribute('style', 'cursor: pointer;');
 
       const nameText = document.createElementNS(ns, 'text');
@@ -455,7 +457,7 @@ function renderStints(data) {
       svg.appendChild(nameLink);
 
       // Add player totals on the right side
-      const totals = playerTotals.get(row.player);
+      const totals = playerTotals.get(playerDisplayNames.get(row.player)) || playerTotals.get(row.player);
       if (totals) {
         const totalsFontSize = smallMobile ? '8' : mobile ? '9' : '10';
         const totalsY = y + ROW_H / 2 + (smallMobile ? 3 : 4);
@@ -536,7 +538,7 @@ function renderStints(data) {
     const dSec = Math.round(s.duration_sec % 60);
     const dur = `${dMin}:${String(dSec).padStart(2, '0')}`;
 
-    let html = `<div class="tip-header">${s.player} <span style="color:${s.team === homeTC ? HOME_COLOR : AWAY_COLOR}">(${s.team})</span>`
+    let html = `<div class="tip-header">${s.player_full || s.player} <span style="color:${s.team === homeTC ? HOME_COLOR : AWAY_COLOR}">(${s.team})</span>`
       + `<br><span class="tip-time">Q${s.period} ${fmtClock(s.clock_in)} → ${fmtClock(s.clock_out)}  ·  ${dur}</span></div>`;
 
     html += `<div class="tip-stats">`

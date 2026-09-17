@@ -31,7 +31,10 @@ def slugify(name: str) -> str:
 def extract_player_data_from_games() -> dict:
     """
     Scan all game HTML files and extract player data.
-    Returns: {player_name: {name, team, games: [...]}}
+    Players are keyed by the slug of their full name (stint 'player_full',
+    falling back to the PBP name), so spelling variants across seasons such as
+    'Sika Kone' / 'Sika Koné' merge into one page.
+    Returns: {slug: {name, team, games: [...]}}
     """
     players = defaultdict(lambda: {'name': '', 'team': '', 'games': []})
 
@@ -67,7 +70,7 @@ def extract_player_data_from_games() -> dict:
             player_stints = defaultdict(list)
             player_teams = {}
             for stint in stints:
-                player = stint.get('player', '')
+                player = stint.get('player_full') or stint.get('player', '')
                 team = stint.get('team', '')
                 if not player or not team:
                     continue
@@ -86,10 +89,8 @@ def extract_player_data_from_games() -> dict:
                 if not team:
                     continue
 
-                # Set player info
-                if not players[player]['name']:
-                    players[player]['name'] = player
-                    players[player]['team'] = team
+                # name and team are taken from the most recent game below
+                key = slugify(player)
 
                 is_home = team == home_tc
                 opponent = away_tc if is_home else home_tc
@@ -109,9 +110,11 @@ def extract_player_data_from_games() -> dict:
                 # Get full box score stats if available
                 box_row = box_lookup.get(player, {})
 
-                players[player]['games'].append({
+                players[key]['games'].append({
                     'game_id': game_id,
                     'date': date,
+                    'name': player,
+                    'team': team,
                     'opponent': opponent,
                     'is_home': is_home,
                     'own_score': own_score,
@@ -127,9 +130,12 @@ def extract_player_data_from_games() -> dict:
             log.warning(f"Error processing {game_file}: {e}")
             continue
 
-    # Sort games by date (newest first)
+    # Sort games by date (newest first); name/team come from the latest game
     for player_data in players.values():
-        player_data['games'].sort(key=lambda g: g['date'], reverse=True)
+        player_data['games'].sort(key=lambda g: (g['date'], g['game_id']), reverse=True)
+        if player_data['games']:
+            player_data['name'] = player_data['games'][0]['name']
+            player_data['team'] = player_data['games'][0]['team']
 
     return dict(players)
 
@@ -181,11 +187,11 @@ def generate_player_html(player_data: dict) -> str:
 def generate_players_manifest(players: dict) -> list:
     """Generate players.json manifest for search."""
     manifest = []
-    for name, data in sorted(players.items()):
+    for slug, data in sorted(players.items(), key=lambda kv: kv[1]['name']):
         if data['games']:  # Only include players with games
             manifest.append({
-                'name': name,
-                'slug': slugify(name),
+                'name': data['name'],
+                'slug': slug,
                 'team': data['team'],
                 'games': len(data['games']),
             })
@@ -207,18 +213,23 @@ def build_player_pages() -> None:
     PLAYERS_DIR.mkdir(parents=True, exist_ok=True)
 
     # Generate player pages
-    generated = 0
-    for name, data in players.items():
+    written = set()
+    for slug, data in players.items():
         if not data['games']:
             continue
 
-        slug = slugify(name)
         html = generate_player_html(data)
         out_path = PLAYERS_DIR / f"{slug}.html"
         out_path.write_text(html, encoding='utf-8')
-        generated += 1
+        written.add(out_path.name)
 
-    log.info(f"Generated {generated} player pages")
+    log.info(f"Generated {len(written)} player pages")
+
+    # Remove pages for players no longer present (e.g. old last-name slugs)
+    for stale in PLAYERS_DIR.glob('*.html'):
+        if stale.name not in written:
+            stale.unlink()
+            log.info(f"Removed stale player page {stale.name}")
 
     # Generate manifest
     manifest = generate_players_manifest(players)

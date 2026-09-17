@@ -18,7 +18,7 @@ from pipeline.config import (
     DATA_DIR, ERRORS_LOG, GAMES_DIR, MANIFEST_PATH, SEASONS, TEMPLATES_DIR,
 )
 from pipeline.wnba_data import (
-    build_payload, build_player_game_stats, compute_score_flow,
+    add_full_names, build_payload, build_player_game_stats, compute_score_flow,
     compute_stints, fetch_boxscore, fetch_pbp, fetch_season_games,
 )
 
@@ -121,6 +121,7 @@ def process_game(game_id: str, game_info: dict) -> dict | None:
 
     # 4. Box score (non-fatal)
     box_score = fetch_boxscore(game_id)
+    add_full_names(stints, box_score)
     stint_players = {s["player"] for s in stints}
     player_game_stats = build_player_game_stats(box_score, stint_players)
 

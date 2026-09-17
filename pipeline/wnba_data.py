@@ -7,6 +7,7 @@ import json
 import logging
 import re
 import time
+import unicodedata
 from pathlib import Path
 
 import pandas as pd
@@ -270,7 +271,10 @@ def compute_stints(pbp_df: pd.DataFrame) -> list[dict]:
     """
     stints = []
 
-    for team in pbp_df["teamTricode"].dropna().unique():
+    # Skip events with no team (period markers, team rebounds, timeouts,
+    # instant replays tagged with a referee's name); they aren't player stints.
+    teams = pbp_df["teamTricode"].dropna().astype(str).str.strip()
+    for team in teams[teams != ""].unique():
         team_events = pbp_df[pbp_df["teamTricode"] == team].copy()
         team_events = team_events.sort_values("actionNumber")
 
@@ -449,6 +453,49 @@ def build_player_game_stats(box_score: list[dict], stint_players: set) -> dict:
             player_game_stats[sp] = last_name_map[parts[-1]]
 
     return player_game_stats
+
+
+# ── Stint name → full name ───────────────────────────────────────────────────
+
+def _fold(s: str) -> str:
+    """Lowercase and strip accents ('Dojkić' → 'dojkic')."""
+    s = unicodedata.normalize("NFD", s or "")
+    return "".join(c for c in s if not unicodedata.combining(c)).lower().strip()
+
+
+def resolve_full_name(pbp_name: str, team: str, box_score: list[dict]) -> str | None:
+    """
+    Map a PBP player name ('Wilson', 'K. Brown', 'Xu') to 'First Last' using
+    the box score rows for that team. Returns None if there's no unique match.
+    """
+    rows = [b for b in box_score if b.get("team") == team]
+    name = _fold(pbp_name)
+    initial = None
+    m = re.match(r"^(\w)\.\s+(.+)$", name)
+    if m:
+        initial, name = m.group(1), m.group(2)
+
+    candidates = [b for b in rows if _fold(b.get("last")) == name]
+    if initial:
+        candidates = [b for b in candidates if _fold(b.get("first")).startswith(initial)]
+    if not candidates:
+        # Some players are listed family-name-first in PBP (e.g. 'Xu' for Xu Han)
+        candidates = [b for b in rows if _fold(b.get("first")) == name]
+    if len(candidates) != 1:
+        return None
+    b = candidates[0]
+    return f"{b.get('first', '')} {b.get('last', '')}".strip() or None
+
+
+def add_full_names(stints: list[dict], box_score: list[dict]) -> None:
+    """Set stint['player_full'] for every stint whose player resolves uniquely."""
+    cache = {}
+    for s in stints:
+        key = (s["player"], s["team"])
+        if key not in cache:
+            cache[key] = resolve_full_name(s["player"], s["team"], box_score)
+        if cache[key]:
+            s["player_full"] = cache[key]
 
 
 # ── Payload assembly ──────────────────────────────────────────────────────────
