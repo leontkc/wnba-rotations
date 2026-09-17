@@ -28,6 +28,27 @@ def slugify(name: str) -> str:
     return name.strip('-')
 
 
+STINT_STATS = ('pts', 'reb', 'ast', 'stl', 'blk', 'to')
+
+
+def merge_stints(stint_list: list[dict]) -> list[dict]:
+    """
+    Merge stints that continue across a quarter break (one ends where the next
+    starts) and sum their stats. Returns [{start, end, pts, reb, ...}].
+    """
+    merged = []
+    for s in sorted(stint_list, key=lambda s: s['start']):
+        if merged and abs(s['start'] - merged[-1]['end']) < 0.5:
+            last = merged[-1]
+            last['end'] = s['end']
+            for k in STINT_STATS:
+                last[k] += s.get(k) or 0
+        else:
+            merged.append({'start': s['start'], 'end': s['end'],
+                           **{k: s.get(k) or 0 for k in STINT_STATS}})
+    return merged
+
+
 def extract_player_data_from_games() -> dict:
     """
     Scan all game HTML files and extract player data.
@@ -80,6 +101,9 @@ def extract_player_data_from_games() -> dict:
                     'pts': stint.get('stint_pts', 0),
                     'reb': stint.get('stint_reb', 0),
                     'ast': stint.get('stint_ast', 0),
+                    'stl': stint.get('stint_stl', 0),
+                    'blk': stint.get('stint_blk', 0),
+                    'to': stint.get('stint_to', 0),
                 })
                 player_teams[player] = team
 
@@ -120,7 +144,7 @@ def extract_player_data_from_games() -> dict:
                     'own_score': own_score,
                     'opp_score': opp_score,
                     'won': won,
-                    'stints': [{'start': s['start'], 'end': s['end']} for s in stint_list],
+                    'stints': merge_stints(stint_list),
                     'minutes': minutes,
                     'pts': box_row.get('pts', total_pts),
                     'reb': box_row.get('reb', total_reb),
