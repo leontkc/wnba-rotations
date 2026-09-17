@@ -1,12 +1,17 @@
 // wnbarotations — shared visualization script
-// DATA and NAV are injected by the game HTML shell before this script loads.
+// DATA and NAV are injected by the game HTML shell before this script loads;
+// teams.js (TEAM_NAMES, TeamColors) loads first.
 
 // ─── Theme ───────────────────────────────────────────────────────────────────
 const CSS = getComputedStyle(document.documentElement);
 const cssVar = (name, fallback) => (CSS.getPropertyValue(name) || '').trim() || fallback;
 
-const HOME_COLOR = cssVar('--home', '#e0364f');
-const AWAY_COLOR = cssVar('--away', '#4a90d9');
+// Chart colors come from the two teams (see teams.js); CSS vars follow them
+const { home: HOME_COLOR, away: AWAY_COLOR } = TeamColors.forMatchup(
+  DATA.game.home_tricode, DATA.game.away_tricode,
+  cssVar('--home', '#e0364f'), cssVar('--away', '#4a90d9'));
+document.documentElement.style.setProperty('--home', HOME_COLOR);
+document.documentElement.style.setProperty('--away', AWAY_COLOR);
 const SURFACE    = cssVar('--surface', '#141821');
 const TEXT_2     = cssVar('--text-2', '#b4bacb');
 const MUTED      = cssVar('--muted', '#8089a0');
@@ -18,15 +23,6 @@ function withAlpha(hex, a) {
   const n = parseInt(hex.replace('#', ''), 16);
   return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`;
 }
-
-const TEAM_NAMES = {
-  ATL: 'Atlanta Dream', CHI: 'Chicago Sky', CON: 'Connecticut Sun', DAL: 'Dallas Wings',
-  GSV: 'Golden State Valkyries', IND: 'Indiana Fever', LAS: 'Los Angeles Sparks',
-  LVA: 'Las Vegas Aces', MIN: 'Minnesota Lynx', NYL: 'New York Liberty', PDX: 'Portland Fire',
-  PHO: 'Phoenix Mercury', PHX: 'Phoenix Mercury', SEA: 'Seattle Storm', TOR: 'Toronto Tempo',
-  WAS: 'Washington Mystics',
-};
-const teamName = tc => TEAM_NAMES[tc] || tc;
 
 // ─── Prev / Next nav ────────────────────────────────────────────────────────
 (function renderNav() {
@@ -55,7 +51,7 @@ function isTouchDevice() {
 function slugify(name) {
   if (!name) return '';
   return name.toLowerCase()
-    .normalize('NFD').replace(/[̀-ͯ]/g, '') // remove accents
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // remove accents
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '');
 }
@@ -91,7 +87,7 @@ document.getElementById('game-title').textContent =
   const side = (tc, score, won, cls, label) => `
     <div class="sb-team ${cls} t-${tc}${won ? ' won' : ''}">
       <div class="sb-id">
-        <span class="sb-tc"><span class="team-chip" aria-hidden="true"></span>${tc}</span>
+        <span class="sb-tc"><span class="team-chip" aria-hidden="true" style="background:${cls === 'home' ? HOME_COLOR : AWAY_COLOR}"></span>${tc}</span>
         <span class="sb-name">${teamName(tc)}</span>
         <span class="sb-side">${label}</span>
       </div>
@@ -103,12 +99,6 @@ document.getElementById('game-title').textContent =
     `<div class="sb-mid"><span class="sb-status">Final</span><span class="sb-date">${dateText}</span>` +
     `<span class="sb-margin">${homeWon ? g.home_tricode : g.away_tricode} by ${margin}</span></div>` +
     side(g.home_tricode, g.score_home, homeWon, 'home', 'Home');
-
-  // Tint each end of the scoreboard with that team's main color
-  el.querySelectorAll('.sb-team').forEach(t => {
-    const c = getComputedStyle(t).getPropertyValue('--tc').trim();
-    if (c) el.style.setProperty(t.classList.contains('home') ? '--home-tint' : '--away-tint', c);
-  });
 })();
 
 // ─── 1. Game Momentum (Score Margin) ─────────────────────────────────────────
@@ -713,7 +703,7 @@ function renderStints(data) {
     if (barW >= minBarWidthForStats) {
       el('text', {
         x: x1 + 3, y: y + barH / 2 + (smallMobile ? 3 : 4),
-        fill: 'rgba(255,255,255,0.92)', 'font-size': statsFontSize, 'font-weight': '600',
+        fill: TeamColors.textOn(color), 'font-size': statsFontSize, 'font-weight': '600',
         'text-anchor': 'start', 'font-family': FONT,
         'pointer-events': 'none', 'clip-path': `url(#${cid})`
       }).textContent = `${s.stint_pts || 0} · ${combo}`;

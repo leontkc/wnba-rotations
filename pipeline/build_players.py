@@ -201,7 +201,7 @@ def generate_player_html(player_data: dict) -> str:
     <span class="pg-opp"><span class="pg-loc">{location}</span> {escape(team_name(g['opponent']))}</span>
     <span class="pg-result {result_class}"><b>{result_text}</b> {g['own_score']}–{g['opp_score']}</span>
   </div>
-  <div class="mini-gantt {side}" data-stints="{stints_json}">
+  <div class="mini-gantt {side}" data-team="{g['team']}" data-stints="{stints_json}">
     <span class="q-mark" style="left:25%"></span><span class="q-mark" style="left:50%"></span><span class="q-mark" style="left:75%"></span>
   </div>
   <div class="pg-stats">

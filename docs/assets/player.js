@@ -44,12 +44,17 @@
   document.querySelectorAll('.mini-gantt').forEach(container => {
     const stints = JSON.parse(container.dataset.stints || '[]');
     const isHome = container.classList.contains('home');
+    const color = typeof TeamColors !== 'undefined' && TeamColors.forTeam(container.dataset.team, '');
 
     stints.forEach(stint => {
       const bar = document.createElement('div');
       bar.className = `mini-stint ${isHome ? 'home' : 'away'}`;
       bar.style.left = `${(stint.start / totalSec) * 100}%`;
       bar.style.width = `${((stint.end - stint.start) / totalSec) * 100}%`;
+      if (color) {
+        bar.style.background = color;
+        bar.style.color = TeamColors.textOn(color);
+      }
       bar.title = tooltip(stint);
       bar.dataset.labels = JSON.stringify(labelOptions(stint));
       const label = document.createElement('span');
