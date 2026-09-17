@@ -31,6 +31,33 @@ const TEAM_COLORS = {
   WAS: ['#C8102E', '#8D9093'],
 };
 
+// ─── Periods ─────────────────────────────────────────────────────────────────
+// Regulation is four quarters; each overtime is a shorter period after them.
+const GamePeriods = {
+  label: p => (p <= 4 ? `Q${p}` : p === 5 ? 'OT' : `${p - 4}OT`),
+
+  // [{period, start, end}] in elapsed seconds, covering at least totalSec
+  list(totalSec, quarterLen = 600, otLen = 300) {
+    const out = [];
+    let t = 0;
+    for (let p = 1; p <= 4 || t < totalSec - 0.5; p++) {
+      const len = p <= 4 ? quarterLen : otLen;
+      out.push({ period: p, start: t, end: t + len });
+      t += len;
+    }
+    return out;
+  },
+
+  // Elapsed seconds -> "Q2 4:31" (an end time on a period break stays in the earlier period)
+  clockAt(elapsed, isEnd = false, quarterLen = 600, otLen = 300) {
+    const periods = GamePeriods.list(elapsed + 1, quarterLen, otLen);
+    const hit = periods.find(p => (isEnd ? elapsed > p.start && elapsed <= p.end : elapsed >= p.start && elapsed < p.end))
+      || periods[periods.length - 1];
+    const left = Math.max(0, Math.round(hit.end - elapsed));
+    return `${GamePeriods.label(hit.period)} ${Math.floor(left / 60)}:${String(left % 60).padStart(2, '0')}`;
+  },
+};
+
 const TeamColors = (function () {
   const SURFACE = [20, 24, 33];          // --surface, the chart background
   const MIN_CONTRAST = 3;                // WCAG non-text contrast

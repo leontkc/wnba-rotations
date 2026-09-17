@@ -83,19 +83,29 @@ def generate_game_html(payload: dict, nav: dict, game_id: str) -> None:
     log.info(f"  Written {out.name}")
 
 
+_EMBEDDED = re.compile(r"const DATA = (\{.*?\});\s*\nconst NAV\s*= (.*?);\s*\n</script>", re.DOTALL)
+
+
+def read_embedded(page: Path) -> tuple[dict, dict] | None:
+    """Return the (DATA, NAV) embedded in a generated game page, or None."""
+    if not page.exists():
+        return None
+    m = _EMBEDDED.search(page.read_text(encoding="utf-8"))
+    return (json.loads(m.group(1)), json.loads(m.group(2))) if m else None
+
+
 def rerender_existing_games() -> int:
     """
     Re-render every docs/games/*.html with the current template, reusing the
     DATA/NAV already embedded in each page. Returns the number of pages written.
     """
-    pat = re.compile(r"const DATA = (\{.*?\});\s*\nconst NAV\s*= (.*?);\s*\n</script>", re.DOTALL)
     count = 0
     for page in sorted(GAMES_DIR.glob("*.html")):
-        m = pat.search(page.read_text(encoding="utf-8"))
-        if not m:
+        embedded = read_embedded(page)
+        if not embedded:
             log.warning(f"  {page.name}: no embedded data, skipping")
             continue
-        generate_game_html(json.loads(m.group(1)), json.loads(m.group(2)), page.stem)
+        generate_game_html(*embedded, page.stem)
         count += 1
     return count
 
@@ -220,6 +230,11 @@ def run_build(seasons: list[str], force_regen: bool = False, single_game_id: str
             continue
 
         nav = nav_map.get(game_id, {"prev": None, "next": None})
+        if single_game_id:
+            # Keep the prev/next links the page already has
+            embedded = read_embedded(html_path)
+            if embedded:
+                nav = embedded[1]
         try:
             generate_game_html(payload, nav, game_id)
         except Exception as e:

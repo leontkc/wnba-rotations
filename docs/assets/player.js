@@ -2,15 +2,9 @@
 
 // Render mini Gantt charts for each game, labeling each stint with its stats
 (function renderMiniGantts() {
-  const totalSec = 2400; // 40 minutes
   const STATS = [['pts', 'p'], ['reb', 'r'], ['ast', 'a'], ['stl', 's'], ['blk', 'b']];
 
-  // Elapsed seconds -> "Q2 4:31"; an end time on a quarter break is "Q2 0:00"
-  function fmtClock(elapsed, isEnd = false) {
-    const q = Math.max(1, Math.min(4, isEnd ? Math.ceil(elapsed / 600) : Math.floor(elapsed / 600) + 1));
-    const left = Math.max(0, q * 600 - elapsed);
-    return `Q${q} ${Math.floor(left / 60)}:${String(Math.round(left % 60)).padStart(2, '0')}`;
-  }
+  const fmtClock = (elapsed, isEnd) => GamePeriods.clockAt(elapsed, isEnd);
 
   // Candidate labels, longest first: "6p 2r 1a", then just the first stat
   function labelOptions(stint) {
@@ -44,7 +38,17 @@
   document.querySelectorAll('.mini-gantt').forEach(container => {
     const stints = JSON.parse(container.dataset.stints || '[]');
     const isHome = container.classList.contains('home');
-    const color = typeof TeamColors !== 'undefined' && TeamColors.forTeam(container.dataset.team, '');
+    const color = TeamColors.forTeam(container.dataset.team, '');
+    // Overtime games get a longer track
+    const periods = GamePeriods.list(Math.max(2400, ...stints.map(s => s.end)));
+    const totalSec = periods[periods.length - 1].end;
+    container.querySelectorAll('.q-mark').forEach(m => m.remove());
+    periods.slice(1).forEach(p => {
+      const mark = document.createElement('span');
+      mark.className = 'q-mark';
+      mark.style.left = `${(p.start / totalSec) * 100}%`;
+      container.appendChild(mark);
+    });
 
     stints.forEach(stint => {
       const bar = document.createElement('div');

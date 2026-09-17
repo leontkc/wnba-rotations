@@ -115,11 +115,14 @@ document.getElementById('game-title').textContent =
   // Auto-detect quarter length from first entry's clock
   const firstClock = clockToSec(flow[0].clock_display);
   const quarterLen = firstClock; // 720 for NBA (12:00), 600 for WNBA (10:00)
+  const OT_LEN = 300;             // 5-minute overtimes
 
   // Calculate margin: positive = home leading, negative = away leading
   const marginData = flow.map(d => {
     const clockSec = clockToSec(d.clock_display);
-    const elapsedMin = ((d.period - 1) * quarterLen + (quarterLen - clockSec)) / 60;
+    const periodLen = d.period <= 4 ? quarterLen : OT_LEN;
+    const periodStart = d.period <= 4 ? (d.period - 1) * quarterLen : 4 * quarterLen + (d.period - 5) * OT_LEN;
+    const elapsedMin = (periodStart + (periodLen - clockSec)) / 60;
     return {
       x: elapsedMin,
       y: d.score_home - d.score_away,
@@ -130,8 +133,9 @@ document.getElementById('game-title').textContent =
     };
   });
 
-  const totalGameMin = 4 * quarterLen / 60; // 48 for NBA, 40 for WNBA
-  const quarterMin = quarterLen / 60; // 12 or 10
+  const lastMin = Math.max(...marginData.map(d => d.x));
+  const periods = GamePeriods.list(Math.max(4 * quarterLen, lastMin * 60), quarterLen, OT_LEN);
+  const totalGameMin = periods[periods.length - 1].end / 60; // 40 for WNBA, more with overtime
 
   // Find max margin for symmetric y-axis
   const maxMargin = Math.max(
@@ -144,8 +148,8 @@ document.getElementById('game-title').textContent =
     id: 'quarterLines',
     afterDraw(chart) {
       const { ctx, chartArea: { top, bottom }, scales: { x } } = chart;
-      [quarterMin, quarterMin * 2, quarterMin * 3].forEach((min, i) => {
-        const xPx = x.getPixelForValue(min);
+      periods.slice(1).forEach(p => {
+        const xPx = x.getPixelForValue(p.start / 60);
         ctx.save();
         ctx.strokeStyle = 'rgba(255,255,255,0.14)';
         ctx.lineWidth = 1;
@@ -157,7 +161,7 @@ document.getElementById('game-title').textContent =
         ctx.setLineDash([]);
         ctx.fillStyle = MUTED;
         ctx.font = `600 ${isSmallMobile() ? 9 : 11}px ${FONT}`;
-        ctx.fillText(`Q${i + 2}`, xPx + 4, top + 14);
+        ctx.fillText(GamePeriods.label(p.period), xPx + 4, top + 14);
         ctx.restore();
       });
     }
@@ -276,7 +280,7 @@ document.getElementById('game-title').textContent =
           callbacks: {
             title(items) {
               const d = marginData[items[0].dataIndex];
-              return `Q${d.period} ${d.clock}`;
+              return `${GamePeriods.label(d.period)} ${d.clock}`;
             },
             label(item) {
               const d = marginData[item.dataIndex];
@@ -398,7 +402,9 @@ function renderStints(data) {
   });
   const svgH = PAD_TOP + totalContentH + PAD_BOT;
 
-  function xOf(elSec) { return PAD_LEFT + (elSec / 2400) * chartW; }
+  const periods = GamePeriods.list(Math.max(2400, ...stints.map(s => s.end_elapsed)));
+  const gameEnd = periods[periods.length - 1].end;
+  function xOf(elSec) { return PAD_LEFT + (elSec / gameEnd) * chartW; }
 
   const ns = 'http://www.w3.org/2000/svg';
   const svg = document.createElementNS(ns, 'svg');
@@ -426,15 +432,15 @@ function renderStints(data) {
 
   const quarterShades = ['rgba(255,255,255,0.02)', 'rgba(255,255,255,0.05)',
                          'rgba(255,255,255,0.02)', 'rgba(255,255,255,0.05)'];
-  [0,1,2,3].forEach(q => {
-    const x1 = xOf(q * 600);
-    const x2 = xOf((q + 1) * 600);
-    el('rect', { x: x1, y: PAD_TOP, width: x2 - x1, height: totalContentH, fill: quarterShades[q] });
+  periods.forEach((p, q) => {
+    const x1 = xOf(p.start);
+    const x2 = xOf(p.end);
+    el('rect', { x: x1, y: PAD_TOP, width: x2 - x1, height: totalContentH, fill: quarterShades[q % quarterShades.length] });
     el('text', {
       x: (x1 + x2) / 2, y: PAD_TOP - 8,
       fill: MUTED, 'font-size': '11', 'font-weight': '700',
       'text-anchor': 'middle', 'font-family': FONT
-    }).textContent = `Q${q + 1}`;
+    }).textContent = GamePeriods.label(p.period);
   });
 
   // Totals column headers - MIN left-aligned, stats right-aligned
@@ -453,8 +459,8 @@ function renderStints(data) {
     'letter-spacing': '0.04em'
   }).textContent = smallMobile ? 'PTS REB AST STK' : 'PTS   REB   AST   STL   BLK';
 
-  [0, 10, 20, 30, 40].forEach(min => {
-    const x = xOf(min * 60);
+  [0, ...periods.map(p => p.end)].forEach(sec => {
+    const x = xOf(sec);
     el('line', {
       x1: x, y1: PAD_TOP, x2: x, y2: PAD_TOP + totalContentH,
       stroke: 'rgba(255,255,255,0.12)', 'stroke-width': 1,
@@ -591,7 +597,7 @@ function renderStints(data) {
     const dur = `${dMin}:${String(dSec).padStart(2, '0')}`;
 
     let html = `<div class="tip-header">${s.player_full || s.player}<span class="tip-team" style="color:${s.team === homeTC ? HOME_COLOR : AWAY_COLOR}">${s.team}</span>`
-      + `<span class="tip-time">Q${s.period} ${fmtClock(s.clock_in)} → ${fmtClock(s.clock_out)} · ${dur} on court</span></div>`;
+      + `<span class="tip-time">${GamePeriods.label(s.period)} ${fmtClock(s.clock_in)} → ${fmtClock(s.clock_out)} · ${dur} on court</span></div>`;
 
     html += `<div class="tip-stats">`
       + `<span><span class="stat-val">${s.stint_pts || 0}</span> PTS</span>`

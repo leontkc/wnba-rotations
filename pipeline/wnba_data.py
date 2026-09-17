@@ -43,9 +43,20 @@ def clock_display(clock_str):
     return f"{int(m.group(1))}:{int(float(m.group(2))):02d}"
 
 
+QUARTER_SECONDS = 600   # 10-minute WNBA quarters
+OT_SECONDS      = 300   # 5-minute overtime periods
+
+
+def period_length(period):
+    """Length in seconds of a period (1–4 are quarters, 5+ are overtimes)."""
+    return QUARTER_SECONDS if period <= 4 else OT_SECONDS
+
+
 def elapsed_seconds(period, clock_secs):
-    """Map period + clock-remaining → 0–2400 s elapsed in the game."""
-    return (period - 1) * 600 + (600 - clock_secs)
+    """Map period + clock-remaining → seconds elapsed in the game (2400 at end of regulation)."""
+    if period <= 4:
+        return (period - 1) * QUARTER_SECONDS + (QUARTER_SECONDS - clock_secs)
+    return 4 * QUARTER_SECONDS + (period - 5) * OT_SECONDS + (OT_SECONDS - clock_secs)
 
 
 # ── API retry wrapper ─────────────────────────────────────────────────────────
@@ -311,7 +322,7 @@ def compute_stints(pbp_df: pd.DataFrame) -> list[dict]:
                 ]
 
             starters = pre_sub["playerName"].dropna().unique().tolist()
-            p_start = 600.0  # 10-min WNBA quarters
+            p_start = float(period_length(int(period)))
             on_court = {p: p_start for p in starters}
 
             for _, row in period_events.iterrows():
