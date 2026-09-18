@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shyanne Sellers — rotations &amp; stints · wnbarotations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/player.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"></span>wnba<span class="dim">rotations</span></a>
+    <div class="player-search" data-root="../">
+      <input type="search" placeholder="Find a player" aria-label="Find a player" autocomplete="off">
+      <div class="player-dropdown"></div>
+    </div>
+  </div>
+</header>
+
+<main class="page">
+  <header class="player-header">
+    <div class="player-id">
+      <span class="eyebrow">Los Angeles Sparks</span>
+      <h1>Shyanne Sellers</h1>
+    </div>
+    <div class="season-tabs" role="tablist" aria-label="Season">
+      <span class="tab active static">2026</span>
+    </div>
+  </header>
+
+  <div class="stat-tiles" id="stat-tiles" aria-live="polite">
+    <div class="tile"><span class="tile-val" data-stat="gp">1</span><span class="tile-lbl">Games</span></div>
+    <div class="tile"><span class="tile-val" data-stat="min">–</span><span class="tile-lbl">Min / G</span></div>
+    <div class="tile"><span class="tile-val" data-stat="pts">–</span><span class="tile-lbl">Pts / G</span></div>
+    <div class="tile"><span class="tile-val" data-stat="reb">–</span><span class="tile-lbl">Reb / G</span></div>
+    <div class="tile"><span class="tile-val" data-stat="ast">–</span><span class="tile-lbl">Ast / G</span></div>
+    <div class="tile"><span class="tile-val" data-stat="stints">–</span><span class="tile-lbl">Stints / G</span></div>
+  </div>
+
+  <div class="games-head">
+    <h2>Game log</h2>
+    <p class="panel-note">Each bar is a stint, labeled with its stats: <b>p</b>oints, <b>r</b>ebounds, <b>a</b>ssists, <b>s</b>teals, <b>b</b>locks.</p>
+  </div>
+
+  <div id="player-games">
+
+<a class="player-game" href="../games/1022600303.html" data-season="2026">
+  <div class="pg-head">
+    <span class="pg-date">Thu, Sep 17, 2026</span>
+    <span class="pg-opp"><span class="pg-loc">@</span> Dallas Wings</span>
+    <span class="pg-result loss"><b>L</b> 77–97</span>
+  </div>
+  <div class="mini-gantt away" data-team="LAS" data-stints="[{&quot;start&quot;: 600.0, &quot;end&quot;: 845.0, &quot;pts&quot;: 0, &quot;reb&quot;: 1, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 1686.0, &quot;end&quot;: 1800.0, &quot;pts&quot;: 1, &quot;reb&quot;: 0, &quot;ast&quot;: 0, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}, {&quot;start&quot;: 2229.0, &quot;end&quot;: 2400.0, &quot;pts&quot;: 3, &quot;reb&quot;: 1, &quot;ast&quot;: 0, &quot;stl&quot;: 1, &quot;blk&quot;: 0, &quot;to&quot;: 0}]"></div>
+  <div class="pg-stats">
+    <span><b>4</b> PTS</span>
+    <span><b>2</b> REB</span>
+    <span><b>0</b> AST</span>
+    <span class="pg-min"><b>8:50</b> MIN</span>
+  </div>
+</a>
+  </div>
+</main>
+
+<script>
+const PLAYER_DATA = {"name": "Shyanne Sellers", "team": "LAS", "games": [{"game_id": "1022600303", "date": "2026-09-17", "name": "Shyanne Sellers", "team": "LAS", "opponent": "DAL", "is_home": false, "own_score": 77, "opp_score": 97, "won": false, "stints": [{"start": 600.0, "end": 845.0, "pts": 0, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1686.0, "end": 1800.0, "pts": 1, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 2229.0, "end": 2400.0, "pts": 3, "reb": 1, "ast": 0, "stl": 1, "blk": 0, "to": 0}], "minutes": "8:50", "pts": 4, "reb": 2, "ast": 0}]};
+</script>
+<script src="../assets/teams.js"></script>
+<script src="../assets/player.js"></script>
+<script src="../assets/search.js"></script>
+</body>
+</html>
