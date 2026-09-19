@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-18T17:01:22.574820+00:00",
+  "generated_at": "2026-09-19T16:20:05.943989+00:00",
   "games": {
     "0022400235": {
       "game_id": "0022400235",
@@ -9658,6 +9658,39 @@
       "score_away": 110,
       "season": "2026",
       "html_path": "games/1022600302.html"
+    },
+    "1022600308": {
+      "game_id": "1022600308",
+      "date": "2026-09-18",
+      "matchup": "PDX @ GSV",
+      "home_tricode": "GSV",
+      "away_tricode": "PDX",
+      "score_home": 82,
+      "score_away": 66,
+      "season": "2026",
+      "html_path": "games/1022600308.html"
+    },
+    "1022600306": {
+      "game_id": "1022600306",
+      "date": "2026-09-18",
+      "matchup": "IND @ TOR",
+      "home_tricode": "TOR",
+      "away_tricode": "IND",
+      "score_home": 85,
+      "score_away": 103,
+      "season": "2026",
+      "html_path": "games/1022600306.html"
+    },
+    "1022600307": {
+      "game_id": "1022600307",
+      "date": "2026-09-18",
+      "matchup": "NYL @ MIN",
+      "home_tricode": "MIN",
+      "away_tricode": "NYL",
+      "score_home": 81,
+      "score_away": 93,
+      "season": "2026",
+      "html_path": "games/1022600307.html"
     }
   }
 }

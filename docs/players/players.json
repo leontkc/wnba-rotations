@@ -93,7 +93,7 @@
     "name": "Aliyah Boston",
     "slug": "aliyah-boston",
     "team": "IND",
-    "games": 130
+    "games": 131
   },
   {
     "name": "Allisha Gray",
@@ -183,7 +183,7 @@
     "name": "Ashten Prechtel",
     "slug": "ashten-prechtel",
     "team": "GSV",
-    "games": 5
+    "games": 6
   },
   {
     "name": "Astou Ndour-Fall",
@@ -255,7 +255,7 @@
     "name": "Breanna Stewart",
     "slug": "breanna-stewart",
     "team": "NYL",
-    "games": 122
+    "games": 123
   },
   {
     "name": "Bree Hall",
@@ -309,7 +309,7 @@
     "name": "Caitlin Clark",
     "slug": "caitlin-clark",
     "team": "IND",
-    "games": 91
+    "games": 92
   },
   {
     "name": "Cameron Brink",
@@ -327,7 +327,7 @@
     "name": "Carla Leite",
     "slug": "carla-leite",
     "team": "PDX",
-    "games": 75
+    "games": 76
   },
   {
     "name": "Cassandre Prosper",
@@ -356,8 +356,8 @@
   {
     "name": "Charisma Osborne",
     "slug": "charisma-osborne",
-    "team": "PHO",
-    "games": 2
+    "team": "PDX",
+    "games": 3
   },
   {
     "name": "Charlisse Leger-Walker",
@@ -417,7 +417,7 @@
     "name": "Courtney Williams",
     "slug": "courtney-williams",
     "team": "MIN",
-    "games": 141
+    "games": 142
   },
   {
     "name": "Crystal Bradford",
@@ -507,7 +507,7 @@
     "name": "Dorka Juhasz",
     "slug": "dorka-juhasz",
     "team": "MIN",
-    "games": 58
+    "games": 59
   },
   {
     "name": "Dulcy Fankam Mendjiadeu",
@@ -561,7 +561,7 @@
     "name": "Emily Engstler",
     "slug": "emily-engstler",
     "team": "PDX",
-    "games": 113
+    "games": 114
   },
   {
     "name": "Emma Cannon",
@@ -609,7 +609,7 @@
     "name": "Frieda Buhner",
     "slug": "frieda-buhner",
     "team": "PDX",
-    "games": 36
+    "games": 37
   },
   {
     "name": "Gabby Williams",
@@ -675,7 +675,7 @@
     "name": "Holly Winterburn",
     "slug": "holly-winterburn",
     "team": "PDX",
-    "games": 28
+    "games": 29
   },
   {
     "name": "Iliana Rupert",
@@ -693,7 +693,7 @@
     "name": "Isabelle Harrison",
     "slug": "isabelle-harrison",
     "team": "TOR",
-    "games": 99
+    "games": 100
   },
   {
     "name": "Isobel Borlase",
@@ -795,13 +795,13 @@
     "name": "Jonquel Jones",
     "slug": "jonquel-jones",
     "team": "NYL",
-    "games": 123
+    "games": 124
   },
   {
     "name": "Jordan Harrison",
     "slug": "jordan-harrison",
     "team": "PDX",
-    "games": 13
+    "games": 14
   },
   {
     "name": "Jordan Horston",
@@ -837,7 +837,7 @@
     "name": "Julie Allemand",
     "slug": "julie-allemand",
     "team": "TOR",
-    "games": 63
+    "games": 64
   },
   {
     "name": "Julie Vanloo",
@@ -849,7 +849,7 @@
     "name": "Juste Jocyte",
     "slug": "juste-jocyte",
     "team": "GSV",
-    "games": 14
+    "games": 15
   },
   {
     "name": "Justine Pissott",
@@ -873,13 +873,13 @@
     "name": "Kaila Charles",
     "slug": "kaila-charles",
     "team": "GSV",
-    "games": 77
+    "games": 78
   },
   {
     "name": "Kaitlyn Chen",
     "slug": "kaitlyn-chen",
     "team": "GSV",
-    "games": 65
+    "games": 66
   },
   {
     "name": "Kalani Brown",
@@ -915,7 +915,7 @@
     "name": "Karlie Samuelson",
     "slug": "karlie-samuelson",
     "team": "PDX",
-    "games": 74
+    "games": 75
   },
   {
     "name": "Kate Martin",
@@ -945,19 +945,19 @@
     "name": "Kayla McBride",
     "slug": "kayla-mcbride",
     "team": "MIN",
-    "games": 136
+    "games": 137
   },
   {
     "name": "Kayla Thornton",
     "slug": "kayla-thornton",
     "team": "GSV",
-    "games": 113
+    "games": 114
   },
   {
     "name": "Kelsey Mitchell",
     "slug": "kelsey-mitchell",
     "team": "IND",
-    "games": 134
+    "games": 135
   },
   {
     "name": "Kelsey Plum",
@@ -981,13 +981,13 @@
     "name": "Kia Nurse",
     "slug": "kia-nurse",
     "team": "TOR",
-    "games": 123
+    "games": 124
   },
   {
     "name": "Kiah Stokes",
     "slug": "kiah-stokes",
     "team": "GSV",
-    "games": 131
+    "games": 132
   },
   {
     "name": "Kiana Williams",
@@ -1011,7 +1011,7 @@
     "name": "Kiki Rice",
     "slug": "kiki-rice",
     "team": "TOR",
-    "games": 24
+    "games": 25
   },
   {
     "name": "Kitija Laksa",
@@ -1047,13 +1047,13 @@
     "name": "Laeticia Amihere",
     "slug": "laeticia-amihere",
     "team": "GSV",
-    "games": 83
+    "games": 84
   },
   {
     "name": "Laura Juskaite",
     "slug": "laura-juskaite",
     "team": "TOR",
-    "games": 40
+    "games": 41
   },
   {
     "name": "Laura Ziegler",
@@ -1083,7 +1083,7 @@
     "name": "Leonie Fiebich",
     "slug": "leonie-fiebich",
     "team": "NYL",
-    "games": 108
+    "games": 109
   },
   {
     "name": "Lexi Held",
@@ -1101,7 +1101,7 @@
     "name": "Lexie Hull",
     "slug": "lexie-hull",
     "team": "IND",
-    "games": 128
+    "games": 129
   },
   {
     "name": "Li Yueru",
@@ -1191,7 +1191,7 @@
     "name": "Makayla Timpson",
     "slug": "makayla-timpson",
     "team": "IND",
-    "games": 78
+    "games": 79
   },
   {
     "name": "Mamignan Tour\u00e9",
@@ -1227,13 +1227,13 @@
     "name": "Marine Fauthoux",
     "slug": "marine-fauthoux",
     "team": "NYL",
-    "games": 18
+    "games": 19
   },
   {
     "name": "Marine Johannes",
     "slug": "marine-johannes",
     "team": "NYL",
-    "games": 82
+    "games": 83
   },
   {
     "name": "Mari\u00e8me Badiane",
@@ -1257,13 +1257,13 @@
     "name": "Maya Caldwell",
     "slug": "maya-caldwell",
     "team": "MIN",
-    "games": 111
+    "games": 112
   },
   {
     "name": "Megan DiLeo",
     "slug": "megan-dileo",
     "team": "PDX",
-    "games": 14
+    "games": 15
   },
   {
     "name": "Megan Gustafson",
@@ -1281,7 +1281,7 @@
     "name": "Mercedes Russell",
     "slug": "mercedes-russell",
     "team": "IND",
-    "games": 64
+    "games": 65
   },
   {
     "name": "Michaela Onyenwere",
@@ -1299,7 +1299,7 @@
     "name": "Miela Sowah",
     "slug": "miela-sowah",
     "team": "GSV",
-    "games": 6
+    "games": 7
   },
   {
     "name": "Mikiah Herbert Harrigan",
@@ -1317,7 +1317,7 @@
     "name": "Monique Billings",
     "slug": "monique-billings",
     "team": "IND",
-    "games": 106
+    "games": 107
   },
   {
     "name": "Morgan Bertsch",
@@ -1347,7 +1347,7 @@
     "name": "Myisha Hines-Allen",
     "slug": "myisha-hines-allen",
     "team": "IND",
-    "games": 124
+    "games": 125
   },
   {
     "name": "Myles Turner",
@@ -1365,13 +1365,13 @@
     "name": "Nadia Fingall",
     "slug": "nadia-fingall",
     "team": "GSV",
-    "games": 9
+    "games": 10
   },
   {
     "name": "Napheesa Collier",
     "slug": "napheesa-collier",
     "team": "MIN",
-    "games": 96
+    "games": 97
   },
   {
     "name": "Natasha Cloud",
@@ -1383,7 +1383,7 @@
     "name": "Natasha Howard",
     "slug": "natasha-howard",
     "team": "MIN",
-    "games": 119
+    "games": 120
   },
   {
     "name": "Natasha Mack",
@@ -1414,6 +1414,12 @@
     "slug": "nell-angloma",
     "team": "CON",
     "games": 37
+  },
+  {
+    "name": "Nia Brodie",
+    "slug": "nia-brodie",
+    "team": "MIN",
+    "games": 1
   },
   {
     "name": "Nia Coffey",
@@ -1455,7 +1461,7 @@
     "name": "Nyadiew Puoch",
     "slug": "nyadiew-puoch",
     "team": "PDX",
-    "games": 40
+    "games": 41
   },
   {
     "name": "Nyara Sabally",
@@ -1479,7 +1485,7 @@
     "name": "Olivia Miles",
     "slug": "olivia-miles",
     "team": "MIN",
-    "games": 38
+    "games": 39
   },
   {
     "name": "Olivia Nelson-Ododa",
@@ -1497,7 +1503,7 @@
     "name": "Ornella Bankole",
     "slug": "ornella-bankole",
     "team": "TOR",
-    "games": 10
+    "games": 11
   },
   {
     "name": "Paige Bueckers",
@@ -1515,7 +1521,7 @@
     "name": "Pauline Astier",
     "slug": "pauline-astier",
     "team": "NYL",
-    "games": 40
+    "games": 41
   },
   {
     "name": "Peyton Williams",
@@ -1569,7 +1575,7 @@
     "name": "Raven Johnson",
     "slug": "raven-johnson",
     "team": "IND",
-    "games": 35
+    "games": 36
   },
   {
     "name": "Rayah Marshall",
@@ -1581,13 +1587,13 @@
     "name": "Rebecca Allen",
     "slug": "rebecca-allen",
     "team": "NYL",
-    "games": 87
+    "games": 88
   },
   {
     "name": "Rebekah Gardner",
     "slug": "rebekah-gardner",
     "team": "NYL",
-    "games": 82
+    "games": 83
   },
   {
     "name": "Rhyne Howard",
@@ -1617,7 +1623,7 @@
     "name": "Sabrina Ionescu",
     "slug": "sabrina-ionescu",
     "team": "NYL",
-    "games": 117
+    "games": 118
   },
   {
     "name": "Sami Whitcomb",
@@ -1659,7 +1665,7 @@
     "name": "Serah Williams",
     "slug": "serah-williams",
     "team": "PDX",
-    "games": 36
+    "games": 37
   },
   {
     "name": "Serena Sundell",
@@ -1731,7 +1737,7 @@
     "name": "Sophie Cunningham",
     "slug": "sophie-cunningham",
     "team": "IND",
-    "games": 111
+    "games": 112
   },
   {
     "name": "Stefanie Dolson",
@@ -1821,13 +1827,13 @@
     "name": "Temi Fagbenle",
     "slug": "temi-fagbenle",
     "team": "TOR",
-    "games": 87
+    "games": 88
   },
   {
     "name": "Teonni Key",
     "slug": "teonni-key",
     "team": "TOR",
-    "games": 35
+    "games": 36
   },
   {
     "name": "Terry Rozier",
@@ -1839,7 +1845,7 @@
     "name": "Tiffany Hayes",
     "slug": "tiffany-hayes",
     "team": "GSV",
-    "games": 103
+    "games": 104
   },
   {
     "name": "Tiffany Mitchell",
@@ -1869,7 +1875,7 @@
     "name": "Tyasha Harris",
     "slug": "tyasha-harris",
     "team": "IND",
-    "games": 84
+    "games": 85
   },
   {
     "name": "Tyler Herro",
@@ -1893,7 +1899,7 @@
     "name": "Veronica Burton",
     "slug": "veronica-burton",
     "team": "GSV",
-    "games": 124
+    "games": 125
   },
   {
     "name": "Victaria Saxton",
@@ -1911,7 +1917,7 @@
     "name": "Xu Han",
     "slug": "xu-han",
     "team": "NYL",
-    "games": 40
+    "games": 41
   },
   {
     "name": "Yvonne Anderson",
@@ -1923,7 +1929,7 @@
     "name": "Zaay Green",
     "slug": "zaay-green",
     "team": "TOR",
-    "games": 3
+    "games": 4
   },
   {
     "name": "Zia Cooke",

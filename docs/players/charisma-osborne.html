@@ -24,16 +24,18 @@
 <main class="page">
   <header class="player-header">
     <div class="player-id">
-      <span class="eyebrow">Phoenix Mercury</span>
+      <span class="eyebrow">Portland Fire</span>
       <h1>Charisma Osborne</h1>
     </div>
     <div class="season-tabs" role="tablist" aria-label="Season">
-      <span class="tab active static">2024</span>
+      <button type="button" class="tab active" data-season="" role="tab" aria-selected="true">All</button>
+      <button type="button" class="tab" data-season="2026" role="tab" aria-selected="false">2026</button>
+      <button type="button" class="tab" data-season="2024" role="tab" aria-selected="false">2024</button>
     </div>
   </header>
 
   <div class="stat-tiles" id="stat-tiles" aria-live="polite">
-    <div class="tile"><span class="tile-val" data-stat="gp">2</span><span class="tile-lbl">Games</span></div>
+    <div class="tile"><span class="tile-val" data-stat="gp">3</span><span class="tile-lbl">Games</span></div>
     <div class="tile"><span class="tile-val" data-stat="min">–</span><span class="tile-lbl">Min / G</span></div>
     <div class="tile"><span class="tile-val" data-stat="pts">–</span><span class="tile-lbl">Pts / G</span></div>
     <div class="tile"><span class="tile-val" data-stat="reb">–</span><span class="tile-lbl">Reb / G</span></div>
@@ -47,6 +49,21 @@
   </div>
 
   <div id="player-games">
+
+<a class="player-game" href="../games/1022600308.html" data-season="2026">
+  <div class="pg-head">
+    <span class="pg-date">Fri, Sep 18, 2026</span>
+    <span class="pg-opp"><span class="pg-loc">@</span> Golden State Valkyries</span>
+    <span class="pg-result loss"><b>L</b> 66–82</span>
+  </div>
+  <div class="mini-gantt away" data-team="PDX" data-stints="[{&quot;start&quot;: 1544.0, &quot;end&quot;: 1746.5, &quot;pts&quot;: 0, &quot;reb&quot;: 1, &quot;ast&quot;: 1, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 1}, {&quot;start&quot;: 1988.0, &quot;end&quot;: 2400.0, &quot;pts&quot;: 5, &quot;reb&quot;: 0, &quot;ast&quot;: 1, &quot;stl&quot;: 1, &quot;blk&quot;: 0, &quot;to&quot;: 0}]"></div>
+  <div class="pg-stats">
+    <span><b>5</b> PTS</span>
+    <span><b>1</b> REB</span>
+    <span><b>2</b> AST</span>
+    <span class="pg-min"><b>10:14</b> MIN</span>
+  </div>
+</a>
 
 <a class="player-game" href="../games/1022400103.html" data-season="2024">
   <div class="pg-head">
@@ -81,7 +98,7 @@
 </main>
 
 <script>
-const PLAYER_DATA = {"name": "Charisma Osborne", "team": "PHO", "games": [{"game_id": "1022400103", "date": "2024-06-28", "name": "Charisma Osborne", "team": "PHO", "opponent": "LAS", "is_home": true, "own_score": 92, "opp_score": 78, "won": true, "stints": [{"start": 2276.0, "end": 2400.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}], "minutes": "2:04", "pts": 0, "reb": 0, "ast": 0}, {"game_id": "1022400093", "date": "2024-06-22", "name": "Charisma Osborne", "team": "PHO", "opponent": "MIN", "is_home": false, "own_score": 60, "opp_score": 73, "won": false, "stints": [{"start": 600.0, "end": 769.0, "pts": 0, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 1}, {"start": 2094.0, "end": 2400.0, "pts": 2, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 1}], "minutes": "7:55", "pts": 2, "reb": 1, "ast": 1}]};
+const PLAYER_DATA = {"name": "Charisma Osborne", "team": "PDX", "games": [{"game_id": "1022600308", "date": "2026-09-18", "name": "Charisma Osborne", "team": "PDX", "opponent": "GSV", "is_home": false, "own_score": 66, "opp_score": 82, "won": false, "stints": [{"start": 1544.0, "end": 1746.5, "pts": 0, "reb": 1, "ast": 1, "stl": 0, "blk": 0, "to": 1}, {"start": 1988.0, "end": 2400.0, "pts": 5, "reb": 0, "ast": 1, "stl": 1, "blk": 0, "to": 0}], "minutes": "10:14", "pts": 5, "reb": 1, "ast": 2}, {"game_id": "1022400103", "date": "2024-06-28", "name": "Charisma Osborne", "team": "PHO", "opponent": "LAS", "is_home": true, "own_score": 92, "opp_score": 78, "won": true, "stints": [{"start": 2276.0, "end": 2400.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}], "minutes": "2:04", "pts": 0, "reb": 0, "ast": 0}, {"game_id": "1022400093", "date": "2024-06-22", "name": "Charisma Osborne", "team": "PHO", "opponent": "MIN", "is_home": false, "own_score": 60, "opp_score": 73, "won": false, "stints": [{"start": 600.0, "end": 769.0, "pts": 0, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 1}, {"start": 2094.0, "end": 2400.0, "pts": 2, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 1}], "minutes": "7:55", "pts": 2, "reb": 1, "ast": 1}]};
 </script>
 <script src="../assets/teams.js"></script>
 <script src="../assets/player.js"></script>
