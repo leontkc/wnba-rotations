@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-19T16:20:05.943989+00:00",
+  "generated_at": "2026-09-20T16:44:09.982738+00:00",
   "games": {
     "0022400235": {
       "game_id": "0022400235",
@@ -9691,6 +9691,39 @@
       "score_away": 93,
       "season": "2026",
       "html_path": "games/1022600307.html"
+    },
+    "1022600310": {
+      "game_id": "1022600310",
+      "date": "2026-09-19",
+      "matchup": "CHI @ ATL",
+      "home_tricode": "ATL",
+      "away_tricode": "CHI",
+      "score_home": 106,
+      "score_away": 81,
+      "season": "2026",
+      "html_path": "games/1022600310.html"
+    },
+    "1022600311": {
+      "game_id": "1022600311",
+      "date": "2026-09-19",
+      "matchup": "SEA @ GSV",
+      "home_tricode": "GSV",
+      "away_tricode": "SEA",
+      "score_home": 70,
+      "score_away": 57,
+      "season": "2026",
+      "html_path": "games/1022600311.html"
+    },
+    "1022600309": {
+      "game_id": "1022600309",
+      "date": "2026-09-19",
+      "matchup": "PHX @ DAL",
+      "home_tricode": "DAL",
+      "away_tricode": "PHX",
+      "score_home": 87,
+      "score_away": 82,
+      "season": "2026",
+      "html_path": "games/1022600309.html"
     }
   }
 }
