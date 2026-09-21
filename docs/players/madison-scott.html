@@ -24,16 +24,18 @@
 <main class="page">
   <header class="player-header">
     <div class="player-id">
-      <span class="eyebrow">Washington Mystics</span>
+      <span class="eyebrow">New York Liberty</span>
       <h1>Madison Scott</h1>
     </div>
     <div class="season-tabs" role="tablist" aria-label="Season">
-      <span class="tab active static">2025</span>
+      <button type="button" class="tab active" data-season="" role="tab" aria-selected="true">All</button>
+      <button type="button" class="tab" data-season="2026" role="tab" aria-selected="false">2026</button>
+      <button type="button" class="tab" data-season="2025" role="tab" aria-selected="false">2025</button>
     </div>
   </header>
 
   <div class="stat-tiles" id="stat-tiles" aria-live="polite">
-    <div class="tile"><span class="tile-val" data-stat="gp">9</span><span class="tile-lbl">Games</span></div>
+    <div class="tile"><span class="tile-val" data-stat="gp">10</span><span class="tile-lbl">Games</span></div>
     <div class="tile"><span class="tile-val" data-stat="min">–</span><span class="tile-lbl">Min / G</span></div>
     <div class="tile"><span class="tile-val" data-stat="pts">–</span><span class="tile-lbl">Pts / G</span></div>
     <div class="tile"><span class="tile-val" data-stat="reb">–</span><span class="tile-lbl">Reb / G</span></div>
@@ -47,6 +49,21 @@
   </div>
 
   <div id="player-games">
+
+<a class="player-game" href="../games/1022600313.html" data-season="2026">
+  <div class="pg-head">
+    <span class="pg-date">Sun, Sep 20, 2026</span>
+    <span class="pg-opp"><span class="pg-loc">@</span> Toronto Tempo</span>
+    <span class="pg-result win"><b>W</b> 106–69</span>
+  </div>
+  <div class="mini-gantt away" data-team="NYL" data-stints="[{&quot;start&quot;: 2167.0, &quot;end&quot;: 2400.0, &quot;pts&quot;: 4, &quot;reb&quot;: 0, &quot;ast&quot;: 1, &quot;stl&quot;: 0, &quot;blk&quot;: 0, &quot;to&quot;: 0}]"></div>
+  <div class="pg-stats">
+    <span><b>4</b> PTS</span>
+    <span><b>0</b> REB</span>
+    <span><b>1</b> AST</span>
+    <span class="pg-min"><b>3:53</b> MIN</span>
+  </div>
+</a>
 
 <a class="player-game" href="../games/1022500277.html" data-season="2025">
   <div class="pg-head">
@@ -186,7 +203,7 @@
 </main>
 
 <script>
-const PLAYER_DATA = {"name": "Madison Scott", "team": "WAS", "games": [{"game_id": "1022500277", "date": "2025-09-09", "name": "Madison Scott", "team": "WAS", "opponent": "NYL", "is_home": false, "own_score": 66, "opp_score": 75, "won": false, "stints": [{"start": 2267.0, "end": 2400.0, "pts": 2, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}], "minutes": "2:13", "pts": 2, "reb": 0, "ast": 0}, {"game_id": "1022500273", "date": "2025-09-07", "name": "Madison Scott", "team": "WAS", "opponent": "IND", "is_home": true, "own_score": 65, "opp_score": 94, "won": false, "stints": [{"start": 2200.0, "end": 2400.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}], "minutes": "3:20", "pts": 0, "reb": 0, "ast": 0}, {"game_id": "1022500253", "date": "2025-08-30", "name": "Madison Scott", "team": "WAS", "opponent": "GSV", "is_home": false, "own_score": 62, "opp_score": 99, "won": false, "stints": [{"start": 1800.0, "end": 2400.0, "pts": 2, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}], "minutes": "10:00", "pts": 2, "reb": 0, "ast": 0}, {"game_id": "1022500247", "date": "2025-08-28", "name": "Madison Scott", "team": "WAS", "opponent": "NYL", "is_home": false, "own_score": 63, "opp_score": 89, "won": false, "stints": [{"start": 2203.0, "end": 2400.0, "pts": 2, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 0}], "minutes": "3:17", "pts": 2, "reb": 0, "ast": 1}, {"game_id": "1022500236", "date": "2025-08-23", "name": "Madison Scott", "team": "WAS", "opponent": "LVA", "is_home": true, "own_score": 81, "opp_score": 91, "won": false, "stints": [{"start": 2203.0, "end": 2400.0, "pts": 2, "reb": 0, "ast": 0, "stl": 1, "blk": 0, "to": 0}], "minutes": "3:17", "pts": 2, "reb": 0, "ast": 0}, {"game_id": "1022500228", "date": "2025-08-21", "name": "Madison Scott", "team": "WAS", "opponent": "CON", "is_home": false, "own_score": 56, "opp_score": 67, "won": false, "stints": [{"start": 2288.0, "end": 2400.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}], "minutes": "1:52", "pts": 0, "reb": 0, "ast": 0}, {"game_id": "1022500223", "date": "2025-08-19", "name": "Madison Scott", "team": "WAS", "opponent": "CON", "is_home": true, "own_score": 69, "opp_score": 80, "won": false, "stints": [{"start": 248.0, "end": 408.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 811.0, "end": 945.0, "pts": 4, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1699.0, "end": 1800.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}], "minutes": "6:35", "pts": 4, "reb": 0, "ast": 0}, {"game_id": "1022500217", "date": "2025-08-17", "name": "Madison Scott", "team": "WAS", "opponent": "LAS", "is_home": true, "own_score": 95, "opp_score": 86, "won": true, "stints": [{"start": 489.0, "end": 770.0, "pts": 2, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 1}, {"start": 1188.9, "end": 1200.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1702.0, "end": 1975.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 2379.7, "end": 2400.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}], "minutes": "9:45", "pts": 2, "reb": 1, "ast": 0}, {"game_id": "1022500211", "date": "2025-08-15", "name": "Madison Scott", "team": "WAS", "opponent": "IND", "is_home": false, "own_score": 88, "opp_score": 84, "won": true, "stints": [{"start": 319.0, "end": 436.0, "pts": 0, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 0}, {"start": 600.0, "end": 723.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1800.0, "end": 1927.0, "pts": 0, "reb": 0, "ast": 0, "stl": 1, "blk": 0, "to": 0}, {"start": 2377.4, "end": 2400.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}], "minutes": "6:29", "pts": 0, "reb": 0, "ast": 1}]};
+const PLAYER_DATA = {"name": "Madison Scott", "team": "NYL", "games": [{"game_id": "1022600313", "date": "2026-09-20", "name": "Madison Scott", "team": "NYL", "opponent": "TOR", "is_home": false, "own_score": 106, "opp_score": 69, "won": true, "stints": [{"start": 2167.0, "end": 2400.0, "pts": 4, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 0}], "minutes": "3:53", "pts": 4, "reb": 0, "ast": 1}, {"game_id": "1022500277", "date": "2025-09-09", "name": "Madison Scott", "team": "WAS", "opponent": "NYL", "is_home": false, "own_score": 66, "opp_score": 75, "won": false, "stints": [{"start": 2267.0, "end": 2400.0, "pts": 2, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}], "minutes": "2:13", "pts": 2, "reb": 0, "ast": 0}, {"game_id": "1022500273", "date": "2025-09-07", "name": "Madison Scott", "team": "WAS", "opponent": "IND", "is_home": true, "own_score": 65, "opp_score": 94, "won": false, "stints": [{"start": 2200.0, "end": 2400.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}], "minutes": "3:20", "pts": 0, "reb": 0, "ast": 0}, {"game_id": "1022500253", "date": "2025-08-30", "name": "Madison Scott", "team": "WAS", "opponent": "GSV", "is_home": false, "own_score": 62, "opp_score": 99, "won": false, "stints": [{"start": 1800.0, "end": 2400.0, "pts": 2, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}], "minutes": "10:00", "pts": 2, "reb": 0, "ast": 0}, {"game_id": "1022500247", "date": "2025-08-28", "name": "Madison Scott", "team": "WAS", "opponent": "NYL", "is_home": false, "own_score": 63, "opp_score": 89, "won": false, "stints": [{"start": 2203.0, "end": 2400.0, "pts": 2, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 0}], "minutes": "3:17", "pts": 2, "reb": 0, "ast": 1}, {"game_id": "1022500236", "date": "2025-08-23", "name": "Madison Scott", "team": "WAS", "opponent": "LVA", "is_home": true, "own_score": 81, "opp_score": 91, "won": false, "stints": [{"start": 2203.0, "end": 2400.0, "pts": 2, "reb": 0, "ast": 0, "stl": 1, "blk": 0, "to": 0}], "minutes": "3:17", "pts": 2, "reb": 0, "ast": 0}, {"game_id": "1022500228", "date": "2025-08-21", "name": "Madison Scott", "team": "WAS", "opponent": "CON", "is_home": false, "own_score": 56, "opp_score": 67, "won": false, "stints": [{"start": 2288.0, "end": 2400.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}], "minutes": "1:52", "pts": 0, "reb": 0, "ast": 0}, {"game_id": "1022500223", "date": "2025-08-19", "name": "Madison Scott", "team": "WAS", "opponent": "CON", "is_home": true, "own_score": 69, "opp_score": 80, "won": false, "stints": [{"start": 248.0, "end": 408.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 811.0, "end": 945.0, "pts": 4, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1699.0, "end": 1800.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}], "minutes": "6:35", "pts": 4, "reb": 0, "ast": 0}, {"game_id": "1022500217", "date": "2025-08-17", "name": "Madison Scott", "team": "WAS", "opponent": "LAS", "is_home": true, "own_score": 95, "opp_score": 86, "won": true, "stints": [{"start": 489.0, "end": 770.0, "pts": 2, "reb": 1, "ast": 0, "stl": 0, "blk": 0, "to": 1}, {"start": 1188.9, "end": 1200.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1702.0, "end": 1975.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 2379.7, "end": 2400.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}], "minutes": "9:45", "pts": 2, "reb": 1, "ast": 0}, {"game_id": "1022500211", "date": "2025-08-15", "name": "Madison Scott", "team": "WAS", "opponent": "IND", "is_home": false, "own_score": 88, "opp_score": 84, "won": true, "stints": [{"start": 319.0, "end": 436.0, "pts": 0, "reb": 0, "ast": 1, "stl": 0, "blk": 0, "to": 0}, {"start": 600.0, "end": 723.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 1800.0, "end": 1927.0, "pts": 0, "reb": 0, "ast": 0, "stl": 1, "blk": 0, "to": 0}, {"start": 2377.4, "end": 2400.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}], "minutes": "6:29", "pts": 0, "reb": 0, "ast": 1}]};
 </script>
 <script src="../assets/teams.js"></script>
 <script src="../assets/player.js"></script>
