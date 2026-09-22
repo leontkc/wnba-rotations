@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-21T18:34:50.366298+00:00",
+  "generated_at": "2026-09-22T17:35:24.968758+00:00",
   "games": {
     "0022400235": {
       "game_id": "0022400235",
@@ -9779,6 +9779,28 @@
       "score_away": 101,
       "season": "2026",
       "html_path": "games/1022600312.html"
+    },
+    "1022600317": {
+      "game_id": "1022600317",
+      "date": "2026-09-21",
+      "matchup": "ATL @ NYL",
+      "home_tricode": "NYL",
+      "away_tricode": "ATL",
+      "score_home": 84,
+      "score_away": 95,
+      "season": "2026",
+      "html_path": "games/1022600317.html"
+    },
+    "1022600318": {
+      "game_id": "1022600318",
+      "date": "2026-09-21",
+      "matchup": "DAL @ PHX",
+      "home_tricode": "PHX",
+      "away_tricode": "DAL",
+      "score_home": 87,
+      "score_away": 86,
+      "season": "2026",
+      "html_path": "games/1022600318.html"
     }
   }
 }
