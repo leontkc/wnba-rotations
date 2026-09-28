@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T17:51:35.023899+00:00",
+  "generated_at": "2026-09-28T20:03:48.768015+00:00",
   "games": {
     "0022400235": {
       "game_id": "0022400235",
@@ -9933,6 +9933,50 @@
       "score_away": 93,
       "season": "2026",
       "html_path": "games/1022600327.html"
+    },
+    "1042600111": {
+      "game_id": "1042600111",
+      "date": "2026-09-27",
+      "matchup": "DAL @ GSV",
+      "home_tricode": "GSV",
+      "away_tricode": "DAL",
+      "score_home": 104,
+      "score_away": 80,
+      "season": "2026",
+      "html_path": "games/1042600111.html"
+    },
+    "1042600101": {
+      "game_id": "1042600101",
+      "date": "2026-09-27",
+      "matchup": "NYL @ MIN",
+      "home_tricode": "MIN",
+      "away_tricode": "NYL",
+      "score_home": 75,
+      "score_away": 91,
+      "season": "2026",
+      "html_path": "games/1042600101.html"
+    },
+    "1042600121": {
+      "game_id": "1042600121",
+      "date": "2026-09-27",
+      "matchup": "IND @ LVA",
+      "home_tricode": "LVA",
+      "away_tricode": "IND",
+      "score_home": 102,
+      "score_away": 85,
+      "season": "2026",
+      "html_path": "games/1042600121.html"
+    },
+    "1042600131": {
+      "game_id": "1042600131",
+      "date": "2026-09-27",
+      "matchup": "WAS @ ATL",
+      "home_tricode": "ATL",
+      "away_tricode": "WAS",
+      "score_home": 92,
+      "score_away": 77,
+      "season": "2026",
+      "html_path": "games/1042600131.html"
     }
   }
 }

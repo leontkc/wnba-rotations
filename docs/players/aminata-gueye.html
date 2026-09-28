@@ -33,7 +33,7 @@
   </header>
 
   <div class="stat-tiles" id="stat-tiles" aria-live="polite">
-    <div class="tile"><span class="tile-val" data-stat="gp">1</span><span class="tile-lbl">Games</span></div>
+    <div class="tile"><span class="tile-val" data-stat="gp">2</span><span class="tile-lbl">Games</span></div>
     <div class="tile"><span class="tile-val" data-stat="min">–</span><span class="tile-lbl">Min / G</span></div>
     <div class="tile"><span class="tile-val" data-stat="pts">–</span><span class="tile-lbl">Pts / G</span></div>
     <div class="tile"><span class="tile-val" data-stat="reb">–</span><span class="tile-lbl">Reb / G</span></div>
@@ -47,6 +47,21 @@
   </div>
 
   <div id="player-games">
+
+<a class="player-game" href="../games/1042600111.html" data-season="2026">
+  <div class="pg-head">
+    <span class="pg-date">Sun, Sep 27, 2026</span>
+    <span class="pg-opp"><span class="pg-loc">vs</span> Dallas Wings</span>
+    <span class="pg-result win"><b>W</b> 104–80</span>
+  </div>
+  <div class="mini-gantt home" data-team="GSV" data-stints="[{&quot;start&quot;: 1800.0, &quot;end&quot;: 2400.0, &quot;pts&quot;: 2, &quot;reb&quot;: 3, &quot;ast&quot;: 2, &quot;stl&quot;: 2, &quot;blk&quot;: 0, &quot;to&quot;: 1}]"></div>
+  <div class="pg-stats">
+    <span><b>2</b> PTS</span>
+    <span><b>3</b> REB</span>
+    <span><b>2</b> AST</span>
+    <span class="pg-min"><b>10:00</b> MIN</span>
+  </div>
+</a>
 
 <a class="player-game" href="../games/1022600329.html" data-season="2026">
   <div class="pg-head">
@@ -66,7 +81,7 @@
 </main>
 
 <script>
-const PLAYER_DATA = {"name": "Aminata Gueye", "team": "GSV", "games": [{"game_id": "1022600329", "date": "2026-09-24", "name": "Aminata Gueye", "team": "GSV", "opponent": "LAS", "is_home": false, "own_score": 76, "opp_score": 75, "won": true, "stints": [{"start": 1760.9, "end": 1854.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 2025.0, "end": 2150.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 1}], "minutes": "3:38", "pts": 0, "reb": 0, "ast": 0}]};
+const PLAYER_DATA = {"name": "Aminata Gueye", "team": "GSV", "games": [{"game_id": "1042600111", "date": "2026-09-27", "name": "Aminata Gueye", "team": "GSV", "opponent": "DAL", "is_home": true, "own_score": 104, "opp_score": 80, "won": true, "stints": [{"start": 1800.0, "end": 2400.0, "pts": 2, "reb": 3, "ast": 2, "stl": 2, "blk": 0, "to": 1}], "minutes": "10:00", "pts": 2, "reb": 3, "ast": 2}, {"game_id": "1022600329", "date": "2026-09-24", "name": "Aminata Gueye", "team": "GSV", "opponent": "LAS", "is_home": false, "own_score": 76, "opp_score": 75, "won": true, "stints": [{"start": 1760.9, "end": 1854.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}, {"start": 2025.0, "end": 2150.0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 1}], "minutes": "3:38", "pts": 0, "reb": 0, "ast": 0}]};
 </script>
 <script src="../assets/teams.js"></script>
 <script src="../assets/player.js"></script>
