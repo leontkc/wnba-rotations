@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T20:03:48.768015+00:00",
+  "generated_at": "2026-09-30T18:20:36.017369+00:00",
   "games": {
     "0022400235": {
       "game_id": "0022400235",
@@ -9977,6 +9977,28 @@
       "score_away": 77,
       "season": "2026",
       "html_path": "games/1042600131.html"
+    },
+    "1042600102": {
+      "game_id": "1042600102",
+      "date": "2026-09-29",
+      "matchup": "MIN @ NYL",
+      "home_tricode": "NYL",
+      "away_tricode": "MIN",
+      "score_home": 87,
+      "score_away": 71,
+      "season": "2026",
+      "html_path": "games/1042600102.html"
+    },
+    "1042600122": {
+      "game_id": "1042600122",
+      "date": "2026-09-29",
+      "matchup": "LVA @ IND",
+      "home_tricode": "IND",
+      "away_tricode": "LVA",
+      "score_home": 99,
+      "score_away": 89,
+      "season": "2026",
+      "html_path": "games/1042600122.html"
     }
   }
 }
