@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-01T18:45:42.825646+00:00",
+  "generated_at": "2026-10-02T18:17:31.402463+00:00",
   "games": {
     "0022400235": {
       "game_id": "0022400235",
@@ -10021,6 +10021,17 @@
       "score_away": 100,
       "season": "2026",
       "html_path": "games/1042600112.html"
+    },
+    "1042600123": {
+      "game_id": "1042600123",
+      "date": "2026-10-01",
+      "matchup": "IND @ LVA",
+      "home_tricode": "LVA",
+      "away_tricode": "IND",
+      "score_home": 94,
+      "score_away": 83,
+      "season": "2026",
+      "html_path": "games/1042600123.html"
     }
   }
 }
