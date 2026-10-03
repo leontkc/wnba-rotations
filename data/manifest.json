@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-02T18:17:31.402463+00:00",
+  "generated_at": "2026-10-03T17:06:51.911469+00:00",
   "games": {
     "0022400235": {
       "game_id": "0022400235",
@@ -10032,6 +10032,17 @@
       "score_away": 83,
       "season": "2026",
       "html_path": "games/1042600123.html"
+    },
+    "1042600113": {
+      "game_id": "1042600113",
+      "date": "2026-10-02",
+      "matchup": "DAL @ GSV",
+      "home_tricode": "GSV",
+      "away_tricode": "DAL",
+      "score_home": 77,
+      "score_away": 73,
+      "season": "2026",
+      "html_path": "games/1042600113.html"
     }
   }
 }
