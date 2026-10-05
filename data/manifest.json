@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-03T17:06:51.911469+00:00",
+  "generated_at": "2026-10-05T13:09:14.514829+00:00",
   "games": {
     "0022400235": {
       "game_id": "0022400235",
@@ -10043,6 +10043,28 @@
       "score_away": 73,
       "season": "2026",
       "html_path": "games/1042600113.html"
+    },
+    "1042600211": {
+      "game_id": "1042600211",
+      "date": "2026-10-04",
+      "matchup": "LVA @ GSV",
+      "home_tricode": "GSV",
+      "away_tricode": "LVA",
+      "score_home": 71,
+      "score_away": 60,
+      "season": "2026",
+      "html_path": "games/1042600211.html"
+    },
+    "1042600201": {
+      "game_id": "1042600201",
+      "date": "2026-10-04",
+      "matchup": "NYL @ ATL",
+      "home_tricode": "ATL",
+      "away_tricode": "NYL",
+      "score_home": 92,
+      "score_away": 82,
+      "season": "2026",
+      "html_path": "games/1042600201.html"
     }
   }
 }
