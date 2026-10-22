@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-20T17:51:31.572728+00:00",
+  "generated_at": "2026-10-22T17:54:40.942477+00:00",
   "games": {
     "0022400235": {
       "game_id": "0022400235",
@@ -10131,6 +10131,17 @@
       "score_away": 79,
       "season": "2026",
       "html_path": "games/1042600302.html"
+    },
+    "1042600303": {
+      "game_id": "1042600303",
+      "date": "2026-10-21",
+      "matchup": "GSV @ ATL",
+      "home_tricode": "ATL",
+      "away_tricode": "GSV",
+      "score_home": 97,
+      "score_away": 71,
+      "season": "2026",
+      "html_path": "games/1042600303.html"
     }
   }
 }
